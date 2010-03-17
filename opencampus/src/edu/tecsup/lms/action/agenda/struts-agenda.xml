@@ -1,0 +1,39 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="campus-agenda" namespace="/agenda" extends="campus-default">
+
+		<action name="CargarPortada" method="cargarPortada"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Cargar" method="cargar"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+		<result name="success">/comun/agenda/agenda.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="EventosAnual" method="obtenerEventosAnual"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Eventos" method="obtenerEventos"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="GuardarEvento" method="guardarEvento"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="EliminarEvento" method="eliminarEvento"
+			class="edu.tecsup.lms.action.agenda.AgendaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+			
+	</package>
+	
+</struts>

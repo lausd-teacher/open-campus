@@ -1,0 +1,230 @@
+#conectados{
+	max-height: 300px;
+	min-height: 100px;
+	width:98%;
+	overflow-x: hidden;
+	overflow-y: auto;	
+	z-index: 99999;
+	padding-left: 2%;	
+}
+#noconectados{
+	max-height: 100px;
+	min-height: 100px;
+	width:98%;
+	overflow-x: hidden;
+	overflow-y: auto;	
+	padding-left: 2%;	
+}
+#moreDetalles{
+	height: 40px;
+	border: 1px solid #666;
+	background-color: black;
+	visibility:visible;
+	width:150px;
+	position:absolute;		
+}
+.lastMessage{
+	color: gray;
+}
+.flecha_online {
+	background: transparent url(../img/icon_user.jpg) no-repeat scroll 0px;
+	list-style-type: none;
+	margin-left: 1px;
+	padding-left: 15px;
+	cursor:pointer;
+}
+.flecha_offline {
+	background: transparent url(../img/icon_user_out.jpg) no-repeat scroll 0px;
+	list-style-type: none;
+	margin-left: 1px;
+	padding-left: 15px;
+	cursor:pointer;
+}
+.chat{
+	height: 135px;
+	width: 170px;	
+	overflow-x: hidden;
+	overflow-y: auto;
+	overflow :auto;	
+	border-bottom: thick;
+}
+
+.chat span{
+	display: block;
+}
+
+.area_texto{
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+
+.area_texto textarea{
+	border-style: solid;
+	overflow: auto;
+	width: 94%;
+}
+
+.elChat{
+	border: 1px solid #666;
+	width: 170px;
+	background-color: white;
+	max-width: 170px;
+}
+
+.aChat { 
+	color:#0000CC; 
+	color : black;
+	text-decoration:none;
+	white-space: nowrap;
+}
+
+.ChacSeleccionado{
+	border: 2px #0099FF;
+	border-style:solid;
+}
+
+.ChacDesSeleccionado{
+	border: 1px #999999;
+	border-style:solid;
+}
+
+#ChatMensaje{
+	text-align: center;
+	font-weight: bold;
+	padding-left: 10px;
+	color: gray;	
+}
+
+/*ventana de chat azul*/
+.fon_cab_chat tbody tr td{
+	background-image: url(../img/fon_cab_chat.jpg);
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 11;
+	text-decoration: none;
+	font:Tahoma;
+	cursor: move;
+	table-layout: fixed;	
+}
+
+/*ventana de chat verde*/
+.fon_cab_chat2 tbody tr td{
+	background-image: url(../img/fon_cab_chat2.jpg);
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 11;
+	text-decoration: none;
+	font:Tahoma;
+	cursor: move;
+}
+
+/*ventana de chat gris*/
+.fon_cab_chat3 tbody tr td{
+	background-image: url(../img/fon_cab_chat3.jpg);
+	background-repeat:repeat-x;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 11;
+	text-decoration: none;
+	font:Tahoma;
+	cursor: move;
+}
+
+.sup_izq{
+	width:5;
+	background-image:url(../img/c1.gif);
+}
+
+.sup_cen{
+	background-repeat: no-repeat; 
+	background-position:bottom;
+}
+
+.sup_cen1{
+	background-image: url(../img/c3.gif);
+}
+
+.sup_der{
+	background-repeat:no-repeat;
+	background-position:left;
+}
+
+.cen_sup{
+	background-repeat: repeat-y;
+}
+
+.inf_cen{
+	background-image: url(../img/c8.gif); 
+	background-repeat:repeat-x; 
+	background-position:top;
+}
+
+.inf_der{
+	background-repeat:no-repeat; 
+	background-position:top;
+}
+
+.sup_cen2{
+	background-repeat: repeat-x; 
+	background-position:bottom;
+	background-image: url(../img/c3.gif);
+}
+
+.av_sup_iz{
+	background-position:bottom;background-repeat:no-repeat; background-position:bottom;
+}
+
+.av_sup_cen{
+	background-image: url(../img/c3.gif); background-repeat:repeat-x; background-position:bottom;
+}
+
+.av_sup_cen1{
+	background-image: url(../img/c3.gif); background-repeat:repeat-x; background-position:bottom;
+}
+
+.av_sup_cen2{
+	background-image: url(../img/c3.gif); background-repeat:repeat-x; background-position:bottom;
+}
+
+.av_sup_der{
+	background-repeat:no-repeat; background-position:bottom;
+}
+
+.av_cen_1{
+	background-repeat: repeat-y;
+}
+
+.av_cen_4{
+	background-repeat: repeat-y;
+}
+
+
+/* drag-resize CSS */
+
+/* Apply the element you want to drag/resize */
+.drsElement {
+ position: absolute;
+}
+
+/*
+ The main mouse handle that moves the whole element.
+ You can apply to the same tag as drsElement if you want.
+*/
+.drsMoveHandle {
+ cursor: move;
+}
+
+/*
+ The DragResize object name is automatically applied to all generated
+ corner resize handles, as well as one of the individual classes below.
+*/
+.dragresize {
+ position: absolute;
+ width: 5px;
+ height: 5px;
+ font-size: 1px;
+ background: #EEE;
+ border: 1px solid #333;
+}

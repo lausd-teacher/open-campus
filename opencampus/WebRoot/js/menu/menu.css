@@ -1,0 +1,50 @@
+/*Menu*/
+.menu_principal {
+	height: 21px;
+	width: 80px;
+	position: absolute;
+	visibility: hidden;
+	cursor: pointer;		
+}
+
+.menu_subitem_out {
+	text-align:left;
+	cursor: pointer;
+	height: 18px;
+	width: 80px;
+	background-color: #EAEBED;
+	position: relative;
+	top: -1px;
+	left: 0px;
+	border: 1px solid #a5a5a7;
+	padding-top: 3px;
+	padding-left: 8px;
+	cursor: pointer;	
+}
+
+.menu_subitem_over {
+	text-align:left;
+	cursor: pointer;
+	height: 18px;
+	width: 80px;
+	background-color: #a5a5a7;
+	position: relative;
+	top: -1px;
+	left: 0px;
+	border: 1px solid #a5a5a7;
+	padding-top: 3px;
+	padding-left: 8px;
+	cursor: pointer;	
+}
+
+.menu_cabezera{
+	text-align:left;
+	cursor: pointer;
+	height: 18px;
+	width: 18px;
+	background-color: #a5a5a7;
+	position: relative;
+	top: -1px;
+	left: 0px;
+	cursor: pointer;	
+}

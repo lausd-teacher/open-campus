@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="opencampus"
+  id="myeclipse.1253053753189"
+  context-root="/opencampus"
+  j2ee-spec="1.4"
+  archive="opencampus.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

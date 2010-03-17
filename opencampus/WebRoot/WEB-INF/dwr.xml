@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+	
+<dwr>
+
+  <allow>
+
+    <!-- el chat :-) -->    
+	<create creator="spring" javascript="UsuariosConectados" scope="application">
+	  <param name="beanName" value="chat"/>
+	  <exclude method="cerrarSessionExterno"/>
+	</create>
+	
+	<!-- <create creator="spring" javascript="MisDatos" scope="request">
+	  <param name="beanName" value="modificarDatos"/>
+	</create> -->
+	<!-- converters Utilizados si se quiere enviar el objeto al JS
+    <convert converter="bean" match="edu.tecsup.lms.modelo.Usuario">
+    	<param name="include" value="idUsuario, nombreCompleto, rolPredeterminado, usuarioDato"/>
+    </convert>
+    <convert converter="bean" match="edu.tecsup.lms.modelo.usuario.UsuarioDato">
+   		<param name="include" value="nombreApellidoCorto, nombre1"/>
+    </convert>-->    
+    
+  </allow>
+  
+</dwr>

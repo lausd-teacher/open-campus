@@ -1,0 +1,54 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>	
+<!-- Acciones Update usar redirect y acciones Query llamar al jsp -->
+	<package name="campus-unidad" extends="campus-default" namespace="/admin/unidad">
+	
+		<action name="Buscar" method="buscarUnidad"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<result name="success">/admin/unidad/admin_unidad.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerRecurso" method="verRecurso"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<!--action name="ListarFichas" method="listarFichas"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action-->
+		
+		<action name="Eliminar" method="eliminarUnidad"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Crear" method="crearUnidad"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Modificar" method="modificarUnidad"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CambiarEstado" method="cambiarEstado"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Cargar" method="cargar"
+			class="edu.tecsup.lms.action.unidad.UnidadAction">
+			<result name="success">/admin/unidad/admin_unidad.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+	</package>
+</struts>

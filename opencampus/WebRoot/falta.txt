@@ -1,0 +1,35 @@
+//Creado por y modificado por deben de guardar el username y no el id (para que se pueda mostrar)
+//En la base de datos modificado_en debe ser CURRENT_TIMESTAMP y credo_en '0000:...' (manualmente con now())
+
+//Usuarios
+-Eliminar #Eliminar persona, pone su persona.estado en 0 y en usuario.estado lo pone en 0 tmb
+-Modificar
+-Cambiar estado
+
+//Unidades
+-Dejar la interface del mod de unidades como la de usuarios
+-implementar subida de archivos(repaso, lab, texto) y en detalles de cada unidad poder ver si existe el file o no
+-listarFichas se ha comentado solamente, ebes acabarlo
+
+//Silabo
+-Falta editar introduccion y objetivos para un silabo
+-Falta modificar estados (habilitado docete o alumno) para cada recurso-unidad
+-Fichas Dependientes del objeto silabo.gatAulas() cada onjeto aula tiene periodo que debes mostras en un cuadro tipo 
+ver fichas de unidades, no muestres nombre de curso de silabo porque ya se supone que pertenece al curso actual
+-Cambiar el autocompletar de ajax por el que haz craqueado y usado en crear fichas
+
+
+------------------------------------------------------------------------------------------------------
+las funciones de camapania sacalas a la clase de publicacionesAction 
+
+otra AulaVirtualResponsable paralelo a AulaVirtual que permita cargar el aula para el responsable
+el acceso a AulaVirtualResponsable no sera por cursos, sino por fichas para el rol de jefe
+en esta AulaVirtualResponsable si no existe matricula se cargan los elementos como si fuese la primera vez, no puede publicar trabajos pero si puede verlos no puede modificar nada, solo dialogo, debate, publicacion y aviso
+vista como docente, 
+cuando ingrese al AulaVirtualResponsable si no tiene matricula en la bd se cree una matricula al momento y cuando modifique algo se cree su matricula y se guarde a la bd junto con sus cambios
+
+
+
+
+
+si el silabo ve que ya se uso para una ficha en ejecucion no debe modificar sino sugiere que se duplique y modificar sobre la copia

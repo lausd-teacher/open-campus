@@ -1,0 +1,1 @@
+function saludo(dia,tarde,noche){var hora;var hoy=new Date();hora=hoy.getHours();if(hora>19){document.write(noche)}else if(hora>=12){document.write(tarde)}else{document.write(dia)}}

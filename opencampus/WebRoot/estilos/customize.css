@@ -1,0 +1,480 @@
+/***********************************************/
+	/* Estilos Campus TECSUP                       */
+	/***********************************************/
+.tabla00 {
+	border-bottom-color: #0099FF;
+	border-left-color: #0099FF;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #0099FF;
+	border-right-style: solid;
+	border-top-color: #0099FF;
+	border-top-style: solid;
+	background-color: #ffffff;
+}
+.tabla_test{
+	
+	
+	border: #E5EFF8 solid 3px;
+
+}
+
+.tablaFicha {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #7EAAD1;
+	border-left-color: #7EAAD1;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #7EAAD1;
+	border-right-style: solid;
+	border-top-color: #7EAAD1;
+	border-top-style: solid;
+}
+
+.titulo {
+	color: #ffffff;
+}
+
+.titulo1 {
+	color: #000000;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+.titulo2 {
+	color: #4268C9;
+}
+
+.publicaciones {
+	color: #0099FF;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.franja {
+	background-color: #0099FF;
+}
+
+.alineacion {
+	padding-left: 5px;
+}
+
+.datos {
+	color: #4268C9;
+	font-weight: bold;
+	background-color: #E5EFF8;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #7EAAD1;
+}
+
+.datosAbajo {
+	color: #4268C9;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #7EAAD1;
+}
+
+.derecha {
+	background-color: #E5EFF8;
+}
+
+.datosIz {
+	background-color: #F8F8F8;
+}
+
+.plan {
+	padding-left: 10px;
+}
+
+.login {
+	color: #44659B;
+	font-weight: bold;
+}
+
+.bienvenida {
+	font-size: 14px;
+	color: #0E6BC9;
+	font-weight: bold;
+}
+
+.salir {
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.pie {
+	font-weight: bold;
+	text-align: center;
+	color: #FFFFFF;
+	vertical-align: middle;
+	
+}
+
+.menu {
+	text-decoration: none;
+	color: #000000;
+	cursor: pointer;
+}
+
+.cuadros {
+	width: 180px;
+}
+
+.tit_cab_cal {
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 0.9em;
+	text-decoration: none;
+}
+
+.tit_cab {
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-left: 10px;
+	text-decoration: none;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.tit_caption {
+	background-image: url(../img/fon_cab.jpg);
+	background-repeat: repeat-x;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: left;
+	padding-left: 10px;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.usuario {
+	text-align: center;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.tit_popup {
+	font-weight: bold;
+	padding-left: 10px;
+	text-decoration: none;
+	color: #003366;
+}
+
+.ingr_curso {
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+	padding-right: 3px;
+}
+
+.form_button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #44659B;
+	background-color: #FFFFFF;
+	border-top: 1px solid #44659B;
+	border-left: 1px solid #44659B;
+	height: 20px;
+	text-align: center;
+}
+
+.form_text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+.form_text_selecionado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: yellow;
+}
+
+.caja_nota {
+	height: 18px;
+	width: 22px;
+}
+
+.paddding_curso {
+	padding-left: 3px;
+}
+
+.textstatic {
+	padding-left: 10px;
+}
+
+/***********************************************/
+	/* Textos y Links                              */
+	/***********************************************/
+.text_rojo {
+	color: #8D322E;
+}
+
+.text_negro {
+	color: #000000;
+}
+
+.text_amarillo {
+	color: #C19834;
+}
+
+.text_blanco {
+	color: #FFFFFF;
+}
+
+.text_verde {
+	color: #308D2E;
+}
+
+.text_azul {
+	color: #003399;
+}
+
+.link_verde {
+	color: #3BAD39;
+}
+
+.link_rojo {
+	color: #C95142;
+}
+
+.link_rojo_bold {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.link_amarillo {
+	color: #CEAE31;
+}
+
+.link_azul {
+	color: #4266C9;
+}
+
+.link_curso {
+	color: #000000;
+}
+
+.links {
+	color: #FF9900;
+	font-weight: bold;
+}
+
+.links02 {
+	color: #44659B;
+	font-weight: bold;
+}
+
+/***********************************************/
+	/* Líneas                                      */
+	/***********************************************/
+.lin_azul {
+	border-bottom: 1px solid #4268C9;
+}
+
+.lin_rojo {
+	border-bottom: 1px solid #8D322E;
+}
+
+.lin_verde {
+	border-bottom: 1px solid #308D2E;
+}
+
+/***********************************************/
+	/* Bordes                                      */
+	/***********************************************/
+.bor_cal {
+	border-bottom: 1px solid #308D2E;
+	border-left: 1px solid #308D2E;
+}
+
+.bor_fec {
+	border-top: 1px solid #308D2E;
+	border-right: 1px solid #308D2E;
+}
+
+.bor_inicio {
+	border: 1px solid #AAABAF;
+	height: 59px;
+}
+
+.bor_plomo {
+	border: 1px solid #AAABAF;
+}
+
+.bor_verde {
+	border-bottom: 1px solid #308D2E;
+	border-left: 1px solid #308D2E;
+	border-right: 1px solid #308D2E;
+}
+
+.bor_amarillo {
+	border-bottom: 1px solid #C19834;
+	border-left: 1px solid #C19834;
+	border-right: 1px solid #C19834;
+}
+
+.bor_negro {
+	border-bottom: 1px solid #AAABAF;
+	border-left: 1px solid #AAABAF;
+	border-right: 1px solid #AAABAF;
+}
+
+.bor_tabla {
+	border: solid #44659B 1px;
+}
+.bor_tabla_nobortop {
+	
+	border-right: solid #44659B 1px;
+	border-left: solid #44659B 1px;
+	border-bottom: solid #44659B 1px;
+}
+
+.bor_der_unid {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	text-align: center;
+}
+
+.bor_der_cur {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+}
+
+.bor_caja_curso {
+	border-bottom: 1px solid #ABABAB;
+	border-left: 1px solid #ABABAB;
+	border-right: 1px solid #ABABAB;
+	background-color: #F8F8F8;
+	padding-bottom: 3px;
+}
+
+/***********************************************/
+	/* Fondos                                      */
+	/***********************************************/
+.fon_login {
+	background-image: url(../img/login_inf.jpg);
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+.fon_curso {
+	background-image: url(../img/fon_cab_curso.jpg);
+	background-repeat: no-repeat;
+}
+
+.fon_tit_curso {
+	background-image: url(../img/fon_tit_curso_02.jpg);
+	background-repeat: repeat-x;
+	color: white;
+}
+
+.fon_cab_ini {
+	background-image: url(../img/fon_cab_ini.jpg);
+	background-repeat: no-repeat;
+	height: 21px;
+}
+
+.fon_cab_ini_over {
+	height: 18px;
+	background-color: #ffffff;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #7EAAD1;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #7EAAD1;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+}
+
+.fon_cab {
+	background-image: url(../img/fon_cab.jpg);
+	background-repeat: repeat-x;
+}
+
+.fon_cab_popup {
+	background-image: url(../img/fon_popup.jpg);
+	height: 20px;
+}
+
+.fon_cab_noticias_pfr {
+	background-image: url(../img/fon_cab_noticias_pfr.jpg);
+	background-repeat: no-repeat;
+	height: 21px;
+}
+
+.fon_cab_noticias {
+	background-image: url(../img/fon_cab_amarillo.jpg);
+	background-repeat: no-repeat;
+}
+
+.fon_cab_verde {
+	background-image: url(../img/fon_cab_verde.jpg);
+	background-repeat: repeat-x;
+}
+
+.fon_cab_negro {
+	background-image: url(../img/fon_cab_out.jpg);
+	background-repeat: repeat-x;
+}
+
+.fon_cab_amarillo {
+	background-image: url(../img/fon_cab_amarillo.jpg);
+	background-repeat: repeat-x;
+}
+
+.fon_color01 {
+	background-color: #E5EFF8;
+}
+
+.fon_color02 {
+	background-color: #E0EAF3;
+}
+
+.fon_color03 {
+	background-color: #F9F9F9;
+}
+
+.fon_fecha {
+	background-image: url(../img/fon_fecha.jpg);
+	background-repeat: no-repeat;
+}
+
+/***********************************************/
+	/* Tablas                                      */
+	/***********************************************/
+.tabla_sin_layout {
+	table-layout: fixed;
+}
+
+.tabla_sin_layout td {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.tabla_sin_layout td label {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.franja_index {
+	background-color: #007ACA;
+	
+}
+.detalles_index {
+	
+	border: 1px solid #007ACA;
+}

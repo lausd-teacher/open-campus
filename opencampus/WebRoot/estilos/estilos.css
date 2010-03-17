@@ -1,0 +1,13 @@
+/*Compass Design template CSS file*/
+
+@import url("layout.css"); /*Estilos para las capas*/
+@import url("customize.css"); /*Estilo personalizado*/
+@import url("aula_virtual.css"); /*Estilo personalizado*/
+@import url("ficha.css"); /*Estilo personalizado*/
+@import url("reporte.css"); /*Estilo personalizado*/
+@import url("portal.css"); /*Estilo personalizado*/
+@import url("noticias.css"); /*Estilo personalizado*/
+@import url("foro.css"); /*Estilo personalizado*/
+@import url("login_nuevo.css"); /*Estilo personalizado*/
+
+@import url("opencampus.css"); /*Estilos para las capas*/

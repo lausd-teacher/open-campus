@@ -1,0 +1,17 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="campus-chat" extends="campus-default" namespace="/chat">
+		<action name="Cargar" method="cargar" 
+			class="edu.tecsup.lms.action.chat.ChatAction">
+			<result name="success">/comun/chat/chat.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CargarUsuariosOffLine" method="cargarUsuariosOffLine" 
+			class="edu.tecsup.lms.action.chat.ChatAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>	
+	</package>
+
+</struts>

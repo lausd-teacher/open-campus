@@ -1,0 +1,27 @@
+.div_lista {
+	position: absolute;
+	background-color: white;
+	border: 2px solid #c3d9ff;
+	z-index: 1;
+	display: none;
+	margin-top: -5px;
+	font-size: 12px;
+	text-align: left;
+}
+
+.item_resaltado {
+	background-color: #C3D9FF;
+	cursor: pointer;
+}
+
+.item_normal {
+	background-color: white;
+}
+
+.item_ultimo_lista {
+	background-color: #C3D9FF;
+	text-align: right;
+	font-size: 9px;
+	padding-top: 3px;
+	font-weight: bold;
+}

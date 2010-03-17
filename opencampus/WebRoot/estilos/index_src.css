@@ -1,0 +1,114 @@
+html{
+	overflow: auto;
+}	
+body {
+	text-align: center;
+	vertical-align: middle;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #EAEBED;	
+	width: 98%;
+	height: 90%;
+	margin: 3px;
+}
+input{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+td {
+	font-family: Tahoma;
+	font-size: 11px;
+}
+p {
+	text-indent: 0px;
+	font-size: 11px;
+	text-align: justify;
+	margin: 5px;
+}
+form {
+	margin: 0px;
+	padding: 0px;
+}
+.fon_login_iz{
+	background-image:url(../img/fon_login_iz.jpg);
+	background-repeat:no-repeat;
+	background-position:left;
+}
+.fon_login_cen{
+	background-image:url(../img/fon_login_cen.jpg);
+	background-repeat: repeat-x;
+	background-position:left;
+}
+.ingr_curso {
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+	padding-right: 3px;
+}
+.fon_login_de{
+	background-image:url(../img/fon_login_de.jpg);
+	background-repeat:no-repeat;
+	background-position:right;
+}
+.fon_caja {
+	border-bottom: 1px solid #ABABAB;
+	border-left: 1px solid #ABABAB;
+	border-right: 1px solid #ABABAB;
+	background-color: #FfFfFf;
+	padding-bottom: 3px;
+}
+.form_text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+.form_button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #44659B;
+	background-color: #FFFFFF;
+	border-top: 1px solid #44659B;
+	border-left: 1px solid #44659B;
+	height: 20px;
+	text-align: center;
+}
+.detalles_index {
+	border: 1px solid #007ACA;
+}
+.bienvenida {
+	font-size: 14px;
+	color: #0E6BC9;
+	font-weight: bold;
+}
+.franja_index {
+	background-color: #007ACA;
+}
+.titulo {
+	color: #ffffff;
+}
+#contenedor {
+	margin:0px auto;
+	text-align: left;
+	width: 993px;
+	background-color: #FFFFFF;
+}
+#cuerpo {
+	width: 991px;
+	border-left: 1px solid #B6B6B6;
+	border-right: 1px solid #B6B6B6;
+	float: left;
+	left: 0px;
+	top: 0px;	
+}
+#pie {
+	clear: both;
+	height: 30px;
+	background-image: url(../img/fon_pie2.jpg);
+	background-repeat: repeat-x;
+}
+.pie {
+	font-weight: bold;
+	text-align: center;
+	color: #FFFFFF;
+	vertical-align: middle;
+}

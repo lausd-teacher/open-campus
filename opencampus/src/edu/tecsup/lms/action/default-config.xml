@@ -1,0 +1,242 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus-default" namespace="/" extends="struts-default">
+		<interceptors>
+			<!-- INTERCEPTORES GENÉRICOS -->
+			<interceptor name="CampusUsuarioInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusUsuarioInterceptor" />
+			
+			<!-- ROLES DE LA PLATAFORMA -->
+			<interceptor name="CampusAdministradorInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusAdministradorInterceptor" />
+
+			<interceptor name="CampusJefeInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusJefeInterceptor" />
+
+			<interceptor name="CampusSoporteInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusSoporteInterceptor" />
+
+			<interceptor name="CampusDocenteInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusDocenteInterceptor" />
+
+			<interceptor name="CampusMonitorInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusMonitorInterceptor" />
+
+			<interceptor name="CampusEmpresaInterceptor"
+				class="edu.tecsup.lms.interceptor.plataforma.CampusEmpresaInterceptor" />
+
+			<!-- ROLES DEL AULA VIRTUAL -->
+			<interceptor name="AulaVirtualResponsableInterceptor"
+				class="edu.tecsup.lms.interceptor.aulavirtual.AulaVirtualResponsableInterceptor" />
+
+			<interceptor name="AulaVirtualDocenteMonitorInterceptor"
+				class="edu.tecsup.lms.interceptor.aulavirtual.AulaVirtualDocenteMonitorInterceptor" />
+
+			<interceptor name="AulaVirtualDocenteInterceptor"
+				class="edu.tecsup.lms.interceptor.aulavirtual.AulaVirtualDocenteInterceptor" />
+
+			<interceptor name="AulaVirtualEstudianteInterceptor"
+				class="edu.tecsup.lms.interceptor.aulavirtual.AulaVirtualEstudianteInterceptor" />
+
+			<interceptor name="AulaVirtualEstudianteMonitorInterceptor"
+				class="edu.tecsup.lms.interceptor.aulavirtual.AulaVirtualEstudianteMonitorInterceptor" />
+
+			<!-- STACKS DE INTERCEPTORES -->
+			<interceptor-stack name="campusStack">
+				<interceptor-ref name="basicStack" />
+				<interceptor-ref name="i18n" />
+				<!-- interceptor-ref name="logger"/ -->
+			</interceptor-stack>
+
+			<interceptor-stack name="usuario-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusUsuarioInterceptor" />
+			</interceptor-stack>
+
+			<!-- STACKS DE INTERCEPTORES PARA LA PLATAFORMA -->
+			<interceptor-stack name="administrador-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusAdministradorInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="jefe-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusJefeInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="soporte-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusSoporteInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="docente-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusDocenteInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="monitor-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusMonitorInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="empresa-campus">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="CampusEmpresaInterceptor" />
+			</interceptor-stack>
+
+			<!-- STACKS DE INTERCEPTORES PARA EL AULA VIRTUAL -->
+			<interceptor-stack name="responsable-aula-virtual">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref
+					name="AulaVirtualResponsableInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="docente-aula-virtual">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref name="AulaVirtualDocenteInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="docente-monitor-aula-virtual">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref
+					name="AulaVirtualDocenteMonitorInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="estudiante-aula-virtual">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref
+					name="AulaVirtualEstudianteInterceptor" />
+			</interceptor-stack>
+
+			<interceptor-stack name="estudiante-monitor-aula-virtual">
+				<interceptor-ref name="campusStack" />
+				<interceptor-ref
+					name="AulaVirtualEstudianteMonitorInterceptor" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="campusfileUpload-documents">
+				<interceptor-ref name="fileUpload">
+		    		<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpe,image/pjpeg,image/x-png,application/vnd.ms-powerpoint,application/octet-stream,
+	application/pdf,application/msword,application/vnd.ms-excel,application/x-zip-compressed,application/zip,text/plain,text/html,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,
+	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation</param>
+	    			<param name="maximumSize">15728640</param>
+	    		</interceptor-ref>
+			</interceptor-stack>
+			
+			<interceptor-stack name="campusfileUpload-images">
+				<interceptor-ref name="fileUpload">
+		    		<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpe,image/pjpeg,image/x-png</param>
+	    		</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="error">/error_action.jsp</result>
+			<result name="invalid.token">/error_action.jsp</result>
+			<result name="login" type="redirect-action">Inicio</result>
+			<result name="portal" type="redirect-action">Portal</result>
+			<result name="curso" type="redirect-action">Curso</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Throwable" />
+			<exception-mapping result="error" exception="java.lang.Runnable" />
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+
+		<action name="Inicio"
+			class="edu.tecsup.lms.action.InicioAction">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="InicioNoticiaDetalle"
+			class="edu.tecsup.lms.action.InicioAction" method="noticiaDetalle">
+			<result>/noticia_detalle.jsp</result>
+		</action>
+		
+		<action name="KeepAlive" method="none"
+			class="edu.tecsup.lms.action.InicioAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerImagen" method="verImagen"
+			class="edu.tecsup.lms.action.InicioAction">
+		</action>
+		
+		<action name="VerImagenPrevia" method="verImagenPrevia"
+			class="edu.tecsup.lms.action.InicioAction">
+		</action>
+		
+		<action name="Portal" method="portal"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/portal.jsp</result>
+			<result name="success_min">/comun/portal_min.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="GrabarPortal" method="grabarPortal"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="ConfiguracionPortal" method="configuracionPortal"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/configuracion.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="ConfiguracionPortalDefault" method="configuracionDefault"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success" type="redirect-action">
+				ConfiguracionPortal
+			</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalVisible" method="grabarPortalVisible"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalEliminado"
+			method="grabarPortalEliminado"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="GuardarIdioma"
+			method="guardarIdioma"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success" type="redirect-action">
+				Portal
+			</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="Curso" method="verCursos"
+			class="edu.tecsup.lms.action.ficha.FichaAction">
+			<result name="success">/comun/ficha/ficha.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="CursoHistorico" method="obtenerFichaHistorica"
+			class="edu.tecsup.lms.action.ficha.FichaAction">
+			<result name="success">
+				/comun/ficha/ficha_historica.jsp
+			</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Utilitarios">
+			<result>/comun/utilitarios.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Soporte" method="soporte"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<result>/comun/soporte.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Opciones" method="obtenerOpciones"
+			class="edu.tecsup.lms.action.OpcionesAction">
+			<result>/comun/opciones.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+	</package>
+</struts>

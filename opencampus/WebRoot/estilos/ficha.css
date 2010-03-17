@@ -1,0 +1,74 @@
+/**
+*
+*   Para las opciones de selecionar
+*
+*/
+.opcion_selecionar {
+	cursor: pointer;
+	color: #0a37b8;
+}
+
+/**
+*
+*   Para las etiquetas predetermidas
+*
+*/
+.ficha_etiqueta_predeteminada {
+	position: relative;
+	height: 35px;	
+}
+
+.ficha_etiqueta_predeteminada1 {
+	position: relative;
+	height: 17px;
+	width: 20px;
+}
+
+.ficha_etiqueta_predeteminada2 {
+	position: relative;
+	height: 17px;
+	width: 90px;
+	left: 20px;
+	top: -35px;
+	font-weight: bold;
+	text-decoration: underline;
+	/*background-color: #44659B;*/
+	color: #0a37b8;
+	cursor: pointer;
+}
+
+.ficha_tabla {
+	table-layout: fixed;
+}
+.ficha_tabla td {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/**
+*
+*  En la busqueda
+*/
+.ficha_item_link {
+	/*font-family: arial,sans-serif;*/
+	border-bottom: solid #eaeaea 1px;
+	background-color: #FFFFFF;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #5a5959;
+}
+
+.ul_profesores{
+	list-style-type: square;
+	
+	margin-top: -5px;
+	margin-bottom: -2px;
+	
+}
+
+.selecionando_tr:HOVER TD {
+	background-color: #FFFBE8;
+	cursor: pointer;
+}
+

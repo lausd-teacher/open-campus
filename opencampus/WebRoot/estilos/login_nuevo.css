@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+
+.fon_login_iz{
+	background-image:url(../img/fon_login_iz.jpg);
+	background-repeat:no-repeat;
+	background-position:left;
+}
+.fon_login_de{
+	background-image:url(../img/fon_login_de.jpg);
+	background-repeat:no-repeat;
+	background-position:right;
+}
+.fon_login_cen{
+	background-image:url(../img/fon_login_cen.jpg);
+	background-repeat: repeat-x;
+	background-position:left;
+}
+.fon_caja {
+	border-bottom: 1px solid #ABABAB;
+	border-left: 1px solid #ABABAB;
+	border-right: 1px solid #ABABAB;
+	background-color: #FfFfFf;
+	padding-bottom: 3px;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="campus-buzon" extends="campus-default" namespace="/comun/buzon">
+	
+		<action name="CargarPortada" method="cargarPortada"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<result name="success">/comun/portal/servicio_buzon.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+	
+		<action name="Buzon" method="buzon"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<result name="success">/comun/buzon/buzon.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="DescargarAdjunto" method="descargarArchivo"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Configuration" method="configuration"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<result name="success">/comun/buzon/configuracion.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="DirectorioBuzon" method="directorio"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<result name="success">/comun/buzon/directorio.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MensajesRecibidos" method="listarMensajes"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MarcarFavorito" method="marcarFavorito"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MoverCarpeta" method="moverCarpeta"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CrearCarpeta" method="crearCarpeta"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<!-- action name="TraerCarpeta" method="traerCarpeta"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action-->		
+		
+		<action name="CambiarNombreCarpeta" method="cambiarNombreCarpeta"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="EliminarCarpeta" method="eliminarCarpeta"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MarcarLeido" method="marcarLeido"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MarcarNoLeido" method="marcarNoLeido"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<!-- action name="Buscar" method="buscar"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action-->
+		
+		<action name="Eliminar" method="eliminar"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+				
+		<action name="NoLeidos" method="noLeidos"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="BuscarContacto" method="buscarUsuario"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="EnviarPapelera" method="enviarPapelera"
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>			
+		</action>
+
+		<action name="EnviarMensaje" method="enviarMensaje" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">5242880</param>
+	    	</interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+			<result name="success" type="redirect-action">Buzon</result>
+			<result name="error" type="redirect-action">Buzon</result>
+		</action>
+		
+		<action name="EnviarMensajeSoporte" method="enviarMensajeSoporte" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">5242880</param>
+	    	</interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>			
+			<result name="success" type="redirect-action">Soporte?aviso=${aviso}</result>
+		</action>
+				
+		<action name="NuevoMensaje" method="masivo" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>			
+			<result name="success">/comun/buzon/nuevo.jsp?nombres=${nombres}</result>
+		</action>
+		
+		<action name="EnviarMensajeM" method="enviarMensaje" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">5242880</param>
+	    	</interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+			<result name="success">/comun/buzon/enviado.jsp</result>
+		</action>
+	
+	</package>
+	
+	<package name="campus-admin-buzon" extends="campus-default" namespace="/admin/buzon">
+		<action name="Cargar" method="mantenimiento" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+			<result name="success">/admin/buzon/buzon.jsp</result>
+		</action>
+		<action name="LimpiarBuzon" method="limpiarBuzon" 
+			class="edu.tecsup.lms.action.buzon.BuzonAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+			<result name="success" type="redirect-action">Cargar</result>
+		</action>
+	</package>
+
+</struts>

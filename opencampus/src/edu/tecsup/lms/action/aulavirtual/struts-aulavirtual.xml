@@ -1,0 +1,204 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<package name="campus-aulavirtual" namespace="/admin" extends="campus-default">
+		<action name="AulaVirtual" method="ingresar"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success">/admin/aulavirtual/aula_virtual.jsp</result>
+			<result name="RESPONSABLE">/admin/aulavirtual/aula_virtual_historico.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		
+		
+		
+		
+		
+		<action name="SalirDelAula" method="salir"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="AsignarSilabo" method="asignarSilabo"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success" type="redirect-action">AulaVirtual?id=${id}</result>
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		<action name="AulaVirtualEstudiante" method="ingresarPre"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="ESTUDIANTE">/admin/aulavirtual/aula_virtual_pre.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+			
+	</package>
+	
+	
+	
+	<package name="campus-aulavirtual-componentes" namespace="/admin/aulavirtual" extends="campus-aulavirtual">
+		
+		<action name="Configurar" method="configurar" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success">/admin/aulavirtual/configuracion.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MiClase" method="miClase" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success">/admin/aulavirtual/mi_clase.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>	
+		
+		<action name="BuscarNoMatriculadosAutocompletar" method="buscarNoMatriculadosAutocompletar" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Matricular" method="matricular" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success" type="redirect-action">MiClase</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CambiarEstadoMatricula" method="cambiarEstadoMatricula" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="EliminarMatricula" method="eliminarMatricula" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<result name="success" type="redirect-action">MiClase</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CambiarPrincipalMatricula" method="cambiarPrincipalMatricula" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		
+		
+		
+		<action name="ConfigurarGuardarPesos" method="guardarPesos" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>	
+		
+		<action name="ConfigurarGuardarPesos" method="guardarPesos" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>	
+		
+		<action name="ConfigurarNoAuditable" method="guardarNoAuditable" class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>	
+		
+		<action name="FichaUnidadCambiarEstado" method="fichaUnidadCambiarEstado"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+
+		<action name="FichaUnidadRecursoCambiarEstado" method="fichaUnidadRecursoCambiarEstado"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="FichaUnidadRecursoCambiarEstadoDocente" method="fichaUnidadRecursoCambiarEstadoDocente"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+				
+		<action name="FichaUnidadRecursoCambiarEstadoEstudiante" method="fichaUnidadRecursoCambiarEstadoEstudiante"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+				
+		<action name="FichaUnidadRecursoCambiarCalifica" method="fichaUnidadRecursoCambiarCalifica"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarTexto" method="copiarTexto"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarRepaso" method="copiarRepaso"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="FichaRecursoCambiarEstado" method="fichaRecursoCambiarEstado"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarLaboratorio" method="copiarLaboratorio"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="GuardarConfiguracion" method="guardarConfiguracion"
+			class="edu.tecsup.lms.action.aulavirtual.GestionarAulaVirtualAction">			
+			<interceptor-ref name="responsable-aula-virtual"></interceptor-ref>
+		</action>
+		
+	</package>
+	
+	
+	
+	<package name="campus-aulavirtual-comun-componentes" namespace="/aulavirtual" extends="campus-default">
+		
+		<action name="SilaboDeCurso" method="silaboDeCurso"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<result name="success">/comun/aulavirtual/plan_curso.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="AulaVirtual" method="ingresar"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<result name="DOCENTE">/docente/aula_virtual.jsp</result>
+			<result name="ESTUDIANTE">/estudiante/aula_virtual.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerRecurso" method="verRecurso"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+
+
+
+
+		
+		
+		<action name="SalirDelAula" method="salir"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="MiClase" method="miClase"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<result name="success">/comun/aulavirtual/mi_clase.jsp</result>
+			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarRepaso" method="copiarRepaso"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">			
+			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarTexto" method="copiarTexto"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">			
+			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+		</action>
+		
+		<action name="CopiarRepasoOff" method="copiarRepasoOff"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">			
+			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+		</action>	
+	
+		<action name="FichaUnidadRecursoTestCambiarEstadoEstudiante" method="fichaUnidadRecursoTestCambiarEstadoEstudiante"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">
+			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+		</action>
+
+		<action name="CopiarLaboratorio" method="copiarLaboratorio"
+			class="edu.tecsup.lms.action.aulavirtual.AulaVirtualAction">			
+			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+		</action>
+
+	</package>
+
+</struts>
