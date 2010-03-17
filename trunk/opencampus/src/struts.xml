@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	    	
+	<constant name="struts.messages.error.uploading" value="Error al subir el archivo" />
+	<constant name="struts.messages.error.file.too.large" value="Archivo excede el limite" />
+	<constant name="struts.messages.error.content.type.not.allowed" value="Tipo de archivo no permitido" />
+	<constant name="struts.multipart.maxSize" value="15242880" />	
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	
+	<constant name="struts.custom.i18n.resources" value="mensajes" />
+	<constant name="struts.i18n.encoding" value="ISO-8859-1"/>
+	<constant name="struts.i18n.reload" value="true"/>
+    <constant name="struts.locale" value="es_PE"/>	
+	<!--	<constant name="struts.multipart.parser" value="jakarta" />-->
+	
+	
+	<include file="edu/tecsup/lms/action/default-config.xml" />
+	<include file="edu/tecsup/lms/action/aulavirtual/struts-aulavirtual.xml" />
+	<include file="edu/tecsup/lms/action/curso/struts-curso.xml" />
+	<include file="edu/tecsup/lms/action/discusion/struts-discusion.xml" />
+	<include file="edu/tecsup/lms/action/dialogo/struts-dialogo.xml" />
+	<include file="edu/tecsup/lms/action/debate/struts-debate.xml" />
+	<include file="edu/tecsup/lms/action/ficha/struts-ficha.xml" />
+	<include file="edu/tecsup/lms/action/herramienta/struts-herramienta.xml" />
+	<include file="edu/tecsup/lms/action/seguridad/struts-seguridad.xml" />
+	<include file="edu/tecsup/lms/action/usuario/struts-usuario.xml" />
+	<include file="edu/tecsup/lms/action/unidad/struts-unidad.xml" />
+	<include file="edu/tecsup/lms/action/jerarquia/struts-jerarquia.xml" />
+	<include file="edu/tecsup/lms/action/laboratorio/struts-laboratorio.xml" />
+	<include file="edu/tecsup/lms/action/matricula/struts-matricula.xml" />
+	<include file="edu/tecsup/lms/action/periodo/struts-periodo.xml" />
+	<include file="edu/tecsup/lms/action/publicacion/struts-publicacion.xml" />
+	<include file="edu/tecsup/lms/action/silabo/struts-silabo.xml" />
+	<include file="edu/tecsup/lms/action/test/struts-test.xml" />
+	<include file="edu/tecsup/lms/action/tgrupal/struts-tgrupal.xml" />
+	<include file="edu/tecsup/lms/action/tindividual/struts-tindividual.xml" />
+	<include file="edu/tecsup/lms/action/buzon/struts-buzon.xml" />
+	<include file="edu/tecsup/lms/action/noticia/struts-noticia.xml" />
+	<include file="edu/tecsup/lms/action/aviso/struts-aviso.xml" />
+	<include file="edu/tecsup/lms/action/aulavirtual/reporte/struts-aulavirtual-reporte.xml" />			
+	<include file="edu/tecsup/lms/action/aulavirtual/informe/struts-aulavirtual-informe.xml" />		
+	<include file="edu/tecsup/lms/action/reporte/struts-reporte.xml" />		
+	<include file="edu/tecsup/lms/action/inicio/struts-portal.xml" />	
+ 	<include file="edu/tecsup/lms/action/agenda/struts-agenda.xml" />
+	<include file="edu/tecsup/lms/action/anotacion/struts-anotacion.xml" />
+	<include file="edu/tecsup/lms/action/chat/struts-chat.xml" />
+	<include file="edu/tecsup/lms/action/encuesta/struts-encuesta.xml" />
+	<include file="edu/tecsup/lms/action/foro/struts-foro.xml" />
+
+</struts>

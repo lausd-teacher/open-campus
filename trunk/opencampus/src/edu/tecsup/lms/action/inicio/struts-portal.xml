@@ -1,0 +1,24 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus-portal" extends="campus-default"
+		namespace="/admin/portal">
+		<action name="ObtenerServicios" method="obtenerServicios"
+			class="edu.tecsup.lms.action.inicio.GestionarPortal">
+			<result name="success">
+				/admin/portal/configuracion.jsp
+			</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalGestionar" method="grabarPortal"
+			class="edu.tecsup.lms.action.inicio.GestionarPortal">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalAccionGestionar"
+			method="grabarPortalAccion"
+			class="edu.tecsup.lms.action.inicio.GestionarPortal">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+	</package>
+</struts>

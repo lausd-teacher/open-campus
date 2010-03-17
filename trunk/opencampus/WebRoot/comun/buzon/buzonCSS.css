@@ -1,0 +1,318 @@
+.listas {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	text-align: left;
+	vertical-align: baseline;
+	word-spacing: normal;
+	overflow:auto; 
+	white-space: normal;
+	width:240px; 
+	height:100px;
+}
+.lista {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	text-transform: none;
+	text-align: left;
+	vertical-align: baseline;
+	word-spacing: normal;
+	overflow:auto; 
+	white-space: normal;
+	width:260px; 
+	height:200px;
+}
+#salir{
+	top: 38px;
+	right: 19px;
+	position: absolute;
+}
+#Superior{
+	top:38px;
+	position: absolute;
+	left:19px;
+}
+#aviso{
+	background-color: red;
+	color: white;
+	font-size: 12px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.bor_tabla {
+	border: solid #44659B 1px;
+}
+.xxx{
+	background-image: url(../../img/fon_cab.jpg);
+	background-repeat: repeat-x;
+}
+.content{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding-left: 10px;
+	vertical-align:middle;
+}
+.texto{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	vertical-align:middle;
+	padding-left: 3px;
+}
+.mensaje{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	vertical-align:middle;
+	padding-left: 3px;
+	background:#DFF0FF;	
+}
+.selec{
+	clear:both;
+	padding-left:10px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.textoMenu{	
+	height:20px;;	
+}
+.chico{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	vertical-align:middle;
+	padding-left: 2px;
+	color:#4268C9;
+	font-weight:bold;
+}
+
+.abajo{
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+}
+.tit_cab{
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+	
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-left: 5px;
+	text-decoration: none;
+	vertical-align:middle;
+}
+.body, td, input, textarea, select {
+	font-family:arial, sans-serif	
+}
+input, textarea, select {
+	font-size: 12px;	
+}
+img {
+	border:0
+}
+body {
+	background:#fff;
+	margin:0
+}
+pre {
+	white-space:pre-wrap;
+	white-space:-moz-pre-wrap;
+	word-wrap:break-word;
+	white-space:-pre-wrap;
+	white-space:-o-pre-wrap
+}
+.s {
+	font-size:80%
+}
+
+
+.l {
+	color:#0000cc;
+	cursor:pointer;
+	cursor:hand;
+	white-space:nowrap
+}
+.form_button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #44659B;
+	background-color: #FFFFFF;
+	border-top: 1px solid #44659B;
+	border-left: 1px solid #44659B;
+	height: 20px;
+	text-align: center;
+}
+a {
+	cursor:pointer;
+	text-decoration: none;
+	font-size: 9pt;
+}
+a:link {
+	color: #000000
+}
+a:visited {
+	color: #000000
+}
+a:hover {
+	color: #000000
+}
+a:active {
+	color: #000000
+}
+#nav {
+	position: absolute;
+	left: 10px;
+	top: 98px;
+}
+.noLeido{
+	background:#FFFFFF none repeat scroll 0%;
+	cursor: pointer;
+	color: #FF0000;
+}
+.leido{
+	
+	background: #EFF8FF none repeat scroll 0%;
+	cursor: pointer;
+}
+
+
+.sd .fbh {
+	border-color:#7aabff;
+	background:#b8d1ff;
+	color:#1a6dff
+}
+.sd .fbe {
+	background:#c7dbff;
+	color:#669eff
+}
+.sd .fbd {
+	background:#e0ecff;
+	color:#c7dbff
+}
+.sd .fbb {
+	border-color:#adcbff
+}
+.sd #fb {
+	border-color:#c3d9ff;
+	background:#e0ecff
+}
+.sd .an, .sd .thc {
+	background:#DFF0FF;	
+}
+.sd .fs {
+	border-left-color:#DFF0FF;	
+}
+.nl {
+	font-size:100%;	
+}
+.tbcr {
+	float:left;
+	margin-left:0.5ex;
+	padding-right:0.5ex;
+	border:0px;
+}
+.tbc {
+	font-size:80%;	
+}
+.tbcp {
+	float:right;
+	text-align:right;
+}
+.fs {
+	border-left:9px solid
+}
+
+.ss .fs {
+	border-left-color:#ccc
+}
+.sb .fs {
+	border-left-color:#74dd82
+}
+.sq .fs {
+	border-left-color:#74dd82
+}
+.sf .fs {
+	border-left-color:#fad163
+}
+.so .fs {
+	border-left-color:#c3d9ff
+}
+.ct {
+	font-size:100%
+}
+.sc {
+	background-position:1 3;
+	background-repeat:no-repeat
+}
+.tf {
+	font-size:80%;
+	text-align:center;
+	padding:10 20;
+	font-weight: bold;
+	padding-top: 20px;
+}
+
+
+.tablaMensajes{
+	border-spacing:0pt;
+	cursor:pointer;
+	padding:0pt;
+	table-layout:fixed;
+	width:100%;
+	border-collapse: collapse;
+}
+
+.tablaMensajes td {
+	border-bottom:1px solid #CCCCCC;
+	empty-cells:show;
+	font-size:80%;
+	overflow:hidden;
+	padding:2px 0pt 3px;
+	vertical-align:top;
+	white-space:nowrap;
+}
+
+.tablaMensajes div{
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.col1{
+	width: 29px
+}
+.col2{
+	width: 20px
+}
+.col3{
+	width: 22ex
+}
+.col5{
+	width: 17px
+}
+.col6{
+	width: 13ex
+}
+.colExtra{
+	width: 2ex;
+}
+.fon_tit_buzon {
+	background-image: url(../../img/fon_tit_curso_02.jpg);
+	background-repeat: repeat-x;
+	color: white;
+}/*
+.bor_tabla01 {
+	border-collapse: collapse; /*separate*/
+	border: 1px solid #7EAAD1;
+}*/
+.cabe{
+	font-size: 13px;
+	font-weight: bold;
+}

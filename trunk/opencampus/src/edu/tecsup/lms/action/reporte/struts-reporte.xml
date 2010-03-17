@@ -1,0 +1,79 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus_reporte" namespace="/reporte"
+		extends="campus-default">
+		<action name="Auditoria" method="reporte"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/reporte.jsp</result>
+			<interceptor-ref name="empresa-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaSecDoc" method="reportesecdoc"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/secdoc.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaDeCurso" method="auditoriaDeCurso"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/reporteCursoVirtual.jsp</result>
+			<interceptor-ref name="monitor-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaDeDocente" method="auditoriaDeDocente"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/reporteDocente.jsp</result>
+			<interceptor-ref name="monitor-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaTecsupVirtual" method="auditoriaTecsupVirtual"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/auditoriaTecsupVirtual.jsp</result>
+			<interceptor-ref name="monitor-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaTecsupVirtualXLS" method="auditoriaTecsupVirtual"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/auditoriaTecsupVirtualXLS.jsp</result>
+			<interceptor-ref name="monitor-campus"></interceptor-ref>
+		</action>
+		<action name="ReporteTecsupVirtual" method="reporteTecsupVirtual"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/reporteTecsupVirtual.jsp</result>
+			<interceptor-ref name="monitor-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaSecDocImprimir"
+			method="reportesecdocImprimir"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">
+				/admin/reporte/impresion_secdoc.jsp
+			</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaSecDocExcel" method="reportesecdocExcel"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaPDF" method="reportePDF"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<interceptor-ref name="empresa-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CargarAuditoriaDepartamento" method="auditoriaDeDocente"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/reporteDocente.jsp</result>
+			<interceptor-ref name="jefe-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaDepartamento" method="auditoriaTecsupVirtual"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/admin/reporte/auditoriaTecsupVirtual.jsp</result>
+			<interceptor-ref name="jefe-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaSemanal" method="obtenerAuditoriaSemanal"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/docente/auditoria/auditoria_aulavirtual.jsp</result>
+			<interceptor-ref name="jefe-campus"></interceptor-ref>
+		</action>
+		<action name="AuditoriaSemanalXLS" method="obtenerAuditoriaSemanal"
+			class="edu.tecsup.lms.action.reporte.ReporteAction">
+			<result name="success">/docente/auditoria/auditoria_aulavirtual_XLS.jsp</result>
+			<interceptor-ref name="jefe-campus"></interceptor-ref>
+		</action>
+		
+	</package>
+</struts>

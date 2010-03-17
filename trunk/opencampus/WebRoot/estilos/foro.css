@@ -1,0 +1,335 @@
+@charset "utf-8";
+/* CSS Document */
+
+#foro_principal {
+	float: left;
+	padding: 10px;
+	width: 970px;
+}
+.foro_bor_tabla {
+	border-bottom:solid #44659B 1px;
+	border-left:solid #44659B 1px;
+	border-right:solid #44659B 1px;
+	/*border: solid #44659B 1px;*/
+}
+.foro_bor_de{
+	border-right:solid #44659B 1px;
+	
+}
+.foro_bor_de_2{
+	border-right:solid #44659B 1px;
+	background-color: #E5EFF8;
+	
+}
+.foro_bor_iz{
+	border-left:solid #44659B 1px;
+	
+	
+}
+.foro_bor_aba{
+	border-bottom:solid #44659B 1px;
+	
+}
+.foro_fon_tit_iz{
+	background-image:url(../img/foro_fon_tit_iz.jpg);
+	background-repeat:no-repeat;
+
+}
+.foro_fon_tit_iz_rvs{
+	background-image:url(../img/foro_fon_tit_iz_rvs.jpg);
+	background-repeat:no-repeat;
+
+}
+.foro_fon_tit{
+	background-image:url(../img/foro_fon_tit.jpg);
+	background-repeat: repeat-x;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-left: 10px;
+	text-decoration: none;
+	vertical-align: middle;
+	
+
+}
+.foro_fon_tit_de{
+	background-image:url(../img/foro_fon_tit_de.jpg);
+	background-repeat:no-repeat;
+
+}
+.foro_fon_tit_de_rvs{
+	background-image:url(../img/foro_fon_tit_de_rvs.jpg);
+	background-repeat:no-repeat;
+
+}
+
+.foro_esq_de1{
+	background-image: url(../img/foro_esq_de1.jpg);
+	background-repeat:no-repeat;
+	vertical-align:top;
+	text-align: right;
+	
+
+}
+.foro_esq_de1_2{
+	background-image: url(../img/foro_esq_de1_2.jpg);
+	background-repeat:no-repeat;
+	vertical-align:top;
+	text-align: right;
+
+}
+.foro_esq_de2{
+	background-image: url(../img/foro_esq_de2.jpg);
+	background-repeat:no-repeat;
+	vertical-align: bottom;
+	text-align: right;
+
+}
+.foro_esq_de2_2{
+	background-image: url(../img/foro_esq_de2_2.jpg);
+	background-repeat:no-repeat;
+	vertical-align: bottom;
+	text-align: right;
+
+}
+.foro_esq_aba{
+	background-image: url(../img/foro_esq_aba.jpg);
+	background-repeat: repeat-x;
+	vertical-align:top;
+	
+
+}
+.foro_esq_aba_2{
+	background-image: url(../img/foro_esq_aba_2.jpg);
+	background-repeat: repeat-x;
+	vertical-align:top;
+	
+
+}
+
+.foro_esq_iz{
+	background-image: url(../img/foro_esq_iz.jpg);
+	background-repeat:no-repeat;
+	vertical-align:bottom;	
+	text-align: right;
+	/*border-bottom:solid #44659B 1px;*/
+
+}
+.foro_esq_iz_2{
+	background-image: url(../img/foro_esq_iz_2.jpg);
+	background-repeat:no-repeat;
+	
+	text-align: left;
+	/*border-bottom:solid #44659B 1px;*/
+
+}
+.foro_Modulo {
+	color: #000000;
+	border-right-width: 1px;
+	border-right-style: solid;	
+	border-right-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_Modulo1 {
+	color: #000000;
+	border-right-width: 1px;
+	border-right-style: solid;	
+	border-right-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+	
+}
+
+.foro_ModuloAbajo1 {
+	
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_ModuloArriba {
+	
+	color: #000000;
+	border-top-width: 1px;
+	border-top-style: solid;	
+	border-top-color: #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_ModuloAbajoDerecha {
+	
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_ModuloArribaDerecha {
+	
+	color: #000000;
+	border-top-width: 1px;
+	border-top-style: solid;	
+	border-top-color: #7EAAD1;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_ModuloArribaAbajo {
+	
+	color: #000000;
+	border-top-width: 1px;
+	border-top-style: solid;	
+	border-top-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;
+	
+}
+.foro_ModuloDerecha {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;
+}
+.foro_ModuloAbajo {
+	border-bottom: 1px solid #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+}
+.foro_bor_der_unid {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	/*border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;*/
+	text-align: center;
+	padding: 3px 3px 3px 3px;
+}
+.foro_bor_der_msj {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	border-left-width: 1px;
+	border-left-style: solid;	
+	border-left-color: #7EAAD1;
+	
+	padding: 3px 3px 3px 3px;
+}
+.foro_bor_der_unid_col {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	text-align: center;
+	padding: 3px 3px 3px 3px;
+}
+.foro_bor_der_unid_col_img {
+	
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	text-align: center;
+	padding: 3px 3px 3px 3px;
+}
+.foro_bor_der_cur {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	/*border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;*/
+	padding: 3px 3px 3px 3px;	
+}
+.foro_bor_der_cur_start {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	padding-left: 10px;
+	/*border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;*/
+	
+}
+.foro_bor_der_cur_col {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;	
+}
+.foro_bor_der_cur_fe {
+	
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	border-bottom-color: #7EAAD1;
+	padding: 3px 3px 3px 3px;
+	
+	
+}
+.foro_bor_der_cur_ult {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #7EAAD1;
+	
+	border-bottom:solid #44659B 1px;
+	
+}
+.foro_bor_der_cur_ult_aba {
+	
+	border-bottom:solid #44659B 1px;
+	
+}
+
+.foro_fon_degrade{
+	background-image: url('../img/foro_list_back.jpg'); 
+	background-repeat: repeat-x;
+}
+
+.foro_menu{
+	font-weight: bold;
+	text-decoration: underline;
+	color: #0a37b8;
+	cursor: pointer;
+	padding-left:3px;
+	padding-right:3px;
+	}
+.foro_menu1{
+	font-weight: bold;
+	color: #0a37b8;
+}
+
+/****wipe's round specials*******************************/
+.t {background: url(../img/foro/dot2.gif) 0 0 repeat-x; width: 100%}
+.b {background: url(../img/foro/dot2.gif) 0 100% repeat-x;}
+.l {background: url(../img/foro/dot2.gif) 0 0 repeat-y; }
+.r {background: url(../img/foro/dot2.gif) 100% 0 repeat-y;}
+.bl {background: url(../img/foro/izq_inf.gif) 0 100% no-repeat;}
+.br {background: url(../img/foro/der_inf.gif) 100% 100% no-repeat;}
+.tl {background: url(../img/foro/izq_sup.gif) 0 0 no-repeat;}
+.tr {background: url(../img/foro/der_sup.gif) 100% 0 no-repeat; }

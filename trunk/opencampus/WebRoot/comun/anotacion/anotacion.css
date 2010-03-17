@@ -1,0 +1,258 @@
+DIV {
+	font-size: 0pt;
+}
+
+#divError {
+	margin: 0pt 0pt;
+	width: 100%;
+	text-align: center;
+}
+
+#div_txtError {
+	position: fixed;
+	width: auto;
+}
+
+#txtError {
+	padding-left: 10px;
+	text-align: center;
+	padding-right: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+#tabla_txtError {
+	width: auto;
+}
+
+#tabla_txtError td {
+	padding-left: 0px;
+}
+
+.anotacion_border_eliminar {
+	width: 20px;
+	position: absolute;
+	margin-right: 0px;
+	z-index: 3;
+	margin-top: 0px;
+	top: 0pt;
+	right: 0pt;
+	height: 100%;
+}
+
+.anotacion_border_selecionar {
+	width: 20px;
+	height: 100%;
+	z-index: 2;
+	position: absolute;
+	left: 0pt;
+	top: 0pt;
+	direction: ltr;
+	left: 0pt;
+	outline-color: invert;
+	outline-style: none;
+	outline-width: 0pt;
+}
+
+.anotacion_border_selecionado {
+	background-image: url(../../img/note_borde.gif);
+	background-repeat: repeat-y;
+}
+
+.anotacion_titulo {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	left: 0px;
+	top: 0px;
+}
+
+.tabla_anotacion_titulo {
+	position: relative;
+	width: 100%;
+}
+
+.cursor_mano {
+	cursor: pointer;
+}
+
+.cursor_editar {
+	cursor: text;
+}
+
+.anotacion_primero {
+	position: relative;
+	border: 1px solid #44659B;
+	width: 98%;
+}
+
+.anotacion_titulo_editar {
+	background-color: white;
+	border-width: 0px;
+	font-size: 11px;
+}
+
+.anotacion_eliminar {
+	padding-top: 3px;
+	padding-left: 2px;
+}
+
+.anotacion_comentario_editar {
+	border-width: 0px;
+	width: 100%;
+	overflow: hidden;
+	background: #E7EEF2 none repeat scroll 0% 50%;
+}
+
+.div_anotacion_comentario_editar {
+	position: relative;
+	width: 100%;
+	border-top: 1px solid #BCD1F3;
+	background: #E7EEF2;
+}
+
+.div_anotacion_opciones {
+	width: 100%;
+	border-top: 1px dotted #BCD1F3;
+	z-index: 1;
+	height: 20px;
+	position: relative;
+}
+
+.div_div_anotacion_opciones {
+	margin-left: 35px;
+	height: 18px;
+	width: 85px;
+	padding-left: 3px;
+}
+
+.div_anotacion_opciones_imgs {
+	background-image: url(../../img/icon_comentario.png);
+	width: 30px;
+	height: 18px;
+}
+
+.div_anotacion_opciones_label {
+	color: #0000CC;
+	font-size: 8pt;
+}
+
+.div_anotacion_opciones_selecionado {
+	border-color: #E7EEF2 rgb(188, 209, 243) rgb(188, 209, 243);
+	background-color: #E7EEF2;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.div_center_textarea {
+	height: auto;
+	margin: 0pt auto;
+	text-align: center;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-bottom: -12px;
+}
+
+.anotacion_segundo {
+	height: 12px;
+}
+
+.anotacion_segundo_relleno {
+	font-size: 0pt;
+	height: 3px;
+}
+
+.anotacion_segundo_div {
+	font-size: 0pt;
+	height: 6px;
+}
+
+.anotacion_fecha {
+	font-size: 7pt;
+	color: #666666;
+	text-align: right;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 80px;
+}
+
+.anotacion_pre {
+	
+}
+
+.anotacion_pre_relleno {
+	height: 4px;
+	position: relative;
+}
+
+.anotacion_pre_principal {
+	height: auto;
+	width: 98%;
+	background-color: #F2F2F2;
+	border: 1px #898989 solid;
+	border-top: 3px #4F4F4F outset;
+	border-left: 3px #4F4F4F outset;
+	position: relative;
+}
+
+.anotacion_pre_nuevo {
+	position: relative;
+}
+
+.anotacion_titulo_nuevo {
+	width: 100%;
+	background-color: #F2F2F2;
+	border-width: 0px;
+	position: relative;
+	z-index: 50;
+}
+
+.anotacion_pre_instruccion {
+	background-color: #F2F2F2;
+	font-size: 8pt;
+	color: #666666;
+	position: absolute;
+	right: 0px;
+	width: 100px;
+	top: 4px;
+	z-index: 53;
+}
+
+.anotacion_nuevo_eliminar {
+	position: absolute;
+	right: 10px;
+	top: 4px;
+	z-index: 53;
+}
+
+.div_anotacion_nuevo_opciones {
+	width: 100%;
+	/*border-top: 1px dotted #898989;*/
+	z-index: 1;
+	height: 20px;
+	position: relative;
+	background-color: #F2F2F2;
+}
+
+.anotacion_pre_nuevo_instruccion {
+	background-color: #F2F2F2;
+	font-size: 8pt;
+	color: #666666;
+	position: absolute;
+	right: 0px;
+	width: 100px;
+	bottom: 4px;
+	z-index: 53;
+}
+
+.div_div_anotacion_imprimir {
+	margin-left: 135px;
+	margin-top : -20px;
+	height: 18px;
+	width: 65px;
+	padding-left: 5px;
+}

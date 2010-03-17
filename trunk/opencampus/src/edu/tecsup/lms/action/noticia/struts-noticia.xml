@@ -1,0 +1,118 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus-noticias" namespace="/noticia" extends="campus-default">
+
+		<action name="CargarPortada" method="cargarPortada"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success">/comun/portal/servicio_noticia.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>	
+
+		<action name="Cargar" method="cargarTitulares"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success">/comun/noticia/noticia.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>	
+		
+		<action name="VerNoticia" method="verNoticiaPublica"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success">/comun/noticia/verNoticia.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerImagen" method="verImagen"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerImagenPrevia" method="verImagenPrevia"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+			
+	</package>
+	
+	<package name="campus-admin-noticias" namespace="/admin/noticia" extends="campus-default">
+
+		<action name="Cargar" method="cargar"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success">/admin/noticia/admin_noticia.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="VerNoticia" method="verNoticia"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success">/comun/noticia/verNoticia.jsp</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="ObtenerNoticia" method="obtenerNoticia"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Crear" method="crear"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="campusfileUpload-images"/>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Modificar" method="modificar"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="campusfileUpload-images"/>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Eliminar" method="eliminar"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CambiarEstado" method="cambiarEstado"
+			class="edu.tecsup.lms.action.noticia.NoticiaAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+	</package>
+	
+	<package name="campus-admin-noticias-seccion" namespace="/admin/noticia/seccion" extends="campus-default">
+
+		<action name="Cargar" method="cargar"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<result name="success">/admin/noticia/admin_seccion.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Crear" method="crear"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Eliminar" method="eliminar"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Reordenar" method="reordenar"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Renombrar" method="modificar"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CargarXML" method="cargarXML"
+			class="edu.tecsup.lms.action.noticia.SeccionAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+				
+	</package>
+</struts>

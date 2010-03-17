@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/opencampus</value>
+		</property>
+	</bean>
+
+	<bean id="baseDAO" class="edu.tecsup.lms.dao.BaseDAO"
+		abstract="true" />
+
+	<bean id="avisoDAO" class="edu.tecsup.lms.dao.AvisoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="buzonDAO" class="edu.tecsup.lms.dao.BuzonDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="cursoDAO" class="edu.tecsup.lms.dao.CursoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="agendaDAO" class="edu.tecsup.lms.dao.AgendaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="reporteDAO" class="edu.tecsup.lms.dao.ReporteDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="fichaDAO" class="edu.tecsup.lms.dao.FichaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="fichaHerramientaDAO"
+		class="edu.tecsup.lms.dao.FichaHerramientaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="fichaRecursoDAO"
+		class="edu.tecsup.lms.dao.FichaRecursoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="fichaUnidadDAO"
+		class="edu.tecsup.lms.dao.FichaUnidadDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="fichaUnidadRecursoDAO"
+		class="edu.tecsup.lms.dao.FichaUnidadRecursoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="jerarquiaDAO" class="edu.tecsup.lms.dao.JerarquiaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="laboratorioDAO"
+		class="edu.tecsup.lms.dao.LaboratorioDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="matriculaDAO" class="edu.tecsup.lms.dao.MatriculaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="periodoDAO" class="edu.tecsup.lms.dao.PeriodoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="ingresoDAO" class="edu.tecsup.lms.dao.IngresoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="publicacionDAO"
+		class="edu.tecsup.lms.dao.PublicacionDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="silaboDAO" class="edu.tecsup.lms.dao.SilaboDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="testDAO" class="edu.tecsup.lms.dao.TestDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="trabajoGrupalDAO"
+		class="edu.tecsup.lms.dao.TrabajoGrupalDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="trabajoIndividualDAO"
+		class="edu.tecsup.lms.dao.TrabajoIndividualDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="usuarioDAO" class="edu.tecsup.lms.dao.UsuarioDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="unidadDAO" class="edu.tecsup.lms.dao.UnidadDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dialogoDAO" class="edu.tecsup.lms.dao.DialogoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="debateDAO" class="edu.tecsup.lms.dao.DebateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="aulaVirtualDAO"
+		class="edu.tecsup.lms.dao.AulaVirtualDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="etiquetaDAO" class="edu.tecsup.lms.dao.EtiquetaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="especialidadDAO"
+		class="edu.tecsup.lms.dao.EspecialidadDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="noticiaDAO" class="edu.tecsup.lms.dao.NoticiaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="foroDAO" class="edu.tecsup.lms.dao.ForoDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="portalDAO" class="edu.tecsup.lms.dao.PortalDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="encuestaDAO" class="edu.tecsup.lms.dao.EncuestaDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="anotacionDAO" class="edu.tecsup.lms.dao.AnotacionDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="foroUsuarioDAO"
+		class="edu.tecsup.lms.dao.ForoUsuarioDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="fichaInformeDAO"
+		class="edu.tecsup.lms.dao.FichaInformeDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>

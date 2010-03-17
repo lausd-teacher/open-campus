@@ -1,0 +1,210 @@
+/***********************************************/
+	/* HTML Campus TECSUP                          */
+	/***********************************************/
+html{
+	overflow: auto;
+}	
+
+body {
+	text-align: center;
+	vertical-align: middle;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #EAEBED;	
+	width: 98%;
+	height: 90%;
+	margin: 3px;
+	/*overflow: auto;*/
+}
+
+textarea{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+input{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+td {
+	font-family: Tahoma;
+	font-size: 11px;
+}
+
+p {
+	text-indent: 0px;
+	font-size: 11px;
+	text-align: justify;
+	margin: 5px;
+	/*line-height: 14px;*/
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+/***********************************************/
+	/* Layout Divs                                 */
+/***********************************************/
+#contenedor {
+	margin:0px auto;
+	text-align: left;
+	width: 993px;
+	background-color: #FFFFFF;
+}
+
+#menu_principal {
+	height: 22px;
+	width: 993px;
+	background-image: url(../img/fon_menu.jpg);
+	background-repeat: no-repeat;
+}
+
+#menu_principal_alumno {
+	height: 22px;
+	width: 994px;
+	color: #44659B;
+	background-image: url(../img/fon_menu_alumno.jpg);
+	background-repeat: no-repeat;
+}
+
+#banner {
+	width: 991px;
+	border-right: 1px solid #B6B6B6;
+	border-left: 1px solid #B6B6B6;
+	background-image: url(../img/logo.jpg);
+	height: 68px;
+	background-repeat: no-repeat;
+	border-bottom: solid #B6B6B6 1px;
+}
+
+#bienvenida {
+	height: 24px;
+	border-bottom: 1px solid #B6B6B6;
+	border-left: 1px solid #B6B6B6;*/
+	border-right: 1px solid #B6B6B6;*/
+	background-color: #F7F7F7;
+	text-align: left;
+	color: #44659B;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+#cuerpo {
+	width: 991px;
+	border-left: 1px solid #B6B6B6;
+	border-right: 1px solid #B6B6B6;
+	float: left;
+	left: 0px;
+	top: 0px;	
+}
+
+#principal {
+	padding: 10px;
+	width: 972px;
+}
+#principal_encuesta {
+	float: left;
+	padding: 10px;
+	width: 803px;
+}
+
+#inicio {
+	
+}
+
+#noticias {
+	
+}
+
+#otros {
+	
+}
+
+#foros {
+	
+}
+
+#derecha {
+	float: right;
+	width: 200px;
+	/*padding-top: 5px;*/ /*padding-bottom: 5px;*/
+	position: absolute;
+	left: 790px;
+	/*top: 2px;	*/
+}
+
+#pie {
+	clear: both;
+	height: 30px;
+	/*background-image: url(../img/fon_pie2.jpg);
+	background-repeat: repeat-x;*/
+	background-color: #aaaaaa;
+	border: 1px solid #cccccc;
+	
+	
+	
+}
+	
+
+#tooltip {
+	position: absolute;
+	background-color: #fffbbf;
+	border: 1px #000000 solid;
+	padding: 3px;
+	display: none;
+}
+
+.avisoback_red {
+	width: 100%;
+	border: 1px dashed #BD0000;
+	background-color: #FF1800; 
+	height: 20px;
+	padding: 1px; 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.errMsg {
+	color:#F00 !important;
+	display:block;
+}
+
+.errFld {
+	border: 1px solid #FF0000 !important;
+} 
+/***********************************************/
+	/* Layout Divs Otros                           */
+	/***********************************************/
+	
+#contenidoWY{
+	background-color: white;
+	border: 1px solid black;
+
+}
+#message{
+	width: 100%;
+	background-color: #FFF1A8;
+	border: 0px solid #FFED88;
+	padding: 5px 0px 5px 0px;
+	text-indent: 5px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #EB411F;
+	display: none;
+}
+
+#message a{
+	color: #000000;
+}
+
+.gris{
+	background-color: #EEEEEE;
+}

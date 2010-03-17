@@ -1,0 +1,236 @@
+/*Tabla*/
+.tabla01_encabezado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #4468C9;
+	background-image: url(../img/back_th.jpg);
+	background-repeat: repeat-x;
+}
+
+.tabla02_encabezado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FDFDFD;
+	background-color: #4468C9;
+	background-image: url(../img/back_th_out.jpg);
+	background-repeat: repeat-x;
+}
+
+.tabla01_fila1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	vertical-align: middle;
+	background-color: #E5EFF8;
+	height: 15px;
+}
+
+.tabla01 caption{
+	padding: 2px;
+	padding-left: 10px;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	color: #FFFFFF;
+	background-color: #4468C9;
+	background-image: url(../img/back_th.jpg);
+	background-repeat: repeat-x;
+}
+
+.tabla01_out caption{
+	padding: 2px;
+	padding-left: 10px;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	color: #FFFFFF;
+	background-color: #4468C9;
+	background-image: url(../img/back_th_out.jpg);
+	background-repeat: repeat-x;
+}
+
+.tabla01_subEncabezado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	height: 20px;
+	background-color: #FFFFFF;
+	background-position: center center;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tabla01 {
+	border-collapse: collapse; /*separate*/
+	border: 1px solid #7EAAD1;
+}
+
+.tabla01_out {
+	border-collapse: collapse; /*separate*/
+	border: 1px solid #CCCCCC;
+}
+
+.tabla09 {
+	border-collapse: collapse; /*separate*/
+	border-bottom: 1px solid #7EAAD1;
+	border-left: 1px solid #7EAAD1;
+	border-right: 1px solid #7EAAD1;
+}
+
+.tabla01_border_top {
+	border-top: 1px solid #90bada;
+}
+.tabla01_border_bottom {
+	border-bottom: 1px solid #90bada;
+}
+.tabla01_border_left {
+	border-left: 1px solid #90bada;
+}
+.tabla01_border_right {
+	border-right: 1px solid #90bada;
+}
+
+.tabla01 td{
+	/*white-space: nowrap;*/
+	overflow: hidden;
+}
+
+.tabla01_out td{
+	/*white-space: nowrap;*/
+	overflow: hidden;
+}
+
+.tabla01 tr th {
+	padding: 0px;
+	padding-left: 0px;
+}
+
+.tabla01_out tr th {
+	padding: 0px;
+	padding-left: 0px;
+}
+
+.innerDiv_Title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #4468C9;
+	background-image: url(../img/back_th.jpg);
+	background-repeat: repeat-x;
+	cursor: url(../img/hand.cur);
+}
+
+.tabla02 {
+	border-collapse: collapse; /*separate*/
+	border: 1px solid #CCCCCC;
+}
+
+.tabla02 tr th {
+	padding: 2px;
+	padding-left: 10px;
+}
+
+.tabla02 tr td {
+	padding: 2px;	
+}
+
+.paddingCuerpo {
+	padding: 5px;
+	text-align: justify;
+	background-color: #F9F9F9;
+}
+
+.paddingForm {
+	padding: 5px;
+	background-color: #E7E8E9;
+}
+
+.dialogoPuntoV {
+	background-image: url(../img/punto_v.gif);
+	background-repeat: repeat-y;
+}
+
+.tabla01_bordeColumna {
+	border-left-width: 2px;
+	border-left-style: solid;	
+	border-left-color: #D0DFEA;
+	padding-left: 2px;	
+}
+
+.tabla02_bordeColumna {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #90bada;
+}
+
+.tabla02_bordeColumna2 {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #90bada;
+}
+
+.tabla02_bordeColumna4 {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #90bada;
+}
+.tabla03_bordeColumna {
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #90bada;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #90bada;
+}
+.tabla01_fila2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	vertical-align: middle;
+	background-color: #FFFFFF;
+	height: 15px;
+}
+
+.configuracion_error {
+	background-position:center;
+	background-image: url(../img/fondo_config.jpg);
+	background-repeat: no-repeat;
+}
+
+/* CSS ALL */ 
+    /***********************************************/
+	/* Layout Divs                                 */
+	/***********************************************/
+#prin_01 {
+	background-color: #F8F8F8;
+	height: 21px;
+	border-bottom: solid #B6B6B6 1px;
+	text-align: left;
+	color: #44659B;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	vertical-align: middle;
+}
+#prin_02{
+	width: 750px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+#pop_up{
+	background-color: #FFFFFF;
+	width: 520px;
+	text-align: center;
+}
+#pop_cuerpo{
+	background-color: #FFFFFF;
+	padding: 10px;
+	text-align: left;
+}
