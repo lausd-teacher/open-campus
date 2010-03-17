@@ -834,7 +834,7 @@ public class UsuarioDAO extends BaseDAO {
 	}
 	
 	public Integer crear(Usuario usuario)throws DAOException {
-		log.info("crear(Usuario usuario) ");
+		log.info("crear("+usuario+") ");
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		Connection cons = null;
@@ -923,6 +923,39 @@ public class UsuarioDAO extends BaseDAO {
 			closeConnection(cons);
 		}
 		return id;
+	}
+	
+	public Usuario verificarUsuario(String username)throws DAOException {
+		log.info("verificarUsuario("+username+") ");
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		Connection cons = null;
+		Usuario usuario = null;
+		try {
+			String query = "SELECT idusuario,usuario,tipo,estado FROM cv_usuario WHERE usuario=?";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
+			stmt.setString(1, username);
+			result = stmt.executeQuery();
+			if (result.next()) {
+				usuario = new Usuario();
+				usuario.setId(result.getInt("idusuario"));
+				usuario.setUsuario(result.getString("usuario"));
+				usuario.setTipo(result.getString("tipo"));
+				usuario.setEstado(result.getInt("estado"));
+			}		
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+		return usuario;
 	}
 	
 	public Collection<Usuario> listarUltimos()throws DAOException {

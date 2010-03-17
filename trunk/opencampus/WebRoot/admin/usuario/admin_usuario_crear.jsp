@@ -2,8 +2,6 @@
 <%@ page errorPage="../../error_action.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,13 +51,14 @@
 						<td width="90" class="line"><strong>C&oacute;digo</strong></td>
 						<td><input type="text" maxlength="32" readonly="readonly" size="28" value="<c:out value="${usuario.id}"/>"/></td>
 						<td width="90" class="line"><strong>Usuario</strong></td>
-						<td><input type="text" name="username" maxlength="32" class="required validate-alphanum" size="28" value="<c:out value="${usuario.usuario}"/>"/></td>
+						<td><input type="text" name="username" maxlength="32" class="required validate-alphanum" size="28" onkeyup="verificaUsuarioOnKeyUp(this)"
+							value="<c:out value="${usuario.usuario}"/>"/><input type="hidden" id="user_ok" value="1"></td>
 					</tr>
 					<tr>
 						<td width="90" class="line"><strong>Clave</strong></td>
-						<td><input type="password" name="clave" maxlength="32" size="28" value=""/></td>
+						<td><input type=text id="clave" name="clave" maxlength="32" size="28" class="validate-strongpassword" value=""/></td>
 						<td width="90" class="line"><strong>Repetir Clave</strong></td>
-						<td><input type="password" maxlength="32" size="28" value=""/></td>
+						<td><input type="text" id="clave2" maxlength="32" size="28" value=""/></td>
 					</tr>
 					<tr>
 						<td class="line"><strong>Opciones</strong></td>

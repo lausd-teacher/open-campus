@@ -16,7 +16,7 @@ wFORMS.behaviors['validation'].errMsg_alpha        = "Sólo se admiten letras (a-
 wFORMS.behaviors['validation'].errMsg_email        = "No es una dirección de correo válida."; // validate email 
 wFORMS.behaviors['validation'].errMsg_integer      = "Introduzca un valor numérico."; // integer 
 wFORMS.behaviors['validation'].errMsg_float        = "Introduzca un valor decimal (ej: 1.9)."; // float 
-wFORMS.behaviors['validation'].errMsg_password     = "Contraseña insegura. Se admite una combinación de mayúsculas y minúsculas de entre 4 y 12 caracteres. "; // password
+wFORMS.behaviors['validation'].errMsg_password     = "Contraseña insegura.";// Se admite una combinación de mayúsculas y minúsculas de entre 6 y 12 caracteres. "; // password
 wFORMS.behaviors['validation'].errMsg_alphanum     = "Sólo valores alfanuméricos (a-z 0-9). "; // alphanumeric
 wFORMS.behaviors['validation'].errMsg_date         = "La fecha no es correcta"; // date
 wFORMS.behaviors['validation'].errMsg_notification = "Se ha(n) encontrado %% error(es). El formulario no se ha enviado.\nVerifique los datos introducidos."; // %% errors.
@@ -39,6 +39,10 @@ wFORMS.behaviors['validation'].isAlpha = function(s) {
 wFORMS.behaviors['validation'].isAlphaNum = function(s) {
 	var reg = /^[\u0030-\u0039\u0041-\u007A\u00C0-\u00FF\u0100\u017F]+$/;
 	return this.isEmpty(s) || reg.test(s);
+}
+wFORMS.behaviors['validation'].isPassword = function(s) {
+	var regexp = /^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{1,16}$/;  // <= breaks in IE5/Mac
+	return wFORMS.behaviors['validation'].isEmpty(s) || regexp.test(s);;
 }
 // Unicode ranges (from http://www.unicode.org/) :
 // \u0030-\u0039 : Numbers 0-9

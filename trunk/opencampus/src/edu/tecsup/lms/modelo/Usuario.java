@@ -129,19 +129,22 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 	}
 	
 	public Rol getRol(int idrol){
-		int index = roles.indexOf(new Rol(idrol));
-		if(index != -1)
-			return roles.get(index);
+		if(roles!=null){
+			int index = roles.indexOf(new Rol(idrol));
+			if(index != -1)
+				return roles.get(index);
+		}
 		return null;
 	}
 
 	public String getNombreCompleto(){
-		if(Constante.TIPO_USUARIO_PERSONA.equals(this.tipo))
-			return this.persona.getNombreCompleto();
-		else if(Constante.TIPO_USUARIO_EMPRESA.equals(this.tipo))
-			return "this.empresa.getNombreCompleto()";
-		else
-			return null;
+		if(this.persona!=null){
+			if(Constante.TIPO_USUARIO_PERSONA.equals(this.tipo))
+				return this.persona.getNombreCompleto();
+			else if(Constante.TIPO_USUARIO_EMPRESA.equals(this.tipo))
+				return "this.empresa.getNombreCompleto()";
+		}
+		return null;
 	}
 	
 	public String getNombreCorto(){

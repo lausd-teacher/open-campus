@@ -1849,8 +1849,8 @@ if(wFORMS) {
 			// NOT IMPLEMENTED
 			isPassword: function(s) {
 				// Matches strong password : at least 1 upper case letter, one lower case letter. 4 characters minimum. 12 max.
-				var regexp = /^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,12}$/;  // <= breaks in IE5/Mac
-				return wFORMS.behaviors['validation'].isEmpty(s) || regexp.test(s);;
+				//var regexp = /^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,12}$/;  // <= breaks in IE5/Mac
+				return wFORMS.behaviors['validation'].isEmpty(s) /*|| regexp.test(s)*/;
 			},
 			
 			// ------------------------------------------------------------------------------------------		

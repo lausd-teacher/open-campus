@@ -4,6 +4,67 @@ Event.observe(window, 'load', function() {
 	Calendar.setup({inputField:"nacimiento", ifFormat:"%d-%m-%Y", singleClick:true});
 });
 
+var verify = null;
+var usernameTMP = null; 
+var usernameTMP2 = false; 
+function verificaUsuarioOnKeyUp(texto){
+	hideErrorForm('username');
+	$('user_ok').setValue('0');
+	clearTimeout(verify);
+	usernameTMP = texto.value;
+	if(!usernameTMP2)usernameTMP2 = usernameTMP;
+	//verify = setTimeout("verificaUsuario('"+texto.value+"')", 1000); INSEGUROOO XSS. Pon esto en el input->'); alert('XSS
+	if(usernameTMP2 != usernameTMP)verify = setTimeout("verificaUsuario()", 1000);	
+}
+
+
+///*************************
+CORRIGE verificaUsuarioOnKeyUp, no debe bloquear si vuelvo a poner ebenitesX, no me deja regresarlo como antes
+TMB los mensajes de errores, que no chancke el mensaje de "clave insegura", ya hice que use los mensajes del wforms
+***///
+function verificaUsuario(){
+	try{
+		var query = function(transport) {
+			//alert(transport.responseText)
+			var msg = transport.responseText.strip();
+			if(msg == 'OK'){
+				$('email_ok').setValue('1');
+				hideErrorForm('username');
+			}else if(msg == 'USED'){
+				showErrorForm('username','Nombre de usuario en uso.');
+			}else{
+				showErrorForm('username','No fue posible verificar.');
+			}
+		};
+		
+		var params = "username="+usernameTMP;
+		new Ajax.Request(xGetContextPath()+"/admin/usuario/Verificar.action", { method: 'post', parameters: params, onSuccess: query }); 
+	}catch(e){
+		if(e.description)
+			alert(e.description);
+		else
+			alert(e);
+	}
+}
+
+function comparaClave(){
+	if(!$F('clave').blank()){
+		if($F('clave').length < 6){
+			showErrorForm('clave',"Longitud mínima 6 caracteres.");
+			return false;
+		}
+		hideErrorForm('clave');
+		
+		if($('clave').getValue() != $('clave2').getValue()){
+			showErrorForm('clave2',"Clave no coincide.");
+			return false;
+		}
+	}
+	hideErrorForm('clave');
+	hideErrorForm('clave2');
+	return true;
+}
+
 function cargarCombo(combo,accion,subCombo){
 	try{	
 		if(subCombo){
@@ -134,14 +195,35 @@ function deleteOption(theSel, theIndex) {
 
 wf.functionName_formValidation = "myCustomValidation";
 function myCustomValidation (evt) {
-	if (wf.formValidation(evt) && evt.srcElement.id == 'form_usuario_crear'){
+	if (evt.srcElement.id == 'form_usuario_crear'){
+		
+		var isValidate = wf.formValidation(evt);
 		
 		if(!validarAdjunto($('foto').value)){
 			showErrorForm('bloque_foto',"&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Se permiten únicamente archivos JPG.");
-			return wf.utilities.XBrowserPreventEventDefault(evt);
+			isValidate = false;
 		}else{
 			hideErrorForm('bloque_foto');
 		}
+		
+		if($('user_ok')){
+		
+			if(!comparaClave()){
+				isValidate = false;
+			}
+			
+			if($F('user_ok') != '1'){
+				showErrorForm('username','Nombre de usuario no válido.');
+				isValidate = false;
+			}else{
+				hideErrorForm('username');
+			}
+			
+		}
+		
+		if(!isValidate)
+			return wf.utilities.XBrowserPreventEventDefault(evt);
+		
 		selectAll($('rols'));
 		selectAll($('permisos'));
 		$('btn_usuario_crear').disable();
@@ -150,18 +232,20 @@ function myCustomValidation (evt) {
 	}
 }
 
-function showErrorForm(id,m,noAlert){
-	var msg = $(id+'errMsg');
+function showErrorForm(id,m){
+	/*var msg = $(id+'errMsg');
 	if(!msg) msg = new Element('div', { 'id': id+'errMsg' , 'class': 'errMsg' }).update(m);
 	$(id).parentNode.appendChild(msg);	
 	$(id).addClassName('errFld');
-	if(wFORMS.showAlertOnError && !noAlert) alert(m);
+	*/
+	wFORMS.behaviors['validation'].showError($(id),m);
 }
 
 function hideErrorForm(id){
-	var msg = $(id+'errMsg');
+	/*var msg = $(id+'errMsg');
 	if(msg) msg.parentNode.removeChild(msg); 	
-	$(id).removeClassName('errFld');
+	$(id).removeClassName('errFld');*/
+	wFORMS.behaviors['validation'].removeErrorMessage($(id));
 }
 
 function selectAll(theSel){

@@ -236,7 +236,7 @@ public class Constante {
 	/**
 	 * Para estados de cambio de clave
 	 */
-	public static final int PASSWORD_LONGITUD_MINIMA = 8;
+	public static final int PASSWORD_LONGITUD_MINIMA = 6;
 	
 	/**
 	 * Portal cantidad de servicios
