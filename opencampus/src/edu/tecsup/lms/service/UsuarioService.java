@@ -59,6 +59,15 @@ public class UsuarioService {
 		}
 	}
 	
+	public Usuario verificarUsuario(String username) throws ServiceException{
+		try {
+			return usuarioDAO.verificarUsuario(username);
+		} catch (Exception e) {
+			log.error(e);
+			throw new ServiceException(e.toString());
+		}
+	}
+	
 	public Usuario validarUsuario(Usuario user) throws ServiceException {
 		log.info("validarUsuario("+user+")");
 		try {

@@ -89,7 +89,12 @@
 			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
 			<result name="success">/admin/usuario/admin_usuario_crear.jsp</result>
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
-		</action>			
+		</action>
+		
+		<action name="Verificar" method="verificarUsuario"
+			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>				
 	</package>
 	
 	<package name="campus-usuario" extends="campus-default" namespace="/usuario">

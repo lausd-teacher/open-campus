@@ -563,6 +563,24 @@ public class GestorUsuarioAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String verificarUsuario() throws ActionException{
+		log.info("verificarUsuario()" +username);
+		try {
+			if(username != null){
+				Usuario usuario = usuarioService.verificarUsuario(username);
+				PrintWriter out = response.getWriter();
+				if(usuario == null)
+					out.println("OK"); //No esta en uso
+				else
+					out.println("USED"); //En uso. Si ocurre un error no muestra mensaje
+			}
+		} catch (Exception e) {
+			log.error(e);
+			//throw new ActionException(e);
+		}
+		return NONE;
+	}
+	
 	public String crear()  throws Exception{
 		log.info("crear()");
 		try{
@@ -619,8 +637,8 @@ public class GestorUsuarioAction extends BaseAction {
 				if(n != 0){
 					usuario.setUsuario(usuario.getUsuario()+Formato.completarCeros(n, 2));
 				}
-				
-				Integer id = usuarioService.crear(usuario);
+				System.out.println(usuario);
+				//Integer id = usuarioService.crear(usuario);
 				
 				// File
 				// **********************************************************
