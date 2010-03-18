@@ -6,20 +6,18 @@ Event.observe(window, 'load', function() {
 
 var verify = null;
 var usernameTMP = null; 
-var usernameTMP2 = false; 
-function verificaUsuarioOnKeyUp(texto){
+function verificaUsuarioOnKeyUp(input, usuario){
 	hideErrorForm('username');
 	$('user_ok').setValue('0');
 	clearTimeout(verify);
-	usernameTMP = texto.value;
-	if(!usernameTMP2)usernameTMP2 = usernameTMP; //Este metodo no sirve
-	//verify = setTimeout("verificaUsuario('"+texto.value+"')", 1000); INSEGUROOO XSS. Pon esto en el input->'); alert('XSS
-	if(usernameTMP2 != usernameTMP)verify = setTimeout("verificaUsuario()", 1000);	
+	usernameTMP = input.value.strip();
+	if(usernameTMP != usuario)verify = setTimeout("verificaUsuario()", 1000);
+	//verify = setTimeout("verificaUsuario('"+texto.value+"')", 1000); INSEGUROOO XSS. Pon esto en el input->'); alert('XSS	
 }
 
 
 ///*************************
-/*CORRIGE verificaUsuarioOnKeyUp, no debe bloquear si vuelvo a poner ebenitesX, no me deja regresarlo como antes
+/*
 TMB los mensajes de errores, que no chancke el mensaje de "clave insegura", ya hice que use los mensajes del wforms
 ***///
 function verificaUsuario(){
@@ -37,7 +35,7 @@ function verificaUsuario(){
 			}
 		};
 		
-		var params = "username="+usernameTMP;
+		var params = "username="+escape(usernameTMP);
 		new Ajax.Request(xGetContextPath()+"/admin/usuario/Verificar.action", { method: 'post', parameters: params, onSuccess: query }); 
 	}catch(e){
 		if(e.description)
