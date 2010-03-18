@@ -51,7 +51,7 @@
 						<td width="90" class="line"><strong>C&oacute;digo</strong></td>
 						<td><input type="text" maxlength="32" readonly="readonly" size="28" value="<c:out value="${usuario.id}"/>"/></td>
 						<td width="90" class="line"><strong>Usuario</strong></td>
-						<td><input type="text" name="username" maxlength="32" class="required validate-alphanum" size="28" onkeyup="verificaUsuarioOnKeyUp(this)"
+						<td><input type="text" name="username" maxlength="32" class="required validate-alphanum" size="28" onkeyup="verificaUsuarioOnKeyUp(this,'<c:out value="${usuario.usuario}"/>')"
 							value="<c:out value="${usuario.usuario}"/>"/><input type="hidden" id="user_ok" value="1"></td>
 					</tr>
 					<tr>

@@ -304,7 +304,7 @@ public class GestorUsuarioAction extends BaseAction {
 	}
 
 	public void setUsername(String username) {
-		this.username = username.replaceAll("%", "");
+		this.username = username.trim().replaceAll("%", "");
 	}
 
 	public String getNombre1() {
