@@ -12,14 +12,14 @@ function verificaUsuarioOnKeyUp(texto){
 	$('user_ok').setValue('0');
 	clearTimeout(verify);
 	usernameTMP = texto.value;
-	if(!usernameTMP2)usernameTMP2 = usernameTMP;
+	if(!usernameTMP2)usernameTMP2 = usernameTMP; //Este metodo no sirve
 	//verify = setTimeout("verificaUsuario('"+texto.value+"')", 1000); INSEGUROOO XSS. Pon esto en el input->'); alert('XSS
 	if(usernameTMP2 != usernameTMP)verify = setTimeout("verificaUsuario()", 1000);	
 }
 
 
 ///*************************
-CORRIGE verificaUsuarioOnKeyUp, no debe bloquear si vuelvo a poner ebenitesX, no me deja regresarlo como antes
+/*CORRIGE verificaUsuarioOnKeyUp, no debe bloquear si vuelvo a poner ebenitesX, no me deja regresarlo como antes
 TMB los mensajes de errores, que no chancke el mensaje de "clave insegura", ya hice que use los mensajes del wforms
 ***///
 function verificaUsuario(){
