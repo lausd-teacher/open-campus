@@ -48,23 +48,25 @@
 						<td rowspan="3" width="88"><img src="<%=request.getContextPath() %>/admin/usuario/VerFoto.action?id=<c:out value="${usuario.id}"/>" 
 					width="85" border="0" class="open_border"> 
 						</td>
-						<td width="90" class="line"><strong>C&oacute;digo</strong></td>
-						<td><input type="text" maxlength="32" readonly="readonly" size="28" value="<c:out value="${usuario.id}"/>"/></td>
-						<td width="90" class="line"><strong>Usuario</strong></td>
+						<td width="90" class="line"><label>Usuario</label></td>
 						<td><input type="text" name="username" maxlength="32" class="required validate-alphanum" size="28" onkeyup="verificaUsuarioOnKeyUp(this,'<c:out value="${usuario.usuario}"/>')"
-							value="<c:out value="${usuario.usuario}"/>"/><input type="hidden" id="user_ok" value="1"></td>
-					</tr>
-					<tr>
+							value="<c:out value="${usuario.usuario}"/>"/><input type="hidden" id="user_ok" value="1">							
+							<input type="hidden" name="idusuario" value="<c:out value="${usuario.id}"/>"></td>
+					
 						<td width="90" class="line"><strong>Clave</strong></td>
-						<td><input type=text id="clave" name="clave" maxlength="32" size="28" class="validate-strongpassword" value=""/></td>
-						<td width="90" class="line"><strong>Repetir Clave</strong></td>
-						<td><input type="text" id="clave2" maxlength="32" size="28" value=""/></td>
+						<td><input type=text name="clave" maxlength="32" size="28" class="validate-strongpassword" value=""/></td>
 					</tr>
 					<tr>
 						<td class="line"><strong>Opciones</strong></td>
 						<td colspan="3" class="border-top">
 							<label><input type="checkbox" name="estado" value="1" <c:if test="${usuario.estado==1}">checked</c:if>>Estado de cuenta </label>
 							<label><input type="checkbox" name="estadoforo" value="1" >Estado de foro (*) </label>
+						</td>
+					</tr>
+					<tr>
+						<td class="line"><strong>&nbsp;</strong></td>
+						<td colspan="3" class="border-top">
+							&nbsp;
 						</td>
 					</tr>
 				</table>
@@ -252,7 +254,6 @@
      	<tfoot>
 		<tr> 
 			<td align="center" >
-				<input type="hidden" name="idusuario" value="<c:out value="${usuario.id}"/>">
 				<input id="btn_usuario_crear" type="submit" value="Guardar">	
 				<input type="button" value="Cancelar" 
 					onclick="document.location='<%=request.getContextPath()%>/admin/usuario/Buscar.action'">								

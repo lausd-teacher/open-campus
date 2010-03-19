@@ -79,7 +79,7 @@ public class GestorUsuarioAction extends BaseAction {
 	
 	private Integer paginas;
 	
-	private String estado;
+	private Integer estado;
 	
 	private String estadoforo;
 	
@@ -592,6 +592,7 @@ public class GestorUsuarioAction extends BaseAction {
 				
 				Usuario usuario = new Usuario();
 				
+				log.info("Set Persona");
 				Persona persona = new Persona();
 				persona.setNomuno(nombre1);
 				persona.setNomdos(nombre2);
@@ -611,9 +612,7 @@ public class GestorUsuarioAction extends BaseAction {
 				
 				usuario.setPersona(persona);
 				
-				usuario.setUsuario(usuario.generarUsuario());
-				usuario.setClave(usuario.generarClaveDefault());
-				
+				log.info("Set Roles");
 				List<Rol> roles = new ArrayList<Rol>();
 				if(rols != null && rols.length != 0){
 					for (int i = 0; i < rols.length; i++) {
@@ -624,6 +623,7 @@ public class GestorUsuarioAction extends BaseAction {
 				}
 				usuario.setRoles(roles);
 				
+				log.info("Set Permisos");
 				Collection<Jerarquia> jerarquias = new ArrayList<Jerarquia>();
 				if(permisos != null){
 					for (int i = 0; i < permisos.length; i++) {
@@ -632,13 +632,28 @@ public class GestorUsuarioAction extends BaseAction {
 				}
 				usuario.setPermisos(jerarquias);
 				
-				//Validar usuario
-				Integer n = usuarioService.numeroUsuarioRepetido(usuario.getUsuario());
-				if(n != 0){
-					usuario.setUsuario(usuario.getUsuario()+Formato.completarCeros(n, 2));
+				
+				Integer id = null;
+				if(idusuario != null){
+					log.info("Modificar usuario "+ idusuario);
+					id = idusuario;
+					usuario.setId(idusuario);
+					usuario.setUsuario(username);
+					usuario.setClave((clave != null && clave.trim().length()>0)?clave:null);
+					usuario.setEstado((estado!=null)?Constante.ESTADO_ACTIVO:Constante.ESTADO_INACTIVO);
+					//usuario.setEstadoForo(estadoforo);
+					
+					usuarioService.modificar(usuario);
+				}else{
+					log.info("Crear usuario");
+					usuario.setUsuario(usuario.generarUsuario());
+					usuario.setClave(usuario.generarClaveDefault());
+					
+					log.info("Validar Nombre de usuario repetido");
+					usuario.setUsuario(usuarioService.verificarUsuarioSecuencia(usuario.getUsuario()));
+					
+					id = usuarioService.crear(usuario);
 				}
-				System.out.println(usuario);
-				//Integer id = usuarioService.crear(usuario);
 				
 				// File
 				// **********************************************************
@@ -676,11 +691,11 @@ public class GestorUsuarioAction extends BaseAction {
 		return SUCCESS;
 	}
 
-	public String getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 

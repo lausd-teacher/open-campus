@@ -12,6 +12,7 @@ function verificaUsuarioOnKeyUp(input, usuario){
 	clearTimeout(verify);
 	usernameTMP = input.value.strip();
 	if(usernameTMP != usuario)verify = setTimeout("verificaUsuario()", 1000);
+	else $('user_ok').setValue('1');
 	//verify = setTimeout("verificaUsuario('"+texto.value+"')", 1000); INSEGUROOO XSS. Pon esto en el input->'); alert('XSS	
 }
 
@@ -26,7 +27,7 @@ function verificaUsuario(){
 			//alert(transport.responseText)
 			var msg = transport.responseText.strip();
 			if(msg == 'OK'){
-				$('email_ok').setValue('1');
+				$('user_ok').setValue('1');
 				hideErrorForm('username');
 			}else if(msg == 'USED'){
 				showErrorForm('username','Nombre de usuario en uso.');
@@ -45,22 +46,39 @@ function verificaUsuario(){
 	}
 }
 
-function comparaClave(){
-	if(!$F('clave').blank()){
-		if($F('clave').length < 6){
-			showErrorForm('clave',"Longitud mínima 6 caracteres.");
-			return false;
-		}
-		hideErrorForm('clave');
+wf.functionName_formValidation = "myCustomValidation";
+function myCustomValidation (evt) {
+	if (wf.formValidation(evt) && evt.srcElement.id == 'form_usuario_crear'){
 		
-		if($('clave').getValue() != $('clave2').getValue()){
-			showErrorForm('clave2',"Clave no coincide.");
-			return false;
+		var isValidate = true;
+		
+		if(!validarAdjunto($('foto').value)){
+			showErrorForm('bloque_foto',"&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Se permiten únicamente archivos JPG.");
+			isValidate = false;
+		}else{
+			hideErrorForm('bloque_foto');
 		}
+		
+		if($('user_ok')){
+		
+			if($F('user_ok') != '1'){
+				showErrorForm('username','Nombre de usuario no válido.');
+				isValidate = false;
+			}else{
+				hideErrorForm('username');
+			}
+			
+		}
+		
+		if(!isValidate)
+			return wf.utilities.XBrowserPreventEventDefault(evt);
+		
+		selectAll($('rols'));
+		selectAll($('permisos'));
+		$('btn_usuario_crear').disable();
+		//loading();
+		//return wf.utilities.XBrowserPreventEventDefault(evt);
 	}
-	hideErrorForm('clave');
-	hideErrorForm('clave2');
-	return true;
 }
 
 function cargarCombo(combo,accion,subCombo){
@@ -191,58 +209,11 @@ function deleteOption(theSel, theIndex) {
 	}
 }
 
-wf.functionName_formValidation = "myCustomValidation";
-function myCustomValidation (evt) {
-	if (evt.srcElement.id == 'form_usuario_crear'){
-		
-		var isValidate = wf.formValidation(evt);
-		
-		if(!validarAdjunto($('foto').value)){
-			showErrorForm('bloque_foto',"&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Se permiten únicamente archivos JPG.");
-			isValidate = false;
-		}else{
-			hideErrorForm('bloque_foto');
-		}
-		
-		if($('user_ok')){
-		
-			if(!comparaClave()){
-				isValidate = false;
-			}
-			
-			if($F('user_ok') != '1'){
-				showErrorForm('username','Nombre de usuario no válido.');
-				isValidate = false;
-			}else{
-				hideErrorForm('username');
-			}
-			
-		}
-		
-		if(!isValidate)
-			return wf.utilities.XBrowserPreventEventDefault(evt);
-		
-		selectAll($('rols'));
-		selectAll($('permisos'));
-		$('btn_usuario_crear').disable();
-		//return wf.utilities.XBrowserPreventEventDefault(evt);
-		//loading();
-	}
-}
-
 function showErrorForm(id,m){
-	/*var msg = $(id+'errMsg');
-	if(!msg) msg = new Element('div', { 'id': id+'errMsg' , 'class': 'errMsg' }).update(m);
-	$(id).parentNode.appendChild(msg);	
-	$(id).addClassName('errFld');
-	*/
 	wFORMS.behaviors['validation'].showError($(id),m);
 }
 
 function hideErrorForm(id){
-	/*var msg = $(id+'errMsg');
-	if(msg) msg.parentNode.removeChild(msg); 	
-	$(id).removeClassName('errFld');*/
 	wFORMS.behaviors['validation'].removeErrorMessage($(id));
 }
 

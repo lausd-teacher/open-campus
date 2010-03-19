@@ -15,6 +15,7 @@ import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
 import edu.tecsup.lms.util.Constante;
+import edu.tecsup.lms.util.Formato;
 
 public class UsuarioService {
 
@@ -256,10 +257,23 @@ public class UsuarioService {
 		}
 	}
 	
-	public Integer numeroUsuarioRepetido(String usuario)throws ServiceException {
-		log.info("numeroUsuarioRepetido(String usuario)");
+	public String verificarUsuarioSecuencia(String username)throws ServiceException {
+		log.info("verificarUsuarioSecuencia("+username+")");
 		try {
-			return usuarioDAO.numeroUsuarioRepetido(usuario);
+			String usernamenew = username;
+			Integer n = 1;
+			do{
+				Usuario usuario = usuarioDAO.verificarUsuario(usernamenew);
+				if(usuario!=null){
+					log.info("Nombre de usuario ya existe, provando sequencia: "+n);
+					usernamenew = username + Formato.completarCeros(n++, 2);
+				}else{
+					log.info("Nombre de usuario generado: "+username);
+					break;
+				}
+			}while (true);
+			
+			return usernamenew;
 		} catch (Exception e) {
 			log.error(e);
 			throw new ServiceException(e.toString());
@@ -270,6 +284,16 @@ public class UsuarioService {
 		log.info("crear(Usuario usuario)");
 		try {
 			return usuarioDAO.crear(usuario);
+		} catch (Exception e) {
+			log.error(e);
+			throw new ServiceException(e.toString());
+		}
+	}
+	
+	public void modificar(Usuario usuario)throws ServiceException {
+		log.info("modificar(Usuario usuario)");
+		try {
+			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
 			log.error(e);
 			throw new ServiceException(e.toString());

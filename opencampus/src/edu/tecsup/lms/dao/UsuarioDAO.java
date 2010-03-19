@@ -803,36 +803,7 @@ public class UsuarioDAO extends BaseDAO {
 		}
 		return distritos;
 	}
-	
-	public Integer numeroUsuarioRepetido(String usuario)throws DAOException {
-		log.info("numeroUsuarioRepetido(String usuario)");
-		PreparedStatement stmt = null;
-		ResultSet result = null;
-		Connection cons = null;
-		Integer n = null;
-		try {
-			String query = "select count(*) from cv_usuario where usuario = ? or usuario like ?";
-			cons = dataSource.getConnection();
-			stmt =  cons.prepareStatement(query);
-			stmt.setString(1,usuario);
-			stmt.setString(2,usuario+"__");
-			result = stmt.executeQuery();
-			if (result.next()) 
-				n = result.getInt(1);
-		} catch (SQLException e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} catch (Exception e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} finally {
-			closeResultSet(result);
-			closeStatement(stmt);
-			closeConnection(cons);
-		}
-		return n;
-	}
-	
+		
 	public Integer crear(Usuario usuario)throws DAOException {
 		log.info("crear("+usuario+") ");
 		PreparedStatement stmt = null;
@@ -857,6 +828,7 @@ public class UsuarioDAO extends BaseDAO {
 			result.next();
 			id = result.getInt(1);
 			
+			log.info("Insertando persona...");
 			query = "insert  into cv_persona(idpersona,idubigeo,nomuno,nomdos,apepaterno,apematerno,fecnacimiento,sexo," +
 					"dirdomicilio,teldomicilio,telcelular,email,dni,creado_en,creado_por,modificado_en,modificado_por) " +
 					"values (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,now(),?)";
@@ -881,6 +853,7 @@ public class UsuarioDAO extends BaseDAO {
 				throw new DAOException("No culmino");
 			}
 			
+			log.info("Insertando roles...");
 			query = "insert  into cv_usuario_rol(idusuario,idrol) values (?,?)";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1,id);
@@ -892,6 +865,7 @@ public class UsuarioDAO extends BaseDAO {
 				}
 			}
 			
+			log.info("Insertando jerarquias...");
 			query = "insert  into cv_usuario_jerarquia(idusuario,idjerarquia) values (?,?)";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1,id);
@@ -923,6 +897,106 @@ public class UsuarioDAO extends BaseDAO {
 			closeConnection(cons);
 		}
 		return id;
+	}
+	
+	public void modificar(Usuario usuario)throws DAOException {
+		log.info("modificar("+usuario+") ");
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		Connection cons = null;
+		try {
+			
+			String query = "update cv_usuario set usuario=?,estado=? ";
+				if(usuario.getClave()!=null)
+					query += ",clave=? ";
+				query += "where idusuario=?";
+			cons = dataSource.getConnection();
+			cons.setAutoCommit(false);
+			stmt =  cons.prepareStatement(query);
+			int i=1;
+			stmt.setString(i++,usuario.getUsuario());
+			stmt.setInt(i++, usuario.getEstado());
+			if(usuario.getClave()!=null)
+				stmt.setString(i++, usuario.getClave());
+			stmt.setInt(i++, usuario.getId());
+			if (1 != stmt.executeUpdate()) {
+				throw new DAOException("Error en update into cv_usuario");
+			}
+			
+			log.info("Modificando persona...");
+			query = "update cv_persona set idubigeo=?,nomuno=?,nomdos=?,apepaterno=?,apematerno=?,fecnacimiento=?,sexo=?," +
+					"dirdomicilio=?,teldomicilio=?,telcelular=?,email=?,dni=?,modificado_en=now(),modificado_por=? " +
+					"where idpersona=?";
+			stmt =  cons.prepareStatement(query);
+			stmt.setString(1, usuario.getPersona().getUbigeo().getIdPais());
+			stmt.setString(2, usuario.getPersona().getNomuno());
+			stmt.setString(3, usuario.getPersona().getNomdos());
+			stmt.setString(4, usuario.getPersona().getApepaterno());
+			stmt.setString(5, usuario.getPersona().getApematerno());
+			stmt.setString(6, Formato.calendarToDate(usuario.getPersona().getFecnacimiento()));
+			stmt.setString(7, usuario.getPersona().getSexo());
+			stmt.setString(8, usuario.getPersona().getDirdomicilio());
+			stmt.setString(9, usuario.getPersona().getTeldomicilio());
+			stmt.setString(10, usuario.getPersona().getTelcelular());
+			stmt.setString(11, usuario.getPersona().getEmail());
+			stmt.setString(12, usuario.getPersona().getDni());
+			stmt.setString(13, usuario.getPersona().getUsuarioCreacion());
+			stmt.setInt(14, usuario.getId());
+			if (1 != stmt.executeUpdate()) {
+				throw new DAOException("Error en insert into cv_persona");
+			}
+			
+			log.info("Insertando roles...");
+			query = "delete from cv_usuario_rol where idusuario=?";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1,usuario.getId());
+			stmt.executeUpdate();
+			
+			query = "insert  into cv_usuario_rol(idusuario,idrol) values (?,?)";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1,usuario.getId());
+			for (Rol rol : usuario.getRoles()) {
+				stmt.setInt(2, rol.getIdrol());
+				if (1 != stmt.executeUpdate()) {
+					throw new DAOException("Error en insert into cv_usuario_rol: "+rol.getIdrol());
+				}
+			}
+			
+			log.info("Insertando jerarquias...");
+			query = "delete from cv_usuario_jerarquia where idusuario=?";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1,usuario.getId());
+			stmt.executeUpdate();
+			
+			query = "insert  into cv_usuario_jerarquia(idusuario,idjerarquia) values (?,?)";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1,usuario.getId());
+			for (Jerarquia j : usuario.getPermisos()) {
+				stmt.setInt(2, j.getIdJerarquia());
+				if (1 != stmt.executeUpdate()) {
+					throw new DAOException("Error en insert into cv_usuario_jerarquia: "+j.getIdJerarquia());
+				}
+			}
+			
+			
+			// Transaccion exitosa
+			cons.commit();
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			try {
+				cons.rollback();
+			} catch (SQLException e) {
+				log.error(e);
+			}
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
 	}
 	
 	public Usuario verificarUsuario(String username)throws DAOException {
