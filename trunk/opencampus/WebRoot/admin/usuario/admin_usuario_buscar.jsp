@@ -74,7 +74,7 @@
 					<table width="100%" cellpadding="3" cellspacing="0"
 						class="open_table with_hover sortable" border="0" style="table-layout: fixed;"> 
 						<caption>
-							<span style="float: left"><s:text name="portal.menu.directorio"/></span>
+							<span style="float: left;"><s:text name="portal.menu.directorio"/></span>
 							
 							<c:if test="${usuarios != null}">
 								<span style="float: right" class="pagination">

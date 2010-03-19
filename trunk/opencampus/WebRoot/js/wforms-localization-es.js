@@ -41,8 +41,13 @@ wFORMS.behaviors['validation'].isAlphaNum = function(s) {
 	return this.isEmpty(s) || reg.test(s);
 }
 wFORMS.behaviors['validation'].isPassword = function(s) {
-	var regexp = /^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{1,16}$/;  // <= breaks in IE5/Mac
-	return wFORMS.behaviors['validation'].isEmpty(s) || regexp.test(s);;
+	//var regexp = /^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{1,16}$/;  // <= breaks in IE5/Mac
+	
+	var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).*$", "g");
+	var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+	var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+	
+	return wFORMS.behaviors['validation'].isEmpty(s) || (enoughRegex.test(s) && mediumRegex.test(s));
 }
 // Unicode ranges (from http://www.unicode.org/) :
 // \u0030-\u0039 : Numbers 0-9
