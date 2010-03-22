@@ -1,5 +1,7 @@
 package edu.tecsup.lms.dao;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +19,7 @@ import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
+import edu.tecsup.lms.util.Archivo;
 import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.Formato;
 
@@ -1096,6 +1099,154 @@ public class UsuarioDAO extends BaseDAO {
 			closeConnection(cons);
 		}
 		return usuarios;
+	}
+	
+	public void cambiarEstado(Integer idusuario, Integer estado) throws DAOException {
+		PreparedStatement stmt = null;
+		Connection cons = null;
+		try {
+			String query = "update cv_usuario set estado=? where idusuario=?";
+			cons = dataSource.getConnection();
+			stmt = cons.prepareStatement(query);
+			stmt.setInt(1, estado);
+			stmt.setInt(2, idusuario);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			log.error(e.toString());
+		}finally {
+			closeConnection(cons);
+			closeStatement(stmt);
+		}
+	}
+	
+	public void eliminar(Integer idusuario) throws DAOException {
+		PreparedStatement stmt = null;
+		Connection cons = null;
+		ResultSet result = null;
+		Collection<String> adjuntos = new ArrayList<String>();
+		try {
+			String query = null;
+			cons = dataSource.getConnection();
+			cons.setAutoCommit(false);
+			
+			try{
+				log.info("Deleting cv_usuario_rol...");
+				query = "DELETE FROM cv_usuario_rol WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_usuario_jerarquia...");
+				query = "DELETE FROM cv_usuario_jerarquia WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_persona...");
+				query = "DELETE FROM cv_persona WHERE IDPERSONA=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_empresa...");
+				query = "DELETE FROM cv_empresa WHERE IDEMPRESA=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_servicio_usuario...");
+				query = "DELETE FROM cv_servicio_usuario WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_agenda...");
+				query = "DELETE FROM cv_agenda WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_anotacion...");
+				query = "DELETE FROM cv_anotacion WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_ingreso...");
+				query = "DELETE FROM cv_ingreso WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_carpeta_usuario...");
+				query = "DELETE FROM cv_carpeta_usuario WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_mensaje_usuario...");
+				query = "DELETE FROM cv_mensaje_usuario WHERE IDUSUARIO=? " +
+						"OR IDMENSAJE IN (SELECT IDMENSAJE FROM cv_mensaje WHERE USUARIO_CREACION =?)";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.setInt(2, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Searching attachment in cv_adjunto...");
+				query = "SELECT DATE_FORMAT(m.FECHA,'%y') ANIO, DATE_FORMAT(m.FECHA,'%m') MES, a.IDADJUNTO " +
+						"FROM cv_mensaje m, cv_adjunto a WHERE m.IDMENSAJE=a.IDMENSAJE " +
+						"AND m.ADJUNTO=1 AND USUARIO_CREACION =?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				result = stmt.executeQuery();
+				while (result.next()) {
+					adjuntos.add(Constante.RUTA_BUZON + result.getString("ANIO") + Constante.SLASH
+					+ result.getString("MES") + Constante.SLASH + result.getInt("IDADJUNTO"));
+				}
+				
+				
+				log.info("Deleting cv_adjunto...");
+				query = "DELETE FROM cv_adjunto WHERE " +
+						"IDMENSAJE IN (SELECT IDMENSAJE FROM cv_mensaje WHERE USUARIO_CREACION =?)";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_mensaje...");
+				query = "DELETE FROM cv_mensaje WHERE USUARIO_CREACION=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
+				log.info("Deleting cv_carpeta...");
+				query = "DELETE FROM cv_carpeta WHERE IDCARPETA NOT IN (SELECT DISTINCT IDCARPETA FROM cv_carpeta_usuario " +
+						"UNION SELECT DISTINCT IDCARPETA FROM cv_mensaje_usuario WHERE idcarpeta IS NOT NULL)";
+				stmt = cons.prepareStatement(query);
+				stmt.executeUpdate();
+				
+				//foro, publicacion, matricula; si hay registros aqui el usuario no será eliminado físicamente
+				try {
+					for (String filename : adjuntos) {
+						log.error("Deleting attachment: "+filename+" ...");
+						Archivo.eliminarArchivo(filename);
+					}
+				} catch (Exception e) {
+					log.error(e.toString());
+				}
+				
+			}catch (SQLException e) {
+				cons.rollback();
+				log.warn("No pudo ser eliminado fisicamente. MSG:"+e.toString());
+				//FALTAAAAAAA.................... (solo cambiar estado en cv_persona)
+			}
+			
+		} catch (Exception e) {
+			log.error(e.toString());
+		}finally {
+			closeResultSet(result);
+			closeStatement(stmt);;
+			closeConnection(cons);
+		}
 	}
 	
 }
