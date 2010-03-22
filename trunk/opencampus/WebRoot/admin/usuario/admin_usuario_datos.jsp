@@ -66,9 +66,8 @@
 						</td>
 						<td>
 							<%=usuario.getUsuario()%>&nbsp;&nbsp;&nbsp;
-							<label
-								onClick="javascript:cambioPassword('<%=usuario.getId()%>');"
-								style="text-align: right; cursor: pointer; font-size: 7pt; color: blue; font-weight: bold;">
+							<label class="link"
+								onClick="javascript:cambioPassword('<%=usuario.getId()%>');">
 								Cambiar Clave
 							</label>
 						</td>
@@ -78,9 +77,20 @@
 						<td>
 							<%=Formato.calendarToString(p.getFecnacimiento(),Constante.FECHA_DIA_MES_ANO)%>
 						</td>
-						<td rowspan="6" align="center" valign="top" width="89">
+						<td rowspan="6" align="center" valign="top" width="90">
 							<img src="<%=request.getContextPath() %>/admin/usuario/VerFoto.action?id=<%=usuario.getId()%>" 
-								width="85" border="0" class="open_border"> 
+								width="85" border="0" class="open_border">
+							<table cellpadding="0" cellspacing="0" border="0" width="90">
+								<tr>
+									<td><img src="<%=request.getContextPath()%>/img/icon_mail_send.gif" border="0" alt="Enviar Correo"
+										style="cursor:pointer" onclick="nuevoMensaje('<%=request.getContextPath()%>/comun/buzon/NuevoMensaje.action?destino=<%=usuario.getUsuario()%>')"></td>
+									<%if(false){ %>
+									<td><img src="<%=request.getContextPath()%>/img/icon_mail_send.gif" border="0" alt="Ver Cursos"
+										style="cursor:pointer" onclick=""></td>
+									<%} %>
+									<td><a href="javascript:void(0);" onclick="nuevoMensaje('<%=request.getContextPath()%>/comun/buzon/NuevoMensaje.action?destino=<%=usuario.getUsuario()%>')">Enviar E-mail</a></td>
+								</tr>
+							</table>
 						</td>
 					</tr>
 					<tr class="line">

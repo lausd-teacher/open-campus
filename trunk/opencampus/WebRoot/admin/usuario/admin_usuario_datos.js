@@ -16,3 +16,8 @@ function cambioPassword(s_id) {
 	ajax.send("id=" + s_id);
 	}
 }
+
+function nuevoMensaje(url){
+	window.open(url, 'NuevoMensaje', 'height=350,width=510,scrollbars=no');
+	return true;
+}
