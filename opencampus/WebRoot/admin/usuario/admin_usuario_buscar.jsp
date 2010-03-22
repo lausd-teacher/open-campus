@@ -233,8 +233,7 @@
 											</td>
 											
 											<td align="center" >
-												<img src="<%=request.getContextPath()%>/img/icon_mail_send.gif" border="0"
-														style="cursor:pointer" onclick="nuevoMensaje('<%=request.getContextPath()%>/comun/buzon/NuevoMensaje.action?destino=<c:out value="${u.usuario}"/>')">
+												estado
 											</td>
 											<td align="center" >
 												<img src="<%=request.getContextPath()%>/img/icon_view.gif" border="0"

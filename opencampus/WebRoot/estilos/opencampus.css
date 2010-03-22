@@ -54,7 +54,7 @@
 .open_table thead tr{
 	background-color: #DDDDDD;
 }
-.open_table thead th, .open_table thead td {
+.open_table thead tr th, .open_table thead tr td {
 	border-right: 1px solid #CCCCCC;
 	vertical-align: middle;
 	font-family: Arial, Helvetica, sans-serif;
@@ -70,7 +70,7 @@
 .with_hover tbody tr:hover {
 	background-color: #CEE7FF;
 }
-.open_table tbody th, .open_table tbody td {
+.open_table tbody tr th, .open_table tbody tr td {
 	border-right: 1px solid #CCCCCC;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -93,8 +93,27 @@
 	text-decoration: none;
 	color: black;
 }
+.open_table td table td{
+	border-right: none; !important
+}
 .open_border{
-	border: 1px solid #CCCCCC;	
+	border: 1px solid #CCCCCC;
+		
+}
+/*
+ * Links
+ */
+a, .link {
+	color: #000000;
+	cursor: pointer;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: bold;	
+}
+a:hover, .link:hover {
+	color: #666666;
+	text-decoration: underline;
 }
 /*
  * Form
