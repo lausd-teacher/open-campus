@@ -18,6 +18,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
+import edu.tecsup.lms.excepcion.ServiceException;
 import edu.tecsup.lms.modelo.Jerarquia;
 import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.usuario.Persona;
@@ -691,6 +692,39 @@ public class GestorUsuarioAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	public String cambiarEstado() throws ActionException{
+		log.info("cambiarEstado(): " + estado);
+		try {
+			if(idusuario != null && estado != null){
+				
+				usuarioService.cambiarEstado(idusuario, estado);
+				
+				PrintWriter out = getResponse().getWriter();
+				out.print("OK");
+				out.close();
+			}
+		} catch (Exception e) {
+			log.error(e);
+			//throw new ActionException(e);
+		}
+		return NONE;
+	}
+	
+	public String eliminar() throws Exception{
+		log.info("eliminar() "+ idusuario);
+		try {
+			if(idusuario != null){
+				usuarioService.eliminar(idusuario);
+			}else {
+				throw new ActionException("Hace falta el parametro id");
+			}
+		} catch (Exception e) {
+			log.error(e);
+			throw new ActionException(e);
+		}
+		return SUCCESS;
+	}
+	
 	public Integer getEstado() {
 		return estado;
 	}

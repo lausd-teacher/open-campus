@@ -14,17 +14,6 @@ function enviarMensajeTodos() {
 }
 function enviar() {
 }
-function obtenerContextPath() {
-	var context = "";
-	var array = document.location.href.split("/");
-	try {
-		var context = array[0] + "/" + array[1] + "/" + array[2] + "/" + array[3];
-	}
-	catch (e) {
-	}
-	return context;
-}
-
 function updateUser(){
 	var xx = document.getElementsByName("cb");
 	var destino = "";
@@ -79,6 +68,30 @@ function ocultarImagen() {
 }
 
 // ********** Fin Mostrar Imagen de Usuario ***********//
+
+function cambiarEstado(img,id){
+	var estado = 0;
+	if(img.alt == 'Activar') estado=1;
+	
+	var myConn = new XHConn();
+	var query = function (oXML) { 
+		if(oXML.responseText.strip() === 'OK'){
+			if(estado == 1){
+				img.alt = 'Desactivar';
+				img.src = xGetContextPath()+"/img/activo.gif";
+			}else{
+				img.alt = 'Activar';
+				img.src = xGetContextPath()+"/img/desactivo.gif";
+			}
+		}else{
+			alert('Hubo un error al intentar guardar, se sugiere actualizar la página.');
+		}
+	};
+	var cadena = "idusuario="+id+"&estado="+estado;
+	myConn.connect(xGetContextPath()+"/admin/usuario/CambiarEstado.action", "POST", cadena, query);
+}
+
+//---------------------------------------------------------------------------------------------
 function busqueda() {
 	var ausuario = document.getElementById("id_usuario");
 	var busuario = document.getElementById("form_usuario");

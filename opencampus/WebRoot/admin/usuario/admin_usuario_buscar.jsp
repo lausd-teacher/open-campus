@@ -233,7 +233,16 @@
 											</td>
 											
 											<td align="center" >
-												estado
+												<c:choose>
+											  		<c:when test="${u.estado==1}">
+											  			<img src="<%=request.getContextPath() %>/img/activo.gif" border="0" alt="Desactivar" style="cursor: pointer;"
+											  			onclick="cambiarEstado(this,'<c:out value="${u.id}"/>')" />
+											  		</c:when>
+											  		<c:otherwise>
+											  			<img src="<%=request.getContextPath() %>/img/desactivo.gif" border="0" alt="Activar" style="cursor: pointer;"
+											  			onclick="cambiarEstado(this,'<c:out value="${u.id}"/>')"/>
+											  		</c:otherwise>
+											  	</c:choose>
 											</td>
 											<td align="center" >
 												<img src="<%=request.getContextPath()%>/img/icon_view.gif" border="0"
@@ -241,11 +250,11 @@
 											</td>
 											<td align="center" >
 												<img src="<%=request.getContextPath()%>/img/icon_edit.gif" border="0"
-														style="cursor:pointer" onclick="window.location.href='<%=request.getContextPath()%>/admin/usuario/Editar.action?id=<c:out value="${u.id}"/>'">
+														style="cursor:pointer" onclick="go('<%=request.getContextPath()%>/admin/usuario/Editar.action?id=<c:out value="${u.id}"/>')">
 											</td>
 											<td align="center" >
 												<img src="<%=request.getContextPath()%>/img/icon_trash.gif" border="0"
-														style="cursor:pointer" onclick="nuevoMensaje('<%=request.getContextPath()%>/admin/usuario/Eliminar.action?id=<c:out value="${u.id}"/>')">
+														style="cursor:pointer" onclick="if(confirm_delete())go('<%=request.getContextPath()%>/admin/usuario/Eliminar.action?idusuario=<c:out value="${u.id}"/>')">
 											</td>
 										</tr>
 									</c:forEach>

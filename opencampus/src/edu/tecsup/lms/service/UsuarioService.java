@@ -300,6 +300,26 @@ public class UsuarioService {
 		}
 	}
 	
+	public void cambiarEstado(Integer idusuario, Integer estado)throws ServiceException {
+		log.info("modificar(Integer idusuario, Integer estado)");
+		try {
+			usuarioDAO.cambiarEstado(idusuario, estado);
+		} catch (Exception e) {
+			log.error(e);
+			throw new ServiceException(e.toString());
+		}
+	}
+	
+	public void eliminar(Integer idusuario)throws ServiceException {
+		log.info("eliminar(Integer idusuario)");
+		try {
+			usuarioDAO.eliminar(idusuario);
+		} catch (Exception e) {
+			log.error(e);
+			throw new ServiceException(e.toString());
+		}
+	}
+	
 	public Collection<Usuario> listarUltimos()throws ServiceException {
 		log.info("listarUltimos()");
 		try {
