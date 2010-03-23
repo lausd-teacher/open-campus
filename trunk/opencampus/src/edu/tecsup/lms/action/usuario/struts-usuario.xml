@@ -80,18 +80,25 @@
 			<interceptor-ref name="campusfileUpload-images"/>
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>
+		<action name="Eliminar" method="eliminar"
+			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
 		<action name="Ubigeo" method="ubigeo"
 			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>	
-		
 		<action name="Editar" method="editar"
 			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
 			<result name="success">/admin/usuario/admin_usuario_crear.jsp</result>
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>
-		
 		<action name="Verificar" method="verificarUsuario"
+			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		<action name="CambiarEstado" method="cambiarEstado"
 			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>				

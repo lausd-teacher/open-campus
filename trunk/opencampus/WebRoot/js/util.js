@@ -288,6 +288,12 @@ function ocultarNombres() {
 	xHide("nombres");
 }
 
+function confirm_delete(){
+	return window.confirm("¿Está seguro que desea eliminar dicho elemento?");
+}
+function go(url){
+	window.location.href=url;
+}
 function abrirGuiaEstudiante() {	
 	campusGuia = window.open("http://www.tecsup.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
 	campusGuia.focus();	

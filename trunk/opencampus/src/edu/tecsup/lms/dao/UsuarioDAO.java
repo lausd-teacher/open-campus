@@ -1,7 +1,5 @@
 package edu.tecsup.lms.dao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +14,7 @@ import edu.tecsup.lms.excepcion.DAOException;
 import edu.tecsup.lms.modelo.Jerarquia;
 import edu.tecsup.lms.modelo.Periodo;
 import edu.tecsup.lms.modelo.Usuario;
+import edu.tecsup.lms.modelo.correo.Adjunto;
 import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
@@ -394,6 +393,7 @@ public class UsuarioDAO extends BaseDAO {
 			r = stmt.executeUpdate();
 		} catch (Exception e) {
 			log.error(e.toString());
+			throw new DAOException(e.toString());
 		}finally {
 			closeConnection(cons);
 			closeStatement(stmt);
@@ -1113,6 +1113,7 @@ public class UsuarioDAO extends BaseDAO {
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			log.error(e.toString());
+			throw new DAOException(e.toString());
 		}finally {
 			closeConnection(cons);
 			closeStatement(stmt);
@@ -1193,15 +1194,21 @@ public class UsuarioDAO extends BaseDAO {
 				stmt.executeUpdate();
 				
 				log.info("Searching attachment in cv_adjunto...");
-				query = "SELECT DATE_FORMAT(m.FECHA,'%y') ANIO, DATE_FORMAT(m.FECHA,'%m') MES, a.IDADJUNTO " +
+				query = "SELECT m.FECHA, DATE_FORMAT(m.FECHA,'%y') ANIO, DATE_FORMAT(m.FECHA,'%m') MES, a.IDADJUNTO " +
 						"FROM cv_mensaje m, cv_adjunto a WHERE m.IDMENSAJE=a.IDMENSAJE " +
 						"AND m.ADJUNTO=1 AND USUARIO_CREACION =?";
 				stmt = cons.prepareStatement(query);
 				stmt.setInt(1, idusuario);
 				result = stmt.executeQuery();
 				while (result.next()) {
+					Adjunto a = new Adjunto();
+					a.setFecha(Formato.timestampToCalendar(result.getString("FECHA")));
+					String mes = a.getFechaAdjunto().substring(0, 2);
+					
 					adjuntos.add(Constante.RUTA_BUZON + result.getString("ANIO") + Constante.SLASH
-					+ result.getString("MES") + Constante.SLASH + result.getInt("IDADJUNTO"));
+					//+ result.getString("MES") 
+					+ mes //Temporal hasta corregir la estructura de repositorio de Adjuntos
+					+ Constante.SLASH + result.getInt("IDADJUNTO"));
 				}
 				
 				
@@ -1225,9 +1232,16 @@ public class UsuarioDAO extends BaseDAO {
 				stmt.executeUpdate();
 				
 				//foro, publicacion, matricula; si hay registros aqui el usuario no será eliminado físicamente
+				
+				log.info("Deleting cv_usuario...");
+				query = "DELETE FROM cv_usuario WHERE IDUSUARIO=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
+				
 				try {
 					for (String filename : adjuntos) {
-						log.error("Deleting attachment: "+filename+" ...");
+						log.info("Deleting attachment: "+filename+" ...");
 						Archivo.eliminarArchivo(filename);
 					}
 				} catch (Exception e) {
@@ -1236,12 +1250,17 @@ public class UsuarioDAO extends BaseDAO {
 				
 			}catch (SQLException e) {
 				cons.rollback();
-				log.warn("No pudo ser eliminado fisicamente. MSG:"+e.toString());
-				//FALTAAAAAAA.................... (solo cambiar estado en cv_persona)
+				log.warn("No pudo ser eliminado fisicamente, procede borrado logico. MSG:"+e.toString());
+				query = "UPDATE cv_persona SET estado=0 WHERE IDPERSONA=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, idusuario);
+				stmt.executeUpdate();
 			}
-			
+			log.info("User successfully removed: "+idusuario);
+			cons.commit();
 		} catch (Exception e) {
 			log.error(e.toString());
+			throw new DAOException(e.toString());
 		}finally {
 			closeResultSet(result);
 			closeStatement(stmt);;
