@@ -54,10 +54,6 @@
 			<result name="success">/admin/usuario/admin_usuario_buscar.jsp</result>
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>
-		<action name="VerFoto" method="verFoto"
-			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
-			<interceptor-ref name="administrador-campus"></interceptor-ref>
-		</action>
 		<action name="DatosUsuario" method="datosUsuario"
 			class="edu.tecsup.lms.action.usuario.GestorUsuarioAction">
 			<result name="success">/admin/usuario/admin_usuario_datos.jsp</result>

@@ -70,7 +70,7 @@
 				<div id="principal">
 				<s:include value="/error_message.jsp"/> 
 				<c:if test="${usuarios != null}">
-					<table width="975" cellpadding="3" cellspacing="0" class="bor_tabla" border="0">
+					<table width="975" cellpadding="3" cellspacing="0" class="open_border" border="0">
 						<tr>
 							<td>&nbsp;</td>
 							<td width="20">
@@ -134,7 +134,7 @@
 					</c:if>
 					<form action="<%=request.getContextPath()%>/Directorio.action" method="post" onsubmit="return validar(this)">
 					<table width="975" cellpadding="3" cellspacing="0"
-						class="bor_tabla sortable" border="0" style="table-layout: fixed;"> 
+						class="open_table sortable" border="0" style="table-layout: fixed;"> 
 						<caption class="fon_cab tit_cab"><s:text name="portal.menu.directorio"/></caption>
 						<thead> 
 						
@@ -170,31 +170,31 @@
 									</option>
 									<c:forEach items="${roles}" var="r">
 										<option value="<c:out value="${r.idrol}"/>" 
-										<c:if test="${r.idrol == rol}">selected</c:if>><c:out value="${r.nombre}"/></option>
+										<c:if test="${r.idrol == filtro.rol}">selected</c:if>><c:out value="${r.nombre}"/></option>
 									</c:forEach>
 								</select>
 							</td>
 							
 							<td class="bor_der_unid">
 								<input name="username" type="text" class="form_text" size="12"
-									value="<c:out value="${username}"/>"  />
+									value="<c:out value="${filtro.usuario}"/>"  />
 							</td>
 							
 							<td align="center" class="bor_der_unid">
 								<input name="paterno" type="text" class="form_text"
-									value="<c:out value="${paterno}"/>" size="12" />
+									value="<c:out value="${filtro.paterno}"/>" size="12" />
 							</td>
 							<td align="center" class="bor_der_unid">
 								<input name="materno" type="text" class="form_text"
-									value="<c:out value="${materno}"/>" size="12" />
+									value="<c:out value="${filtro.materno}"/>" size="12" />
 							</td>
 							<td align="center" class="bor_der_unid">
 								<input name="nombre1" type="text" class="form_text" size="12"
-									value="<c:out value="${nombre1}"/>" />
+									value="<c:out value="${filtro.nombre1}"/>" />
 							</td>
 							<td align="center" class="bor_der_unid">
 								<input name="nombre2" type="text" class="form_text" size="12"
-									value="<c:out value="${nombre2}"/>" />
+									value="<c:out value="${filtro.nombre2}"/>" />
 							</td>
 							<td align="center">
 								<input type="hidden" name="pagina" value="0" id="form_posicionPagina">

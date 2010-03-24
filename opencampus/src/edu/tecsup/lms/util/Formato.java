@@ -192,12 +192,15 @@ public final class Formato {
 	 * @return
 	 */
 	public static String matizarFrace(String frace) {
-		frace = frace.trim().toUpperCase().replace('Á', 'A').replace('É', 'E')
-				.replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N');
-		while (frace.indexOf("  ") != -1) {
-			frace = frace.replaceAll("  ", " ");
+		if(frace != null){
+			frace = frace.trim().toUpperCase().replace('Á', 'A').replace('É', 'E')
+					.replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N');
+			while (frace.indexOf("  ") != -1) {
+				frace = frace.replaceAll("  ", " ");
+			}
+			return frace.trim();
 		}
-		return frace.trim();
+		return null;
 	}
 	
 	/**

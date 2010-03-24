@@ -18,12 +18,12 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
-import edu.tecsup.lms.excepcion.ServiceException;
 import edu.tecsup.lms.modelo.Jerarquia;
 import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
+import edu.tecsup.lms.modelo.usuario.UsuarioFiltro;
 import edu.tecsup.lms.service.JerarquiaService;
 import edu.tecsup.lms.service.UsuarioService;
 import edu.tecsup.lms.util.Archivo;
@@ -90,6 +90,8 @@ public class GestorUsuarioAction extends BaseAction {
 	
 	private Integer[] permisos;
 	
+	private UsuarioFiltro filtro;
+	
 	private List<Usuario> usuarios;
 	
 	private Collection<Usuario> ultimos;
@@ -111,6 +113,14 @@ public class GestorUsuarioAction extends BaseAction {
 	public String contentType;
 
 	public String filename;
+
+	public UsuarioFiltro getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(UsuarioFiltro filtro) {
+		this.filtro = filtro;
+	}
 
 	public String getClave() {
 		return clave;
@@ -359,35 +369,48 @@ public class GestorUsuarioAction extends BaseAction {
 			roles = usuarioService.listarRoles();
 			ultimos = usuarioService.listarUltimos();
 			
-			if (null != pagina) {
+			
+			log.info("Determinando filtro...");
+			
+			if(this.username != null){
+				this.filtro = new UsuarioFiltro();
+				filtro.setUsuario(username);
+				filtro.setRol(rol);
+				filtro.setNombre1(nombre1);
+				filtro.setNombre2(nombre2);
+				filtro.setPaterno(paterno);
+				filtro.setMaterno(materno);
+							
+				getUsuarioSession().getFiltros().setFiltroUsuarios(filtro);
+			
+			}else if(getUsuarioSession().getFiltros().getFiltroUsuarios() != null){
 				
-				if(null != username){
-					
-					Usuario filtro = new Usuario();
-					filtro.setUsuario(Formato.matizarFrace(username));
-					filtro.setRolPredeterminado(new Rol(rol));
-					
-					Persona persona = new Persona();
-					persona.setNomuno(Formato.matizarFrace(nombre1));
-					persona.setNomdos(Formato.matizarFrace(nombre2));
-					persona.setApepaterno(Formato.matizarFrace(paterno));
-					persona.setApematerno(Formato.matizarFrace(materno));
-					filtro.setPersona(persona);
-					
-					getUsuarioSession().setMisUsuarios(usuarioService.buscar(filtro)); 
-					
-				}
+				this.filtro = getUsuarioSession().getFiltros().getFiltroUsuarios();
 				
-				List<Usuario> usuarios = getUsuarioSession().getMisUsuarios();
+			}else{
+				this.filtro = new UsuarioFiltro();
+			}
+			
+			
+			log.info("Consultando resultados...");
+			
+			if(this.filtro != null){
+				this.usuarios = usuarioService.buscar(filtro); 
+			}
+			
+			
+			log.info("Paginando resultados...");
+			
+			if(usuarios != null){
+				total = usuarios.size();
+				paginas = total / Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
 				
-				if(usuarios != null){
-					total = usuarios.size();
-					paginas = total / Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
-					
-					int inicio = pagina * Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
-					int fin = inicio + Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
-					this.usuarios = usuarios.subList(inicio, (fin>usuarios.size())?usuarios.size():fin);
-				}
+				if(pagina==null) pagina=0;
+				if(pagina>paginas) pagina=paginas;
+				
+				int inicio = pagina * Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				int fin = inicio + Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				this.usuarios = usuarios.subList(inicio, (fin>usuarios.size())?usuarios.size():fin);
 			}
 			
 		} catch (Exception e) {
@@ -412,27 +435,11 @@ public class GestorUsuarioAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
-	
-	private boolean esMiUsuario(int id){
-		return getUsuarioSession().getMisUsuarios().contains(new Usuario(id));
-	}
-	
-	public String verFoto()  throws Exception{
-		log.info("verFoto()");
-		if(null != id && esMiUsuario(id)){
-			String filename = id + ".jpg";
-			String source = Constante.RUTA_FOTOS + filename;
-			Archivo.downloadResizedFile(filename, source, 85, 0, getResponse());
-		}else{
-			log.error("Accedo a informacion de usuario no permitido.");
-		}
-		return NONE;
-	}
-	
+
 	public String datosUsuario()  throws ActionException{
 		log.info("datosUsuario()"+id);
 		try {
-			if(null != id && esMiUsuario(id)){
+			if(null != id){
 				usuario = usuarioService.obtenerSoloDatos(id);
 			}else{
 				log.error("Accedo a informacion de usuario no permitido.");

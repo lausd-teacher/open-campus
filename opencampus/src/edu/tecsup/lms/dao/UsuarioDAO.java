@@ -18,6 +18,7 @@ import edu.tecsup.lms.modelo.correo.Adjunto;
 import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
+import edu.tecsup.lms.modelo.usuario.UsuarioFiltro;
 import edu.tecsup.lms.util.Archivo;
 import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.Formato;
@@ -498,8 +499,8 @@ public class UsuarioDAO extends BaseDAO {
 		return roles;
 	}
 	
-	public List<Usuario> buscar(Usuario filtro)throws DAOException {
-		log.info("buscar(Usuario filtro) ");
+	public List<Usuario> buscar(UsuarioFiltro filtro)throws DAOException {
+		log.info("buscar("+filtro+") ");
 		
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -513,57 +514,56 @@ public class UsuarioDAO extends BaseDAO {
 			String query = "select u.idusuario, u.usuario, p.nomuno, p.nomdos, p.apepaterno, p.apematerno, u.estado " +
 					"from cv_usuario u, cv_persona p " +
 					"where u.idusuario = p.idpersona and p.estado=1 ";
-			
-			if(!"".equals(filtro.getUsuario())){
+			if(null != filtro.getUsuario()){
 				query += "and (soundex(u.usuario) = soundex(?) " +
 						"or replace(replace(replace(replace(replace(replace(upper(u.usuario),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ?) ";
 			}
-			if(!"".equals(filtro.getPersona().getNomuno())){
+			if(null != (filtro.getNombre1())){
 				query += "and (soundex(p.nomuno) = soundex(?) " +
 						"or replace(replace(replace(replace(replace(replace(upper(p.nomuno),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ?) ";
 			}
-			if(!"".equals(filtro.getPersona().getNomdos())){
+			if(null != (filtro.getNombre2())){
 				query += "and (soundex(p.nomdos) = soundex(?) " +
 						"or replace(replace(replace(replace(replace(replace(upper(p.nomdos),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ?) ";
 			}
-			if(!"".equals(filtro.getPersona().getApepaterno())){
+			if(null != (filtro.getPaterno())){
 				query += "and (soundex(p.apepaterno) = soundex(?) " +
 						"or replace(replace(replace(replace(replace(replace(upper(p.apepaterno),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ?) ";
 			}
-			if(!"".equals(filtro.getPersona().getApematerno())){
+			if(null != (filtro.getMaterno())){
 				query += "and (soundex(p.apematerno) = soundex(?) " +
 						"or replace(replace(replace(replace(replace(replace(upper(p.apematerno),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ?) ";
 			}
-			if(0 != filtro.getRolPredeterminado().getIdrol()){
+			if(null != filtro.getRol()){
 				query += "and 0<(select count(*) from cv_usuario_rol where idusuario=u.idusuario and estado=1 and idrol=?) ";
 			}
 			query += "order by p.apepaterno, p.apematerno, p.nomuno, p.nomdos";
 			//System.out.println(query);
-			cons = dataSource.getConnection();
+			cons = dataSource.getConnection(); 
 			stmt =  cons.prepareStatement(query);
 			int i = 1;
-			if(!"".equals(filtro.getUsuario())){
+			if(null != (filtro.getUsuario())){
 				stmt.setString(i++, filtro.getUsuario());
 				stmt.setString(i++, "%" + filtro.getUsuario() + "%");
 			}
-			if(!"".equals(filtro.getPersona().getNomuno())){
-				stmt.setString(i++, filtro.getPersona().getNomuno());
-				stmt.setString(i++, "%" + filtro.getPersona().getNomuno() + "%");
+			if(null != (filtro.getNombre1())){
+				stmt.setString(i++, filtro.getNombre1());
+				stmt.setString(i++, "%" + filtro.getNombre1() + "%");
 			}
-			if(!"".equals(filtro.getPersona().getNomdos())){
-				stmt.setString(i++, filtro.getPersona().getNomdos());
-				stmt.setString(i++, "%" + filtro.getPersona().getNomdos() + "%");
+			if(null != (filtro.getNombre2())){
+				stmt.setString(i++, filtro.getNombre2());
+				stmt.setString(i++, "%" + filtro.getNombre2() + "%");
 			}
-			if(!"".equals(filtro.getPersona().getApepaterno())){
-				stmt.setString(i++, filtro.getPersona().getApepaterno());
-				stmt.setString(i++, "%" + filtro.getPersona().getApepaterno() + "%");
+			if(null != (filtro.getPaterno())){
+				stmt.setString(i++, filtro.getPaterno());
+				stmt.setString(i++, "%" + filtro.getPaterno() + "%");
 			}
-			if(!"".equals(filtro.getPersona().getApematerno())){
-				stmt.setString(i++, filtro.getPersona().getApematerno());
-				stmt.setString(i++, "%" + filtro.getPersona().getApematerno() + "%");
+			if(null != (filtro.getMaterno())){
+				stmt.setString(i++, filtro.getMaterno());
+				stmt.setString(i++, "%" + filtro.getMaterno() + "%");
 			}
-			if(0 != filtro.getRolPredeterminado().getIdrol()){
-				stmt.setInt(i++, filtro.getRolPredeterminado().getIdrol());
+			if(null != filtro.getRol()){
+				stmt.setInt(i++, filtro.getRol());
 			}
 			result = stmt.executeQuery();
 			

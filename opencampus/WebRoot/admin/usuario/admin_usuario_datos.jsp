@@ -78,7 +78,7 @@
 							<%=Formato.calendarToString(p.getFecnacimiento(),Constante.FECHA_DIA_MES_ANO)%>
 						</td>
 						<td rowspan="6" align="center" valign="top" width="90">
-							<img src="<%=request.getContextPath() %>/admin/usuario/VerFoto.action?id=<%=usuario.getId()%>" 
+							<img src="<%=request.getContextPath() %>/VerFoto.action?id=<%=usuario.getId()%>" 
 								width="85" border="0" class="open_border">
 							<table cellpadding="0" cellspacing="0" border="0" width="90">
 								<tr>

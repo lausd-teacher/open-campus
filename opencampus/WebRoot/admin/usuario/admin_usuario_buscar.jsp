@@ -171,31 +171,31 @@
 									</option>
 									<c:forEach items="${roles}" var="r">
 										<option value="<c:out value="${r.idrol}"/>" 
-										<c:if test="${r.idrol == rol}">selected</c:if>><c:out value="${r.nombre}"/></option>
+										<c:if test="${r.idrol == filtro.rol}">selected</c:if>><c:out value="${r.nombre}"/></option>
 									</c:forEach>
 								</select>
 							</td>
 							
 							<td>
 								<input name="username" onkeyup="enviarABuscar(event);" type="text" size="12"
-									value="<c:out value="${username}"/>"  />
+									value="<c:out value="${filtro.usuario}"/>"  />
 							</td>
 							
 							<td align="center">
 								<input name="paterno" type="text" onkeyup="enviarABuscar(event);"
-									value="<c:out value="${paterno}"/>" size="12" />
+									value="<c:out value="${filtro.paterno}"/>" size="12" />
 							</td>
 							<td align="center">
 								<input name="materno" type="text" onkeyup="enviarABuscar(event);"
-									value="<c:out value="${materno}"/>" size="12" />
+									value="<c:out value="${filtro.materno}"/>" size="12" />
 							</td>
 							<td align="center">
 								<input name="nombre1" type="text" onkeyup="enviarABuscar(event);" size="12"
-									value="<c:out value="${nombre1}"/>" />
+									value="<c:out value="${filtro.nombre1}"/>" />
 							</td>
 							<td align="center">
 								<input name="nombre2" type="text" onkeyup="enviarABuscar(event);" size="12"
-									value="<c:out value="${nombre2}"/>" />
+									value="<c:out value="${filtro.nombre2}"/>" />
 							</td>
 							<td align="center" colspan="4">
 								<input type="hidden" name="pagina" value="0" id="form_posicionPagina">
@@ -210,7 +210,7 @@
 							<c:choose>
 								<c:when test="${fn:length(usuarios)>0}">
 									<c:forEach items="${usuarios}" var="u" varStatus="fila">
-										<tr onmouseover="verImagen(this,'<%=request.getContextPath()%>/admin/usuario/VerFoto.action?id=<c:out value="${u.id}"/>');"
+										<tr onmouseover="verImagen(this,'<%=request.getContextPath()%>/VerFoto.action?id=<c:out value="${u.id}"/>');"
 										onmouseout=" ocultarImagen();" id="<c:out value="${u.idToString}"/>" style="height: 16px;">
 										
 											<td align="center">

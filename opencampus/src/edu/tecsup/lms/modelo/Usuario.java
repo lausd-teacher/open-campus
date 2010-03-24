@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.tecsup.lms.dao.IngresoDAO;
+import edu.tecsup.lms.modelo.usuario.FiltroList;
 import edu.tecsup.lms.modelo.usuario.Ingreso;
 import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
@@ -73,11 +74,11 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 	
 	private Set<Integer> misForos = null;
 	
-	private List<Usuario> misUsuarios = null;
-	
 	private Rol rolPredeterminado = null;
 	
 	private AulaVirtual aulaActual = null;
+	
+	private FiltroList filtros = new FiltroList();
 	
 	private static Collection<Rol> rolesPrivados = null;
 	
@@ -118,6 +119,14 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 			
 		}
 		return rolPredeterminado;
+	}
+
+	public FiltroList getFiltros() {
+		return filtros;
+	}
+
+	public void setFiltros(FiltroList filtros) {
+		this.filtros = filtros;
 	}
 
 	public void setRolPredeterminado(Rol rolPredeterminado) {
@@ -207,14 +216,6 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-
-	public List<Usuario> getMisUsuarios() {
-		return misUsuarios;
-	}
-
-	public void setMisUsuarios(List<Usuario> misUsuarios) {
-		this.misUsuarios = misUsuarios;
 	}
 
 	public Set<Integer> getMisNoticias() {
