@@ -45,7 +45,7 @@
 				<table width="100%" border="0" cellpadding="3" cellspacing="0" class="open_table">
 					<caption>Datos de Usuario</caption>
 					<tr>
-						<td rowspan="3" width="88"><img src="<%=request.getContextPath() %>/admin/usuario/VerFoto.action?id=<c:out value="${usuario.id}"/>" 
+						<td rowspan="3" width="88"><img src="<%=request.getContextPath() %>/VerFoto.action?id=<c:out value="${usuario.id}"/>" 
 					width="85" border="0" class="open_border"> 
 						</td>
 						<td width="90" class="line"><label>Usuario</label></td>

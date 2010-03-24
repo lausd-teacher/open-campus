@@ -3,7 +3,6 @@ package edu.tecsup.lms.action.ficha;
 import java.io.File;
 import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
@@ -12,7 +11,6 @@ import edu.tecsup.lms.modelo.Curso;
 import edu.tecsup.lms.modelo.Jerarquia;
 import edu.tecsup.lms.modelo.Periodo;
 import edu.tecsup.lms.modelo.Silabo;
-import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.service.FichaService;
 import edu.tecsup.lms.service.JerarquiaService;
 import edu.tecsup.lms.service.PeriodoService;
@@ -261,7 +259,7 @@ public class FichaAction extends BaseAction {
 					this.cursos = fichaService.buscarFichas(filtro);
 				}
 				
-				List<Usuario> usuarios = getUsuarioSession().getMisUsuarios();
+//				List<Usuario> usuarios = getUsuarioSession().getMisUsuarios();
 				
 //				if(usuarios != null){
 //					total = usuarios.size();

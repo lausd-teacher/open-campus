@@ -14,6 +14,7 @@ import edu.tecsup.lms.modelo.Jerarquia;
 import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.usuario.Rol;
 import edu.tecsup.lms.modelo.usuario.Ubigeo;
+import edu.tecsup.lms.modelo.usuario.UsuarioFiltro;
 import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.Formato;
 
@@ -174,8 +175,8 @@ public class UsuarioService {
 		return roles;
 	}
 	
-	public List<Usuario> buscar(Usuario filtro)throws ServiceException {
-		log.info("buscarSistema(Usuario filtro)");
+	public List<Usuario> buscar(UsuarioFiltro filtro)throws ServiceException {
+		log.info("buscarSistema(UsuarioFiltro filtro)");
 		List<Usuario> array = null;
 		try {
 			array = usuarioDAO.buscar(filtro);

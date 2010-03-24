@@ -8,8 +8,8 @@ import java.util.Map;
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
 import edu.tecsup.lms.modelo.Usuario;
-import edu.tecsup.lms.modelo.usuario.Persona;
 import edu.tecsup.lms.modelo.usuario.Rol;
+import edu.tecsup.lms.modelo.usuario.UsuarioFiltro;
 import edu.tecsup.lms.service.UsuarioService;
 import edu.tecsup.lms.util.Archivo;
 import edu.tecsup.lms.util.Constante;
@@ -50,9 +50,11 @@ public class UsuarioAction extends BaseAction {
 
 	private Usuario usuario;
 	
+	private UsuarioFiltro filtro;
+	
 	private Collection<Usuario> cumples;
 	
-	protected Collection<Usuario> usuarios;
+	protected List<Usuario> usuarios;
 	
 	private Map<String,Usuario> conectados;
 	
@@ -64,7 +66,7 @@ public class UsuarioAction extends BaseAction {
 		return roles;
 	}
 
-	public Collection<Usuario> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
@@ -195,6 +197,14 @@ public class UsuarioAction extends BaseAction {
 		return usuarioService;
 	}
 	
+	public UsuarioFiltro getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(UsuarioFiltro filtro) {
+		this.filtro = filtro;
+	}
+
 	public String cargarPortada() throws Exception{
 		log.info("cargarPortada()");
 		try {
@@ -226,46 +236,60 @@ public class UsuarioAction extends BaseAction {
 			roles = usuarioService.listarRoles();
 			roles.removeAll(Usuario.getRolesPrivados());
 			
-			if (null != pagina) {
+			log.info("Determinando filtro...");
+			
+			if(this.username != null){
 				
-				if(null != username){
-					
-					if(!Usuario.getRolesPrivados().contains(new Rol(rol)) && rol != 0
-							&& ((username != null && username.trim().length()>2)
-							|| (nombre1 != null && nombre1.trim().length()>2)
-							|| (nombre2 != null && nombre2.trim().length()>2)
-							|| (paterno != null && paterno.trim().length()>2)
-							|| (materno != null && materno.trim().length()>2))){
-					
-						Usuario filtro = new Usuario();
-						filtro.setUsuario(Formato.matizarFrace(username));
-						filtro.setRolPredeterminado(new Rol(rol));
-						
-						Persona persona = new Persona();
-						persona.setNomuno(Formato.matizarFrace(nombre1));
-						persona.setNomdos(Formato.matizarFrace(nombre2));
-						persona.setApepaterno(Formato.matizarFrace(paterno));
-						persona.setApematerno(Formato.matizarFrace(materno));
-						filtro.setPersona(persona);
-						
-						getUsuarioSession().setMisUsuarios(usuarioService.buscar(filtro)); 
-					
-					}else{
-						addActionError("Debe indicar el rol y como mínimo uno de los cinco campos del formulario con una longitud no menor a 3 caracteres.");
-						log.error("Faltan parametros del formulario.");
-					}
+				if(!Usuario.getRolesPrivados().contains(new Rol(rol)) && rol != 0
+						&& ((username != null && username.trim().length()>2)
+						|| (nombre1 != null && nombre1.trim().length()>2)
+						|| (nombre2 != null && nombre2.trim().length()>2)
+						|| (paterno != null && paterno.trim().length()>2)
+						|| (materno != null && materno.trim().length()>2))){
+				
+					this.filtro = new UsuarioFiltro();
+					filtro.setUsuario(Formato.matizarFrace(username));
+					filtro.setRol(rol);
+					filtro.setNombre1(Formato.matizarFrace(nombre1));
+					filtro.setNombre2(Formato.matizarFrace(nombre2));
+					filtro.setPaterno(Formato.matizarFrace(paterno));
+					filtro.setMaterno(Formato.matizarFrace(materno));
+										
+					getUsuarioSession().getFiltros().setFiltroDirectorio(filtro);
+				
+				}else{
+					addActionError("Debe indicar el rol y como mínimo uno de los cinco campos del formulario con una longitud no menor a 3 caracteres.");
+					log.error("Faltan parametros del formulario.");
 				}
 				
-				List<Usuario> usuarios = getUsuarioSession().getMisUsuarios();
+			}else if(getUsuarioSession().getFiltros().getFiltroDirectorio() != null){
 				
-				if(usuarios != null){
-					total = usuarios.size();
-					paginas = total / Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				this.filtro = getUsuarioSession().getFiltros().getFiltroDirectorio();
+								
+			}/*else{
+				this.filtro = new UsuarioFiltro(); //Solo para el admin
+			}*/
+			
+			log.info("Consultando resultados...");
+			
+			if(this.filtro != null){
+				this.usuarios = usuarioService.buscar(filtro); 
+			}
+			
+			log.info("Paginando resultados...");
+			
+			if (this.usuarios != null) {
+				
+				total = usuarios.size();
+				paginas = total / Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				
+				if(pagina==null) pagina=0;
+				if(pagina>paginas) pagina=paginas;
+				
+				int inicio = pagina * Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				int fin = inicio + Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
+				this.usuarios = usuarios.subList(inicio, (fin>usuarios.size())?usuarios.size():fin);
 					
-					int inicio = pagina * Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
-					int fin = inicio + Constante.BUSQUEDA_CANTIDAD_DIRECTORIO;
-					this.usuarios = usuarios.subList(inicio, (fin>usuarios.size())?usuarios.size():fin);
-				}
 			}
 			
 		} catch (Exception e) {
@@ -276,14 +300,10 @@ public class UsuarioAction extends BaseAction {
 	}
 	
 	public String verFoto()  throws Exception{
-		log.info("verFoto()");
-		//if(null != id && getUsuarioSession().getMisUsuarios().contains(new Usuario(id))){
-			String filename = id + ".jpg";
-			String source = Constante.RUTA_FOTOS + filename;
-			Archivo.downloadResizedFile(filename, source, 85, 0, getResponse());
-		//}else{
-			//log.error("Accedo a informacion de usuario no permitido.");
-		//}
+		log.info("verFoto() "+id);
+		String filename = id + ".jpg";
+		String source = Constante.RUTA_FOTOS + filename;
+		Archivo.downloadResizedFile(filename, source, 85, 0, getResponse());
 		return NONE;
 	}
 	
