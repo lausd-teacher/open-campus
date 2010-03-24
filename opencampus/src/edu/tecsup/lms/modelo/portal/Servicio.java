@@ -1,114 +1,28 @@
 package edu.tecsup.lms.modelo.portal;
 
-public class Servicio {
+import java.io.Serializable;
+
+public class Servicio implements Serializable{
+	
+	private static final long serialVersionUID = 2799134248495895574L;
+
 	private String id;
 
-	private int columna;
-
-	private int visible;
-
 	private String nombre;
+	
+	private Integer columna;
+	
+	private Integer posicion;
 
-	private String comentario;
+	private Integer estado;
+	
+	private Integer visible;
 
-	private String imagen;
-
-	private int usuarioEstado;
-
-	private int estado;
-
-	private int usuarioEliminar;
-
-	private int usuarioMinimizar;
-
-	private int verIngreso;
-
-	private int verDescripcion;
+	private Integer permisoEliminar;
+	
+	private Integer permisoMinimizar;
 
 	public Servicio() {
-	}
-
-	public Servicio(String id, int columna, int visible, String nombre,
-			String comentario, String imagen) {
-		super();
-		this.id = id;
-		this.columna = columna;
-		this.visible = visible;
-		this.nombre = nombre;
-		this.comentario = comentario;
-		this.imagen = imagen;
-	}
-
-	public int getUsuarioEstado() {
-		return usuarioEstado;
-	}
-
-	public void setUsuarioEstado(int usuarioEstado) {
-		this.usuarioEstado = usuarioEstado;
-	}
-
-	public int getUsuarioMinimizar() {
-		return usuarioMinimizar;
-	}
-
-	public void setUsuarioMinimizar(int usuarioMinimizar) {
-		this.usuarioMinimizar = usuarioMinimizar;
-	}
-
-	public int getVerIngreso() {
-		return verIngreso;
-	}
-
-	public void setVerIngreso(int verIngreso) {
-		this.verIngreso = verIngreso;
-	}
-
-	public int getVerDescripcion() {
-		return verDescripcion;
-	}
-
-	public void setVerDescripcion(int verDescripcion) {
-		this.verDescripcion = verDescripcion;
-	}
-
-	public int getUsuarioEliminar() {
-		return usuarioEliminar;
-	}
-
-	public void setUsuarioEliminar(int usuarioEliminar) {
-		this.usuarioEliminar = usuarioEliminar;
-	}
-
-	public int getEstado() {
-		return estado;
-	}
-
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
 	}
 
 	public String getId() {
@@ -119,20 +33,74 @@ public class Servicio {
 		this.id = id;
 	}
 
-	public int getColumna() {
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public Integer getColumna() {
 		return columna;
 	}
 
-	public void setColumna(int columna) {
+
+	public void setColumna(Integer columna) {
 		this.columna = columna;
 	}
 
-	public int getVisible() {
+
+	public Integer getPosicion() {
+		return posicion;
+	}
+
+
+	public void setPosicion(Integer posicion) {
+		this.posicion = posicion;
+	}
+
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+
+
+	public Integer getVisible() {
 		return visible;
 	}
 
-	public void setVisible(int visible) {
+
+	public void setVisible(Integer visible) {
 		this.visible = visible;
+	}
+
+
+	public Integer getPermisoEliminar() {
+		return permisoEliminar;
+	}
+
+
+	public void setPermisoEliminar(Integer permisoEliminar) {
+		this.permisoEliminar = permisoEliminar;
+	}
+
+
+	public Integer getPermisoMinimizar() {
+		return permisoMinimizar;
+	}
+
+
+	public void setPermisoMinimizar(Integer permisoMinimizar) {
+		this.permisoMinimizar = permisoMinimizar;
 	}
 
 }

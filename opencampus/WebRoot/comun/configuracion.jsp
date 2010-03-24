@@ -2,20 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="edu.tecsup.lms.util.Constante"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@ page import="java.util.Collection"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="edu.tecsup.lms.modelo.portal.Servicio"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%
-	Usuario usuario = (Usuario) request.getSession().getAttribute(Constante.USUARIO_ACTUAL);
-	Collection<Servicio> portal = (Collection<Servicio>) request.getAttribute("portal");
-	if (null == portal) {
-		portal = new ArrayList<Servicio>(0);
-	}
-%>
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -31,18 +22,10 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/util.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/tooltip/tooltip.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
+			src="<c:out value='${contextPath}'/>/js/protostaculus.js"></script>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/configuracion.js"></script>
-		<script type="text/javascript">
-			var SERVICIO_FALTA=0;
-			var TXT_COMPLETO='<s:text name="portal.configuracion.aviso1"/>';
-			var TXT_INCOMPLETO='<s:text name="portal.configuracion.aviso2"/>';
-		</script>
-		
-		
+				
 	</head>
 	<%@include file="/comun/capas/reloj.jsp"%>
 	<body onLoad="mostrarReloj()">
@@ -52,147 +35,169 @@
 
 			<div id="cuerpo">
 				<div id="principal">
-					<table border="0" cellpadding="3" cellspacing="0" class="tabla01"
-						width="99%" >
-						<tr class="fon_tit_curso">
-							<td height="17" class="tit_cab" colspan="3"> 
-								<s:text name="portal.menu.configuracion"/>
-							</td>
-						</tr>
-
-						<tr>
-							<td align="center" class="moduloAbajo1" colspan="3"
-								id="td_mensaje_servicio" height="18">
-								<s:text name="portal.configuracion.help"/>
-							</td>
-						</tr>
-						
-						<tr style="background-color: #E5EFF8">
-							<%
-							int fila=0;
-							
-								int total_falta = 0;
-								final int TOTAL_MAXIMO = 3;
-								int contador = 0;
-								for (Servicio servicio : portal) {
-									contador++;
-							%>
-
-							<td <%if(contador!=TOTAL_MAXIMO){%>style="border-right: 1px #7EAAD1 solid;"<%} %>>
-								<table width="310" border="0">
-									<tr>
-										<td align="left" width="20">
-											<%
-												if (0 == servicio.getEstado()
-															&& 1 == servicio.getUsuarioEliminar()) {
-														total_falta++;
-													}
-											%>
-											<input type="checkbox" value="1"
-												<%if (1 == servicio.getEstado()) {%> checked="checked"
-												<%} %> onclick="anadirServicio('<%=servicio.getId()%>')"
-												id="id_<%=servicio.getId()%>"
-												<%if(0==servicio.getUsuarioEliminar()){ %>
-												disabled="disabled" <%} %> />
-
-										</td>
-										<td align="left" width="20">
-											<img
-												src="<%=request.getContextPath() + servicio.getImagen()%>"
-												alt="<fmt:message key="<%=servicio.getNombre()%>"/>
-										</td>
-										<td width="270">
-											<strong><fmt:message key="<%=servicio.getNombre()%>"/></strong>
-										</td>
-									</tr>
-									
-									<tr>
-										<td align="left" colspan="1">&nbsp;
-											
-										</td>
-										<td align="left" colspan="2">
-											<fmt:message key="<%=servicio.getComentario()%>"/>
-										</td>
-									</tr>
-									
-								</table>							
-							</td>
-							<%
-								if (contador >= TOTAL_MAXIMO) {
-										contador = 0;
-										fila++;
-										
-							%>							
-							</tr>	
-							<tr <%if(fila%2==0){ %> style="background-color: #E5EFF8"<%} %> > 							
-								<% }								
-								%>
+				
+					<table border="0" cellpadding="3" cellspacing="0" class="open_table" width="100%">
+						<caption><s:text name="portal.menu.configuracion"/></caption>
+						<tbody>
+							<tr>
 								
-							<%}
-								
-							if(contador<TOTAL_MAXIMO){
-							for(int u=0;u<TOTAL_MAXIMO-contador;u++){
-							contador++;
-						%>
-						
-						<td <%if(contador!=TOTAL_MAXIMO){%>style="border-right: 1px #7EAAD1 solid;"<%} %>>
-						
-							<table>
-								<tr>
-									<td width="20" align="left"><input type="checkbox" checked="checked" disabled="disabled" /></td>
-									<td width="16" align="center"><img src="<%=request.getContextPath()%>/img/icon_idioma.jpg"/></td>
-								  <td align="left" colspan="3"><strong><s:text name="idioma.titulo"></s:text></strong></td>
-							  </tr>
-								<tr>
-									<td>&nbsp;<s:text name="idioma" id="id_idioma"/></td>
-									<td align="center"><input type="radio" name="idioma" id="es" 
-										onClick="cambiarIdioma('es');"
-										<s:if test="#id_idioma=='es'">checked="checked"</s:if> /></td>
-									<td width="59"><s:text name="idioma.espanol"></s:text></td>
-									<td width="20" align="left"><input type="radio" name="idioma" id="en" 
-										onClick="cambiarIdioma('en');"
-										<s:if test="#id_idioma=='en'">checked="checked"</s:if> /></td>
-							        <td width="225" align="left"><s:text name="idioma.ingles"></s:text></td>
-							  </tr>
-							</table>						
-						</td>
-						<%} %>
-						</tr>
-						<%} %>
-												
+								<c:forEach items="${portal}" var="servicio" varStatus="status">
+									<td>
+										<table width="100%" border="0" cellpadding="3" cellspacing="0">
+											<tr>
+												<td width="20">
+													<input type="checkbox" <c:if test="${servicio.estado == 1}">checked="checked"</c:if>
+														<c:if test="${servicio.permisoEliminar != 1}">disabled="disabled"</c:if>
+														onclick="anadirServicio(this,'<c:out value="${servicio.id}"/>')" />
+												</td>
+												<td width="20">
+													<img src="<%=request.getContextPath()%>/img/icons/<c:out value="${servicio.id}"/>.gif" alt='' />
+												</td>
+												<td>
+													<strong><fmt:message key="${servicio.nombre}"/></strong>
+												</td>
+											</tr>
+										</table>
+									</td>
+									
+									<c:if test="${status.count==5}">
+										<td rowspan="2">
+											<table width="100%" border="0" cellpadding="3" cellspacing="0" style="table-layout: fixed;">
+												<tr>
+													<td width="20"><input type="checkbox" checked="checked" disabled="disabled" /></td>
+													<td width="20"><img src="<%=request.getContextPath()%>/img/icon_idioma.jpg"/></td>
+													<td><strong><s:text name="idioma.titulo"></s:text></strong></td>
+												 </tr>
+												<tr>
+													<td colspan="3">
+														<table width="100%" border="0" cellpadding="0" cellspacing="0">
+															<tr>
+																<td width="20"><s:text name="idioma" id="id_idioma"/>
+																	<input type="radio" name="idioma" id="es"  onClick="cambiarIdioma('es');"
+																<s:if test="#id_idioma=='es'">checked="checked"</s:if> /></td>
+																<td width="55"><s:text name="idioma.espanol"></s:text></td>
+																<td width="20" ><input type="radio" name="idioma" id="en" 
+																	onClick="cambiarIdioma('en');"
+																<s:if test="#id_idioma=='en'">checked="checked"</s:if> /></td>
+															    <td><s:text name="idioma.ingles"></s:text></td>
+														    </tr>
+												    	</table>
+												    </td>
+												</tr>
+											</table>
+										</td>
+										</tr><tr>
+									</c:if>
+									
+								</c:forEach>
+									
+							</tr>
+						</tbody>
 					</table>
-					<table width="100%">
-					<%
-							if (0 != portal.size()) {
-						%>
-						<tr>
-							
-							<td colspan="3" align="right" valign="bottom" height="30px" >
-								<input value="<s:text name="portal.configuracion.restaurarconfiguracion"/>" type="button"
-									class="form_button" style="width: 150px; cursor: pointer;"
-									onclick="reiniciarServicio();">
-								&nbsp;&nbsp;
-							</td>
-						</tr>
-						<%
-							}
-						%>
-					</table>
+				
 					<br>
+					
+					
+					
+					
+					<c:forEach var="servicio" items="${portal}">
+		
+		<br><div id="<c:out value='${servicio.id}' />"
+			style="vertical-align: top; width: 241px; padding-bottom: 5px; float: left; padding-top: 5px; display: none;">
+			<table width="230" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+				<tr>
+					<td height="18" valign="top"  style="background-image: url(img/fon_menu.jpg); background-position-x:center; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;">
+						<table cellpadding="0" cellspacing="0" width="100%" border="0" >
+							<tr>
+								<td valign="bottom" style="cursor: move;" id="tabla_<c:out value='${servicio.id}' />">									
+									<table border="0" align="left" cellpadding="3" cellspacing="0" width="100%" >
+										<tr>
+											<td align="left" width="20">
+												<img height="15"
+													src="<c:out value='${contextPath}' /><c:out value='${servicio.id}' />"
+													alt="<fmt:message key="${servicio.comentario}"/>" style="cursor: move;" />
+											<br></td>
+											<td align="left">
+												<div
+													style="padding-left: 5px; padding-right: 10px; font-weight: bold;">
+													
+													<fmt:bundle basename="mensajes">
+														
+													</fmt:bundle>
+												</div>
+											<br></td>
+										</tr>
+									</table>
+								<br></td>
+								<td width="15">
+									<c:choose>
+										<c:when test="${servicio.usuarioMinimizar == 1}">
+											<img
+												src="<c:out value='${contextPath}'/>/img/comprimir_portal.jpg"
+												alt="Minimizar" style="cursor: pointer;"
+												onClick="esconderServicio('<c:out value='${servicio.id}' />');">
+										</c:when>
+										<c:otherwise>
+											<img src="<c:out value='${contextPath}'/>/img/inac_comprimir_portal.jpg">
+										</c:otherwise>
+									</c:choose>
+								<br></td>
+								<td width="15">
+									<c:choose>
+										<c:when test="${servicio.usuarioEliminar == 1}">
+											<img src="<c:out value='${contextPath}'/>/img/cerrar_portal.jpg"
+												alt="Cerrar" style="cursor: pointer;"
+												onClick="eliminarServicio('<c:out value='${servicio.id}' />');">
+										</c:when>
+										<c:otherwise>
+											<img src="<c:out value='${contextPath}'/>/img/inac_cerrar_portal.jpg">
+										</c:otherwise>
+									</c:choose>
+								<br></td>
+							</tr>
+						</table>
+					<br></td>
+				</tr>
+				<tr id="<c:out value='${servicio.id}' />_tr" <c:if test='${servicio.visible == 0}'>style="display: none; visibility: hidden;"</c:if>>
+					<td id="<c:out value='${servicio.id}' />_td" style="text-align: left; background-color:#FFF; border: 1px solid #cccccc;">
+						<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
+					<br></td>
+				</tr>
+				<tr height="20" style="background-color: #cccccc;">
+					<td align="right"><br>
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="70%" align="left">
+									<c:if test="${servicio.verDescripcion == 1}">
+										<label id="<c:out value='${servicio.id}' />_descripcion"
+											style="font-weight: bold; font-size: 100%; padding-left: 5px;">
+											&nbsp;
+										</label>
+									</c:if>
+								<br></td>
+								<td align="right">
+									<c:if test="${servicio.verIngreso == 1}">
+										
+									</c:if>
+								<br></td>
+							</tr>
+						</table>
+					<br><br></td>
+				</tr>
+			</table>
+		</div>		
+		
+		</c:forEach>
+					
+					
+					
+					
+					
 				</div>
 			</div>
 			<div id="pie">
 				<%@include file="pie.jsp"%>
 			</div>
 		</div>
-		<script type="text/javascript">
-			resizeHeight();
-			<%if(0==total_falta){%>
-			//document.getElementById('td_mensaje_servicio').innerHTML=TXT_COMPLETO;
-			<%}else{%>
-			//document.getElementById('td_mensaje_servicio').innerHTML=TXT_INCOMPLETO;
-			<%}%>
-			SERVICIO_FALTA = '<%=total_falta%>';
-		</script>
 	</body>
 </html>

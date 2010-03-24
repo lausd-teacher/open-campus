@@ -5,17 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.tecsup.lms.action.BaseAction;
-import edu.tecsup.lms.modelo.Noticia;
-import edu.tecsup.lms.modelo.Usuario;
-import edu.tecsup.lms.modelo.correo.Mensaje;
-import edu.tecsup.lms.modelo.ficha.curso.Ficha;
+import edu.tecsup.lms.excepcion.ActionException;
 import edu.tecsup.lms.modelo.portal.Servicio;
-import edu.tecsup.lms.service.BuzonService;
-import edu.tecsup.lms.service.FichaService;
-import edu.tecsup.lms.service.NoticiaService;
 import edu.tecsup.lms.service.PortalService;
-import edu.tecsup.lms.service.UsuarioService;
-import edu.tecsup.lms.util.Constante;
 
 public class PortalAction extends BaseAction {
 
@@ -23,22 +15,6 @@ public class PortalAction extends BaseAction {
 
 	private PortalService portalService;
 	
-	private FichaService fichaService;
-	
-	private BuzonService buzonService;
-	
-	private NoticiaService noticiaService;
-	
-	private UsuarioService usuarioService;
-	
-	private Collection<Usuario> cumples;
-	
-	private Collection<Noticia> noticias;
-	
-	private Collection<Mensaje> mensajes;
-	
-	private Collection<Ficha> cursos;
-
 	private String[] principal_col_0;
 
 	private String[] principal_col_1;
@@ -53,18 +29,6 @@ public class PortalAction extends BaseAction {
 	
 	private Collection<Servicio> portal;
 
-	public Collection<Usuario> getCumples() {
-		return cumples;
-	}
-
-	public void setCumples(Collection<Usuario> cumples) {
-		this.cumples = cumples;
-	}
-
-	public void setUsuarioService(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
-	}
-
 	public Collection<Servicio> getPortal() {
 		return portal;
 	}
@@ -77,28 +41,26 @@ public class PortalAction extends BaseAction {
 		this.portalService = portalService;
 	}
 
-	public String portal() throws Exception{
+	public String portal() throws ActionException{
 		log.info("portal() usuario:"+getUsuarioSession());
-				
-		//Eliminar cuando soluciones ajax cerrar aula
-//		if (null != getAulaVirtualSession() && (getAulaVirtualSession().getTestActual() == null 
-//				|| getAulaVirtualSession().getTestActual().getIdNotaTest() == 0)) {
-//			getSession().remove(Constante.AULA_ACTUAL);
-//		}
-		
-		// SERVICIO *************************************************
-		if(getUsuarioSession().getCompacto() == Constante.ESTADO_ACTIVO){ //CAMBIAR DE POSCICION
-//			cursos = fichaService.obtenerFichasUsuarioServicio(getUsuarioSession());
-			mensajes = buzonService.cargarPortada(getUsuarioSession().getId());
-			cumples = usuarioService.verCumpleanieros();
-			noticias = noticiaService.cargarPortada(getUsuarioSession());
-
-			return "success_min";
-		}else{
-			portal = portalService.obtenerServicioUsuario(getUsuarioSession().getId());
-			return SUCCESS;
+		try{
+			//portal = portalService.obtenerServiciosUsuario(getUsuarioSession().getId());
+		}catch (Exception e) {
+			log.error(e);
+			throw new ActionException(e.getMessage());
 		}
-			
+		return SUCCESS;
+	}
+	
+	public String configurarPortal() throws ActionException{
+		log.info("configurarPortal() "+getUsuarioSession().getId());
+		try{
+			portal = portalService.obtenerServiciosUsuarioConfig(getUsuarioSession().getId());
+		}catch (Exception e) {
+			log.error(e);
+			throw new ActionException(e.getMessage());
+		}
+		return SUCCESS;
 	}
 
 	public String guardarIdioma() throws Exception{
@@ -157,14 +119,6 @@ public class PortalAction extends BaseAction {
 		return NONE;
 	}
 
-	public String configuracionPortal() throws Exception{
-		log.info("configuracionPortal()");
-		
-		portal = portalService.obtenerServicios(getUsuarioSession().getId());
-		
-		return SUCCESS;
-	}
-
 	public String configuracionDefault() throws Exception{
 		log.info("configuracionDefault()");
 		
@@ -195,42 +149,6 @@ public class PortalAction extends BaseAction {
 
 	public void setEstadoServicio(String estadoServicio) {
 		this.estadoServicio = estadoServicio;
-	}
-
-	public void setFichaService(FichaService fichaService) {
-		this.fichaService = fichaService;
-	}
-
-	public void setCursos(Collection<Ficha> cursos) {
-		this.cursos = cursos;
-	}
-
-	public void setBuzonService(BuzonService buzonService) {
-		this.buzonService = buzonService;
-	}
-
-	public void setMensajes(Collection<Mensaje> mensajes) {
-		this.mensajes = mensajes;
-	}
-
-	public Collection<Mensaje> getMensajes() {
-		return mensajes;
-	}
-
-	public Collection<Ficha> getCursos() {
-		return cursos;
-	}
-
-	public void setNoticiaService(NoticiaService noticiaService) {
-		this.noticiaService = noticiaService;
-	}
-
-	public void setNoticias(Collection<Noticia> noticias) {
-		this.noticias = noticias;
-	}
-
-	public Collection<Noticia> getNoticias() {
-		return noticias;
 	}
 
 }

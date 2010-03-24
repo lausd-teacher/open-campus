@@ -2,8 +2,7 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="campus-portal" extends="campus-default"
-		namespace="/admin/portal">
+	<package name="campus-admin-portal" extends="campus-default" namespace="/admin/portal">
 		<action name="ObtenerServicios" method="obtenerServicios"
 			class="edu.tecsup.lms.action.inicio.GestionarPortal">
 			<result name="success">
@@ -21,4 +20,35 @@
 			<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>
 	</package>
+	
+	<package name="campus-portal" extends="campus-default" namespace="/portal">
+		<action name="ConfigurarPortal" method="configurarPortal"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/configuracion.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		
+		<action name="GrabarPortal" method="grabarPortal"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="ConfiguracionPortalDefault" method="configuracionDefault"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success" type="redirect-action">
+				ConfigurarPortal
+			</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalVisible" method="grabarPortalVisible"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="GrabarPortalEliminado"
+			method="grabarPortalEliminado"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+	</package>
+	
 </struts>

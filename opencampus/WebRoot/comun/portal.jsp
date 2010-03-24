@@ -151,7 +151,6 @@
 		
 		</c:forEach>
 		
-		
 	</body>
 	<head>
 		<script type="text/javascript">

@@ -170,35 +170,9 @@
 		<action name="Portal" method="portal"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<result name="success">/comun/portal.jsp</result>
-			<result name="success_min">/comun/portal_min.jsp</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
-		<action name="GrabarPortal" method="grabarPortal"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		<action name="ConfiguracionPortal" method="configuracionPortal"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<result name="success">/comun/configuracion.jsp</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		<action name="ConfiguracionPortalDefault" method="configuracionDefault"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<result name="success" type="redirect-action">
-				ConfiguracionPortal
-			</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		<action name="GrabarPortalVisible" method="grabarPortalVisible"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		<action name="GrabarPortalEliminado"
-			method="grabarPortalEliminado"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
 		<action name="GuardarIdioma"
 			method="guardarIdioma"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
