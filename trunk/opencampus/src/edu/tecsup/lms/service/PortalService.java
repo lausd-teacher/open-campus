@@ -27,39 +27,31 @@ public class PortalService {
 		}
 	}
 
-	public Collection<Servicio> obtenerServicioGestionar()
-			throws ServiceException {
-		Collection<Servicio> services = null;
+	public Collection<Servicio> obtenerServiciosGestionar() throws ServiceException {
 		try {
-			services = portalDAO.obtenerServicioGestionar();
+			return portalDAO.obtenerServiciosGestionar();
+		} catch (Exception e) {
+			throw new ServiceException(e.toString());
+		}
+	}
+
+	public Collection<Servicio> obtenerServiciosUsuario(int usuario)throws ServiceException {
+		try {
+			return portalDAO.obtenerServiciosUsuario(usuario);
 		} catch (DAOException e) {
 			throw new ServiceException(e.toString());
 		}
-		return services;
 	}
 
-	public Collection<Servicio> obtenerServicioUsuario(int usuario)
-			throws ServiceException {
-		Collection<Servicio> services = null;
+	public Collection<Servicio> obtenerServiciosUsuarioConfig(int usuario)throws ServiceException {
 		try {
-			services = portalDAO.obtenerServicioUsuario(usuario);
+			return portalDAO.obtenerServiciosUsuarioConfig(usuario);
 		} catch (DAOException e) {
 			throw new ServiceException(e.toString());
 		}
-		return services;
 	}
-
-	public Collection<Servicio> obtenerServicios(int usuario)
-			throws ServiceException {
-		Collection<Servicio> services = null;
-		try {
-			services = portalDAO.obtenerServicios(usuario);
-		} catch (DAOException e) {
-			throw new ServiceException(e.toString());
-		}
-		return services;
-	}
-
+	
+	//*****************************************************************************************//
 	public void guardar(int usuario, Collection<String[]> array)
 			throws ServiceException {
 		try {

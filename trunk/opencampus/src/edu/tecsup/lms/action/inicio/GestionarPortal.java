@@ -73,8 +73,8 @@ public class GestionarPortal extends BaseAction {
 	public String obtenerServicios() {
 		log.info("obtenerServicios()");
 		try {
-			servicios = portalService.obtenerServicioGestionar();
-		} catch (ServiceException e) {
+			//servicios = portalService.obtenerServicioGestionar();
+		} catch (Exception e) {
 			log.info(e.toString());
 		}
 		return SUCCESS;

@@ -185,8 +185,7 @@ public class MenuOpciones {
 			new Menu("portal.menu.soporte", "/Soporte.action", ""),
 			new Menu("portal.menu.utilitarios", "/Utilitarios.action", ""),
 			new Menu("portal.menu.historicos", "/CursoHistorico.action", ""),
-			new Menu("portal.menu.configuracion",
-					"/ConfiguracionPortal.action", "") };
+			new Menu("portal.menu.configuracion", "/portal/ConfigurarPortal.action", "") };
 
 	public static final Menu menuOpciones = new Menu("portal.menu.opciones",
 			"/Opciones.action", "");
