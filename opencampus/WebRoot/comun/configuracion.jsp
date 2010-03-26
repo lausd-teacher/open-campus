@@ -61,32 +61,7 @@
 									</td>
 									
 									<c:if test="${status.count==5}">
-										<td rowspan="2">
-											<table width="100%" border="0" cellpadding="3" cellspacing="0" style="table-layout: fixed;">
-												<tr>
-													<td width="20"><input type="checkbox" checked="checked" disabled="disabled" /></td>
-													<td width="20"><img src="<%=request.getContextPath()%>/img/icon_idioma.jpg"/></td>
-													<td><strong><s:text name="idioma.titulo"></s:text></strong></td>
-												 </tr>
-												<tr>
-													<td colspan="3">
-														<table width="100%" border="0" cellpadding="0" cellspacing="0">
-															<tr>
-																<td width="20"><s:text name="idioma" id="id_idioma"/>
-																	<input type="radio" name="idioma" id="es"  onClick="cambiarIdioma('es');"
-																<s:if test="#id_idioma=='es'">checked="checked"</s:if> /></td>
-																<td width="55"><s:text name="idioma.espanol"></s:text></td>
-																<td width="20" ><input type="radio" name="idioma" id="en" 
-																	onClick="cambiarIdioma('en');"
-																<s:if test="#id_idioma=='en'">checked="checked"</s:if> /></td>
-															    <td><s:text name="idioma.ingles"></s:text></td>
-														    </tr>
-												    	</table>
-												    </td>
-												</tr>
-											</table>
-										</td>
-										</tr><tr>
+										<c:out value="</tr><tr>" escapeXml="false"></c:out>
 									</c:if>
 									
 								</c:forEach>
@@ -97,99 +72,107 @@
 				
 					<br>
 					
-					
-					
-					
-					<c:forEach var="servicio" items="${portal}">
-		
-		<br><div id="<c:out value='${servicio.id}' />"
-			style="vertical-align: top; width: 241px; padding-bottom: 5px; float: left; padding-top: 5px; display: none;">
-			<table width="230" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
-				<tr>
-					<td height="18" valign="top"  style="background-image: url(img/fon_menu.jpg); background-position-x:center; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;">
-						<table cellpadding="0" cellspacing="0" width="100%" border="0" >
+					<table border="0" cellpadding="3" cellspacing="0" class="open_table" width="100%">
+						<caption><s:text name="portal.menu.portal"/></caption>
+						<tbody>
 							<tr>
-								<td valign="bottom" style="cursor: move;" id="tabla_<c:out value='${servicio.id}' />">									
-									<table border="0" align="left" cellpadding="3" cellspacing="0" width="100%" >
-										<tr>
-											<td align="left" width="20">
-												<img height="15"
-													src="<c:out value='${contextPath}' /><c:out value='${servicio.id}' />"
-													alt="<fmt:message key="${servicio.comentario}"/>" style="cursor: move;" />
-											<br></td>
-											<td align="left">
-												<div
-													style="padding-left: 5px; padding-right: 10px; font-weight: bold;">
-													
-													<fmt:bundle basename="mensajes">
-														
-													</fmt:bundle>
-												</div>
-											<br></td>
-										</tr>
-									</table>
-								<br></td>
-								<td width="15">
-									<c:choose>
-										<c:when test="${servicio.usuarioMinimizar == 1}">
-											<img
-												src="<c:out value='${contextPath}'/>/img/comprimir_portal.jpg"
-												alt="Minimizar" style="cursor: pointer;"
-												onClick="esconderServicio('<c:out value='${servicio.id}' />');">
-										</c:when>
-										<c:otherwise>
-											<img src="<c:out value='${contextPath}'/>/img/inac_comprimir_portal.jpg">
-										</c:otherwise>
-									</c:choose>
-								<br></td>
-								<td width="15">
-									<c:choose>
-										<c:when test="${servicio.usuarioEliminar == 1}">
-											<img src="<c:out value='${contextPath}'/>/img/cerrar_portal.jpg"
-												alt="Cerrar" style="cursor: pointer;"
-												onClick="eliminarServicio('<c:out value='${servicio.id}' />');">
-										</c:when>
-										<c:otherwise>
-											<img src="<c:out value='${contextPath}'/>/img/inac_cerrar_portal.jpg">
-										</c:otherwise>
-									</c:choose>
-								<br></td>
-							</tr>
-						</table>
-					<br></td>
-				</tr>
-				<tr id="<c:out value='${servicio.id}' />_tr" <c:if test='${servicio.visible == 0}'>style="display: none; visibility: hidden;"</c:if>>
-					<td id="<c:out value='${servicio.id}' />_td" style="text-align: left; background-color:#FFF; border: 1px solid #cccccc;">
-						<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
-					<br></td>
-				</tr>
-				<tr height="20" style="background-color: #cccccc;">
-					<td align="right"><br>
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tr>
-								<td width="70%" align="left">
-									<c:if test="${servicio.verDescripcion == 1}">
-										<label id="<c:out value='${servicio.id}' />_descripcion"
-											style="font-weight: bold; font-size: 100%; padding-left: 5px;">
-											&nbsp;
-										</label>
-									</c:if>
-								<br></td>
-								<td align="right">
-									<c:if test="${servicio.verIngreso == 1}">
-										
-									</c:if>
-								<br></td>
-							</tr>
-						</table>
-					<br><br></td>
-				</tr>
-			</table>
-		</div>		
-		
-		</c:forEach>
+								<td>
 					
 					
+								<c:forEach var="servicio" items="${portal}">
+					
+									<div id="<c:out value='${servicio.id}' />"
+										style="vertical-align: top; width: 241px; padding-bottom: 5px; float: left; padding-top: 5px;">
+										<table width="230" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+											<tr>
+												<td height="18" valign="top"  style="background-image: url(img/fon_menu.jpg); background-position-x:center; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;">
+													<table cellpadding="0" cellspacing="0" width="100%" border="0" >
+														<tr>
+															<td valign="bottom" style="cursor: move;" id="tabla_<c:out value='${servicio.id}' />">									
+																<table border="0" align="left" cellpadding="3" cellspacing="0" width="100%" >
+																	<tr>
+																		<td align="left" width="20">
+																			<img height="15"
+																				src="<c:out value='${contextPath}' /><c:out value='${servicio.id}' />"
+																				alt="<fmt:message key="${servicio.nombre}"/>" style="cursor: move;" />
+																		<br></td>
+																		<td align="left">
+																			<div
+																				style="padding-left: 5px; padding-right: 10px; font-weight: bold;">
+																				<fmt:setLocale value='${sessionScope["WW_TRANS_I18N_LOCALE"]}' scope="session"/>
+																				<fmt:bundle basename="mensajes">
+																					<fmt:message key="${servicio.nombre}"/>
+																				</fmt:bundle>
+																			</div>
+																		<br></td>
+																	</tr>
+																</table>
+															<br></td>
+															<td width="15">
+																<c:choose>
+																	<c:when test="${servicio.permisoMinimizar == 1}">
+																		<img
+																			src="<c:out value='${contextPath}'/>/img/comprimir_portal.jpg"
+																			alt="Minimizar" style="cursor: pointer;"
+																			onClick="esconderServicio('<c:out value='${servicio.id}' />');">
+																	</c:when>
+																	<c:otherwise>
+																		<img src="<c:out value='${contextPath}'/>/img/inac_comprimir_portal.jpg">
+																	</c:otherwise>
+																</c:choose>
+															<br></td>
+															<td width="15">
+																<c:choose>
+																	<c:when test="${servicio.permisoEliminar == 1}">
+																		<img src="<c:out value='${contextPath}'/>/img/cerrar_portal.jpg"
+																			alt="Cerrar" style="cursor: pointer;"
+																			onClick="eliminarServicio('<c:out value='${servicio.id}' />');">
+																	</c:when>
+																	<c:otherwise>
+																		<img src="<c:out value='${contextPath}'/>/img/inac_cerrar_portal.jpg">
+																	</c:otherwise>
+																</c:choose>
+															<br></td>
+														</tr>
+													</table>
+												<br></td>
+											</tr>
+											<tr id="<c:out value='${servicio.id}' />_tr" <c:if test='${servicio.visible == 0}'>style="display: none; visibility: hidden;"</c:if>>
+												<td id="<c:out value='${servicio.id}' />_td" style="text-align: left; background-color:#FFF; border: 1px solid #cccccc;">
+													<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
+												<br></td>
+											</tr>
+											<tr height="20" style="background-color: #cccccc;">
+												<td align="right"><br>
+													<table width="100%" cellpadding="0" cellspacing="0">
+														<tr>
+															<td width="70%" align="left">
+																	<label id="<c:out value='${servicio.id}' />_descripcion"
+																		style="font-weight: bold; font-size: 100%; padding-left: 5px;">
+																		&nbsp;
+																	</label>
+															<br></td>
+															<td align="right">
+																	<label
+																		style="cursor: pointer; font-weight: bold; font-size: 100%; padding-right: 5px;"
+																		onclick="abrir_<c:out value='${servicio.id}' />();"
+																		class="portal_menu_selecionando">
+																		<s:text name="portal.servicios.link"/>
+																	</label>
+															<br></td>
+														</tr>
+													</table>
+												<br><br></td>
+											</tr>
+										</table>
+									</div>		
+					
+								</c:forEach>
+								
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					
 					
 					
