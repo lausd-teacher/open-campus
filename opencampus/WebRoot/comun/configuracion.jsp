@@ -72,8 +72,7 @@
 				
 					<br>
 					
-					<table border="0" cellpadding="3" cellspacing="0" class="open_table" width="100%">
-						<caption><s:text name="portal.menu.portal"/></caption>
+					<table border="0" cellpadding="3" cellspacing="0" class="open_grid" width="100%">
 						<tbody>
 							<tr>
 								<td>
