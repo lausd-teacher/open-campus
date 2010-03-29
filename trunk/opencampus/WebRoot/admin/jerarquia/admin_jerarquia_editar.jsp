@@ -2,13 +2,7 @@
 <%@ page errorPage="../../error_action.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante,edu.tecsup.lms.modelo.Jerarquia"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%
-			Usuario usuario = (Usuario) request.getSession().getAttribute(
-			Constante.USUARIO_ACTUAL);
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -22,8 +16,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj()">
+	<body>
 
 		<div id="contenedor">
 			<s:include value="/comun/bienvenida.jsp"></s:include>

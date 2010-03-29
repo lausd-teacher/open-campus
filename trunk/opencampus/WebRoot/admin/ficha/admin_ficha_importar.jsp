@@ -136,8 +136,7 @@
 				var isDirector = <%=isDirector%>	
 		</script>
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onload="mostrarReloj()">
+	<body>
 		<div id="contenedor">
 		
 			<s:include value="/comun/bienvenida.jsp"></s:include>

@@ -3,10 +3,10 @@
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="edu.tecsup.lms.util.Formato"%>
+<%@ page import="edu.tecsup.lms.util.Constante"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
 <%@  page import="edu.tecsup.lms.util.Util"%>
 <%@  page import="java.util.Collection"%>
 <%@ page import="edu.tecsup.lms.modelo.Usuario"%>
@@ -98,8 +98,7 @@
 				var CANTIDADREGISTRO =<%=cantidadRegistro%>;
 		</script>
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 			<div id="cuerpo" style="background-color: white;">

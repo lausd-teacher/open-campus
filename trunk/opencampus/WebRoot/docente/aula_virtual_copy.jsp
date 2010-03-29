@@ -40,9 +40,8 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/aviso.js"></script>
 	</head>
-	<%@include file="../comun/capas/reloj.jsp"%>
 	<body
-		onLoad="mostrarReloj();expand();mensajes('<%out.print(n);%>');" onunload="cerrarAula()"
+		onLoad="expand();mensajes('<%out.print(n);%>');" onunload="cerrarAula()"
 		onbeforeunload="if(this.exit===true) return 'Si cierra la ventana será calificado con el puntaje obtenido hasta el momento.';" >
 		
 		<c:out value="${usuario_actual}"></c:out><div id="contenedor" style="z-index: 1;width: 994px;">

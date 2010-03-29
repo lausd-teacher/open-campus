@@ -2,15 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.curso.Formacion"%>
 <%@  page import="edu.tecsup.lms.modelo.ficha.FichaHistorica"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.curso.Ficha"%>
 <%@  page import="edu.tecsup.lms.util.Constante"%>
 <%@  page import="java.util.Collection"%>
 <%
-	Usuario usuario = (Usuario) request.getSession().getAttribute(
-			Constante.USUARIO_ACTUAL);
 	Collection<FichaHistorica> cursos = (Collection<FichaHistorica>) request
 			.getAttribute("cursos");
 %>
@@ -36,8 +31,7 @@
 			var context = '<%=request.getContextPath()%>';
 		</script>
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onload="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			
 			<%@include file="../bienvenida.jsp"%>

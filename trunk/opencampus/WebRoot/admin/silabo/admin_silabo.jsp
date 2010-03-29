@@ -2,14 +2,7 @@
 <%@ page errorPage="../../error_action.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%
-Usuario usuario = (Usuario) request.getSession().getAttribute(
-Constante.USUARIO_ACTUAL);
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -49,18 +42,16 @@ Constante.USUARIO_ACTUAL);
 			src="<%=request.getContextPath()%>/js/tablesort.js"></script>
 
 </head>
-<%@include file="/comun/capas/reloj.jsp" %>
 <%	
 	String idCurso = request.getParameter("idCurso");
-	//AulaVirtual aulaVirtual = (AulaVirtual)request.getSession().getAttribute(Constante.AULA_ACTUAL);
 	
-	if(idCurso != null/* && aulaVirtual != null*/){
+	if(idCurso != null){
 %>
-<body onLoad="mostrarReloj(); buscarCursoPorID('<%=idCurso %>','')">
+<body onLoad="buscarCursoPorID('<%=idCurso %>','')">
 <%
 		}else{
 		%>
-<body onload="mostrarReloj()">
+<body>
 <%
 		}
 	 %>

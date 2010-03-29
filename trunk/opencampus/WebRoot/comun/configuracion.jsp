@@ -5,38 +5,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<c:set var="contextPath" value='${pageContext.request.contextPath}' />
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1" />
-		<title><s:text name="titulo.campus.virtual" /></title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />		
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<c:out value='${contextPath}'/>/js/protostaculus.js"></script>
+		<s:include value="/comun/jslibs.jsp"/>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/configuracion.js"></script>
-				
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj()">
-		<div id="contenedor">
-			<fmt:setLocale value='${sessionScope["WW_TRANS_I18N_LOCALE"]}' scope="session"/>
-			<s:include value="/comun/bienvenida.jsp"></s:include>
-
-			<div id="cuerpo">
-				<div id="principal">
-				
-					<table border="0" cellpadding="3" cellspacing="0" class="open_table" width="100%">
+	<body>
+	
+		<div id="container">
+		
+			<s:include value="/comun/bienvenida.jsp"/>
+			
+			<div id="body">
+			
+			
+				<table border="0" cellpadding="3" cellspacing="0" class="open_table" width="100%">
 						<caption><s:text name="portal.menu.configuracion"/></caption>
 						<tbody>
 							<tr>
@@ -76,6 +62,23 @@
 						<tbody>
 							<tr>
 								<td>
+					
+								<div id="cuerpo" style="z-index: 0;">
+									<div id="principal" style="z-index: -1;">
+										<div id="principal_col_0"
+											style="width: 242px; float: left; min-height: 50px; padding-bottom: 10px;">
+										</div>
+										<div id="principal_col_1"
+											style="width: 242px; float: left; min-height: 50px; padding-bottom: 10px;">
+										</div>
+										<div id="principal_col_2"
+											style="width: 242px; float: left; min-height: 50px; padding-bottom: 10px;">
+										</div>
+										<div id="principal_col_3"
+											style="width: 242px; float: left; min-height: 50px; padding-bottom: 10px;">
+										</div>
+									</div>
+								</div>
 					
 					
 								<c:forEach var="servicio" items="${portal}">
@@ -173,13 +176,26 @@
 						</tbody>
 					</table>
 					
+					<script type="text/javascript">
+		
+						var portal = new CampusVirtual.Portal("#principal div", {onOverWidget:onOverWidget, onOutWidget:onOutWidget, onChange:onChange, removeEffect:Effect.SwitchOff});
+						
+						function loadServices(){
+						<c:forEach var="servicio" items="${portal}">
+							portal.add(new CampusVirtual.Widget('<c:out value='${servicio.id}' />'), '<c:out value='${servicio.columna}' />');
+							cargar_<c:out value='${servicio.id}' />();
+						</c:forEach>
+							portal._updateColumnsHeight();	
+						
+						}	
+					</script>
 					
 					
-				</div>
 			</div>
-			<div id="pie">
-				<%@include file="pie.jsp"%>
-			</div>
+			
+			<s:include value="/comun/pie.jsp"/>
+			
 		</div>
+		
 	</body>
 </html>

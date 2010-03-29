@@ -35,6 +35,18 @@ function cerrarVentanas() {
 	cerrarBuzon();
 }
 
+ function mostrarReloj(ahorita){
+	if(ahorita)this.ahorita = ahorita;
+	this.ahorita.setSeconds(this.ahorita.getSeconds()+1);
+	$('top_reloj').update( 'Lima, '+this.ahorita.format('dd-mm-yyyy hh:nn:ss a/p'));
+	setTimeout('mostrarReloj(false)',990);
+}
+
+
+function setZeroString(s_valor){
+	return (s_valor<10)?'0'+s_valor:s_valor;
+}
+
 /* Abrir Servicios */
 
 function abrir_servicio_curso(){

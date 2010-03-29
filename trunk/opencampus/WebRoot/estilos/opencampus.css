@@ -1,4 +1,11 @@
 @CHARSET "ISO-8859-1";
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #EAEBED;
+	margin: 0;
+ 	padding: 0;
+}
 /*
  * Open Table
  */
@@ -277,4 +284,67 @@ tr.roweven {
 	color:#FFF; 
 	font-weight: bold;
 	text-indent: 3px;
+}
+
+/*
+ * Layaout
+ */
+ 
+#container{
+	width: 991px;
+	background-color: #FFFFFF;
+	margin: 0px auto 0px auto;
+	padding: 0px;
+	border: 1px solid #B6B6B6;
+	overflow: hidden;
+}
+#top_menu {
+	width: 100%;
+	height: 20px;
+	background-image: url(../img/bg_table_caption.gif);
+	background-repeat: repeat-x;
+	border-bottom: 1px solid #B6B6B6;
+	padding: 0px;
+}
+#top_menu td{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	white-space: nowrap;
+}
+#top_menu span#top_campus{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#top_menu span#top_saludo{
+	font-weight: bold;
+}
+#top_menu span#top_usuario{
+	color:#44659B;
+	font-weight: bold;
+}
+#top_menu span#top_reloj{
+	color:#44659B;
+}
+#banner {
+	width: 100%;
+	border-bottom: 1px solid #B6B6B6;
+	background-image: url(../img/logo.jpg);
+	height: 68px;
+	background-repeat: no-repeat;
+}
+#main_menu {
+	height: 22px;
+	border-bottom: 1px solid #B6B6B6;
+	background-color: #F7F7F7;
+}
+#body{
+	width: 100%-20px;
+	padding: 10px;
+}
+
+#pie {
+	width: 100%;
+	clear: both;
+	height: 30px;
+	background-color: #aaaaaa;
 }

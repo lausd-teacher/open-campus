@@ -53,8 +53,7 @@
 			src="<%=request.getContextPath()%>/js/jComponente.js"></script>		
 		
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 		
 			<s:include value="/comun/bienvenida.jsp"></s:include>

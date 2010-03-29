@@ -29,8 +29,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/admin/portal/configuracion.js"></script>
 	</head>
-	<s:include value="/comun/capas/reloj.jsp"></s:include>
-	<body onload="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 			<div id="cuerpo" style="z-index: 0;">

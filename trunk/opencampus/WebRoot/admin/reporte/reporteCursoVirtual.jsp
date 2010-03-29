@@ -6,20 +6,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.util.Util"%>
-<%@  page import="java.util.Collection"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.Especialidad"%>
-<%@  page import="edu.tecsup.lms.modelo.Sede"%>
-<%@  page import="edu.tecsup.lms.modelo.Departamento"%>
-<%@  page import="edu.tecsup.lms.modelo.Periodo"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.UsuarioReporte"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.FichaReporte"%>
-<%
-			Usuario usuario = (Usuario) request.getSession().getAttribute(
-			Constante.USUARIO_ACTUAL);
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -41,8 +27,7 @@
 		<link href="<%=request.getContextPath()%>/js/divlista/divlista.css"
 			rel="stylesheet" type="text/css">
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 			<div id="cuerpo" style="background-color: white;">

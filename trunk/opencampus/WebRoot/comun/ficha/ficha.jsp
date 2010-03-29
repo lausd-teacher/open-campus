@@ -4,8 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -22,8 +20,7 @@
 			src="<%=request.getContextPath()%>/js/jComponente.js"></script>		
 	</head>
 	
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onload="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			<%@include file="../bienvenida.jsp"%>
 			<div id="cuerpo">				
