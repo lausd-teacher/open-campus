@@ -1,39 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page import="edu.tecsup.lms.util.Constante"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%
-			Usuario usuario = (Usuario) request.getSession().getAttribute(
-			Constante.USUARIO_ACTUAL);
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title><s:text name="titulo.campus.virtual" />
-		</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
-		<link href="<%=request.getContextPath()%>/js/menu/menu.css" rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/menu/menu.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>		
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/tooltip/tooltip.js"></script>
+		<s:include value="/comun/jslibs.jsp"/>
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj()">
-		<div id="contenedor">
+	<body>
+		<div id="container">
 			
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 
-			<div id="cuerpo">
-				<div id="principal">
+			<div id="body">
 					<table  border="0" cellpadding="3" cellspacing="0" class="tabla01" width="99%">
 						<tr class="fon_tit_curso">
 							<td height="17" colspan="8" class="tit_cab">
@@ -188,13 +167,9 @@
 						</tr>							
 					</table>
 					<br/> 
-				</div>
 				
 			</div>
-			<div id="tooltip"></div>
-			<div id="pie">
-				<%@include file="pie.jsp"%>
-			</div>
+			<%@include file="pie.jsp"%>
 		</div>				
 	</body>
 </html>

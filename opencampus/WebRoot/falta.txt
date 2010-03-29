@@ -33,3 +33,14 @@ cuando ingrese al AulaVirtualResponsable si no tiene matricula en la bd se cree 
 
 
 si el silabo ve que ya se uso para una ficha en ejecucion no debe modificar sino sugiere que se duplique y modificar sobre la copia
+
+
+
+<div id="container">
+	incluse(bienvenido)		
+	
+	<div id="body">
+	</div>
+
+	incluse(foot)
+</div>

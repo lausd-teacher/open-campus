@@ -14,12 +14,6 @@
 		<meta http-equiv="Content-Type"
 			content="text/html; charset=ISO-8859-1">
 		<c:set var="contextPath" value='${pageContext.request.contextPath}' />
-
-		<%
-					Usuario usuario = (Usuario) request.getSession().getAttribute(
-					Constante.USUARIO_ACTUAL);
-		%>
-
 		<title><s:text name="titulo.campus.virtual" />
 		</title>
 
@@ -39,9 +33,7 @@
 			src="<%=request.getContextPath()%>/js/util.js"></script>
 
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-
-	<body onload="mostrarReloj()">
+	<body>
 
 		<div id="contenedor">
 

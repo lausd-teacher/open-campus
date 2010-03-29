@@ -4,8 +4,6 @@
 <%@ taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,10 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 
-<%
-Usuario usuario = (Usuario)request.getSession().getAttribute(Constante.USUARIO_ACTUAL);
- %>
- 
 <title><s:text name="titulo.campus.virtual" /></title>
 
 <link href="<c:out value='${contextPath}'/>/estilos/estilos.css"
@@ -29,9 +23,7 @@ Usuario usuario = (Usuario)request.getSession().getAttribute(Constante.USUARIO_A
 			src="<c:out value='${contextPath}'/>/js/util.js"></script>
 
 </head>
-<%@include file="/comun/capas/reloj.jsp" %>
-
-<body onload="mostrarReloj()">
+<body>
 
 <div id="contenedor">
   <s:include value="/comun/bienvenida.jsp"></s:include>

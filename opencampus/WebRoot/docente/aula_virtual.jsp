@@ -36,8 +36,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/aviso.js"></script>
 	</head>
-	<%@include file="../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();" onunload="cerrarAula()">
+	<body onunload="cerrarAula()">
 		
 			<div id="contenedor">
 			

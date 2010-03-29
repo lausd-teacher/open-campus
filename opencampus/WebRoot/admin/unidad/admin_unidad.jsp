@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page errorPage="../../error_action.jsp" %>
-<%@  page import="java.util.Collection,java.util.Iterator"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.Unidad"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
@@ -35,8 +31,7 @@
 <!-- <body> -->
 <!-- ***************************** ENCABEZADO PARA INCLUDE ***************************************** -->
 
-<%@include file="/comun/capas/reloj.jsp" %>
-<body onLoad="mostrarReloj();">
+<body>
 <div id="contenedor">
   <s:include value="/comun/bienvenida.jsp"></s:include>
   <div id="cuerpo">

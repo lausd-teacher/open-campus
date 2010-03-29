@@ -41,8 +41,7 @@ String n = (String) session.getAttribute("n");
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/aviso.js"></script>
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();expand();mensajes('<%out.print(n);%>');">
+	<body onLoad="expand();mensajes('<%out.print(n);%>');">
 		<div id="contenedor">
 			<div id="contenedor">
 				

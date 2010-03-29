@@ -93,8 +93,7 @@
 		<script language="JavaScript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/openwysiwyg/wysiwyg.js"></script>
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 	
 		
 		<div id="contenedor">

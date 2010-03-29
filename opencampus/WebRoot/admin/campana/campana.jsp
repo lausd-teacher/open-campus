@@ -31,9 +31,8 @@ Usuario usuario = (Usuario)request.getSession().getAttribute(Constante.USUARIO_A
 			src="<c:out value='${contextPath}'/>/admin/campana/campana.js"></script>
 
 </head>
-<%@include file="/comun/capas/reloj.jsp" %>
 
-<body onload="mostrarReloj()">
+<body>
 
 <div id="contenedor">
   <s:include value="/comun/bienvenida.jsp"></s:include>

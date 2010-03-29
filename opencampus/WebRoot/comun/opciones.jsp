@@ -2,16 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="edu.tecsup.lms.util.Constante"%>
 <%@ page import="edu.tecsup.lms.util.MenuOpciones.Menu"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
 <%@ page import="java.util.Map"%>
 
 
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%
-			Usuario usuario = (Usuario) request.getSession().getAttribute(
-			Constante.USUARIO_ACTUAL);
 	Map<String, Map<String, Menu>> menus = (Map<String, Map<String, Menu>>) request
 			.getAttribute("opciones");
 %>
@@ -40,8 +36,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/tooltip/tooltip.js"></script>
 	</head>
-	<%@include file="/comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 
 			<s:include value="/comun/bienvenida.jsp"></s:include>

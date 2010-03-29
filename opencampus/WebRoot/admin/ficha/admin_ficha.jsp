@@ -39,8 +39,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/admin/ficha/admin_ficha.js"></script>
 	</head>
-	<%@include file="../../comun/capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 			<div id="cuerpo">			

@@ -30,8 +30,7 @@
 		<link href="<c:out value='${contextPath}'/>/estilos/estilos.css"
 			rel="stylesheet" type="text/css" />
 	</head>
-	<s:include value="capas/reloj.jsp" />
-	<body onLoad="mostrarReloj();loadServices();" onResize="resize();">
+	<body onLoad="loadServices();" onResize="resize();">
 		<div id="contenedor">
 			
 			<s:include value="bienvenida.jsp" />

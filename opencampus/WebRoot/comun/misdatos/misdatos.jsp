@@ -42,8 +42,7 @@
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/tooltip/tooltip.js"></script>
 	</head>
-	<%@include file="../capas/reloj.jsp"%>
-	<body onLoad="mostrarReloj();">
+	<body>
 		<div id="contenedor">
 			
 			<%@include file="../bienvenida.jsp"%>
