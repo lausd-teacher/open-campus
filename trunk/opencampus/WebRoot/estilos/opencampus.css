@@ -112,6 +112,12 @@ body {
 	padding: 3px;
 	background-image: url("../img/bg_grid.gif");
 }
+.open_grid .line{
+	background-color:  #DDDDDD;
+	padding: 3px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
 /*
  * Links
  */
@@ -265,6 +271,56 @@ tr.roweven {
 	font-weight: bold;
 	text-indent: 3px;
 }
+/*
+ * Portal
+  */
+#columns .column{
+	margin: 5px;
+	min-height: 200px; /* set a min-height to ensure a target dropzone */
+	float: left;
+	width: 220px;
+	border: 1px solid #CCCCCC;
+	padding: 3px;
+}
+#columns .draghandle{
+	cursor: move;
+}
+#columns .target {
+	border: 1px dashed #AAAAAA;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+#columns .column .block{
+	background-color: white;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+#columns .column .block .draghandle{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 3px 3px 0px 3px;
+	margin: 0px;
+	background-color: #cccccc;
+	background-image: url(../img/bg_table_caption.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+	border-bottom: solid #CCCCCC 1px;
+	color: #333333;
+	text-align: left;
+	vertical-align: middle;	
+	display: block;
+	width: 212px;
+	height: 17px;
+}
+
+#columns .column .block .body1{
+	min-height: 100px;
+	color: #aaaaaa;
+	text-align: center;
+}
+
 
 /***/
 /* ActionMessage */

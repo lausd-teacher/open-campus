@@ -750,7 +750,7 @@ Date.prototype.format = function(f)
     );
 }
 
-Object.prototype.zf = function(f)
+Number.prototype.zf = function(f)
 {
     if (!this.valueOf())
         return ' ';
