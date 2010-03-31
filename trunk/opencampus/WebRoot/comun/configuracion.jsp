@@ -12,6 +12,32 @@
 		<s:include value="/comun/jslibs.jsp"/>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/configuracion.js"></script>
+			
+	<STYLE type="text/css">
+	
+	#portal .portal-column {
+  float: left;
+  width: 30%;
+}
+#portal #portal-column-block-list {
+  position: absolute;
+  width: 200px;
+  top: 180px;
+  left: 10px;
+  z-index: 10;
+}
+#portal .block .block-toggle {
+  background-image: url(block-slide.png);
+  float: right;
+  cursor: pointer;
+}
+#portal .block .block-toggle span {
+  display: none;
+}
+#portal .block-list-handle, #portal .handle {
+  cursor: move;
+}
+	</STYLE>
 	</head>
 	<body>
 	
@@ -57,8 +83,74 @@
 					</table>
 				
 					<br>
-					
-					<table border="0" cellpadding="3" cellspacing="0" class="open_grid" width="100%">
+
+
+
+
+				<div id="portal">
+			        <a href="#" id="portal-block-list-link" 
+					title= "Click to add portlets" name="portal-block-list-link">Add
+			        content</a><br class="clear" />
+			
+			        <div class="portal-column" id="portal-column-0">
+			          <h2>Column 0</h2>
+			        </div>
+			
+			        <div class="portal-column" id="portal-column-1">
+			          <h2>Column 1</h2>
+			        </div>
+			
+			        <div class="portal-column" id="portal-column-2">
+			          <h2>Column 2</h2>
+			        </div>
+			
+			        <div class="portal-column" id="portal-column-block-list"
+			        style="display: none;">
+			          <h2 class="block-list-handle">Block List</h2>
+			
+			         
+			
+			          <div class="block block-user" id="block-user-3">
+			            <h3 class="handle"><a class=
+			            "block-toggle"><span>toggle</span></a> Who's
+			            online</h3>
+			
+			            <div class="content">
+			              <div>
+			                There are currently 1 user and 0 guests online.
+			
+			                <div class="item-list">
+			                  <h3>Online users</h3>
+			
+			                  <ul>
+			                    <li><a href="#" title=
+			                    "View user profile.">ayman</a></li>
+			                  </ul>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+			
+			          <div class="block block-node" id="block-node-0">
+			            <h3 class="handle"><a class=
+			            "block-toggle"><span>toggle</span></a> Syndicate</h3>
+			
+			            <div class="content">
+			              <div>
+			                <a href="#" class="feed-icon"><img src="feed.png"
+			                alt="Syndicate content" title="Syndicate content"
+			                width="16" height="16" /></a>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div><!-- end content -->
+
+
+
+
+
+				<table border="0" cellpadding="3" cellspacing="0" class="open_grid" width="100%">
 						<tbody>
 							<tr>
 								<td>
@@ -178,16 +270,16 @@
 					
 					<script type="text/javascript">
 		
-						var portal = new CampusVirtual.Portal("#principal div", {onOverWidget:onOverWidget, onOutWidget:onOutWidget, onChange:onChange, removeEffect:Effect.SwitchOff});
+						//var portal = new CampusVirtual.Portal("#principal div", {onOverWidget:onOverWidget, onOutWidget:onOutWidget, onChange:onChange, removeEffect:Effect.SwitchOff});
 						
-						function loadServices(){
+						/*function loadServices(){
 						<c:forEach var="servicio" items="${portal}">
 							portal.add(new CampusVirtual.Widget('<c:out value='${servicio.id}' />'), '<c:out value='${servicio.columna}' />');
 							cargar_<c:out value='${servicio.id}' />();
 						</c:forEach>
 							portal._updateColumnsHeight();	
 						
-						}	
+						}	*/
 					</script>
 					
 					
