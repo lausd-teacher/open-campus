@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/configuracion.js"></script>
 			
 		<script type="text/javascript">
-			var settings = {'column-1':['block-1','block-2'], 'column-2':['block-3']};
+			var settings = <c:out value="${cadena}"  escapeXml="false"/>;
 		</script>
 
 	</head>
@@ -62,7 +62,7 @@
 							</tr>
 						</tbody>
 					</table>
-				
+					
 				<table border="0" cellpadding="3" cellspacing="0" class="open_grid" width="100%">
 						<thead>
 							<tr><td class="line">Arrastre cada elemento y despl&aacute;celo hasta la hubicaci&oacute;n deseada.</td></tr>
@@ -94,11 +94,6 @@
 														<div class="draghandle">
 														
 															<!-- Encabezado -->
-															<!-- 
-																http://www.ajaxupdates.com/igoogle-like-drag-drop-portal-v2-0/
-																* Exconder y mostrar los divs con scriptaculus (Effect.Apear)
-																* puede susar apply_settings para refrescar los bloques cuando hagan click en eliminar y agregar servicios, en lugar de refrezcar toda la pantalla
-															 -->
 															<table cellpadding="0" cellspacing="0" width="100%" border="0" >
 																<tr>
 																	<td align="left" width="20">
@@ -117,25 +112,35 @@
 																	<td width="15">
 																		<c:choose>
 																			<c:when test="${servicio.permisoMinimizar == 1}">
-																				<img
-																					src="<c:out value='${contextPath}'/>/img/comprimir_portal.jpg"
-																					alt="Minimizar" style="cursor: pointer;"
-																					onClick="esconderServicio('<c:out value='${servicio.id}' />');">
+																				<c:choose>
+																				<c:when test="${servicio.visible == 0}">
+																					<img
+																						src="<c:out value='${contextPath}'/>/img/mas.jpg"
+																						alt="<s:text name="portal.servicio.comentario.maximizar"/>" style="cursor: pointer;"
+																						onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
+																				</c:when>
+																				<c:otherwise>
+																					<img
+																						src="<c:out value='${contextPath}'/>/img/menos.jpg"
+																						alt="<s:text name="portal.servicio.comentario.minimizar"/>" style="cursor: pointer;"
+																						onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
+																				</c:otherwise>
+																			</c:choose>	
 																			</c:when>
 																			<c:otherwise>
-																				<img src="<c:out value='${contextPath}'/>/img/inac_comprimir_portal.jpg">
+																				<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
 																			</c:otherwise>
 																		</c:choose>
 																	</td>
 																	<td width="15">
 																		<c:choose>
 																			<c:when test="${servicio.permisoEliminar == 1}">
-																				<img src="<c:out value='${contextPath}'/>/img/cerrar_portal.jpg"
-																					alt="Cerrar" style="cursor: pointer;"
-																					onClick="eliminarServicio('<c:out value='${servicio.id}' />');">
+																				<img src="<c:out value='${contextPath}'/>/img/cerrar.jpg"
+																					alt="<s:text name="portal.servicio.comentario.cerrar"/>" style="cursor: pointer;"
+																					onClick="closeService(this,'<c:out value='${servicio.id}' />');">
 																			</c:when>
 																			<c:otherwise>
-																				<img src="<c:out value='${contextPath}'/>/img/inac_cerrar_portal.jpg">
+																				<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
 																			</c:otherwise>
 																		</c:choose>
 																	</td>
@@ -145,10 +150,11 @@
 															
 														</div>
 														
-														<div class="body1" <c:if test='${servicio.visible == 0}'>style="display: none; visibility: hidden;"</c:if>>
+														<div class="body1" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
 															<!-- Contenido -->
 															<center><strong><fmt:message key="${servicio.nombre}"/></strong></center>
 															<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
+															<c:out value="${servicio.estado}"></c:out>
 															<!-- Fin Contenido -->
 														</div>
 														

@@ -23,9 +23,11 @@ public class PortalAction extends BaseAction {
 
 	private String[] principal_col_3;
 
-	private String stringServicio;
+	private String servicio;
 
-	private String estadoServicio;
+	private Integer estado;
+	
+	private String cadena;
 	
 	private Collection<Servicio> portal;
 
@@ -56,6 +58,9 @@ public class PortalAction extends BaseAction {
 		log.info("configurarPortal() "+getUsuarioSession().getId());
 		try{
 			portal = portalService.obtenerServiciosUsuarioConfig(getUsuarioSession().getId());
+			cadena = Servicio.doServicesToJson(portal);
+			log.info(cadena);
+			
 		}catch (Exception e) {
 			log.error(e);
 			throw new ActionException(e.getMessage());
@@ -69,6 +74,22 @@ public class PortalAction extends BaseAction {
 		//getSession().setAttribute("WW_TRANS_I18N_LOCALE",request_locale); 
 		return SUCCESS;
 	}
+	
+	public String ocultarServicio() throws Exception{
+		log.info("ocultarServicio() "+servicio+"-"+estado);
+		
+		PrintWriter out = getResponse().getWriter();
+		if(portalService.ocultarServicio(getUsuarioSession().getId(), servicio, estado));
+			out.print("OK");
+		out.close();
+			
+		return NONE;
+	}
+	
+	
+	
+	
+	
 	
 	public String grabarPortal() throws Exception{
 		log.info("grabarPortal()");
@@ -95,25 +116,13 @@ public class PortalAction extends BaseAction {
 		return NONE;
 	}
 	
-	
-
-	public String grabarPortalVisible() throws Exception{
-		log.info("grabarPortalVisible()");
-		
-		PrintWriter out = getResponse().getWriter();
-		int valor = portalService.guardarPortalVisible(getUsuarioSession().getId(), stringServicio, estadoServicio);
-		out.print(valor);
-		out.close();
-			
-		return NONE;
-	}
 
 	public String grabarPortalEliminado() throws Exception{
 		log.info("grabarPortalEliminado()");
 		
 		PrintWriter out = getResponse().getWriter();
-		int valor = portalService.guardarPortalEliminado(getUsuarioSession().getId(), stringServicio,estadoServicio);
-		out.print(valor);
+		//int valor = portalService.guardarPortalEliminado(getUsuarioSession().getId(), stringServicio,estado);
+		//out.print(valor);
 		out.close();
 		
 		return NONE;
@@ -143,12 +152,28 @@ public class PortalAction extends BaseAction {
 		this.principal_col_3 = principal_col_3;
 	}
 
-	public void setStringServicio(String stringServicio) {
-		this.stringServicio = stringServicio;
+	public Integer getEstado() {
+		return estado;
 	}
 
-	public void setEstadoServicio(String estadoServicio) {
-		this.estadoServicio = estadoServicio;
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+
+	public String getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(String servicio) {
+		this.servicio = servicio;
+	}
+
+	public String getCadena() {
+		return cadena;
+	}
+
+	public void setCadena(String cadena) {
+		this.cadena = cadena;
 	}
 
 }
