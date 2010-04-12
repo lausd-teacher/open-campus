@@ -27,6 +27,11 @@
 			<result name="success">/comun/configuracion.jsp</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
+		<action name="OcultarServicio" method="ocultarServicio"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
 		
 		
 		<action name="GrabarPortal" method="grabarPortal"
@@ -40,10 +45,7 @@
 			</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
-		<action name="GrabarPortalVisible" method="grabarPortalVisible"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
+		
 		<action name="GrabarPortalEliminado"
 			method="grabarPortalEliminado"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
