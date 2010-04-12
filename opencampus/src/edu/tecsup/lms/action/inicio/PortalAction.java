@@ -86,6 +86,19 @@ public class PortalAction extends BaseAction {
 		return NONE;
 	}
 	
+	public String eliminarServicio() throws Exception{
+		log.info("eliminarServicio() "+servicio+"-"+estado);
+		
+		PrintWriter out = getResponse().getWriter();
+		if(portalService.eliminarServicio(getUsuarioSession().getId(), servicio, estado));
+			out.print("OK");
+		out.close();
+			
+		return NONE;
+	}
+	
+	
+	
 	
 	
 	
@@ -116,18 +129,6 @@ public class PortalAction extends BaseAction {
 		return NONE;
 	}
 	
-
-	public String grabarPortalEliminado() throws Exception{
-		log.info("grabarPortalEliminado()");
-		
-		PrintWriter out = getResponse().getWriter();
-		//int valor = portalService.guardarPortalEliminado(getUsuarioSession().getId(), stringServicio,estado);
-		//out.print(valor);
-		out.close();
-		
-		return NONE;
-	}
-
 	public String configuracionDefault() throws Exception{
 		log.info("configuracionDefault()");
 		

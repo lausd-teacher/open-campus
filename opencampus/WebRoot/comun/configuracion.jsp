@@ -39,9 +39,10 @@
 										<table width="100%" border="0" cellpadding="3" cellspacing="0">
 											<tr>
 												<td width="20">
-													<input type="checkbox" <c:if test="${servicio.estado == 1}">checked="checked"</c:if>
+													<input type="checkbox" id="chkbox_<c:out value="${servicio.id}"/>"
+														<c:if test="${servicio.estado == 1}">checked="checked"</c:if>
 														<c:if test="${servicio.permisoEliminar != 1}">disabled="disabled"</c:if>
-														onclick="anadirServicio(this,'<c:out value="${servicio.id}"/>')" />
+														onclick="configService(this,'<c:out value="${servicio.id}"/>')" />
 												</td>
 												<td width="20">
 													<img src="<%=request.getContextPath()%>/img/icons/<c:out value="${servicio.id}"/>.gif" alt='' />
@@ -89,7 +90,7 @@
 											
 											<c:forEach var="servicio" items="${portal}" varStatus="status">
 					
-												<div class="block" id="block-<c:out value='${status.count}' />">
+												<div class="block" id="block-<c:out value="${servicio.id}"/>" <c:if test='${servicio.estado == 0}'>style="display: none;"</c:if>>
 												
 														<div class="draghandle">
 														
@@ -137,7 +138,7 @@
 																			<c:when test="${servicio.permisoEliminar == 1}">
 																				<img src="<c:out value='${contextPath}'/>/img/cerrar.jpg"
 																					alt="<s:text name="portal.servicio.comentario.cerrar"/>" style="cursor: pointer;"
-																					onClick="closeService(this,'<c:out value='${servicio.id}' />');">
+																					onClick="removeService('<c:out value='${servicio.id}' />');">
 																			</c:when>
 																			<c:otherwise>
 																				<img src="<c:out value='${contextPath}'/>/img/nada.jpg">

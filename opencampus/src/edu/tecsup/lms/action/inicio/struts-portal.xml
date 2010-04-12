@@ -31,6 +31,10 @@
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
+		<action name="EliminarServicio" method="eliminarServicio"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
 		
 		
 		

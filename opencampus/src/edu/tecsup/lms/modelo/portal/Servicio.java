@@ -109,9 +109,8 @@ public class Servicio implements Serializable{
 	public static String doServicesToJson(Collection<Servicio> portal){
 		StringBuffer string  = new StringBuffer("{");
 		Integer columnTmp = -1; 
-		int i = 1;
 		for (Servicio servicio : portal) {
-			if(servicio.getEstado() == Constante.ESTADO_ACTIVO){
+//			if(servicio.getEstado() == Constante.ESTADO_ACTIVO){
 				if(columnTmp != servicio.getColumna()){
 					if(columnTmp!=-1)string.replace(string.length()-1, string.length(), "],");
 					string.append("'column-");
@@ -120,10 +119,9 @@ public class Servicio implements Serializable{
 					columnTmp = servicio.getColumna();
 				}
 				string.append("'block-");
-				string.append(i);
+				string.append(servicio.getId());
 				string.append("',");
-			}
-			i++;
+//			}
 		}
 		string.replace(string.length()-1, string.length(),"]}");
 		return string.toString();
