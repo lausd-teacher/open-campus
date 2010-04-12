@@ -27,16 +27,52 @@ function hideService(img,id,msgMax, msgMin){
 				}
 			}
 		}
-	});
-		
+	});	
 	
 }
 
-function closeService(img,id){
-	var block = $(img).up('div').up('div');
-	block.hide();
+function removeService(id){
+		
+	new Ajax.Request(xGetContextPath() +"/portal/EliminarServicio.action", 
+	{
+		method: 'post',
+		parameters: "servicio="+id+"&estado=0",
+		onSuccess: function(transport) {
+			if (transport.responseText.strip() == 'OK'){
+  				$(id).hide();
+  				if($('chkbox'+id))$('chkbox'+id).checked=false;
+			}
+		}
+	});
+	
 }
 
+function addService(id){
+		
+	new Ajax.Request(xGetContextPath() +"/portal/EliminarServicio.action", 
+	{
+		method: 'post',
+		parameters: "servicio="+id+"&estado=1",
+		onSuccess: function(transport) {
+			if (transport.responseText.strip() == 'OK'){
+  				$(id).show();
+  				if($('chkbox'+id))$('chkbox'+id).checked=true;
+			}
+		}
+	});
+	
+}
+
+function configService(chk,id){
+	alert(chk.checked)
+	//FALTA ACAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	//************************
+	if(chk.checked){
+		addService(id);
+	}else{
+		removeService(id);
+	}
+}
 
 /*
  * <!-- 
@@ -65,10 +101,7 @@ no agregar a la cadena si el estado=0
 
 
 
-function anadirServicio(check, id) {
-		var valors = (check.checked==true)?'1':'0';
-		new Ajax.Request(xGetContextPath() +"/portal/GrabarPortalEliminado.action",{parameters:"stringServicio="+id+"&estadoServicio="+valors});
-}
+
 
 function reiniciarServicio(){
 	if(window.confirm('¿Desea reestablecer los servicios por defecto?')){

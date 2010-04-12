@@ -51,9 +51,17 @@ public class PortalService {
 		}
 	}
 	
-	public boolean ocultarServicio(Integer usuario, String servicio, Integer estado) throws ServiceException {
+	public boolean ocultarServicio(Integer idusuario, String servicio, Integer estado) throws ServiceException {
 		try {
-			return portalDAO.ocultarServicio(usuario, servicio, estado);
+			return portalDAO.ocultarServicio(idusuario, servicio, estado);
+		} catch (Exception e) {
+			throw new ServiceException(e.toString());
+		}
+	}
+	
+	public boolean eliminarServicio(Integer idusuario, String servicio, Integer estado) throws ServiceException {
+		try {
+			return portalDAO.eliminarServicio(idusuario, servicio, estado);
 		} catch (Exception e) {
 			throw new ServiceException(e.toString());
 		}
@@ -64,17 +72,6 @@ public class PortalService {
 			throws ServiceException {
 		try {
 			portalDAO.guardarPortal(usuario, array);
-		} catch (DAOException e) {
-			throw new ServiceException(e.toString());
-		}
-	}
-
-	
-
-	public int guardarPortalEliminado(int usuario, String servicio,
-			String estado) throws ServiceException {
-		try {
-			return portalDAO.guardarPortalEliminado(usuario, servicio, estado);
 		} catch (DAOException e) {
 			throw new ServiceException(e.toString());
 		}

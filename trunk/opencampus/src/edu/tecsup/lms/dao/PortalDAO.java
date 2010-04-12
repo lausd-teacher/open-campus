@@ -129,6 +129,80 @@ public class PortalDAO extends BaseDAO {
 		return servicios;
 	}
 	
+	public boolean ocultarServicio(Integer idusuario, String servicio, Integer estado) throws DAOException {
+		log.info("ocultarServicio("+idusuario+", "+servicio+","+estado+")");
+		Connection cons = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			String query = "select permiso_minimizar  from cv_servicio_maestro where idservicio=?";
+			cons = dataSource.getConnection();
+			stmt = cons.prepareStatement(query);
+			stmt.setString(1, servicio);
+			result = stmt.executeQuery();
+			
+			if(result.next()){
+				query = "update cv_servicio_usuario set visible=? " +
+						"where idusuario=? and idservicio=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, estado);
+				stmt.setInt(2, idusuario);
+				stmt.setString(3, servicio);
+				if(stmt.executeUpdate() == 1){
+					return true;
+				}
+			}		
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+		return false;
+	}
+	
+	public boolean eliminarServicio(Integer idusuario, String servicio, Integer estado) throws DAOException {
+		log.info("eliminarServicio("+idusuario+", "+servicio+","+estado+")");
+		Connection cons = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			String query = "select permiso_eliminar  from cv_servicio_maestro where idservicio=?";
+			cons = dataSource.getConnection();
+			stmt = cons.prepareStatement(query);
+			stmt.setString(1, servicio);
+			result = stmt.executeQuery();
+			
+			if(result.next()){
+				query = "update cv_servicio_usuario set estado=? " +
+						"where idusuario=? and idservicio=?";
+				stmt = cons.prepareStatement(query);
+				stmt.setInt(1, estado);
+				stmt.setInt(2, idusuario);
+				stmt.setString(3, servicio);
+				if(stmt.executeUpdate() == 1){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+		return false;
+	}
+	
 	public Collection<Servicio> obtenerServiciosUsuario(int usuario)
 			throws DAOException {
 		log.info("obtenerServiciosUsuario(int idUsuario)");
@@ -189,42 +263,6 @@ public class PortalDAO extends BaseDAO {
 		return col_servicios;
 	}
 	
-	public boolean ocultarServicio(Integer idusuario, String servicio, Integer estado) throws DAOException {
-		log.info("ocultarServicio("+idusuario+", "+servicio+","+estado+")");
-		Connection cons = null;
-		PreparedStatement stmt = null;
-		ResultSet result = null;
-		try {
-			String query = "select permiso_minimizar  from cv_servicio_maestro where idservicio=?";
-			cons = dataSource.getConnection();
-			stmt = cons.prepareStatement(query);
-			stmt.setString(1, servicio);
-			result = stmt.executeQuery();
-			
-			if(result.next()){
-				query = "update cv_servicio_usuario set visible=? " +
-						"where idusuario=? and idservicio=?";
-				stmt = cons.prepareStatement(query);
-				stmt.setInt(1, estado);
-				stmt.setInt(2, idusuario);
-				stmt.setString(3, servicio);
-				if(stmt.executeUpdate() == 1){
-					return true;
-				}
-			}		
-		} catch (SQLException e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} catch (Exception e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} finally {
-			closeResultSet(result);
-			closeStatement(stmt);
-			closeConnection(cons);
-		}
-		return false;
-	}
 	
 	//*****************************************************************************************//
 	
@@ -257,39 +295,6 @@ public class PortalDAO extends BaseDAO {
 			closeStatement(stmt);
 			closeConnection(cons);
 		}
-	}
-	
-	
-	
-	public int guardarPortalEliminado(int usuario, String servicio,
-			String estado) throws DAOException {
-		log.info("guardarPortalEliminado(String usuario, String servicio,String estado)");
-		Connection cons = null;
-		PreparedStatement stmt = null;
-		int r = 0;
-		try {
-			String query = "update cv_servicio_usuario set estado=? " +
-					"where idusuario=? and idservicio=? and '1'=(" +
-					"select usuario_eliminado from cv_servicio_maestro " +
-					"where idservicio=?)";
-			cons = dataSource.getConnection();
-			stmt = cons.prepareStatement(query);
-			stmt.setString(1, estado);
-			stmt.setInt(2, usuario);
-			stmt.setString(3, servicio);
-			stmt.setString(4, servicio);
-			r = stmt.executeUpdate();
-		} catch (SQLException e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} catch (Exception e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} finally {
-			closeStatement(stmt);
-			closeConnection(cons);
-		}
-		return r;
 	}
 	
 	public void eliminarConfiguracion(int usuario) throws DAOException {
