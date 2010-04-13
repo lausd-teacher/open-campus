@@ -67,15 +67,16 @@ public class PortalService {
 		}
 	}
 	
-	//*****************************************************************************************//
-	public void guardar(int usuario, Collection<String[]> array)
-			throws ServiceException {
+	public void grabarPortal(Integer idusuario, Collection<Servicio> servicios)	throws ServiceException {
 		try {
-			portalDAO.guardarPortal(usuario, array);
-		} catch (DAOException e) {
+			portalDAO.grabarPortal(idusuario, servicios);
+		} catch (Exception e) {
 			throw new ServiceException(e.toString());
 		}
 	}
+	
+	//*****************************************************************************************//
+	
 
 	public void eliminarConfiguracion(int usuario) throws ServiceException {
 		try {

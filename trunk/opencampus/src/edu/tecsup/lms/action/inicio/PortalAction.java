@@ -1,7 +1,6 @@
 package edu.tecsup.lms.action.inicio;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.tecsup.lms.action.BaseAction;
@@ -14,14 +13,6 @@ public class PortalAction extends BaseAction {
 	private static final long serialVersionUID = 2895336110634130811L;
 
 	private PortalService portalService;
-	
-	private String[] principal_col_0;
-
-	private String[] principal_col_1;
-
-	private String[] principal_col_2;
-
-	private String[] principal_col_3;
 
 	private String servicio;
 
@@ -77,57 +68,49 @@ public class PortalAction extends BaseAction {
 	
 	public String ocultarServicio() throws Exception{
 		log.info("ocultarServicio() "+servicio+"-"+estado);
-		
-		PrintWriter out = getResponse().getWriter();
-		if(portalService.ocultarServicio(getUsuarioSession().getId(), servicio, estado));
-			out.print("OK");
-		out.close();
-			
+		try{
+			PrintWriter out = getResponse().getWriter();
+			if(portalService.ocultarServicio(getUsuarioSession().getId(), servicio, estado));
+				out.print("OK");
+			out.close();
+		}catch (Exception e) {
+			log.error(e);
+		}	
 		return NONE;
 	}
 	
 	public String eliminarServicio() throws Exception{
 		log.info("eliminarServicio() "+servicio+"-"+estado);
-		
-		PrintWriter out = getResponse().getWriter();
-		if(portalService.eliminarServicio(getUsuarioSession().getId(), servicio, estado));
-			out.print("OK");
-		out.close();
-			
+		try{
+			PrintWriter out = getResponse().getWriter();
+			if(portalService.eliminarServicio(getUsuarioSession().getId(), servicio, estado));
+				out.print("OK");
+			out.close();
+		}catch (Exception e) {
+			log.error(e);
+		}
 		return NONE;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	public String grabarPortal() throws Exception{
-		log.info("grabarPortal()");
-		if (null == principal_col_0) {
-			principal_col_0 = new String[0];
+		log.info("grabarPortal(): "+cadena);
+		try{
+			
+			portalService.grabarPortal(getUsuarioSession().getId(), Servicio.doJsonToServices(cadena));
+			
+		}catch (Exception e) {
+			log.error(e);
 		}
-		if (null == principal_col_1) {
-			principal_col_1 = new String[0];
-		}
-		if (null == principal_col_2) {
-			principal_col_2 = new String[0];
-		}
-		if (null == principal_col_3) {
-			principal_col_3 = new String[0];
-		}
-		Collection<String[]> col_final = new ArrayList<String[]>();
-		col_final.add(principal_col_0);
-		col_final.add(principal_col_1);
-		col_final.add(principal_col_2);
-		col_final.add(principal_col_3);
-		
-		portalService.guardar(getUsuarioSession().getId(), col_final);
-	
 		return NONE;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public String configuracionDefault() throws Exception{
 		log.info("configuracionDefault()");
@@ -135,22 +118,6 @@ public class PortalAction extends BaseAction {
 		portalService.eliminarConfiguracion(getUsuarioSession().getId());
 		
 		return SUCCESS;
-	}
-	
-	public void setPrincipal_col_0(String[] principal_col_0) {
-		this.principal_col_0 = principal_col_0;
-	}
-
-	public void setPrincipal_col_1(String[] principal_col_1) {
-		this.principal_col_1 = principal_col_1;
-	}
-
-	public void setPrincipal_col_2(String[] principal_col_2) {
-		this.principal_col_2 = principal_col_2;
-	}
-
-	public void setPrincipal_col_3(String[] principal_col_3) {
-		this.principal_col_3 = principal_col_3;
 	}
 
 	public Integer getEstado() {

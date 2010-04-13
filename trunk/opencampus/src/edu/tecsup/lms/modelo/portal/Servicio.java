@@ -1,9 +1,8 @@
 package edu.tecsup.lms.modelo.portal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-
-import edu.tecsup.lms.util.Constante;
 
 public class Servicio implements Serializable{
 	
@@ -108,23 +107,41 @@ public class Servicio implements Serializable{
 	
 	public static String doServicesToJson(Collection<Servicio> portal){
 		StringBuffer string  = new StringBuffer("{");
-		Integer columnTmp = -1; 
+		Integer columnTmp = 0; 
 		for (Servicio servicio : portal) {
-//			if(servicio.getEstado() == Constante.ESTADO_ACTIVO){
 				if(columnTmp != servicio.getColumna()){
-					if(columnTmp!=-1)string.replace(string.length()-1, string.length(), "],");
+					if(columnTmp!=0)string.replace(string.length()-1, string.length(), "],");
 					string.append("'column-");
-					string.append(servicio.getColumna()+1);
+					string.append(columnTmp = servicio.getColumna());
 					string.append("':[");
-					columnTmp = servicio.getColumna();
 				}
 				string.append("'block-");
 				string.append(servicio.getId());
 				string.append("',");
-//			}
 		}
 		string.replace(string.length()-1, string.length(),"]}");
 		return string.toString();
+	}
+	
+	public static Collection<Servicio> doJsonToServices(String cadena){
+		Collection<Servicio> servicios = new ArrayList<Servicio>();
+		Servicio servicio = null;
+		if(cadena != null){
+			String[] grupos = cadena.split(":");
+			if(grupos.length == 2){
+				Integer columna = Integer.parseInt(grupos[0].substring(grupos[0].indexOf('-')+1));
+				String[] blocks = grupos[1].split(",");
+				Integer fila = 1;
+				for (String block : blocks) {
+					servicio = new Servicio();
+					servicio.setId(block.substring(block.indexOf('-')+1));
+					servicio.setColumna(columna);
+					servicio.setPosicion(fila++);
+					servicios.add(servicio);
+				}
+			}
+		}
+		return servicios;
 	}
 
 }
