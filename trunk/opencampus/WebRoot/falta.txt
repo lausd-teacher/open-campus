@@ -44,3 +44,10 @@ si el silabo ve que ya se uso para una ficha en ejecucion no debe modificar sino
 
 	incluse(foot)
 </div>
+
+
+----- Modificar BD
+*dialogo:predecesores deben aceptar nulos, por el momento se ha eliminado  relacion
+*indices para cv_servicio_usuario (ver daos)
+*UPDATE cv_servicio_maestro SET COLUMNA=COLUMNA+1 , POSICION=POSICION+1;
+*UPDATE cv_servicio_usuario SET COLUMNA=COLUMNA+1 , POSICION=POSICION+1;
