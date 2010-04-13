@@ -155,7 +155,6 @@
 															<!-- Contenido -->
 															<center><strong><fmt:message key="${servicio.nombre}"/></strong></center>
 															<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
-															<c:out value="${servicio.estado}"></c:out>
 															<!-- Fin Contenido -->
 														</div>
 														

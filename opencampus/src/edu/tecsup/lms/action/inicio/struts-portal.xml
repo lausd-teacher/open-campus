@@ -35,13 +35,13 @@
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
-		
-		
-		
 		<action name="GrabarPortal" method="grabarPortal"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
+		
+		
+		
 		<action name="ConfiguracionPortalDefault" method="configuracionDefault"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<result name="success" type="redirect-action">
@@ -50,11 +50,6 @@
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
-		<action name="GrabarPortalEliminado"
-			method="grabarPortalEliminado"
-			class="edu.tecsup.lms.action.inicio.PortalAction">
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
 	</package>
 	
 </struts>

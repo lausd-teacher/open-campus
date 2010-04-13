@@ -61,7 +61,7 @@ Portal.prototype = {
 					// serialize all blocks in this container
 					var postBody = container.id + ':';
 					postBody += $A(blocks).pluck('id').join(',');
-					postBody = 'value=' + escape(postBody);
+					postBody = 'cadena=' + escape(postBody);
 					
 					// save it to the database
 					new Ajax.Request(this.options.saveurl, { method: 'post', postBody: postBody, onComplete : function (t) {

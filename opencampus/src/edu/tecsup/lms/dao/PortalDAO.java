@@ -203,6 +203,41 @@ public class PortalDAO extends BaseDAO {
 		return false;
 	}
 	
+	public void grabarPortal(Integer idusuario, Collection<Servicio> servicios) throws DAOException {
+		log.info("grabarPortal("+idusuario+", "+servicios+")");
+		Connection cons = null;
+		PreparedStatement stmt = null;
+		try {
+			String query = "update cv_servicio_usuario set columna=?, posicion=? where idusuario=? and idservicio=?";
+			cons = dataSource.getConnection();
+			cons.setAutoCommit(false);
+			stmt = cons.prepareStatement(query);
+			stmt.setInt(3, idusuario);
+			
+			for (Servicio servicio : servicios) {
+				stmt.setInt(1, servicio.getColumna());
+				stmt.setInt(2, servicio.getPosicion());
+				stmt.setString(4, servicio.getId());
+				if(stmt.executeUpdate() != 1){
+					throw new DAOException("No se pudo actualizar: "+servicio.getId()+"-"+servicio.getPosicion());
+				}
+			}
+			cons.commit();
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			try {
+				cons.rollback();
+			} catch (SQLException e) {}
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+	}
+	
 	public Collection<Servicio> obtenerServiciosUsuario(int usuario)
 			throws DAOException {
 		log.info("obtenerServiciosUsuario(int idUsuario)");
@@ -263,39 +298,9 @@ public class PortalDAO extends BaseDAO {
 		return col_servicios;
 	}
 	
+
 	
 	//*****************************************************************************************//
-	
-	public void guardarPortal(int usuario, Collection<String[]> array)
-			throws DAOException {
-		log.info("guardarPortal(String usuario, Collection<String[]> array)");
-		Connection cons = null;
-		PreparedStatement stmt = null;
-		try {
-			String query = "update cv_servicio_usuario set columna=?, posicion=? where idusuario=? and idservicio=?";
-			cons = dataSource.getConnection();
-			stmt = cons.prepareStatement(query);
-			stmt.setInt(3, usuario);
-			int posicion = 0;
-			for (String[] item : array) {
-				stmt.setInt(1, posicion++);
-				for (int u = 0; u < item.length; u++) {
-					stmt.setInt(2, u);
-					stmt.setString(4, item[u]);
-					stmt.executeUpdate();
-				}
-			}
-		} catch (SQLException e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} catch (Exception e) {
-			log.error(e);
-			throw new DAOException(e.toString());
-		} finally {
-			closeStatement(stmt);
-			closeConnection(cons);
-		}
-	}
 	
 	public void eliminarConfiguracion(int usuario) throws DAOException {
 		log.info("eliminarConfiguracion(int usuario)");
@@ -327,7 +332,7 @@ public class PortalDAO extends BaseDAO {
 	}
 	
 
-	
+	//////Renombrar a grabarPortalMaestro()
 	public void guardarPortalGestionar(Collection<String[]> array) throws DAOException {
 		log.info("guardarPortalGestionar(Collection<String[]> array)");
 		Connection cons = null;
