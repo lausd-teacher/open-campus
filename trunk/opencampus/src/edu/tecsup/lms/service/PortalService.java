@@ -35,7 +35,7 @@ public class PortalService {
 		}
 	}
 
-	public Collection<Servicio> obtenerServiciosUsuario(int usuario)throws ServiceException {
+	public Collection<Servicio> obtenerServiciosUsuario(Integer usuario)throws ServiceException {
 		try {
 			return portalDAO.obtenerServiciosUsuario(usuario);
 		} catch (DAOException e) {

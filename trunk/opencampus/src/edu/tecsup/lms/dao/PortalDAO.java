@@ -238,64 +238,61 @@ public class PortalDAO extends BaseDAO {
 		}
 	}
 	
-	public Collection<Servicio> obtenerServiciosUsuario(int usuario)
-			throws DAOException {
-		log.info("obtenerServiciosUsuario(int idUsuario)");
+	public Collection<Servicio> obtenerServiciosUsuario(Integer idusuario) throws DAOException {
+		log.info("obtenerServiciosUsuario("+idusuario+")");
 		Connection cons = null;
 		PreparedStatement stmt = null;
-		PreparedStatement stmt1 = null;
+		PreparedStatement stmt2 = null;
 		ResultSet result = null;
-		Collection<Servicio> col_servicios = new ArrayList<Servicio>();
-		Servicio ser = null;
+		Collection<Servicio> servicios = new ArrayList<Servicio>();
+		Servicio servicio = null;
 		try {
-			String query = "select cvus.idservicio,cvus.columna,cvus.visible,cvsm.nombre,cvsm.imagen," +
-					"cvsm.ver_descripcion,cvsm.ver_ingresar,cvsm.usuario_eliminado,cvsm.usuario_minimizado, cvsm.comentario " +
-					"from cv_servicio_maestro cvsm, cv_servicio_usuario cvus " +
-					"where cvsm.idservicio=cvus.idservicio and cvus.estado='1' and cvsm.estado='1' " +
-					"and cvus.idusuario=? order by cvus.columna,cvus.posicion";
+			String query = "SELECT cvus.idservicio,cvus.columna,cvus.posicion,cvus.estado,cvus.visible," +
+					"cvsm.nombre,cvsm.permiso_minimizar,cvsm.permiso_eliminar " +
+					"FROM cv_servicio_maestro cvsm, cv_servicio_usuario cvus " +
+					"WHERE cvsm.idservicio=cvus.idservicio AND cvsm.estado='1' AND cvus.estado='1' " +
+					"AND cvus.idusuario=? " +
+					"ORDER BY cvus.columna,cvus.posicion";
 			cons = dataSource.getConnection();
 			stmt = cons.prepareStatement(query);
-			stmt.setInt(1, usuario);
+			stmt.setInt(1, idusuario);
 			result = stmt.executeQuery();
 			
 			if(!result.isBeforeFirst()){
-				query = "insert into cv_servicio_usuario(idusuario,idservicio,columna,posicion,visible,estado) " +
-						"select ?,idservicio,columna,posicion,usuario_visible,usuario_estado " +
-						"from cv_servicio_maestro";
-				stmt1 = (PreparedStatement) cons.prepareStatement(query);
-				stmt1.setInt(1, usuario);
-				stmt1.executeUpdate();
+				query = "INSERT INTO cv_servicio_usuario(idusuario,idservicio,columna,posicion,visible,estado) " +
+						"SELECT ?,idservicio,columna,posicion,1,estado " +
+						"FROM cv_servicio_maestro;";
+				stmt2 = cons.prepareStatement(query);
+				stmt2.setInt(1, idusuario);
+				stmt2.executeUpdate();
 				result = stmt.executeQuery();
 			}
 			
 			while (result.next()) {
-				log.info("Servicio "+result.getString("nombre")+" cargado en el portal para "+usuario);
-				ser = new Servicio();
-				ser.setId(result.getString("idservicio"));
-				ser.setColumna(result.getInt("columna"));
-				ser.setVisible(result.getInt("visible"));
-//				ser.setImagen(result.getString("imagen"));
-//				ser.setNombre(result.getString("nombre"));
-//				ser.setVerIngreso(result.getInt("ver_ingresar"));
-//				ser.setVerDescripcion(result.getInt("ver_descripcion"));
-//				ser.setUsuarioEliminar(result.getInt("usuario_eliminado"));
-//				ser.setUsuarioMinimizar(result.getInt("usuario_minimizado"));
-//				ser.setComentario(result.getString("comentario"));
-				col_servicios.add(ser);
+				servicio = new Servicio();
+				servicio.setId(result.getString("idservicio"));
+				servicio.setNombre(result.getString("nombre"));
+				servicio.setColumna(result.getInt("columna"));
+				servicio.setPosicion(result.getInt("posicion"));
+				servicio.setEstado(result.getInt("estado"));
+				servicio.setVisible(result.getInt("visible"));
+				servicio.setPermisoMinimizar(result.getInt("permiso_minimizar"));
+				servicio.setPermisoEliminar(result.getInt("permiso_eliminar"));
+				
+				servicios.add(servicio);
 			}
 			
-		
 		} catch (SQLException e) {
 			throw new DAOException(e.toString());
 		} catch (Exception e) {
 			throw new DAOException(e.toString());
 		} finally {
 			closeResultSet(result);
-			closeStatement(stmt1);
+			closeStatement(stmt2);
 			closeStatement(stmt);
 			closeConnection(cons);
 		}
-		return col_servicios;
+		return servicios;
 	}
 	
 

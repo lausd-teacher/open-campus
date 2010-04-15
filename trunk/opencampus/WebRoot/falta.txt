@@ -45,6 +45,8 @@ si el silabo ve que ya se uso para una ficha en ejecucion no debe modificar sino
 	incluse(foot)
 </div>
 
+-Velocity
+**Hacer sitemesh para todos los *.jsp, excepto los que terminen en *_inc.jsp, *_popup.jsp, *_ajax.jsp
 
 ----- Modificar BD
 *dialogo:predecesores deben aceptar nulos, por el momento se ha eliminado  relacion

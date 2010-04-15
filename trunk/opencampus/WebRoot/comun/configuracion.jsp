@@ -17,6 +17,9 @@
 			
 		<script type="text/javascript">
 			var settings = <c:out value="${cadena}"  escapeXml="false"/>;
+			Event.observe(window, 'load', function() {
+				this.portal = new Portal(settings, options, data);
+			});
 		</script>
 
 	</head>

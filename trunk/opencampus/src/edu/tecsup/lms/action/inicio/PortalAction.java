@@ -37,7 +37,7 @@ public class PortalAction extends BaseAction {
 	public String portal() throws ActionException{
 		log.info("portal() usuario:"+getUsuarioSession());
 		try{
-			//portal = portalService.obtenerServiciosUsuario(getUsuarioSession().getId());
+			portal = portalService.obtenerServiciosUsuario(getUsuarioSession().getId());
 		}catch (Exception e) {
 			log.error(e);
 			throw new ActionException(e.getMessage());
