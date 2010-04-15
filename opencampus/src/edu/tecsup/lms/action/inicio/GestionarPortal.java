@@ -9,7 +9,7 @@ import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ServiceException;
 import edu.tecsup.lms.modelo.portal.Servicio;
 import edu.tecsup.lms.service.PortalService;
-
+@Deprecated
 public class GestionarPortal extends BaseAction {
 
 	private static final long serialVersionUID = 7995015653587998501L;

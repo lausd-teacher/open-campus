@@ -3,20 +3,14 @@ package edu.tecsup.lms.util;
 public class Constante {
 
 	/**
+	 * Redireccion de correo
+	 */
+	public static final String DIRECCION_CORREO_SALIENTE = "soporte@tecsup.edu.pe";
+	
+	/**
 	 * CONSTANTES PARA EL REPOSITORIO
 	 */
-//delete
-//	public static final String RUTA_REPOSITORIO_UNITS = "/home/webcampus/repositorio/unidades";
-//	public static final String RUTA_REPOSITORIO_TEMPORAL = "/usr/local/apache2/htdocs/webcampus/temporal";
-//	public static final String RUTA_REPOSITORIO_FOTOS = "/usr/local/apache2/htdocs/webcampus/fotos";
-//	
-//	public static final String RUTA_WEB_SOFTWARE = "http://www.tecsup.edu.pe/webcampus/soft/";
-//	public static final String RUTA_WEB_FOTOS = "http://www.tecsup.edu.pe/webcampus/fotos/";
-//	public static final String RUTA_WEB_TEMPORAL = "http://www.tecsup.edu.pe/webcampus/temporal/";
-//	public static final String RUTA_WEB_NOTICIAS_IMAGENES = "http://www.tecsup.edu.pe/webcampus/noticias/";
-//fin delete
-	
-	/* UNIX WEB SERVER NUEVO */
+
 	public static final String SLASH = "/";
 	private static final String RUTA_PROYECTO = "opencampus";
 	private static final String RUTA_REPOSITORIO = "/home/";
@@ -748,9 +742,6 @@ public class Constante {
 
 	public static final int MAX_FILA_POR_PAG = 10;
 
-	/**
-	 * Redireccion de correo
-	 */
-	public static final String DIRECCION_CORREO_SALIENTE = "soporte@tecsup.edu.pe";
+	
 
 }

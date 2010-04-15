@@ -1,8 +1,13 @@
+<%@page import="edu.tecsup.lms.util.Constante"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <div id="pie">
-	<table width="100%" height="10">
-	  <tr>
-	    <td class="pie" align="center" ></td>
-	  </tr>
-	</table>
+	<div>
+		Copyright &copy; 2010 <a href="#"><s:text name="titulo.campus.virtual"/></a><br/>
+		<s:text name="portal.pie.derechos"/>
+	</div>
+	<div class="right">
+		<s:text name="portal.pie.requerimientos"/><br/>
+		<a href="#"><%=Constante.DIRECCION_CORREO_SALIENTE %></a>
+	</div>
 </div>
 

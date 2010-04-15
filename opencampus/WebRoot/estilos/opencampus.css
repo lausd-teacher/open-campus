@@ -401,6 +401,22 @@ tr.roweven {
 #pie {
 	width: 100%;
 	clear: both;
-	height: 30px;
+	height: 34px;
 	background-color: #aaaaaa;
+}
+
+#pie div {
+	float: left;
+	padding:5px;
+	color: #ffffff;
+	font-size: 10px;
+	font-weight: bold;
+}
+#pie div a{
+	color: #ffffff;
+	font-size: 10px;
+}
+#pie div.right{
+	float: right;
+	text-align: right;
 }
