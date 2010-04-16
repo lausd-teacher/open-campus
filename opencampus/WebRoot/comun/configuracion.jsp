@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
+<fmt:setLocale value='${sessionScope["WW_TRANS_I18N_LOCALE"]}' scope="session"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:set var="contextPath" value='${pageContext.request.contextPath}' />
@@ -102,16 +103,10 @@
 																<tr>
 																	<td align="left" width="20">
 																		<img height="15" src="<c:out value='${contextPath}' />/img/icons/<c:out value="${servicio.id}"/>.gif"
-																			alt="<fmt:message key="${servicio.nombre}"/>" style="cursor: move;" />
+																			alt="<fmt:message key="${servicio.nombre}"/>" />
 																	</td>
 																	<td align="left">
-																		<div
-																			style="padding-left: 5px; padding-right: 10px; font-weight: bold;">
-																			<fmt:setLocale value='${sessionScope["WW_TRANS_I18N_LOCALE"]}' scope="session"/>
-																			<fmt:bundle basename="mensajes">
-																				<fmt:message key="${servicio.nombre}"/>
-																			</fmt:bundle>
-																		</div>
+																		<b><fmt:message key="${servicio.nombre}"/></b>
 																	</td>
 																	<td width="15">
 																		<c:choose>
@@ -154,12 +149,12 @@
 															
 														</div>
 														
+														<!-- Contenido -->
 														<div class="body1" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
-															<!-- Contenido -->
 															<center><strong><fmt:message key="${servicio.nombre}"/></strong></center>
 															<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
-															<!-- Fin Contenido -->
 														</div>
+														<!-- Fin Contenido -->
 														
 														<div style="background-color: #cccccc; height: 20px;">
 														

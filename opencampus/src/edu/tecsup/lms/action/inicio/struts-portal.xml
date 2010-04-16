@@ -40,6 +40,14 @@
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
+		<action name="CargarCursos" method="cargarCursos"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success"> /comun/portal/servicio_curso.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		
+		
 		
 		
 		<action name="ConfiguracionPortalDefault" method="configuracionDefault"

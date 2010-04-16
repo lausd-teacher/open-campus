@@ -181,17 +181,6 @@ public class FichaAction extends BaseAction {
 		this.jerarquiaService = jerarquiaService;
 	}
 
-	public String cargarPortada() throws ActionException{
-		log.info("cargarPortada()");
-		try {
-			cursos = fichaService.cargarPortada(getUsuarioSession().getId());
-		} catch (Exception e) {
-			log.error(e.toString());
-			return NONE;
-		}
-		return SUCCESS;
-	}
-	
 	public String cargar() throws ActionException{
 		log.info("cargar()");
 		try {
