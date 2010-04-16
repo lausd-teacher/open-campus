@@ -45,7 +45,7 @@
 			<result name="success"> /comun/portal/servicio_curso.jsp</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
-		<action name="CargarHonomastico" method="cargarHonomastico"
+		<action name="CargarHonomasticos" method="cargarHonomasticos"
 			class="edu.tecsup.lms.action.inicio.PortalAction">
 			<result name="success">/comun/portal/servicio_cumpleanos.jsp</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
@@ -56,7 +56,17 @@
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
+		<action name="CargarNoticias" method="cargarNoticias"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/portal/servicio_noticia.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
 		
+		<action name="CargarMensajes" method="cargarMensajes"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/portal/servicio_buzon.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
 		
 		
 		

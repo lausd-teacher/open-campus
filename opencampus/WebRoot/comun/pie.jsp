@@ -6,8 +6,8 @@
 		<s:text name="portal.pie.derechos"/>
 	</div>
 	<div class="right">
-		<s:text name="portal.pie.requerimientos"/><br/>
-		<a href="#"><%=Constante.DIRECCION_CORREO_SALIENTE %></a>
+		<a href="#"><%=Constante.DIRECCION_CORREO_SALIENTE %></a><br/>
+		<s:text name="portal.pie.requerimientos"/>
 	</div>
 </div>
 

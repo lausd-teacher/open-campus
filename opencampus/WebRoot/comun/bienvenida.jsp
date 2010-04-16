@@ -14,7 +14,7 @@
 					alt="<s:text name="titulo.campus.virtual"/>" border="0"/></a>
 			</td>
 			<td width="80">
-				<span id="top_campus"><s:text name="titulo.campus.virtual"/></span>
+				<span id="top_campus"><s:text name="titulo.campus.virtual_corto"/></span>
 			</td>
 			<td width="5" align="center">|</td>
 			<td>
