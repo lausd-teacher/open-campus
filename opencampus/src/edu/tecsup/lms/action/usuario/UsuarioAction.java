@@ -14,7 +14,6 @@ import edu.tecsup.lms.service.UsuarioService;
 import edu.tecsup.lms.util.Archivo;
 import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.Formato;
-import edu.tecsup.lms.util.UsuariosConectados;
 
 public class UsuarioAction extends BaseAction {
 
@@ -52,13 +51,9 @@ public class UsuarioAction extends BaseAction {
 	
 	private UsuarioFiltro filtro;
 	
-	private Collection<Usuario> cumples;
-	
 	protected List<Usuario> usuarios;
 	
 	private Map<String,Usuario> conectados;
-	
-	private Map<Integer,Usuario> conectadosEnChat;
 	
 	protected Collection<Rol> roles;
 	
@@ -72,14 +67,6 @@ public class UsuarioAction extends BaseAction {
 
 	public Map<String, Usuario> getConectados() {
 		return conectados;
-	}
-
-	public Map<Integer, Usuario> getConectadosEnChat() {
-		return conectadosEnChat;
-	}
-
-	public Collection<Usuario> getCumples() {
-		return cumples;
 	}
 
 	public Usuario getUsuario() {
@@ -205,23 +192,7 @@ public class UsuarioAction extends BaseAction {
 		this.filtro = filtro;
 	}
 
-	public String cargarPortada() throws Exception{
-		log.info("cargarPortada()");
-		try {
-			cumples = usuarioService.verCumpleanieros();
-		} catch (Exception e) {
-			log.error(e.toString());
-			return NONE;
-		}
-		return SUCCESS;
-	}
-	
-	public String cargarConectadosEnChat() throws Exception{
-		//log.info("cargarConectadosEnChat()");
-		conectadosEnChat = UsuariosConectados.c; 
-		return SUCCESS;
-	}
-	
+	@Deprecated //cargarConectados del portal para el chat debería cargar a todos, el chat debe regresar a la pagina principal
 	@SuppressWarnings("unchecked")
 	public String cargarConectados() throws Exception{
 		//log.info("cargarConectados()");

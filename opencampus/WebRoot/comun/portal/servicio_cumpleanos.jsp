@@ -12,7 +12,7 @@
 <div style="overflow-x: hidden; overflow-y: auto; max-height: 90px;">
 
 	<table cellpadding="2" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
-		<c:forEach var="cumple" items="${cumples}">
+		<c:forEach var="cumple" items="${usuarios}">
 		<tr class="portal_selecionando" style="cursor:pointer; <c:if test="${cumple.rolPredeterminado.idrol != 0 && cumple.rolPredeterminado.idrol != 7}">background-color: #E0F8E5;</c:if>"
 			onclick="enviarCorreo('<c:out value="${cumple.usuario}"/>','Feliz Cumpleaños!')"
 			onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${cumple.rolPredeterminado.nombre}"/>', this);">
@@ -32,7 +32,7 @@
 			<%} %>
 		</tr>
 		</c:forEach>	
-		<c:if test="${fn:length(cumples)==0}">
+		<c:if test="${fn:length(usuarios)==0}">
 			<tr>
 				<td style="color:gray;font-size:8pt;" height="22" >
 					<span style="padding : 7px;">
@@ -44,5 +44,5 @@
 	</table>
 </div>
 <span id="servicio_cumpleanos_descripcion_origen" style="display:none;">
-	<strong><span class="text_rojo"><c:out value="${fn:length(cumples)}" /></span> <s:text name="portal.cumpleanos.detalle"/></strong>
+	<strong><span class="text_rojo"><c:out value="${fn:length(usuarios)}" /></span> <s:text name="portal.cumpleanos.detalle"/></strong>
 </span>
