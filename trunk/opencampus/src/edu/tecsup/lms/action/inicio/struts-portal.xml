@@ -45,6 +45,16 @@
 			<result name="success"> /comun/portal/servicio_curso.jsp</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
+		<action name="CargarHonomastico" method="cargarHonomastico"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/portal/servicio_cumpleanos.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="CargarConectados" method="cargarConectados"
+			class="edu.tecsup.lms.action.inicio.PortalAction">
+			<result name="success">/comun/portal/servicio_chat.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
 		
 		
 		

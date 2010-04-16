@@ -13,7 +13,7 @@
 <div style="overflow-x: hidden;overflow-y: auto; max-height: 90px;">
 
 	<table cellpadding="2" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
-		<c:forEach var="conectado" items="${conectadosEnChat}">
+		<c:forEach var="conectado" items="${conectados}">
 		<tr class="portal_selecionando" 
 			style="cursor:pointer; <c:if test="${conectado.value.rolPredeterminado.idrol != 145}">background-color: #F0F8E5;</c:if> <c:if test="${conectado.value.id == '100524'}">background-color: #AEDFFF;</c:if>"
 			onclick="enviarCorreo('<c:out value="${conectado.value.usuario}"/>','[Recado]')"
@@ -32,7 +32,7 @@
 			<%} %>
 		</tr>
 		</c:forEach>	
-		<c:if test="${fn:length(conectadosEnChat)==0}">
+		<c:if test="${fn:length(conectados)==0}">
 			<tr>
 				<td style="color:gray;font-size:8pt;" height="22" >
 					<span style="padding : 7px;">
@@ -44,5 +44,5 @@
 	</table>
 </div>
 <span id="servicio_chat_descripcion_origen" style="display:none;">
-	<strong><span class="text_rojo"><c:out value="${fn:length(conectadosEnChat)}" /></span> <s:text name="portal.chat.detalle"/></strong>
+	<strong><span class="text_rojo"><c:out value="${fn:length(conectados)}" /></span> <s:text name="portal.chat.detalle"/></strong>
 </span>

@@ -102,22 +102,6 @@
 	
 	<package name="campus-usuario" extends="campus-default" namespace="/usuario">
 	
-		<action name="CargarPortada" method="cargarPortada"
-			class="edu.tecsup.lms.action.usuario.UsuarioAction">
-			<result name="success">
-				/comun/portal/servicio_cumpleanos.jsp
-			</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		
-		<action name="CargarConectadosEnChat" method="cargarConectadosEnChat"
-			class="edu.tecsup.lms.action.usuario.UsuarioAction">
-			<result name="success">
-				/comun/portal/servicio_chat.jsp
-			</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		
 		<action name="CargarConectados" method="cargarConectados"
 			class="edu.tecsup.lms.action.usuario.UsuarioAction">
 			<result name="success">
