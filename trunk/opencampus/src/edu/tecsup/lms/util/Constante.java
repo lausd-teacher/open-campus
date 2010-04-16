@@ -297,7 +297,27 @@ public class Constante {
 
 	public static final int RECURSO_ID_VIDEO = 9;
 	
-	
+	/**
+	 * Servicios
+	 */
+
+	public static String SERVICIO_CURSO = "servicio_curso";
+
+	public static String SERVICIO_CHAT = "servicio_chat";
+
+	public static String SERVICIO_NOTICIA = "servicio_noticia";
+
+	public static String SERVICIO_CUMPLEANOS = "servicio_cumpleanos";
+
+	public static String SERVICIO_BUZON = "servicio_buzon";
+
+	public static String SERVICIO_FOROS = "servicio_foros";
+
+	public static String SERVICIO_AGENDA = "servicio_agenda";
+
+	public static String SERVICIO_APUNTES = "servicio_apuntes";
+
+	public static String SERVICIO_BIBLIOTECA = "servicio_biblioteca";
 	
 	/* **********************************************************************************/
 
@@ -353,28 +373,6 @@ public class Constante {
 	public static int PORTAL_SERVICIO_FORO = 12;
 
 	
-
-	/**
-	 * Servicio Movible
-	 */
-
-	public static String SERVICIO_CURSO = "servicio_curso";
-
-	public static String SERVICIO_CHAT = "servicio_chat";
-
-	public static String SERVICIO_NOTICIA = "servicio_noticia";
-
-	public static String SERVICIO_CUMPLEANOS = "servicio_cumpleanos";
-
-	public static String SERVICIO_BUZON = "servicio_buzon";
-
-	public static String SERVICIO_FOROS = "servicio_foros";
-
-	public static String SERVICIO_AGENDA = "servicio_agenda";
-
-	public static String SERVICIO_APUNTES = "servicio_apuntes";
-
-	public static String SERVICIO_BIBLIOTECA = "servicio_biblioteca";
 
 	/**
 	 * Turno

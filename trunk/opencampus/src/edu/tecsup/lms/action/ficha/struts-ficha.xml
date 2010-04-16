@@ -106,16 +106,5 @@
     		<interceptor-ref name="administrador-campus"></interceptor-ref>
 		</action>
 	</package>
-	
-	<package name="campus-ficha" extends="campus-default" namespace="/ficha">
-		<action name="CargarPortada" method="cargarPortada"
-			class="edu.tecsup.lms.action.ficha.FichaAction">
-			<result name="success">
-				/comun/portal/servicio_curso.jsp
-			</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-	</package>
-	
-	
+		
 </struts>
