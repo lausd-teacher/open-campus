@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page errorPage="/error_action.jsp"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -150,9 +151,9 @@
 														</div>
 														
 														<!-- Contenido -->
-														<div class="body1" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
-															<center><strong><fmt:message key="${servicio.nombre}"/></strong></center>
-															<img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
+														<div id="box_<c:out value='${servicio.id}' />" class="box" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
+															&nbsp;<br/><center><strong><fmt:message key="${servicio.nombre}"/></strong></center>
+															<img src="<c:out value='${contextPath}'/>/img/cargando.gif" /><br/>&nbsp;
 														</div>
 														<!-- Fin Contenido -->
 														

@@ -12,7 +12,7 @@
 						<td width="53%" height="10">
 								<strong>
 									<a class="link_curso" href="<%=request.getContextPath()%>/Portal.action">
-										Educa
+										<s:text name="titulo.campus.virtual_corto"/>
 									</a>
 								</strong> 
 								<strong>

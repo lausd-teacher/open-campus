@@ -67,6 +67,25 @@ function configService(chk,id){
 	}
 }
 
+/* Carga Servicios */
+var msg_error = '<strong>Problemas con el servicio</strong>';
+function cargar_servicio_curso(){
+	var myConn = new XHConn();
+	var query = function (oXML) {
+		if (oXML.readyState === 4) {
+			if(oXML.responseText !== ""){
+				xInnerHtml('box_servicio_curso',oXML.responseText);
+				xInnerHtml('servicio_curso_descripcion',xInnerHtml('servicio_curso_descripcion_origen'));
+				alert(oXML.status)
+			}else{
+				xInnerHtml('box_servicio_curso',msg_error);
+				alert(oXML.status)
+			}
+		}
+	};
+	myConn.connect(xGetContextPath()+"/portal/CargarCursos.action", "POST", null, query);
+}
+
 /*
  *
 que traiga todos los servicios a la vez, menos los minimizados ni cerrados:
@@ -92,23 +111,7 @@ function eliminarAula(){
 }
 
 /* Carga Servicios */
-var msg_error = '<strong>Problemas con el servicio</strong>';
-function cargar_servicio_curso(){
-	var myConn = new XHConn();
-	var query = function (oXML) {
-		if (oXML.readyState === 4) {
-			if(oXML.responseText !== ""){
-				xInnerHtml('servicio_curso_td',oXML.responseText);
-				portal._updateColumnsHeight();
-				xInnerHtml('servicio_curso_descripcion',xInnerHtml('servicio_curso_descripcion_origen'));
-				eliminarAula();//Corrige el error de al regresar a portal no se elimina el aula session
-			}else{
-				xInnerHtml('servicio_curso_td',msg_error)
-			}
-		}
-	};
-	myConn.connect(xGetContextPath()+"/ficha/CargarPortada.action", "POST", null, query);
-}
+
 function cargar_servicio_buzon(){
 	var myConn = new XHConn();
 	var query = function (oXML) { 

@@ -103,17 +103,6 @@ public class BuzonAction extends BaseAction {
 
 	private int cantidadPorPagina = Constante.MAX_FILA_POR_PAG;
 
-	public String cargarPortada(){
-		log.info("cargarPortada()");
-		try {
-			MENSAJES = buzonService.cargarPortada(getUsuarioSession().getId());
-		} catch (Exception e) {
-			log.error(e.toString());
-			return NONE;
-		}
-		return SUCCESS;
-	}
-	
 	public String buzon() {
 		log.info("buzon()");
 		try {

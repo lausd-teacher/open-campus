@@ -315,8 +315,8 @@ tr.roweven {
 	height: 17px;
 }
 
-#columns .column .block .body1{
-	min-height: 100px;
+#columns .column .block .box{
+	/*min-height: 100px;*/
 	color: #aaaaaa;
 	text-align: center;
 }

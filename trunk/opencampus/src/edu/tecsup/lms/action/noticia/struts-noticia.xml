@@ -2,12 +2,6 @@
 <struts>
 	<package name="campus-noticias" namespace="/noticia" extends="campus-default">
 
-		<action name="CargarPortada" method="cargarPortada"
-			class="edu.tecsup.lms.action.noticia.NoticiaAction">
-			<result name="success">/comun/portal/servicio_noticia.jsp</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>	
-
 		<action name="Cargar" method="cargarTitulares"
 			class="edu.tecsup.lms.action.noticia.NoticiaAction">
 			<result name="success">/comun/noticia/noticia.jsp</result>

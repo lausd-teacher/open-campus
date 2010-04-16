@@ -3,12 +3,6 @@
 
 	<package name="campus-buzon" extends="campus-default" namespace="/comun/buzon">
 	
-		<action name="CargarPortada" method="cargarPortada"
-			class="edu.tecsup.lms.action.buzon.BuzonAction">
-			<result name="success">/comun/portal/servicio_buzon.jsp</result>
-			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-	
 		<action name="Buzon" method="buzon"
 			class="edu.tecsup.lms.action.buzon.BuzonAction">
 			<result name="success">/comun/buzon/buzon.jsp</result>

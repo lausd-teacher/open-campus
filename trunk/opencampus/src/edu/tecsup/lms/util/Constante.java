@@ -319,6 +319,8 @@ public class Constante {
 
 	public static String SERVICIO_BIBLIOTECA = "servicio_biblioteca";
 	
+	public static String SERVICIO_ENLACES = "servicio_enlaces";
+	
 	/* **********************************************************************************/
 
 

@@ -399,6 +399,11 @@ public class PortalDAO extends BaseDAO {
 		return guardarPropiedadGestionar("estado", servicio, estado);
 	}
 
+	/*
+	 * OJOOOOOO: CUANDO QUITES LA OPCION DE QUE EL USUARIO PUEDA MINIMIZAR DEBES PONER A TODOS QUE TENGAN EL SERVICIO
+	 * OCULTO (visible=0) A VISIBLE (visible=1) (en cv_servicio_usuario), por que sino cuando quites la opcion los 
+	 * usuarios ya no podran mostrar nuevamente
+	 */
 	private int guardarPropiedadGestionar(String tipo, String servicio,
 			String estado) throws DAOException {
 		log.info("guardarPropiedadGestionar(String servicio, String estado)");

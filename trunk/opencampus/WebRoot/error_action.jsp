@@ -71,19 +71,12 @@
                               <td>&nbsp;</td>
                               <td colspan="2" class="bienvenida" style="padding-right:30px">
                               	<div align="left">
-	                              	<u>Detalle:</u> 
+	                              	<u>Detalles:</u> 
 	                              	<br/><c:out value="${message}" default="Se ha producido un error no clasificado en el servidor."/>
 	                              	<br/><s:actionerror/>  <s:actionmessage/> <s:fielderror />
-                              	</div>
-                              </td>
-                              <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <td colspan="2" class="bienvenida" style="padding-right:30px">
-                              	<div align="left">
-	                              	<u>Detalle T&eacute;cnico:</u> 
-		                            <br/><s:property value="%{exception}" default="ActionException: Error indeterminado."/>
+	                              	<s:if test="%{exception != null}">
+	                              		<br/>ActionException: <s:property value="%{exception}"/>
+	                              	</s:if>
 		                            <!-- s:property value="%{exceptionStack}"/-->
 	                              	<%if(exception != null){ %>
 	                              		<br/>JSPException: <%=exception %>

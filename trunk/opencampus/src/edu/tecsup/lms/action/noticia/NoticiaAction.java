@@ -156,18 +156,7 @@ public class NoticiaAction extends BaseAction{
 	public String obtenerUltimasNoticias() {
 		return SUCCESS;
 	}
-	
-	public String cargarPortada(){
-		log.info("cargarPortada()");
-		try {
-			noticias = noticiaService.cargarPortada(getUsuarioSession());
-		} catch (Exception e) {
-			log.error(e.toString());
-			return NONE;
-		}
-		return SUCCESS;
-	}
-	
+		
 	public String cargarTitulares() throws Exception{
 		log.info("cargarTitulares()");
 		secciones = noticiaService.cargarTitulares(getUsuarioSession());
