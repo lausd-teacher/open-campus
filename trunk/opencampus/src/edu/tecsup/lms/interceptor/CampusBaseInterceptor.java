@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.MDC;
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -31,18 +33,19 @@ public abstract class CampusBaseInterceptor implements Interceptor {
 
 	public String intercept(ActionInvocation inv) throws Exception {
 		Usuario user = (Usuario) ActionContext.getContext().getSession().get(Constante.USUARIO_ACTUAL);
+		MDC.put("IP", ServletActionContext.getRequest().getRemoteAddr());
 		if (null == user) {
 			log.warn("intercept: " + getInvocationAction(inv) + " - Usuario no logeado");
 			return BaseAction.LOGIN;
 		} else {
 			//Logs de seguimiento minucioso a las peticiones del cliente
-			if(!"CargarConectadosEnChat".equals(inv.getInvocationContext().getName()))
-				log.info("intercept(): " + getInvocationAction(inv) + " - user: "+user);
+//			if(!"CargarConectadosEnChat".equals(inv.getInvocationContext().getName())) //*Solo para los que enpiecen con Periodical 
+//				log.info("intercept(): " + getInvocationAction(inv) + " - user: "+user);
 			
 			//Si ocurrio un error en los interceptors anteriores reenviar a error_action.jsp
 			ValidationAware validation = (ValidationAware)inv.getAction();
 		    if(validation.hasErrors()){
-		    	log.warn("Se reportaron errores por parte de los interceptors, ha sido reenviado a error_action.jsp ");
+		    	log.error("Se reportaron errores por parte de los interceptors, ha sido reenviado a error_action.jsp ");
 		        return BaseAction.ERROR;
 		    }
 			return intercepcion(inv, user);

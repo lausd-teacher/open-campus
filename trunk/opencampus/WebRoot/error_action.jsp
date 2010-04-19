@@ -73,7 +73,7 @@
                               	<div align="left">
 	                              	<u>Detalles:</u> 
 	                              	<br/><c:out value="${message}" default="Se ha producido un error no clasificado en el servidor."/>
-	                              	<br/><s:actionerror/>  <s:actionmessage/> <s:fielderror />
+	                              	<s:actionerror/>  <s:actionmessage/> <s:fielderror />
 	                              	<s:if test="%{exception != null}">
 	                              		<br/>ActionException: <s:property value="%{exception}"/>
 	                              	</s:if>

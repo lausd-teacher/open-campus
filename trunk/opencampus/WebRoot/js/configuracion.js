@@ -69,6 +69,25 @@ function configService(chk,id){
 
 /* Carga Servicios */
 var msg_error = '<strong>Problemas con el servicio</strong>';
+
+function cargar_servicio(id, url){ //falta URL dinámico
+	new Ajax.Request(xGetContextPath() +"/portal/CargarCursos.action", 
+	{
+		method: 'post',
+		onSuccess: function(transport) {
+			if (transport.responseText !== ""){
+  				$('box_'+id).update(transport.responseText);
+  				//xInnerHtml('servicio_curso_descripcion',xInnerHtml('servicio_curso_descripcion_origen'));
+			}else{
+				$('box_'+id).update(msg_error);
+			}
+		}
+	});
+	
+}
+
+
+
 function cargar_servicio_curso(){
 	var myConn = new XHConn();
 	var query = function (oXML) {
@@ -76,10 +95,8 @@ function cargar_servicio_curso(){
 			if(oXML.responseText !== ""){
 				xInnerHtml('box_servicio_curso',oXML.responseText);
 				xInnerHtml('servicio_curso_descripcion',xInnerHtml('servicio_curso_descripcion_origen'));
-				alert(oXML.status)
 			}else{
 				xInnerHtml('box_servicio_curso',msg_error);
-				alert(oXML.status)
 			}
 		}
 	};

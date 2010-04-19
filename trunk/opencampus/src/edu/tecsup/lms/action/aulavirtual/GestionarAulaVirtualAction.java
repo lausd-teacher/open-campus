@@ -190,6 +190,11 @@ public class GestionarAulaVirtualAction extends BaseAction {
 			}else{
 				throw new ActionException("No se ha especificado el parámetro necesario.");
 			}
+//			JSONObject obj = new JSONObject();
+//			obj.put("nombre", "Juan");
+//			System.out.println(obj.toString());
+//			response.addHeader("X-JSON", obj.toString());
+
 		} catch (Exception e) {
 			log.error(e);
 			throw new ActionException(e);
