@@ -94,9 +94,8 @@
 										<br/><img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
 										<script type="text/javascript">
 											Event.observe(window, 'load', function() {
-												cargar_servicio_curso(); //hacer una funcion unica, que reciba el id y la url
-																		// tambien cambiar el estilo de .box, se esta viendo mal cursos (se puso letra gris)
-																		// Usar onFailure atributo de ajaxRequest de prototype para deducir cuando hay error 500
+												cargar_servicio('<c:out value='${servicio.id}' />'); //hacer una funcion unica, que reciba el id y la url
+																   // tambien cambiar el estilo de .box, se esta viendo mal cursos (se puso letra gris)
 												
 											});
 										</script>

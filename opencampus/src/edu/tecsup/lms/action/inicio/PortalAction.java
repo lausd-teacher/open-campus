@@ -1,10 +1,13 @@
 package edu.tecsup.lms.action.inicio;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
+import atg.taglib.json.util.JSONObject;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
@@ -104,9 +107,9 @@ public class PortalAction extends BaseAction {
 	public String portal() throws ActionException{
 		log.info("portal() usuario:"+getUsuarioSession());
 		try{
-			//portal = portalService.obtenerServiciosUsuario(getUsuarioSession().getId());
-			/*
-			for (Servicio servicio : portal) {
+			portal = portalService.obtenerServiciosUsuario(getUsuarioSession().getId());
+			
+			/*for (Servicio servicio : portal) {
 				if(servicio.getVisible() == Constante.ESTADO_ACTIVO){
 					if(Constante.SERVICIO_CURSO.equals(servicio.getId())){
 						cursos = fichaService.cargarPortada(getUsuarioSession().getId());
@@ -133,48 +136,21 @@ public class PortalAction extends BaseAction {
 					}
 				}//para las salidas, usar includes de los jsp de portal
 			}*/
-			int i = 6/0;
 		}catch (Exception e) {
 			log.error(e);
-//			throw new ActionException(e.getMessage());
-			addActionError(e.toString());
-			return ERROR;
-			
-			
-			//BaseAction
-			/*
-			 * protected void addAjaxError(String anErrorMessage) {
-					addActionError(anErrorMessage);
-					request.setAttribute("XXX", "");
-				}
-			 */
-			/*quitar de error_action la primera linea y 
-			veo que no se puede convinar actionexception con http status 500
-			entonces, y por mas ahorro, en el action haz un return error_ajax o ajaxexception
-			o algo que cambie la cabecera a 500 pero y con return none
-
-
-			addAjaxError(e) 
-			return ajax_error;
-
-			xml -> ajax_error>error_ajax.jsp
-
-			*jsp -> errorpage=error_ajax.jsp
-			*/
+			throw new ActionException(e.getMessage());
 		}
 		return SUCCESS;
 	}
 	
 	public String cargarCursos() throws Exception{
 		log.info("cargarCursos()");
-		try {//int i = 23/0;
+		try {
 			cursos = fichaService.cargarPortada(getUsuarioSession().getId());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			//response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
-			//return NONE;
-			//addActionError("ERRORR 1");
-			//return ERROR;
+			return NONE;
 		}
 		return SUCCESS;
 	}
@@ -185,7 +161,7 @@ public class PortalAction extends BaseAction {
 			usuarios = usuarioService.verCumpleanieros();
 		} catch (Exception e) {
 			log.error(e.toString());
-			throw new ActionException(e.getMessage());
+			return NONE;
 		}
 		return SUCCESS;
 	}
@@ -196,7 +172,7 @@ public class PortalAction extends BaseAction {
 			conectados = UsuariosConectados.c; 
 		} catch (Exception e) {
 			log.error(e.toString());
-			throw new ActionException(e.getMessage());
+			return NONE;
 		}
 		return SUCCESS;
 	}
@@ -207,7 +183,7 @@ public class PortalAction extends BaseAction {
 			noticias = noticiaService.cargarPortada(getUsuarioSession());
 		} catch (Exception e) {
 			log.error(e.toString());
-			throw new ActionException(e.getMessage());
+			return NONE;
 		}
 		return SUCCESS;
 	}
@@ -218,7 +194,7 @@ public class PortalAction extends BaseAction {
 			mensajes = buzonService.cargarPortada(getUsuarioSession().getId());
 		} catch (Exception e) {
 			log.error(e.toString());
-			throw new ActionException(e.getMessage());
+			return NONE;
 		}
 		return SUCCESS;
 	}
