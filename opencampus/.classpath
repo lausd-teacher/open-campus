@@ -73,5 +73,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/tiles-core-2.0.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/tiles-jsp-2.0.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-2.0.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/flexjson.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
