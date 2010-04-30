@@ -1,13 +1,8 @@
 package edu.tecsup.lms.action.inicio;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import atg.taglib.json.util.JSONObject;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
@@ -21,7 +16,6 @@ import edu.tecsup.lms.service.FichaService;
 import edu.tecsup.lms.service.NoticiaService;
 import edu.tecsup.lms.service.PortalService;
 import edu.tecsup.lms.service.UsuarioService;
-import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.UsuariosConectados;
 
 public class PortalAction extends BaseAction {
