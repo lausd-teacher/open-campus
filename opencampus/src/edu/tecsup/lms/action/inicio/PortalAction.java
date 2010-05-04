@@ -2,15 +2,18 @@ package edu.tecsup.lms.action.inicio;
 
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import edu.tecsup.lms.action.BaseAction;
 import edu.tecsup.lms.excepcion.ActionException;
+import edu.tecsup.lms.modelo.Anotacion;
 import edu.tecsup.lms.modelo.AulaVirtual;
 import edu.tecsup.lms.modelo.Noticia;
 import edu.tecsup.lms.modelo.Usuario;
 import edu.tecsup.lms.modelo.correo.Mensaje;
 import edu.tecsup.lms.modelo.portal.Servicio;
+import edu.tecsup.lms.service.AnotacionService;
 import edu.tecsup.lms.service.BuzonService;
 import edu.tecsup.lms.service.FichaService;
 import edu.tecsup.lms.service.NoticiaService;
@@ -26,6 +29,8 @@ public class PortalAction extends BaseAction {
 	private UsuarioService usuarioService;
 	
 	private NoticiaService noticiaService;
+	
+	private AnotacionService anotacionService;
 	
 	private PortalService portalService;
 	
@@ -51,6 +56,16 @@ public class PortalAction extends BaseAction {
 	
 	private Collection<Noticia> noticias;
 	
+	private List<Anotacion> anotaciones;
+	
+	public List<Anotacion> getAnotaciones() {
+		return anotaciones;
+	}
+
+	public void setAnotacionService(AnotacionService anotacionService) {
+		this.anotacionService = anotacionService;
+	}
+
 	public Collection<Mensaje> getMensajes() {
 		return mensajes;
 	}
@@ -156,7 +171,7 @@ public class PortalAction extends BaseAction {
 			}else if(Constante.SERVICIO_AGENDA.equals(servicio)){
 				
 			}else if(Constante.SERVICIO_APUNTES.equals(servicio)){
-				
+				anotaciones = anotacionService.cargarPortada(getUsuarioSession().getId());
 			}else if(Constante.SERVICIO_BIBLIOTECA.equals(servicio)){
 				
 			}else if(Constante.SERVICIO_ENLACES.equals(servicio)){
@@ -176,6 +191,17 @@ public class PortalAction extends BaseAction {
 		log.info("cargarCursos()");
 		try {
 			cursos = fichaService.cargarPortada(getUsuarioSession().getId());
+		} catch (Exception e) {
+			log.error(e.toString());
+			return NONE;
+		}
+		return SUCCESS;
+	}
+	
+	public String cargarPortada() throws Exception{
+		log.info("cargarPortada()");
+		try {
+			anotaciones = anotacionService.cargarPortada(getUsuarioSession().getId());
 		} catch (Exception e) {
 			log.error(e.toString());
 			return NONE;

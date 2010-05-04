@@ -44,17 +44,6 @@ public class AnotacionAction extends BaseAction {
 		this.anotacionService = anotacionService;
 	}
 
-	public String cargarPortada() {
-		log.info("cargarPortada()");
-		try {
-			anotaciones = anotacionService.cargarPortada(getUsuarioSession().getId());
-		} catch (Exception e) {
-			log.error(e.toString());
-			return NONE;
-		}
-		return SUCCESS;
-	}
-
 	public String inicio() {
 		log.info("inicio()");
 		try {
