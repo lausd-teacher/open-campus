@@ -14,6 +14,14 @@
 	<head>
 		<s:include value="/comun/jslibs.jsp"/>
 		<script type="text/javascript" src="<c:out value='${contextPath}'/>/js/configuracion.js"></script>
+		<script type="text/javascript">
+			Event.observe(window, 'load', function() {
+				<c:forEach var="servicio" items="${portal}">
+				cargar_servicio('<c:out value='${servicio.id}' />');
+								   // tambien cambiar el estilo de .box, se esta viendo mal cursos (se puso letra gris)
+				</c:forEach>
+			});
+		</script>
 	</head>
 	<body>
 		<div id="container">
@@ -92,13 +100,6 @@
 									<!-- Contenido -->
 									<div id="box_<c:out value='${servicio.id}' />" class="box" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
 										<br/><img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
-										<script type="text/javascript">
-											Event.observe(window, 'load', function() {
-												cargar_servicio('<c:out value='${servicio.id}' />'); //hacer una funcion unica, que reciba el id y la url
-																   // tambien cambiar el estilo de .box, se esta viendo mal cursos (se puso letra gris)
-												
-											});
-										</script>
 									</div>
 									<!-- Fin Contenido -->
 									
@@ -142,16 +143,5 @@
 		</div>
 		
 	</body>
-		<script type="text/javascript">
-		
-			function loadServices(){
-			<c:forEach var="servicio" items="${portal}">
-				portal.add(new CampusVirtual.Widget('<c:out value='${servicio.id}' />'), '<c:out value='${servicio.columna}' />');
-				cargar_<c:out value='${servicio.id}' />();
-			</c:forEach>
-				portal._updateColumnsHeight();	
-			
-			}	
-		</script>
 </html>
 
