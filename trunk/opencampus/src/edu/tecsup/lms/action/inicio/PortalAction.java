@@ -16,6 +16,7 @@ import edu.tecsup.lms.service.FichaService;
 import edu.tecsup.lms.service.NoticiaService;
 import edu.tecsup.lms.service.PortalService;
 import edu.tecsup.lms.service.UsuarioService;
+import edu.tecsup.lms.util.Constante;
 import edu.tecsup.lms.util.UsuariosConectados;
 
 public class PortalAction extends BaseAction {
@@ -137,13 +138,46 @@ public class PortalAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String cargarServicio() throws Exception{
+		log.info("cargarServicio()"+servicio);
+		try {
+			if(Constante.SERVICIO_CURSO.equals(servicio)){
+				cursos = fichaService.cargarPortada(getUsuarioSession().getId());
+			}else if(Constante.SERVICIO_CHAT.equals(servicio)){
+				conectados = UsuariosConectados.c; 
+			}else if(Constante.SERVICIO_NOTICIA.equals(servicio)){
+				noticias = noticiaService.cargarPortada(getUsuarioSession());
+			}else if(Constante.SERVICIO_CUMPLEANOS.equals(servicio)){
+				usuarios = usuarioService.verCumpleanieros();
+			}else if(Constante.SERVICIO_BUZON.equals(servicio)){
+				mensajes = buzonService.cargarPortada(getUsuarioSession().getId());
+			}else if(Constante.SERVICIO_FOROS.equals(servicio)){
+				
+			}else if(Constante.SERVICIO_AGENDA.equals(servicio)){
+				
+			}else if(Constante.SERVICIO_APUNTES.equals(servicio)){
+				
+			}else if(Constante.SERVICIO_BIBLIOTECA.equals(servicio)){
+				
+			}else if(Constante.SERVICIO_ENLACES.equals(servicio)){
+				
+			}else{
+				throw new ActionException("Servicio desconocido: "+servicio);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			//response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			return NONE;
+		}
+		return SUCCESS;
+	}
+	
 	public String cargarCursos() throws Exception{
 		log.info("cargarCursos()");
 		try {
 			cursos = fichaService.cargarPortada(getUsuarioSession().getId());
 		} catch (Exception e) {
-			log.error(e.getMessage());
-			//response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			log.error(e.toString());
 			return NONE;
 		}
 		return SUCCESS;
