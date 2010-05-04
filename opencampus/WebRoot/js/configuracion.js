@@ -70,10 +70,11 @@ function configService(chk,id){
 /* Carga Servicios */
 var msg_error = '<strong>Problemas con el servicio</strong>';
 
-function cargar_servicio(id, url){ //falta URL dinámico
-	new Ajax.Request(xGetContextPath() +"/portal/CargarCursos.action", 
+function cargar_servicio(id){ 
+	new Ajax.Request(xGetContextPath() +"/portal/CargarServicio.action", 
 	{
 		method: 'post',
+		parameters: "servicio="+id,
 		onSuccess: function(transport) {
 			if (transport.responseText !== ""){
   				$('box_'+id).update(transport.responseText);
