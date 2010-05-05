@@ -13,7 +13,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<s:include value="/comun/jslibs.jsp"/>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/js/scriptaculous/scriptaculous.js?load=effects,dragdrop"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/portal/portal.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/configuracion.js"></script>
 			
