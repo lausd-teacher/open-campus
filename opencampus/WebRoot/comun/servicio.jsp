@@ -21,8 +21,8 @@
 				<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif" />
 			</td>
 			<td valign="middle" align="left" >
-				<label style="cursor: pointer;"><c:out value="${ficha.curso.nombre}"/></label>	
-				<!-- BUSCAR EL TOOLTIP QUE ACONSEJASTE AL ALUMNO DE DAVID -->					
+				<label style="cursor: pointer;" onMouseOver="return tooltip('<c:out value="${ficha.curso.nombre}"/>');" 
+					onMouseOut="return hideTip();"><c:out value="${ficha.curso.nombre}"/></label>				
 			</td>
 			<td width="35" align="right" valign="middle">
 				<c:if test="${0<trabajoIndividual}">
@@ -130,8 +130,8 @@
 	<span id="servicio_noticia_descripcion_origen" style="display:none;"></span>
 </c:when>
 
-<c:when test="${servicio == 'servicio_noticia'}">
-	<!-- CURSOS -->
+<c:when test="${servicio == 'servicio_cumpleanos'}">
+	<!-- HONOMASTICO -->
 	<div style="overflow-x: hidden; overflow-y: auto; max-height: 90px;">
 
 		<table cellpadding="2" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
@@ -178,8 +178,8 @@
 			<td colspan="3">
 				<table cellpadding="1" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
 				<c:forEach var="mensaje" items="${mensajes}">
-					<tr onmouseout="ocultarToolTip()" 
-						onmouseover="verToolTip('Enviado por <b><c:out value='${mensaje.usuario}' /></b> el <f:DateToString fecha="${mensaje.fecha_envio}" />', this);">
+					<tr onMouseOver="return tooltip('Enviado por <b><c:out value='${mensaje.usuario}' /></b> el <fmt:formatDate  value="${mensaje.fecha_envio.time}" type="both" pattern="dd-MM-yyyy" />');" 
+						onMouseOut="return hideTip();">
 						<td  height="20" width="20" style="color: #44659B;padding-bottom:2px;" align="center" valign="middle">
 							<img src="<%=request.getContextPath()%>/img/mas_portal.gif" />
 						</td>
@@ -210,7 +210,7 @@
 </c:when>
 
 <c:when test="${servicio == 'servicio_apuntes'}">
-	<!-- MENSAJES-->
+	<!-- ANOTACIONES-->
 	<table width="100%" cellpadding="2" cellspacing="0" style="table-layout: fixed;">
 		<c:forEach var="anotacion" items="${anotaciones}">
 			<tr>
@@ -236,5 +236,47 @@
 	</table>
 	<span id="servicio_apuntes_descripcion_origen" style="display:none;"></span>
 </c:when>
+
+<c:when test="${servicio == 'servicio_foros'}">
+	<!-- FOROS-->
+	
+	
+	
+</c:when>
+
+<c:when test="${servicio == 'servicio_agenda'}">
+	<!-- AGENDA-->
+	
+	
+	
+</c:when>
+
+<c:when test="${servicio == 'servicio_enlaces'}">
+	<!-- ENLACES-->
+	
+	<div style="overflow-x: hidden;overflow-y: auto; max-height: 200px;">
+		<table cellpadding="2" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
+			<tr>
+				<td align="left" class="texto1"> <a href="http://www.educa.edu.pe/" target="_blank" class="link_curso">EDUCA SOLUCIONES SAC</a></td>
+			</tr>
+			<tr>
+				<td align="left" class="texto"> <a href="http://www.educa.edu.pe/jommla/" target="_blank" class="link_curso">Revista Digital</a></td>
+			</tr>			
+			<tr>
+				<td align="left" class="texto1"> <a href="http://www.educa.edu.pe/moodle/" target="_blank" class="link_curso">Plataforma LMS</a></td>
+			</tr>
+		</table>
+	</div>
+	<span id="servicio_enlaces_descripcion_origen" style="display:none;"></span>
+	
+</c:when>
+
+<c:when test="${servicio == 'servicio_biblioteca'}">
+	<!-- BIBLIOTECA-->
+	
+	
+	
+</c:when>
+
 
 </c:choose>

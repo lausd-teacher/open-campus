@@ -317,7 +317,7 @@ tr.roweven {
 
 #columns .column .block .box{
 	/*min-height: 100px;*/
-	color: #aaaaaa;
+	/*color: #aaaaaa;*/
 	text-align: center;
 }
 
@@ -340,6 +340,24 @@ tr.roweven {
 	color:#FFF; 
 	font-weight: bold;
 	text-indent: 3px;
+}
+
+/*
+ * Anatips
+ */
+div#anatips_tip { 
+	border: 1px solid #7EAAD1; 
+	visibility: hidden; 
+	background-color: #B0D4E9; 
+	color:white; 
+	position: absolute; 
+	z-index: 100;
+	padding: 2px 3px; 
+	font-weight:bold;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; 
+	font-size: 8pt;
+	opacity: 0.9; 
+	filter: alpha(opacity=90);
 }
 
 /*

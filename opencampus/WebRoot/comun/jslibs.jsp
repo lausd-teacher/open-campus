@@ -5,6 +5,12 @@
 <script language="javascript" type="text/javascript"
 	src="<%=request.getContextPath()%>/js/prototype.js"></script>
 <script language="javascript" type="text/javascript"
+	src="<%=request.getContextPath()%>/js/scriptaculous/scriptaculous.js?load=builder,effects,dragdrop"></script>
+<script language="javascript" type="text/javascript"
 	src="<%=request.getContextPath()%>/js/jComponente.js"></script>
+<script language="javascript" type="text/javascript"
+	src="<%=request.getContextPath()%>/js/anatips.js"></script>
+<script language="javascript" type="text/javascript"
+	src="<%=request.getContextPath()%>/js/skinnytip.js"></script>  
 <script language="javascript" type="text/javascript"
 	src="<%=request.getContextPath()%>/js/util.js"></script>
