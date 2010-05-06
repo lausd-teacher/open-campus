@@ -37,6 +37,11 @@
 	</filter-mapping>
 	<listener>
 		<listener-class>
+			edu.tecsup.lms.listener.OpenCampusContextListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
