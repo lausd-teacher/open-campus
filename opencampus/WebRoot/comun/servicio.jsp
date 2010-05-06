@@ -265,7 +265,7 @@
 			<tr>
 				<td align="left" class="texto1"> <a href="http://www.educa.edu.pe/moodle/" target="_blank" class="link_curso">Plataforma LMS</a></td>
 			</tr>
-		</table>
+		</table><c:out value="${PROYECTO}"></c:out>
 	</div>
 	<span id="servicio_enlaces_descripcion_origen" style="display:none;"></span>
 	

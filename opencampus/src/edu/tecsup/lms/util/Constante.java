@@ -11,6 +11,7 @@ public class Constante {
 	 * CONSTANTES PARA EL REPOSITORIO
 	 */
 
+	public static final String PROYECTO = "OpenCampus";
 	public static final String SLASH = "/";
 	private static final String RUTA_PROYECTO = "opencampus";
 	private static final String RUTA_REPOSITORIO = "/home/";
