@@ -278,7 +278,7 @@ tr.roweven {
 	margin: 5px;
 	min-height: 150px; /* set a min-height to ensure a target dropzone */
 	float: left;
-	width: 222px;
+	width: 221px;
 	border: 1px solid #CCCCCC;
 	padding: 3px;
 }
@@ -315,12 +315,18 @@ tr.roweven {
 	height: 17px;
 }
 
-#columns .column .block .box{
-	/*min-height: 100px;*/
-	/*color: #aaaaaa;*/
+#columns .column .block .box div.demo{
+	min-height: 60px;
+	color: #aaaaaa;
 	text-align: center;
+	font-weight: bold;
+	padding-top: 20px;
 }
 
+#columns .column .block .foot{
+	background-color: #cccccc; 
+	height: 20px;
+}
 
 /***/
 /* ActionMessage */
