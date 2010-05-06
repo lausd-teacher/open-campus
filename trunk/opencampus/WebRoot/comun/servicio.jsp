@@ -44,7 +44,7 @@
 	</c:if>
 	</table>
 	
-	<span id="servicio_curso_descripcion_origen" style="display:none;">
+	<span id="servicio_curso_descripcion_origen" Xstyle="display:none;">
 		<strong><span class="text_rojo"><c:out value="${fn:length(cursos)}"/></span> <s:text name="portal.curso.detalle"/></strong>
 	</span>
 	

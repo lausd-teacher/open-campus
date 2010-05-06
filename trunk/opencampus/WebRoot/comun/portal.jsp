@@ -99,33 +99,14 @@
 									
 									<!-- Contenido -->
 									<div id="box_<c:out value='${servicio.id}' />" class="box" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
-										<br/><img src="<c:out value='${contextPath}'/>/img/cargando.gif" />
+										<center><img src="<c:out value='${contextPath}'/>/img/cargando.gif" /></center>
 									</div>
 									<!-- Fin Contenido -->
-									
-									<div style="background-color: #cccccc; height: 20px;">
-									
-										El pie debe ser parte del contenido
-										
-										<!-- table width="100%" cellpadding="0" cellspacing="0">
-											<tr>
-												<td width="70%" align="left">
-														<label id="<c:out value='${servicio.id}' />_descripcion"
-															style="font-weight: bold; font-size: 100%; padding-left: 5px;">
-															&nbsp;
-														</label>
-												<br></td>
-												<td align="right">
-														<label
-															style="cursor: pointer; font-weight: bold; font-size: 100%; padding-right: 5px;"
-															onclick="abrir_<c:out value='${servicio.id}' />();"
-															class="portal_menu_selecionando">
-															<s:text name="portal.servicios.link"/>
-														</label>
-												<br></td>
-											</tr>
-										</table-->
-											
+									cuando se acerque a los botones de menos y x que se desactive el envento drag de las cajas 
+y cuando onmouseout que se active
+									<div class="foot">
+										<span><a><s:text name="portal.servicios.link"/></a></span>
+										<span><a><s:text name="portal.servicios.link"/></a></span>
 									</div>
 										
 							</div>		
