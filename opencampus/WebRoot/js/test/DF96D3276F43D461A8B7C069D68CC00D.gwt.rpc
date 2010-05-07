@@ -1,8 +1,0 @@
-com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true
-edu.tecsup.gwt.test.client.modelo.ConfiguracionTest, true
-edu.tecsup.gwt.test.client.modelo.TestAlternativaModelo, true
-[Ledu.tecsup.gwt.test.client.modelo.TestAlternativaModelo;, true
-edu.tecsup.gwt.test.client.modelo.TestModelo, true
-edu.tecsup.gwt.test.client.modelo.TestPrevio, true
-[Ledu.tecsup.gwt.test.client.modelo.TestPrevio;, true
-java.lang.String, true

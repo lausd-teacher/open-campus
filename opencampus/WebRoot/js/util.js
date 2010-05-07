@@ -38,19 +38,43 @@ function cerrarVentanas() {
  function mostrarReloj(ahorita){
 	if(ahorita)this.ahorita = ahorita;
 	this.ahorita.setSeconds(this.ahorita.getSeconds()+1);
-	$('top_reloj').update( 'Lima, '+this.ahorita.format('dd-mm-yyyy hh:nn:ss a/p'));
+	if($('top_reloj'))$('top_reloj').update( 'Lima, '+this.ahorita.format('dd-mm-yyyy hh:nn:ss a/p'));
 	setTimeout('mostrarReloj(false)',990);
 }
-
 
 function setZeroString(s_valor){
 	return (s_valor<10)?'0'+s_valor:s_valor;
 }
 
+function verIdiomas(e){
+	xMoveTo('menu_idioma',xPageX(e)-4,xPageY(e)+22);
+	xChangeDisplay('menu_idioma');	
+	changeImage(xGetElementById('arrow_idioma'));
+}
+
+function cambiarIdioma(idioma){
+	var myConn = new XHConn();
+	myConn.connect(xGetContextPath()+"/GuardarIdioma.action?request_locale="+idioma, "POST", null, function (oXML) {location.reload();});
+}
+
+function changeImage(img){
+	var str = img.src;
+	while (str.indexOf("/") != -1)
+	str = str.slice(str.indexOf("/") + 1);
+	
+	var file = str.toLowerCase();
+	str = str.slice(file.indexOf(".") + 1);
+	if(file.indexOf('_out.'+str) === -1){
+		img.src=img.src.replace('.'+str,'_out.'+str);
+	}else{
+		img.src=img.src.replace('_out.'+str,'.'+str); 
+	}
+}
+
 /* Abrir Servicios */
 
 function abrir_servicio_curso(){
-		window.document.location =xGetContextPath() +'/Curso.action';
+		go(xGetContextPath() +'/Curso.action');
 }
 
 function abrir_servicio_noticia(){
@@ -122,31 +146,6 @@ function abrir_servicio_buzon(){
 	campusBuzon.focus();
 }
 
-function verIdiomas(e){
-	xMoveTo('menu_idioma',xPageX(e)-4,xPageY(e)+22);
-	xChangeDisplay('menu_idioma');	
-	changeImage(xGetElementById('arrow_idioma'));
-}
-
-function cambiarIdioma(idioma){
-	var myConn = new XHConn();
-	myConn.connect(xGetContextPath()+"/GuardarIdioma.action?request_locale="+idioma, "POST", null, function (oXML) {location.reload();});
-}
-
-function changeImage(img){
-	var str = img.src;
-	while (str.indexOf("/") != -1)
-	str = str.slice(str.indexOf("/") + 1);
-	
-	var file = str.toLowerCase();
-	str = str.slice(file.indexOf(".") + 1);
-	if(file.indexOf('_out.'+str) === -1){
-		img.src=img.src.replace('.'+str,'_out.'+str);
-	}else{
-		img.src=img.src.replace('_out.'+str,'.'+str); 
-	}
-}
-
 function abrir_servicio_cumpleanos(){
 }
 
@@ -162,6 +161,15 @@ function abrir_servicio_chat(){
 	}catch(e){}
 }
 
+function confirm_delete(){
+	return window.confirm("¿Está seguro que desea eliminar dicho elemento?");
+}
+
+function go(url){
+	window.location.href=url;
+}
+
+/************** Deprecated *****************/
 function nuevoAjax() {
 	var xmlhttp = false;
 	try { 
@@ -268,10 +276,6 @@ function abrirConfiguration() {
 	confWin.focus();	
 }
 
-function go(url,win){	
-	window.open(url,win,"toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes");
-}
-
 function enviarCorreo(idUsuario,titulo) {
 	if(!titulo)titulo='';
 	window.open(xGetContextPath() + "/comun/buzon/NuevoMensaje.action?destino=" + idUsuario+"&titulo="+titulo, "Saludos", "height=350,width=510,scrollbars=no");
@@ -300,12 +304,6 @@ function ocultarNombres() {
 	xHide("nombres");
 }
 
-function confirm_delete(){
-	return window.confirm("¿Está seguro que desea eliminar dicho elemento?");
-}
-function go(url){
-	window.location.href=url;
-}
 function abrirGuiaEstudiante() {	
 	campusGuia = window.open("http://www.tecsup.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
 	campusGuia.focus();	
