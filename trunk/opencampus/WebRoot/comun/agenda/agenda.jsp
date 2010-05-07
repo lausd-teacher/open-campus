@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}' />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,15 +11,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title><s:text name="titulo.campus.virtual" /></title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<c:out value='${contextPath}'/>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"
-			type="text/javascript"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/scriptaculous/scriptaculous.js?load=effects"></script>
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<script language="javascript" type="text/javascript"
 			src="<c:out value='${contextPath}'/>/js/InnerDiv.js"></script>
 		<script language="javascript" type="text/javascript"
@@ -32,9 +26,7 @@
 			src="<c:out value='${contextPath}'/>/js/jscalendar/calendar-es.js"></script>
 		<script type="text/javascript"
 			src="<c:out value='${contextPath}'/>/js/jscalendar/calendar-setup.js"></script>
-			
-		<%@include file="/comun/capas/reloj.jsp"%>
-		
+				
 	</head>
 	<body onresize="resize()"  onscroll="scrolling()" style="margin-top: 8px;">
 		<div id="pop_up" style="width: 300px;">
@@ -100,7 +92,7 @@
 					      flatCallback : dateChanged,
 					      weekNumbers  : false,
 					      showOthers   : true,
-					      date		   : ahorita,
+					      date		   : new Date(<fmt:formatDate  value="${now}" type="both" pattern="yyyy,MM,dd,HH,mm,ss" />),
 					      step		   : 1,
 					      //showsTime	   : true,
 					      //showRowHead  : false,

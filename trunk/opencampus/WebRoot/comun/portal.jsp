@@ -104,7 +104,51 @@
 									<!-- Fin Contenido -->
 									
 									<div class="foot clearfix">
-										<div style="float:left;"><span class="link" onclick="abrir_<c:out value='${servicio.id}' />();"><s:text name="portal.servicios.link"/></span></div>
+										<div style="float:left;">
+											<c:choose>
+											<c:when test="${servicio.id == 'servicio_curso'}">
+												<!-- CURSOS -->
+												<a href="<c:out value='${contextPath}'/>/Curso.action"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_chat'}">
+												<!-- CHAT -->
+												<a href="<c:out value='${contextPath}'/>/chat/Cargar.action" toptions="width= 730, height = 560,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_noticia'}">
+												<!-- NOTICIAS -->
+												<a href="<c:out value='${contextPath}'/>/noticia/Cargar.action" toptions="width= 740, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_cumpleanos'}">
+												<!-- HONOMASTICO -->
+												
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_buzon'}">
+												<!-- MENSAJES-->
+												<a href="<c:out value='${contextPath}'/>/comun/buzon/Buzon.action" toptions="width= 730, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_apuntes'}">
+												<!-- ANOTACIONES-->
+												<a href="<c:out value='${contextPath}'/>/anotacion/Anotacion.action" toptions="width= 420, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_foros'}">
+												<!-- FOROS-->
+												<a href="<c:out value='${contextPath}'/>/foro/Foro.action" toptions="width= 866, height = 560,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_agenda'}">
+												<!-- AGENDA-->
+												<a href="<c:out value='${contextPath}'/>/agenda/Cargar.action" toptions="width= 400, height = 400,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_enlaces'}">
+												<!-- ENLACES-->
+												
+											</c:when>
+											<c:when test="${servicio.id == 'servicio_biblioteca'}">
+												<!-- BIBLIOTECA-->
+												
+											</c:when>
+											</c:choose>
+											
+										</div>
 										<div style="float: right;"><img src="<c:out value='${contextPath}'/>/img/reload.jpg" class="link"
 											alt="<s:text name="portal.servicios.reload"/>" onclick="cargar_servicio('<c:out value='${servicio.id}' />');"/></div>
 									</div>
