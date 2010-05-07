@@ -799,6 +799,75 @@ function xPrintURL(url)
   //ventimp.close();
 }
 
+// Capa negra;
+var DarkPanel = {
+	id : 'DarkPanel',
+	panels :  new Object(),
+	show : function (id,options){
+		if(!id)id=this.id;
+		
+		this.options = {
+			duration	: 1.0, //0.0 sin efecto
+			fn 			: false
+		}
+		
+		Object.extend(this.options, options || {});
+		
+		panel = DarkPanel.panels[id];
+		if(!panel){
+			panel = new Capa(id,this.options);
+			DarkPanel.panels[id] = panel;
+		}
+		if(panel)panel.show();
+	},
+	hide : function (id){
+		if(!id)id=this.id;
+		panel = DarkPanel.panels[id];
+		if(panel)panel.hide();
+	}
+}
+
+var Capa = Class.create();  
+Object.extend(Object.extend(Capa.prototype, Abstract.prototype), {
+	initialize: function(id,options) {
+		this.id = id;     
+		this.options = options;
+		this.capa = new Element('div', { id:id + '_shadow' , className:'select-free shadown'});
+		this.capa.setStyle({	display: 'none' /*,opacity: 0.5*/});
+		this.capa.setStyle({	top: document.viewport.getScrollOffsets().top+'px', left: document.viewport.getScrollOffsets().left+'px', 
+								width: document.viewport.getWidth()+'px', height: document.viewport.getHeight()+'px' }); 
+		//capa.setOpacity(0.5);
+		if("Explorer" === xBrowser.getName() && xBrowser.getVersion() < 7){
+			this.capa.insert(new Element('iframe')); 
+		}
+		this.capa.observe('click', this.hide.bind(this)); 
+		Event.observe(document.onresize ? document : window, 'resize', this.resize.bind(this));
+		Event.observe(window, 'scroll', this.scroll.bind(this));
+		$(document.body).insert(this.capa); 
+		
+		//Ventana modal
+		if($(id)){
+			 if(!$(id).hasClassName('select-free'))$(id).addClassName('select-free');
+			 $(document.body).insert($(id));
+		}
+	},  
+	resize: function() {  
+		this.capa.setStyle({width: document.viewport.getWidth()+'px', height: document.viewport.getHeight()+'px' }); 		
+	},
+	scroll: function() {  
+		this.capa.setStyle({top: document.viewport.getScrollOffsets().top+'px', left: document.viewport.getScrollOffsets().left+'px'}); 
+	},
+	show: function(duration) {  
+		this.capa.appear({ duration: this.options.duration, from: 0, to: 0.6 });
+		if($(this.id)) $(this.id).show();
+	}, 
+	hide: function() {  
+		this.capa.fade({ duration: this.options.duration });
+		if($(this.id)) $(this.id).hide();
+		if(this.options.fn)this.options.fn();
+	}
+}); 
+
 // Crer Elementos Wipe
 function xCreate(element) {
 	return document.createElement(element);

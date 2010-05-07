@@ -28,7 +28,12 @@ en esta AulaVirtualResponsable si no existe matricula se cargan los elementos co
 vista como docente, 
 cuando ingrese al AulaVirtualResponsable si no tiene matricula en la bd se cree una matricula al momento y cuando modifique algo se cree su matricula y se guarde a la bd junto con sus cambios
 
+***en configuracion del portal para el usuario, cuando se acerque a los botones de '+-' y 'x' que se desactive el envento drag de las cajas 
+y cuando onmouseout que se active, ya que el evento drag esta sobreponiendo los botones (en IE8).
 
+*** cuando con javascript contador un usuario pase los 45 minutos recien activar el onunload para con ajax 
+enviar una consulta y ver si hay session, si hay session pasa, sino muestra una ventana modal de login con ajax. 
+Despues de 45 minutos para evitar congestion por cada request.
 
 
 
