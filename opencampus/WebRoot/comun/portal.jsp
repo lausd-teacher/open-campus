@@ -17,8 +17,9 @@
 		<script type="text/javascript">
 			Event.observe(window, 'load', function() {
 				<c:forEach var="servicio" items="${portal}">
-				cargar_servicio('<c:out value='${servicio.id}' />');
-								   // tambien cambiar el estilo de .box, se esta viendo mal cursos (se puso letra gris)
+					<c:if test="${servicio.visible == 1}">
+						cargar_servicio('<c:out value='${servicio.id}' />');
+					</c:if>
 				</c:forEach>
 			});
 		</script>
@@ -99,14 +100,13 @@
 									
 									<!-- Contenido -->
 									<div id="box_<c:out value='${servicio.id}' />" class="box" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
-										<center><img src="<c:out value='${contextPath}'/>/img/cargando.gif" /></center>
 									</div>
 									<!-- Fin Contenido -->
-									cuando se acerque a los botones de menos y x que se desactive el envento drag de las cajas 
-y cuando onmouseout que se active
-									<div class="foot">
-										<span><a><s:text name="portal.servicios.link"/></a></span>
-										<span><a><s:text name="portal.servicios.link"/></a></span>
+									
+									<div class="foot clearfix">
+										<div style="float:left;"><span class="link" onclick="abrir_<c:out value='${servicio.id}' />();"><s:text name="portal.servicios.link"/></span></div>
+										<div style="float: right;"><img src="<c:out value='${contextPath}'/>/img/reload.jpg" class="link"
+											alt="<s:text name="portal.servicios.reload"/>" onclick="cargar_servicio('<c:out value='${servicio.id}' />');"/></div>
 									</div>
 										
 							</div>		

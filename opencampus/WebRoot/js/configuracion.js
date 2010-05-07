@@ -2,6 +2,7 @@ var options = { portal 			: 'columns',
 				editorEnabled 	: true, 
 				saveurl 		: xGetContextPath() +"/portal/GrabarPortal.action" };
 var data 	= {};				
+var servicios_cargados = new Object(); 
 	
 function hideService(img,id,msgMax, msgMin){
 	var block = $(img).up('div').next();
@@ -24,6 +25,8 @@ function hideService(img,id,msgMax, msgMin){
 			}
 		}
 	});	
+	
+	if(!servicios_cargados[id] && !block.visible())cargar_servicio(id);
 	
 }
 
@@ -70,21 +73,53 @@ function configService(chk,id){
 /* Carga Servicios */
 var msg_error = '<strong>Problemas con el servicio</strong>';
 
-function cargar_servicio(id){ 
+function cargar_servicio(id){
+	if(!$('box_'+id))return;
+	$('box_'+id).childElements().each(function(el, indice){el.remove()}); 
+	
 	new Ajax.Request(xGetContextPath() +"/portal/CargarServicio.action", 
 	{
 		method: 'post',
 		parameters: "servicio="+id,
 		onSuccess: function(transport) {
 			if (transport.responseText !== ""){
+				servicios_cargados[id] = true;
   				$('box_'+id).update(transport.responseText);
-  				//xInnerHtml('servicio_curso_descripcion',xInnerHtml('servicio_curso_descripcion_origen'));
 			}else{
 				$('box_'+id).update(msg_error);
 			}
-		}
+		},
+		onLoading : function(){startLoading('box_'+id)},
+    	onComplete : function(){stopLoading('box_'+id)}
 	});
 	
+}
+
+function startLoading(idblock){
+	if(idblock && $(idblock)){
+		if($(idblock+'_loading'))
+			$(idblock+'_loading').show();
+		else
+			$(idblock).insert(new Element('div', { 'class': 'loading_portal', id: idblock+'_loading' }).insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' })));
+	}else{
+		if($('body_loading'))
+			$('body_loading').show();
+		else{
+			$(document.body).insert(new Element('div', { 'class': 'loading_portal_modal', id: 'body_loading' }).insert(new Element('div').insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' }))));
+			DarkPanel.show('body_loading',{duration	: 0.0});
+		}
+	}
+}
+
+function stopLoading(idblock){
+	if(idblock && $(idblock)){
+		if($(idblock+'_loading'))
+			$(idblock+'_loading').hide();
+	}else{
+		if($('body_loading'))
+			$('body_loading').hide();
+			DarkPanel.hide('body_loading');
+	}
 }
 
 

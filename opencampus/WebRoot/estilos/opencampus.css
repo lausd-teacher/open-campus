@@ -252,6 +252,20 @@ tr.roweven {
 	height:3000px/*must have for any big value*/;
 }
 
+.clearfix:after { /*Corrige divs flotantes que sobresalen del contenedor. Poner al div principal class='clearfix'*/
+	content: "."; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;}
+.clearfix {
+	display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
 /***/
 /* ActionError */
 /***/
@@ -311,7 +325,7 @@ tr.roweven {
 	text-align: left;
 	vertical-align: middle;	
 	display: block;
-	width: 214px;
+	width: 213px;
 	height: 17px;
 }
 
@@ -325,7 +339,7 @@ tr.roweven {
 
 #columns .column .block .foot{
 	background-color: #cccccc; 
-	height: 20px;
+	padding: 3px 3px 3px 3px;
 }
 
 /***/
@@ -444,3 +458,39 @@ div#anatips_tip {
 	float: right;
 	text-align: right;
 }
+
+/*
+ * Custom
+ */
+.loading_portal{
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0px;	
+}
+
+.loading_portal_modal{
+	position: absolute;
+	width: 200px; /* ancho de la capa a centrar */
+	/*height: 40px; /* alto de la capa a centrar */
+	top: 50%;
+	left: 50%;
+	margin-left: -100px; /* mitad del ancho de la capa a centrar */
+	margin-top: -20px; /* mitad del alto de la capa a centrar */	
+	
+	padding: 2px;	
+	border: 2px solid #eeeeee;
+}
+
+.loading_portal_modal div{
+	width: 198px; 
+	/*height: 38px; */
+	
+	text-align: center;
+	border: 1px solid #cccccc;
+	background-color: #ffffff;
+}
+.shadown{
+	background-color:#000000;
+}
+
