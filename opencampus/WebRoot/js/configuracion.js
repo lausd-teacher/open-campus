@@ -279,34 +279,35 @@ function cargar_servicio_cumpleanos(){
 }
 var intervalCalendar = null;
 function cargar_servicio_agenda(){
-	importarCSS(xGetContextPath()+'/js/jscalendar/campus.css');
-	importar(xGetContextPath()+'/js/jscalendar/calendar.js');
+	//importarCSS(xGetContextPath()+'/js/jscalendar/campus.css');
+	//importar(xGetContextPath()+'/js/jscalendar/calendar.js');
 	//importar(xGetContextPath()+'/js/jscalendar/calendar-es.js');
 	//importar(xGetContextPath()+'/js/jscalendar/calendar-setup.js');
-				
 	var myConn = new XHConn();
 	var query = function (oXML) { 
 		if (oXML.readyState === 4) {
 			
 				this.intervalCalendar = setInterval("startCalendar('"+oXML.responseText+"')",100);
-				xInnerHtml('servicio_agenda_descripcion','<strong><span class="text_rojo">'+ (oXML.responseText.split('/').length-1) +'</span> evento(s)<strong>');
-				
+				//xInnerHtml('servicio_agenda_descripcion','<strong><span class="text_rojo">'+ (oXML.responseText.split('/').length-1) +'</span> evento(s)<strong>');
+				this.cal = ahorita;
+				this.cal.setMonth(this.cal.getMonth()-1);
 		}
 	};
 	myConn.connect(xGetContextPath()+"/agenda/CargarPortada.action", "POST", null, query);
 }
+
 var startCalendar = function(days){
 	try{
 		if(Calendar){
-			importar(xGetContextPath()+'/js/jscalendar/calendar-setup.js');
-			importar(xGetContextPath()+'/js/jscalendar/calendar-es.js');
-			xInnerHtml('servicio_agenda_td','<div id="cv_agenda" style="width:99%;"></div>');
+			//importar(xGetContextPath()+'/js/jscalendar/calendar-setup.js');
+			//importar(xGetContextPath()+'/js/jscalendar/calendar-es.js');
+			xInnerHtml('box_servicio_agenda','<div id="cv_agenda" style="width:99%;"></div>');
 			Calendar.setup(
 			    {
 			      flat         : "cv_agenda",
 			      weekNumbers  : false,
 			      showOthers   : true,
-			      date		   : ahorita,
+			      date		   : this.cal,
 			      step		   : 1,
 			      //showsTime	   : true,
 			      showRowHead  : true,

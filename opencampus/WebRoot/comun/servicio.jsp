@@ -44,10 +44,6 @@
 	</c:if>
 	</table>
 	
-	<span id="servicio_curso_descripcion_origen" Xstyle="display:none;">
-		<strong><span class="text_rojo"><c:out value="${fn:length(cursos)}"/></span> <s:text name="portal.curso.detalle"/></strong>
-	</span>
-	
 </c:when>
 
 <c:when test="${servicio == 'servicio_chat'}">
@@ -85,9 +81,7 @@
 			</c:if>
 		</table>
 	</div>
-	<span id="servicio_chat_descripcion_origen" style="display:none;">
-		<strong><span class="text_rojo"><c:out value="${fn:length(conectados)}" /></span> <s:text name="portal.chat.detalle"/></strong>
-	</span>
+	
 </c:when>
 
 <c:when test="${servicio == 'servicio_noticia'}">
@@ -127,7 +121,6 @@
 		</c:forEach>
 
 	</table>
-	<span id="servicio_noticia_descripcion_origen" style="display:none;"></span>
 </c:when>
 
 <c:when test="${servicio == 'servicio_cumpleanos'}">
@@ -166,9 +159,7 @@
 			</c:if>
 		</table>
 	</div>
-	<span id="servicio_cumpleanos_descripcion_origen" style="display:none;">
-		<strong><span class="text_rojo"><c:out value="${fn:length(usuarios)}" /></span> <s:text name="portal.cumpleanos.detalle"/></strong>
-	</span>
+	
 </c:when>
 
 <c:when test="${servicio == 'servicio_buzon'}">
@@ -204,9 +195,7 @@
 			</td>
 		</tr>
 	</table>
-	<span id="servicio_buzon_descripcion_origen" style="display:none;">
-		<strong><span class="text_rojo"><c:out value="${fn:length(mensajes)}" /></span> <s:text name="portal.buzon.detalle"/></strong>
-	</span>
+	
 </c:when>
 
 <c:when test="${servicio == 'servicio_apuntes'}">
@@ -234,7 +223,7 @@
 			</tr> 
 		</c:if>
 	</table>
-	<span id="servicio_apuntes_descripcion_origen" style="display:none;"></span>
+	
 </c:when>
 
 <c:when test="${servicio == 'servicio_foros'}">
@@ -267,7 +256,6 @@
 			</tr>
 		</table>
 	</div>
-	<span id="servicio_enlaces_descripcion_origen" style="display:none;"></span>
 	
 </c:when>
 

@@ -14,6 +14,12 @@
 	<head>
 		<s:include value="/comun/jslibs.jsp"/>
 		<script type="text/javascript" src="<c:out value='${contextPath}'/>/js/configuracion.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/js/jscalendar/campus.css" />
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar-es.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar-setup.js"></script>
+
 		<script type="text/javascript">
 			Event.observe(window, 'load', function() {
 				<c:forEach var="servicio" items="${portal}">
@@ -103,6 +109,7 @@
 									</div>
 									<!-- Fin Contenido -->
 									
+									<% boolean modal = false; %>
 									<div class="foot clearfix">
 										<div style="float:left;">
 											<c:choose>
@@ -112,11 +119,22 @@
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_chat'}">
 												<!-- CHAT -->
-												<a href="<c:out value='${contextPath}'/>/chat/Cargar.action" toptions="width= 730, height = 560,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/chat/Cargar.action" toptions="width= 730, height = 560,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_chat()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_noticia'}">
 												<!-- NOTICIAS -->
-												<a href="<c:out value='${contextPath}'/>/noticia/Cargar.action" toptions="width= 740, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/noticia/Cargar.action" toptions="width= 740, height = 550,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_noticia()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_cumpleanos'}">
 												<!-- HONOMASTICO -->
@@ -124,19 +142,46 @@
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_buzon'}">
 												<!-- MENSAJES-->
-												<a href="<c:out value='${contextPath}'/>/comun/buzon/Buzon.action" toptions="width= 730, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/comun/buzon/Buzon.action" toptions="width= 730, height = 550,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_buzon()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_apuntes'}">
 												<!-- ANOTACIONES-->
-												<a href="<c:out value='${contextPath}'/>/anotacion/Anotacion.action" toptions="width= 420, height = 550,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/anotacion/Anotacion.action" toptions="width= 420, height = 550,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_apuntes()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_foros'}">
 												<!-- FOROS-->
-												<a href="<c:out value='${contextPath}'/>/foro/Foro.action" toptions="width= 866, height = 560,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/foro/Foro.action" toptions="width= 866, height = 560,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_foros()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_agenda'}">
 												<!-- AGENDA-->
-												<a href="<c:out value='${contextPath}'/>/agenda/Cargar.action" toptions="width= 400, height = 400,<c:out value="${modal_config1}"/>"><s:text name="portal.servicios.link"/></a>
+												<%if(modal){ %>
+												<a href="<c:out value='${contextPath}'/>/agenda/Cargar.action" toptions="width= 400, height = 400,<c:out value="${modal_config1}"/>">
+												<%}else{ %>
+												<a href="javascript:voind(0);" onclick="abrir_servicio_agenda()">
+												<%} %>
+												<s:text name="portal.servicios.link"/></a>
+												
+												<script type="text/javascript">
+													Event.observe(window, 'load', function() {
+														cargar_servicio_agenda();
+													});
+												</script>
+												
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_enlaces'}">
 												<!-- ENLACES-->
