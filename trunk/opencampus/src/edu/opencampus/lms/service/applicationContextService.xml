@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!--	<bean id="actividadService"-->
+	<!--		class="edu.opencampus.lms.service.ActividadService">-->
+	<!--		<property name="actividadDAO" ref="actividadDAO" />-->
+	<!--	</bean>-->
+	<!--	<bean id="blockService"-->
+	<!--		class="edu.opencampus.lms.service.BlockService">-->
+	<!--		<property name="blockDAO" ref="blockDAO" />-->
+	<!--	</bean>-->
+
+	<bean id="buzonService"
+		class="edu.opencampus.lms.service.BuzonService">
+		<property name="buzonDAO" ref="buzonDAO" />
+	</bean>
+	<bean id="agendaService"
+		class="edu.opencampus.lms.service.AgendaService">
+		<property name="agendaDAO" ref="agendaDAO" />
+	</bean>
+	<bean id="avisoService"
+		class="edu.opencampus.lms.service.AvisoService">
+		<property name="avisoDAO" ref="avisoDAO" />
+	</bean>
+	<!--	<bean id="chatService" class="edu.opencampus.lms.service.ChatService">-->
+	<!--		<property name="chatDAO" ref="chatDAO" />-->
+	<!--	</bean>-->
+
+	<bean id="portalService"
+		class="edu.opencampus.lms.service.PortalService">
+		<property name="portalDAO" ref="portalDAO" />
+	</bean>
+	<bean id="cursoService"
+		class="edu.opencampus.lms.service.CursoService">
+		<property name="cursoDAO" ref="cursoDAO" />
+		<property name="jerarquiaDAO" ref="jerarquiaDAO" />
+	</bean>
+	<bean id="encuestaService"
+		class="edu.opencampus.lms.service.EncuestaService">
+		<property name="encuestaDAO" ref="encuestaDAO" />
+	</bean>
+	<bean id="fichaService"
+		class="edu.opencampus.lms.service.FichaService">
+		<property name="fichaDAO" ref="fichaDAO" />
+		<property name="jerarquiaDAO" ref="jerarquiaDAO" />
+		<property name="aulaVirtualDAO" ref="aulaVirtualDAO" />
+	</bean>
+	<bean id="fichaConfiguracionService"
+		class="edu.opencampus.lms.service.FichaConfiguracionService">
+		<property name="fichaHerramientaDAO" ref="fichaHerramientaDAO" />
+		<property name="fichaRecursoDAO" ref="fichaRecursoDAO" />
+		<property name="fichaUnidadRecursoDAO"
+			ref="fichaUnidadRecursoDAO" />
+		<property name="fichaUnidadDAO" ref="fichaUnidadDAO" />
+	</bean>
+
+	<bean id="foroService" class="edu.opencampus.lms.service.ForoService">
+		<property name="foroDAO" ref="foroDAO" />
+		<property name="foroUsuarioDAO" ref="foroUsuarioDAO" />
+	</bean>
+
+	<bean id="jerarquiaService"
+		class="edu.opencampus.lms.service.JerarquiaService">
+		<property name="jerarquiaDAO" ref="jerarquiaDAO" />
+	</bean>
+	<bean id="laboratorioService"
+		class="edu.opencampus.lms.service.LaboratorioService">
+		<property name="laboratorioDAO" ref="laboratorioDAO" />
+	</bean>
+	<bean id="matriculaService"
+		class="edu.opencampus.lms.service.MatriculaService">
+		<property name="matriculaDAO" ref="matriculaDAO" />
+	</bean>
+	<bean id="ingresoService"
+		class="edu.opencampus.lms.service.IngresoService">
+		<property name="ingresoDAO" ref="ingresoDAO" />
+	</bean>
+
+
+	<!--	<bean id="practicaService"-->
+	<!--		class="edu.opencampus.lms.service.PracticaService">-->
+	<!--		<property name="practicaDAO" ref="practicaDAO" />-->
+	<!--	</bean>-->
+
+	<bean id="publicacionService"
+		class="edu.opencampus.lms.service.PublicacionService">
+		<property name="publicacionDAO" ref="publicacionDAO" />
+	</bean>
+
+	<bean id="silaboService"
+		class="edu.opencampus.lms.service.SilaboService">
+		<property name="silaboDAO" ref="silaboDAO" />
+	</bean>
+	<bean id="testService" class="edu.opencampus.lms.service.TestService">
+		<property name="testDAO" ref="testDAO" />
+	</bean>
+	<bean id="trabajoGrupalService"
+		class="edu.opencampus.lms.service.TrabajoGrupalService">
+		<property name="trabajoGrupalDAO" ref="trabajoGrupalDAO" />
+	</bean>
+	<bean id="trabajoIndividualService"
+		class="edu.opencampus.lms.service.TrabajoIndividualService">
+		<property name="trabajoIndividualDAO"
+			ref="trabajoIndividualDAO" />
+	</bean>
+	<bean id="usuarioService"
+		class="edu.opencampus.lms.service.UsuarioService" scope="prototype">
+		<property name="usuarioDAO" ref="usuarioDAO" />
+		<property name="jerarquiaDAO" ref="jerarquiaDAO" />
+	</bean>
+	<bean id="unidadService"
+		class="edu.opencampus.lms.service.UnidadService">
+		<property name="unidadDAO" ref="unidadDAO" />
+		<property name="jerarquiaDAO" ref="jerarquiaDAO" />
+	</bean>
+
+	<bean id="reporteService"
+		class="edu.opencampus.lms.service.ReporteService">
+		<property name="reporteDAO" ref="reporteDAO" />
+	</bean>
+	<bean id="noticiaService"
+		class="edu.opencampus.lms.service.NoticiaService">
+		<property name="noticiaDAO" ref="noticiaDAO" />
+	</bean>
+	<bean id="dialogoService"
+		class="edu.opencampus.lms.service.DialogoService">
+		<property name="dialogoDAO" ref="dialogoDAO" />
+	</bean>
+	<bean id="debateService"
+		class="edu.opencampus.lms.service.DebateService">
+		<property name="debateDAO" ref="debateDAO" />
+	</bean>
+	<bean id="aulaVirtualService"
+		class="edu.opencampus.lms.service.AulaVirtualService">
+		<property name="aulaVirtualDAO" ref="aulaVirtualDAO" />
+	</bean>
+	<bean id="periodoService"
+		class="edu.opencampus.lms.service.PeriodoService">
+		<property name="periodoDAO" ref="periodoDAO" />
+	</bean>
+	<bean id="etiquetaService"
+		class="edu.opencampus.lms.service.EtiquetaService">
+		<property name="etiquetaDAO" ref="etiquetaDAO" />
+	</bean>
+
+	<bean id="especialidadService"
+		class="edu.opencampus.lms.service.EspecialidadService">
+		<property name="especialidadDAO" ref="especialidadDAO" />
+	</bean>
+
+	<bean id="anotacionService"
+		class="edu.opencampus.lms.service.AnotacionService">
+		<property name="anotacionDAO" ref="anotacionDAO"></property>
+	</bean>
+
+	<bean id="fichaInformeService"
+		class="edu.opencampus.lms.service.FichaInformeService">
+		<property name="fichaInformeDAO" ref="fichaInformeDAO"></property>
+	</bean>
+
+</beans>

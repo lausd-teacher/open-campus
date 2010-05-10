@@ -1,4 +1,4 @@
-<%@page import="edu.tecsup.lms.util.Constante"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <div id="pie">
 	<div>

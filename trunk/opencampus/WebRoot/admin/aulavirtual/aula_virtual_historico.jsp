@@ -2,10 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.Unidad"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.ficha.Unidad"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%
 Usuario usuario = (Usuario) request.getSession().getAttribute(Constante.USUARIO_ACTUAL);
@@ -49,7 +49,7 @@ String n = (String) session.getAttribute("n");
 			<div id="bienvenida">						
 			<table cellspacing="3" border="0" >
 					<tr>
-						<td width="35" align="center" ><img src="<%=request.getContextPath()%>/img/tecsup_menu.gif" valign="top">						</td>
+						<td width="35" align="center" ><img src="<%=request.getContextPath()%>/img/opencampus_menu.gif" valign="top">						</td>
 						<td width="10" class="menu_prin01" align="center">
 							|
 						</td>

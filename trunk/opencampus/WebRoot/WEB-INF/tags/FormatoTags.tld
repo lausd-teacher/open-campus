@@ -9,7 +9,7 @@
 	<tag>
 		<name>Constante</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.ConstanteTag
+			edu.opencampus.lms.etiqueta.ConstanteTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
@@ -27,7 +27,7 @@
 	<tag>
 		<name>DateToString</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.FormatoTag
+			edu.opencampus.lms.etiqueta.FormatoTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>

@@ -55,7 +55,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
     if (con == null || con.isClosed()) {
 		try {
         	DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        	con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.72.12:1521:bdtecsup","campus","virtual");
+        	con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.72.12:1521:bdopencampus","campus","virtual");
 		} catch(SQLException e1) {
 			System.out.println(e1.getMessage());
 
@@ -66,7 +66,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
 
 <HEAD>
 <%  String sWS=request.getContextPath(); %>
-<link rel="stylesheet" type="text/css" href="<%=sWS%>/css/tecsup.css"> 
+<link rel="stylesheet" type="text/css" href="<%=sWS%>/css/opencampus.css"> 
        
 
 </HEAD>

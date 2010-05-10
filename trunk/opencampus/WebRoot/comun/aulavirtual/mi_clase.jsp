@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="edu.tecsup.lms.etiqueta.NumeroOrdenAlfabetico"%>
+<%@page import="edu.opencampus.lms.etiqueta.NumeroOrdenAlfabetico"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@  page import="java.util.Collection"%>
-<%@  page import="edu.tecsup.lms.modelo.aulavirtual.UsuarioMatricula"%>
-<%@  page import="edu.tecsup.lms.modelo.aulavirtual.TipoMatriculaRol"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
-<%@  page import="edu.tecsup.lms.util.Formato"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.aulavirtual.UsuarioMatricula"%>
+<%@  page import="edu.opencampus.lms.modelo.aulavirtual.TipoMatriculaRol"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Formato"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%
 Collection<TipoMatriculaRol> usuarios = (Collection<TipoMatriculaRol>)  request.getAttribute("USUARIOS_MATRICULADOS");
 AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA_ACTUAL);

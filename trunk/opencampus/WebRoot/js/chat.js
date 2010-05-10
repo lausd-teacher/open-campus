@@ -262,7 +262,7 @@ function changeTitle(title){
 function chatActivo(id){
 	try{ 
 		clearInterval(intervarTitle);
-		parent.document.title = 'Campus Virtual de Tecsup';
+		parent.document.title = 'Campus Virtual de opencampus';
 		interval = 's';
 		if(id.split('_').length>1){
 			destino_activo = id.substring(id.indexOf('_')+6,id.length);			

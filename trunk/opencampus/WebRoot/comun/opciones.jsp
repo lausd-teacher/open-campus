@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="edu.tecsup.lms.util.MenuOpciones.Menu"%>
+<%@ page import="edu.opencampus.lms.util.MenuOpciones.Menu"%>
 <%@ page import="java.util.Map"%>
 
 

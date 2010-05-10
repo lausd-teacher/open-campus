@@ -2,20 +2,20 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="edu.tecsup.lms.util.Formato"%>
-<%@ page import="edu.tecsup.lms.util.Constante"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
+<%@ page import="edu.opencampus.lms.util.Constante"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Util"%>
+<%@  page import="edu.opencampus.lms.util.Util"%>
 <%@  page import="java.util.Collection"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.Especialidad"%>
-<%@  page import="edu.tecsup.lms.modelo.Sede"%>
-<%@  page import="edu.tecsup.lms.modelo.Departamento"%>
-<%@  page import="edu.tecsup.lms.modelo.Periodo"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.UsuarioReporte"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.FichaReporte"%>
+<%@ page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.Especialidad"%>
+<%@  page import="edu.opencampus.lms.modelo.Sede"%>
+<%@  page import="edu.opencampus.lms.modelo.Departamento"%>
+<%@  page import="edu.opencampus.lms.modelo.Periodo"%>
+<%@  page import="edu.opencampus.lms.modelo.reporte.UsuarioReporte"%>
+<%@  page import="edu.opencampus.lms.modelo.reporte.FichaReporte"%>
 <%
 			Usuario usuario = (Usuario) request.getSession().getAttribute(
 			Constante.USUARIO_ACTUAL);
@@ -112,12 +112,12 @@
 					if(false && usuario.getRolPredeterminado() != Constante.ROL_CAMPUS_MONITOR_EMPRESA){
 				 %>
 				
-				<form method="post" id="tecsupVirtual">
+				<form method="post" id="opencampusVirtual">
 					<table width="975" border="0" cellpadding="3" cellspacing="0"
 					class="tablaFicha">
 						<tr class="fon_cab">
 							<td colspan="8" class="tit_cab">
-								Auditor&iacute;a Tecsup Virtual
+								Auditor&iacute;a opencampus Virtual
 							</td>
 						</tr>
 						<tr>
@@ -136,7 +136,7 @@
 									</c:forEach>
 								</select>
 								&nbsp;
-								<input type="button" value="Reporte" class="form_button" onclick="if(validarReporte())searchAuditoria('<%=request.getContextPath()%>/reporte/ReporteTecsupVirtual.action')"/>
+								<input type="button" value="Reporte" class="form_button" onclick="if(validarReporte())searchAuditoria('<%=request.getContextPath()%>/reporte/ReporteopencampusVirtual.action')"/>
 							</td>
 							<td align="right">
 								<span id="rango"></span>
@@ -163,7 +163,7 @@
 									value="<%=Formato.getStringDeDateCompleto(hoy).replaceAll("-","/") %>"/>
 							</td>
 							<td>
-								<input type="button" value="Auditoría" class="form_button" onclick="if(validarAuditoria())searchAuditoria('<%=request.getContextPath()%>/reporte/AuditoriaTecsupVirtual.action')"/>
+								<input type="button" value="Auditoría" class="form_button" onclick="if(validarAuditoria())searchAuditoria('<%=request.getContextPath()%>/reporte/AuditoriaopencampusVirtual.action')"/>
 							</td>
 						</tr>
 					</table>

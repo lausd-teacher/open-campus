@@ -360,13 +360,13 @@ function selecionarTodos(theSel) {
 }
 //Auditoria TV
 function searchAuditoria(url){
-	var name = 'TecsupVirtual';
+	var name = 'opencampusVirtual';
 	var width = 800;
 	var height = screen.height-200;
 	var x = (screen.width-width)/2;
 	var y = (screen.height-height)/2;	
 	var PopUp =window.open('', name, "width=" + width + ",height=" + height + ",toolbar=0,location=0,directories=0,status=1,menubar=0,scrollbars=1,resizable=1,top=" + y + ",left=" + x + "");
-	var form = xGetElementById('tecsupVirtual');
+	var form = xGetElementById('opencampusVirtual');
 	form.target=name;
 	form.action = url;
 	form.submit();
@@ -374,7 +374,7 @@ function searchAuditoria(url){
 }
 
 function validarAuditoria(){
-	var form = xGetElementById('tecsupVirtual');
+	var form = xGetElementById('opencampusVirtual');
 	if(form.busquedaFecha1.value.trim() === '')
 		return false;
 	if(form.busquedaFecha2.value.trim() === '')
@@ -387,7 +387,7 @@ function validarAuditoria(){
 }
 
 function validarReporte(){
-	var form = xGetElementById('tecsupVirtual');
+	var form = xGetElementById('opencampusVirtual');
 	if(form.busquedaPeriodo.selectedIndex === 0){
 		alert("Selecione un periodo.");
 		return false;

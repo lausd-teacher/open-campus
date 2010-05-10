@@ -1,5 +1,5 @@
 <%@  page
-	import="edu.tecsup.lms.modelo.Silabo,java.util.*,edu.tecsup.lms.modelo.ficha.Unidad,edu.tecsup.lms.util.Constante"%>
+	import="edu.opencampus.lms.modelo.Silabo,java.util.*,edu.opencampus.lms.modelo.ficha.Unidad,edu.opencampus.lms.util.Constante"%>
 <%
 	response.setContentType("text/plain;charset=ISO-8859-1"); //Para no tener problemas con ñs y tildes
 	response.setHeader("Cache-Control","no-cache"); //HTTP 1.1

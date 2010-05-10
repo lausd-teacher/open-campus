@@ -1,0 +1,73 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="campus-test" namespace="/aulavirtual/test"
+		extends="campus-default">
+
+		<action name="Listar" method="listar"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<result name="success">/docente/test/listar.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Nuevo" method="nuevo"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<result name="success">/docente/test/nuevo.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Crear" method="crear"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<result name="success" type="redirect-action">
+				Listar?idUnidad=${idUnidad}
+			</result>
+			<result name="input">
+				/docente/test/nuevo.jsp
+			</result>
+			<interceptor-ref name="campusfileUpload-images"/>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+
+		<action name="Modificado" method="modificado"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<result name="success">/docente/test/nuevo.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="DescargarImagen" method="descargarImagen"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="Eliminar" method="eliminar"
+			class="edu.opencampus.lms.action.test.GestionarTestAction">
+			<result name="success" type="redirect-action">
+				Listar?idUnidad=${idUnidad}
+			</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Cargar" method="cargar"
+			class="edu.opencampus.lms.action.test.TestAction">
+			<result name="success">/comun/test/inicio.jsp</result>
+			<result name="into">/comun/test/test.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="Ingresar" method="ingresar"
+			class="edu.opencampus.lms.action.test.TestAction">
+			<result name="success">/comun/test/test.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="VerImagen" method="descargarImagen"
+			class="edu.opencampus.lms.action.test.TestAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="Calificar" method="calificar"
+			class="edu.opencampus.lms.action.test.TestAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+		<action name="SalirDelTest" method="salir"
+			class="edu.opencampus.lms.action.test.TestAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
+	</package>
+
+</struts>

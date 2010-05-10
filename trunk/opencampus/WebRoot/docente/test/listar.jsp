@@ -2,9 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.test.TestPregunta"%>
-<%@  page import="edu.tecsup.lms.modelo.test.TestAlternativa"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.test.TestPregunta"%>
+<%@  page import="edu.opencampus.lms.modelo.test.TestAlternativa"%>
 <%@  page import="java.util.Collection"%>
 <%@  page import="java.util.Iterator"%>
 <%@  page import="java.util.Map"%>

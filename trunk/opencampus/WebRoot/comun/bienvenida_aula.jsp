@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%Usuario usuario = (Usuario)session.getAttribute(Constante.USUARIO_ACTUAL); %>
 <div id="menu_principal_alumno">
 <table width="99%" border="0" cellpadding="1" cellspacing="0" class="tabla_sin_layout">

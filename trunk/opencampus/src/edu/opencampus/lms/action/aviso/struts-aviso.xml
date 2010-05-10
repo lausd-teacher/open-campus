@@ -1,0 +1,47 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus-aviso" namespace="/aviso" extends="campus-default">
+
+		<action name="CargarAviso" method="cargarAviso"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>	
+
+	</package>
+	
+	<!-- package name="campus-admin-noticias" namespace="/admin/aviso" extends="campus-default">
+
+		<action name="Cargar" method="cargar"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<result name="success">/admin/aviso/admin_aviso.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Crear" method="crear"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="campusfileUpload-images"/>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Modificar" method="modificar"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="campusfileUpload-images"/>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Eliminar" method="eliminar"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<result name="success" type="redirect-action">Cargar</result>
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+		<action name="CambiarEstado" method="cambiarEstado"
+			class="edu.opencampus.lms.action.aviso.AvisoAction">
+			<interceptor-ref name="soporte-campus"></interceptor-ref>
+		</action>
+		
+	</package-->
+	
+</struts>

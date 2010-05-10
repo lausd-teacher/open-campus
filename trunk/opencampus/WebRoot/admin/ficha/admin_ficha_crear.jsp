@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page errorPage="../../error_action.jsp" %>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>

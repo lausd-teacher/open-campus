@@ -11,7 +11,7 @@
 						<td width="53%" height="20" >
 								<strong>
 									<a class="link_curso" href="<%=request.getContextPath()%>/Portal.action">
-										Tecsup Virtu@l									</a>								</strong> 
+										opencampus Virtu@l									</a>								</strong> 
 								<strong>
 &gt;								</strong>
 								<strong>

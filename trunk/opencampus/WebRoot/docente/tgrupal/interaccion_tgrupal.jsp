@@ -6,8 +6,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 <%
 AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA_ACTUAL);

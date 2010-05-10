@@ -1,12 +1,12 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.util.Formato"%>
 <%@  page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Collection"%>
-<%@page import="edu.tecsup.lms.modelo.reportesecdoc.UsuarioReporteSecDoc"%>
-<%@page import="edu.tecsup.lms.modelo.reportesecdoc.FichaReporteSecDoc"%>
+<%@page import="edu.opencampus.lms.modelo.reportesecdoc.UsuarioReporteSecDoc"%>
+<%@page import="edu.opencampus.lms.modelo.reportesecdoc.FichaReporteSecDoc"%>
 <%
 	Usuario usuario = (Usuario) request.getSession().getAttribute(
 			Constante.USUARIO_ACTUAL);
@@ -92,7 +92,7 @@
 					<tr>
 						<td
 							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-left: solid #7EAAD1 1px;">
-							<%=usuariosReporte.getCodTecsup()%>
+							<%=usuariosReporte.getCodopencampus()%>
 						</td>
 						<td align="left"
 							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">

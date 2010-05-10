@@ -2,8 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.FichaHistorica"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.ficha.FichaHistorica"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%@  page import="java.util.Collection"%>
 <%
 	Collection<FichaHistorica> cursos = (Collection<FichaHistorica>) request

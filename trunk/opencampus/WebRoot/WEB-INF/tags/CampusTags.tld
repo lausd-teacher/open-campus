@@ -8,14 +8,14 @@
 
 	<tag>
 		<name>MenuPortada</name>
-		<tag-class>edu.tecsup.lms.etiqueta.MenuPortadaTag</tag-class>
+		<tag-class>edu.opencampus.lms.etiqueta.MenuPortadaTag</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
 
 	<tag>
 		<name>JerarquiaRutaCompleta</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.JerarquiaRutaCompletaTag
+			edu.opencampus.lms.etiqueta.JerarquiaRutaCompletaTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
@@ -34,7 +34,7 @@
 	<tag>
 		<name>Formato</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.FormatoTag
+			edu.opencampus.lms.etiqueta.FormatoTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
@@ -53,7 +53,7 @@
 	<tag>
 		<name>RSS</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.RSSTag
+			edu.opencampus.lms.etiqueta.RSSTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
@@ -71,7 +71,7 @@
 	<tag>
 		<name>TextoToNumero</name>
 		<tag-class>
-			edu.tecsup.lms.etiqueta.NumeroOrdenAlfabetico
+			edu.opencampus.lms.etiqueta.NumeroOrdenAlfabetico
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>

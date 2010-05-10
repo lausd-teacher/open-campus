@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<jsp:directive.page import="edu.tecsup.lms.modelo.tindividual.TrabajoIndividualMatricula"/>
+<jsp:directive.page import="edu.opencampus.lms.modelo.tindividual.TrabajoIndividualMatricula"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

@@ -184,7 +184,7 @@
 				<tr>
 					<td valign="top" class="textstatic" style="padding: 10px;text-align: justify;" >
 						<p>
-							El <strong>Campus Virtual de Tecsup</strong> les da la bienvenida a este Foro 
+							El <strong>Campus Virtual de opencampus</strong> les da la bienvenida a este Foro 
 							para que puedan expresar sus consultas y dudas sobre temas relacionados
 							a cada tópico.
 						</p>
@@ -192,8 +192,8 @@
 							Estas son las reglas básicas, por favor, tómese un tiempo en leerlas. 
 							Usted debe respetarlas para permitir un buen ambiente de trabajo y desarrollo personal. 
 							Las personas que no cumplan con estas reglas pueden recibir sanciones que de acuerdo a la 
-							gravedad de la falta que evalúa el Comité de Disciplina de <strong>Tecsup</strong> ,  van desde la advertencia, 
-							suspensiones de acceso, hasta la expulsión total de <strong>Tecsup</strong>.
+							gravedad de la falta que evalúa el Comité de Disciplina de <strong>opencampus</strong> ,  van desde la advertencia, 
+							suspensiones de acceso, hasta la expulsión total de <strong>opencampus</strong>.
 						</p>
 						<p>
 							<ol>

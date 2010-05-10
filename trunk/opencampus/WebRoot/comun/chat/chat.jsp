@@ -6,7 +6,7 @@
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
 <%@ page import="java.util.Collection"%>
-<%@ page import="edu.tecsup.lms.modelo.Usuario"%>
+<%@ page import="edu.opencampus.lms.modelo.Usuario"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}' />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

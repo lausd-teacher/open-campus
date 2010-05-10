@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%
 	Usuario usuario = (Usuario) request.getSession().getAttribute(

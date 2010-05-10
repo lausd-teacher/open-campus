@@ -1,10 +1,10 @@
-AgendaTecsup = function(){
+Agendaopencampus = function(){
 	currentDate = null;
-	eventosTecsup = new Array();
+	eventosopencampus = new Array();
 	daysOfCurrentMonthCell = null;
 };
 
-var agendaTecsup = new AgendaTecsup();
+var agendaopencampus = new Agendaopencampus();
 
 function mostrarAgendaForm(){
 	xGetElementById('evento_form').reset(); 
@@ -49,7 +49,7 @@ function mostrarAgendaParaModificar(agenda){
 function dateChanged(calendar) {
 	if (calendar.dateClicked) {
 		calendar.dateClicked = false;
-		agendaTecsup.currentDate =  calendar.date.print("%d-%m-%Y");
+		agendaopencampus.currentDate =  calendar.date.print("%d-%m-%Y");
 		xInnerHtml('agenda_curDate', 'Eventos para el '+calendar.date.print("%d de %B"));
 		//xInnerHtml('agenda_curDate_title', calendar.date.print("%d"));
 		
@@ -57,7 +57,7 @@ function dateChanged(calendar) {
 		var query = function (oXML) { 
 			if (oXML.readyState === 4) {
 				var xml = oXML.responseXML;
-				agendaTecsup.eventosTecsup = new Array();
+				agendaopencampus.eventosopencampus = new Array();
 				xInnerHtml('agenda_ver_head',calendar.date.print("%A, %d de %B de %Y"));
 				xInnerHtml('agenda_events','');
 				xShowD('agenda_table');
@@ -76,7 +76,7 @@ function dateChanged(calendar) {
 			}
 		};
 			
-		myConn.connect(xGetContextPath()+"/agenda/Eventos.action", "POST", 'date=' + agendaTecsup.currentDate, query);
+		myConn.connect(xGetContextPath()+"/agenda/Eventos.action", "POST", 'date=' + agendaopencampus.currentDate, query);
 		
 	}
 }
@@ -124,15 +124,15 @@ function guardarEvento(form){
 	var detalle = form.detalle.value.stripWithSpace().substring(0,512);
 	var hora = (form.hora.value < 10) ? ("0" + parseFloat(form.hora.value)) : form.hora.value;
 	var minuto = (form.minuto.value < 10) ? ("0" + parseFloat(form.minuto.value)) : form.minuto.value;
-	var date = agendaTecsup.currentDate+' '+hora+':'+minuto;
+	var date = agendaopencampus.currentDate+' '+hora+':'+minuto;
 	
 	//Validar si la fecha ya esta en uso
-	for(var i=0; i<agendaTecsup.eventosTecsup.length; i=i+1) {
-		if(agendaTecsup.eventosTecsup[i].fecha == date){
+	for(var i=0; i<agendaopencampus.eventosopencampus.length; i=i+1) {
+		if(agendaopencampus.eventosopencampus[i].fecha == date){
 			if(cmd == '0'){
 				alert('Ya cuenta con un evento en la misma hora y minuto.');
 				return false;
-			}else if(agendaTecsup.eventosTecsup[i].fecha != cmd){
+			}else if(agendaopencampus.eventosopencampus[i].fecha != cmd){
 				alert('Ya cuenta con un evento en la misma hora y minuto.');
 				return false;
 			}
@@ -166,7 +166,7 @@ function guardarEvento(form){
 					agenda.fecha = date;
 					agenda.notify = (notify) ? 1 : 0;
 					agenda.minutos = minutoAntes;
-					if(agendaTecsup.eventosTecsup.length === 0){
+					if(agendaopencampus.eventosopencampus.length === 0){
 						var curdate = this.ahorita ? new Date(this.ahorita) : new Date();
 						var dateTmp = new Date();
 						dateTmp.setDate(1);
@@ -182,24 +182,24 @@ function guardarEvento(form){
 							getCellofDay(parseFloat(agenda.getDay())).className = "day specialday";
 						}
 					}
-					agendaTecsup.eventosTecsup.push(agenda);
+					agendaopencampus.eventosopencampus.push(agenda);
 					paintEvents(xGetElementById('agenda_events'), agenda);
 				}else{
-					for(var i=0; i<agendaTecsup.eventosTecsup.length; i=i+1) {
-						if(agendaTecsup.eventosTecsup[i].fecha === cmd){
-							var listTitle = xGetElementById('list_title_'+agendaTecsup.eventosTecsup[i].getHourID());
-							var listBody  = xGetElementById('list_body_'+agendaTecsup.eventosTecsup[i].getHourID());
+					for(var i=0; i<agendaopencampus.eventosopencampus.length; i=i+1) {
+						if(agendaopencampus.eventosopencampus[i].fecha === cmd){
+							var listTitle = xGetElementById('list_title_'+agendaopencampus.eventosopencampus[i].getHourID());
+							var listBody  = xGetElementById('list_body_'+agendaopencampus.eventosopencampus[i].getHourID());
 							
-							agendaTecsup.eventosTecsup[i].fecha = date;
-							agendaTecsup.eventosTecsup[i].sumilla = sumilla;
-							agendaTecsup.eventosTecsup[i].detalle = detalle;
-							agendaTecsup.eventosTecsup[i].notify = (notify) ? 1 : 0;
-							agendaTecsup.eventosTecsup[i].minutos = minutoAntes;
+							agendaopencampus.eventosopencampus[i].fecha = date;
+							agendaopencampus.eventosopencampus[i].sumilla = sumilla;
+							agendaopencampus.eventosopencampus[i].detalle = detalle;
+							agendaopencampus.eventosopencampus[i].notify = (notify) ? 1 : 0;
+							agendaopencampus.eventosopencampus[i].minutos = minutoAntes;
 							
-							listTitle.innerHTML = agendaTecsup.eventosTecsup[i].getTime() + ' hs';
-							listBody.innerHTML = agendaTecsup.eventosTecsup[i].sumilla;
-							listTitle.id = 'list_title_' + agendaTecsup.eventosTecsup[i].getHourID();
-							listBody.id = 'list_body_' + agendaTecsup.eventosTecsup[i].getHourID();
+							listTitle.innerHTML = agendaopencampus.eventosopencampus[i].getTime() + ' hs';
+							listBody.innerHTML = agendaopencampus.eventosopencampus[i].sumilla;
+							listTitle.id = 'list_title_' + agendaopencampus.eventosopencampus[i].getHourID();
+							listBody.id = 'list_body_' + agendaopencampus.eventosopencampus[i].getHourID();
 							break;
 						}
 					}
@@ -269,9 +269,9 @@ function changeNotify(check){
 }
 
 function getCellofDay(day){
-	for(var i=0; i<agendaTecsup.daysOfCurrentMonthCell.length; i=i+1) {
-		if(agendaTecsup.daysOfCurrentMonthCell[i].innerHTML == day){
-			return agendaTecsup.daysOfCurrentMonthCell[i];
+	for(var i=0; i<agendaopencampus.daysOfCurrentMonthCell.length; i=i+1) {
+		if(agendaopencampus.daysOfCurrentMonthCell[i].innerHTML == day){
+			return agendaopencampus.daysOfCurrentMonthCell[i];
 		}
 	}
 }
@@ -282,12 +282,12 @@ function eliminarEvento(agenda,divEvento){
 	var query = function (oXML) { 
 		if (oXML.readyState === 4) {
 			if(oXML.responseText === "OK"){
-				for(var i=agendaTecsup.eventosTecsup.length-1; i>=0; i=i-1) {
-					if(agendaTecsup.eventosTecsup[i] === agenda){
-						agendaTecsup.eventosTecsup.splice(i,1);
+				for(var i=agendaopencampus.eventosopencampus.length-1; i>=0; i=i-1) {
+					if(agendaopencampus.eventosopencampus[i] === agenda){
+						agendaopencampus.eventosopencampus.splice(i,1);
 					}
 				}
-				if(agendaTecsup.eventosTecsup.length === 0){
+				if(agendaopencampus.eventosopencampus.length === 0){
 					getCellofDay(parseFloat(agenda.getDay())).className = "day";
 				}
 				divEvento.parentNode.removeChild(divEvento);
@@ -309,7 +309,7 @@ function ourDateStatusFunc(calendar) {
 	xHide('agenda_form');
 	xHide('agenda_ver');
 	
-	agendaTecsup.daysOfCurrentMonthCell = calendar.daysOfCurrentMonth;
+	agendaopencampus.daysOfCurrentMonthCell = calendar.daysOfCurrentMonth;
 	
 	if(yearTmp != calendar.date.print("%Y")){
 		yearTmp = calendar.date.print("%Y");
@@ -445,7 +445,7 @@ function showEvents(xml){
 		agenda.notify = evento.getElementsByTagName("notify")[0].childNodes[0].nodeValue;
 		agenda.minutos = evento.getElementsByTagName("minutos")[0].childNodes[0].nodeValue;
 		
-		agendaTecsup.eventosTecsup.push(agenda);
+		agendaopencampus.eventosopencampus.push(agenda);
 		
 		paintEvents(div,agenda);
 		
