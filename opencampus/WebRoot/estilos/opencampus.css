@@ -109,7 +109,7 @@ body {
 }
 .open_grid{
 	border: 1px solid #CCCCCC;
-	padding: 3px;
+	padding: 0px;
 	background-image: url("../img/bg_grid.gif");
 }
 .open_grid .line{
@@ -288,13 +288,20 @@ tr.roweven {
 /*
  * Portal
   */
+#columns{
+	
+}
 #columns .column{
 	margin: 5px;
-	min-height: 150px; /* set a min-height to ensure a target dropzone */
+	min-height: 100px; /* set a min-height to ensure a target dropzone */
 	float: left;
-	width: 221px;
+	width: 222px;
 	border: 1px solid #CCCCCC;
 	padding: 3px;
+}
+#columns .column_static{
+	width: 225px; !important;
+	border: 0px; !important;
 }
 #columns .draghandle{
 	cursor: move;
@@ -314,7 +321,6 @@ tr.roweven {
 	font-size: 11px;
 	font-weight: bold;
 	text-transform: uppercase;
-	padding: 3px 3px 0px 3px;
 	margin: 0px;
 	background-color: #cccccc;
 	background-image: url(../img/bg_table_caption.gif);
@@ -325,10 +331,25 @@ tr.roweven {
 	text-align: left;
 	vertical-align: middle;	
 	display: block;
-	width: 213px;
-	height: 17px;
+	width: 100%;
+	height: 20px;
 }
 
+#columns .column .block .draghandle .head_icon{
+	float: left;
+	padding: 2px 3px 3px 3px;
+}
+#columns .column .block .draghandle .head_title{
+	float: left;
+	padding: 4px 3px 0px 3px;
+}
+#columns .column .block .draghandle .head_btn{
+	float: right;
+	padding: 4px 4px 0px 0px;
+}
+#columns .column .block .box {
+	
+}
 #columns .column .block .box div.demo{
 	min-height: 60px;
 	color: #aaaaaa;
@@ -336,7 +357,6 @@ tr.roweven {
 	font-weight: bold;
 	padding-top: 20px;
 }
-
 #columns .column .block .foot{
 	background-color: #cccccc; 
 	padding: 3px 3px 3px 3px;

@@ -246,13 +246,13 @@
 	<div style="overflow-x: hidden;overflow-y: auto; max-height: 200px;">
 		<table cellpadding="2" cellspacing="0" width="100%" class="tabla_sin_layout" border="0">
 			<tr>
-				<td align="left" class="texto1"> <a href="http://www.educa.edu.pe/" target="_blank" class="link_curso">EDUCA SOLUCIONES SAC</a></td>
+				<td align="left" class="texto1" style="border: 0px;"> <a href="http://www.educa.edu.pe/" target="_blank" class="link_curso">EDUCA SOLUCIONES SAC</a></td>
 			</tr>
 			<tr>
-				<td align="left" class="texto"> <a href="http://www.educa.edu.pe/jommla/" target="_blank" class="link_curso">Revista Digital</a></td>
+				<td align="left" class="texto" style="border: 0px;"> <a href="http://www.educa.edu.pe/jommla/" target="_blank" class="link_curso">Revista Digital</a></td>
 			</tr>			
 			<tr>
-				<td align="left" class="texto1"> <a href="http://www.educa.edu.pe/moodle/" target="_blank" class="link_curso">Plataforma LMS</a></td>
+				<td align="left" class="texto1" style="border: 0px;"> <a href="http://www.educa.edu.pe/moodle/" target="_blank" class="link_curso">Plataforma LMS</a></td>
 			</tr>
 		</table>
 	</div>
