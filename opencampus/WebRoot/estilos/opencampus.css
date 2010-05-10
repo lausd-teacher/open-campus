@@ -29,16 +29,16 @@ body {
 	background-color: #E5FEC1; !important
 }
 
-.open_table .border-top{
+.open_table .border-top, .open_table .border-t{
 	border-top: solid #CCCCCC 1px;
 }
-.open_table .border-bottom{
+.open_table .border-bottom, .open_table .border-b{
 	border-bottom: solid #CCCCCC 1px;
 }
-.open_table .border-right{
+.open_table .border-right, .open_table .border-r{
 	border-right: solid #CCCCCC 1px;
 }
-.open_table .border-left{
+.open_table .border-left, .open_table .border-l{
 	border-left: solid #CCCCCC 1px;
 }
 .open_table caption {
@@ -513,4 +513,9 @@ div#anatips_tip {
 .shadown{
 	background-color:#000000;
 }
+
+/*
+ * Mis Datos
+ */
+ 
 

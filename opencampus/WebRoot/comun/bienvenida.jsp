@@ -11,10 +11,10 @@
 		<tr>
 			<td width="20" align="center">
 				<a href="<%=request.getContextPath()%>/Portal.action"><img src="<%=request.getContextPath()%>/img/icon_config.gif" 
-					alt="<s:text name="titulo.campus.virtual"/>" border="0"/></a>
+					alt="<s:text name="portal.menu.inicio"/>" border="0"/></a>
 			</td>
 			<td width="80">
-				<span id="top_campus"><s:text name="titulo.campus.virtual_corto"/></span>
+				<span id="top_campus" class="anatips" title="<s:text name="titulo.campus.virtual"/>"><s:text name="titulo.campus.virtual_corto"/></span>
 			</td>
 			<td width="5" align="center">|</td>
 			<td>

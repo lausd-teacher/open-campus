@@ -109,7 +109,8 @@ public abstract class BaseAction extends ActionSupport implements ServletRequest
 	
 	public void setIdiomaSession(String idioma) {
 		getSession().put(Constante.IDIOMA_ATRIBUTO,new Locale(idioma));
-		
+		getSession().put("javax.servlet.jsp.jstl.fmt.locale.session", new Locale(idioma));
+		//jstl-fmt:setLocale: En lugar de usar <fmt:setLocale value='${sessionScope["WW_TRANS_I18N_LOCALE"]}' scope="session"/>
 	}
 
 	public void prepare() throws Exception {
