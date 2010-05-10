@@ -276,7 +276,7 @@ public class PortalAction extends BaseAction {
 		try{
 			
 			portalService.guardarIdioma(getUsuarioSession().getId(), request_locale);
-			//getSession().setAttribute("WW_TRANS_I18N_LOCALE",request_locale); 
+			setIdiomaSession(request_locale); 
 			
 		}catch (Exception e) {
 			log.error(e);

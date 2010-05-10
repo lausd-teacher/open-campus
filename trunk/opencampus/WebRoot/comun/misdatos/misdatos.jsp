@@ -1,214 +1,183 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page errorPage="../../error_action.jsp" %>
-<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
-<%@  page import="edu.opencampus.lms.modelo.usuario.Persona"%>
-<%@  page import="edu.opencampus.lms.modelo.usuario.Rol"%>
-<%@  page import="edu.opencampus.lms.util.Constante"%>
-<%@  page import="edu.opencampus.lms.util.Formato"%>
-<%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
+<%@ page errorPage="/error_action.jsp"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@page import="edu.opencampus.lms.modelo.usuario.Persona"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.modelo.usuario.Rol"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	Usuario usuario = (Usuario) request.getSession().getAttribute(Constante.USUARIO_ACTUAL);
-	Persona p = usuario.getPersona();
-	//Empresa e = usuario.getEmpresa(); 
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1">
-		<title><s:text name="titulo.campus.virtual" />
-		</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script type="text/javascript"
-			src='<%=request.getContextPath()%>/js/md5.js'></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/cambioclave.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/js/jPrototype.js'> </script>
-		<link href="<%=request.getContextPath()%>/comun/misdatos/misdatos.css"
-			rel="stylesheet" type="text/css">
-		<script type="text/javascript"
+		<script language="javascript" type="text/javascript" 
 			src='<%=request.getContextPath()%>/comun/misdatos/misdatos.js'></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/tooltip/tooltip.js"></script>
+			
 	</head>
 	<body>
-		<div id="contenedor">
+		<div id="container">
+		
+			<s:include value="/comun/bienvenida.jsp"/>
 			
-			<%@include file="../bienvenida.jsp"%>
+			<div id="body">
+			
+					<%
+						Usuario usuario = (Usuario) request.getSession().getAttribute(Constante.USUARIO_ACTUAL);
+						Persona p = usuario.getPersona();
+						//Empresa e = usuario.getEmpresa(); 
+					%>
+			
+					<s:include value="/error_message.jsp"/>
+			
+					<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
+						<caption><s:text name="portal.misdatos.titulo"/> </caption> 
+						<tbody>
+							<tr>
+								<td class="border-right" width="100" >
+									<b><s:text name="portal.misdatos.contenido.usuario"/></b>
+								</td>
+								<td class="border-right">
+									<%=usuario.getUsuario()%>&nbsp;&nbsp;&nbsp;<font color="#cccccc">(<%=usuario.getIdToString()%>)</font>
+								</td>
+								<td class="border-right" width="100">
+									<b><s:text name="portal.misdatos.contenido.fechanac"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.calendarToString(p.getFecnacimiento(),Constante.FECHA_DIA_MES_ANO)%>
+								</td>
+								<td rowspan="6" align="center" valign="top" width="89">
+									<img src="<%=request.getContextPath() %>/MiFoto.action" width="85" border="0"> 
+								</td>
+							</tr>
+							<tr class="line">
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.nombres"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTexto(p.getNomuno())%>
+									<%=Formato.formatoTexto(p.getNomdos())%>
+								</td>
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.telefono"/></b>
+								</td>
+								<td class="border-right" id="telefono">
+									<%=Formato.formatoTextoNull(p.getTeldomicilio())%>
+								</td>
+							</tr>
+							<tr >
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.paterno"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTexto(p.getApepaterno())%>
+								</td>
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.celular"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTextoNull(p.getTelcelular())%>&nbsp;
+								</td>
+							</tr>
+							<tr  class="line">
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.materno"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTexto(p.getApematerno())%>
+								</td>
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.direccion"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTextoNull(p.getDirdomicilio())%>
+								</td>
 
-			<div id="cuerpo">
-				<div id="principal">
-					<table width="99%" cellpadding="0" cellspacing="0" border="0"
-						class="tabla01">
-						<tr class="fon_tit_curso">
-							<td class="tit_cab" height="20">
-								<s:text name="portal.misdatos.titulo"/>
-							</td>
-						</tr>
-						<tr>
-							<td valign="top">
-								<table width="100%" cellpadding="3" cellspacing="0" border="0"
-									class="tabla_sin_layout">
-									<tr>
-										<td class="texto1" width="100" >
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.usuario"/></strong>
-										</td>
-										<td class="texto1" width="160" >
-											<%=usuario.getUsuario()%>&nbsp;&nbsp;&nbsp;<font color="#cccccc">(<%=usuario.getIdToString()%>)</font>
-										</td>
-										<td class="texto1" width="100">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.fechanac"/></strong>
-										</td>
-										<td class="texto1" width="200">
-											<%=Formato.calendarToString(p.getFecnacimiento(),Constante.FECHA_DIA_MES_ANO)%>
-										</td>
-										<td rowspan="6" align="center" valign="middle" width="100">
-											
-											<img src="<%=request.getContextPath() %>/MiFoto.action" width="85" border="0"> 
-											
-										</td>
-									</tr>
-									<tr>
-										<td class="texto">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.nombres"/></strong>
-										</td>
-										<td class="texto">
-											<%=Formato.formatoTexto(p.getNomuno())%>
-											<%=Formato.formatoTexto(p.getNomdos())%>
-										</td>
-										<td class="texto">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.telefono"/></strong>
-										</td>
-										<td class="texto" id="telefono">
-											<%=Formato.formatoTextoNull(p.getTeldomicilio())%>
-										</td>
-									</tr>
-									<tr >
-										<td class="texto1">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.paterno"/></strong>
-										</td>
-										<td class="texto1">
-											<%=Formato.formatoTexto(p.getApepaterno())%>
-										</td>
-										<td align="left" class="texto1">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.celular"/></strong>
-										</td>
-										<td align="left" class="texto1" id="celular">
-											<%=Formato.formatoTextoNull(p.getTelcelular())%>&nbsp;
-										</td>
-									</tr>
-									<tr >
-										<td class="texto">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.materno"/></strong>
-										</td>
-										<td class="texto">
-											<%=Formato.formatoTexto(p.getApematerno())%>
-										</td>
-										<td class="texto" valign="top">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.direccion"/></strong>
-										</td>
-										<td class="texto">
-											<span
-												onmouseover="verToolTip('<%=Formato.formatoTextoNull(p.getDirdomicilio())%>', this);"
-												onmouseout="ocultarToolTip()"> <%=Formato.formatoTextoNull(p.getDirdomicilio())%></span>
-										</td>
-
-									</tr>
-									<tr >
-										<td class="texto1" valign="top">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.sexo"/></strong>
-										</td>
-										<td class="texto1" valign="top">
-											<%=Formato.formatoTexto(p.getSexoCompleto())%>
-										</td>
-										<td align="left" class="texto1">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.ubicacion"/></strong>
-										</td>
-										<td align="left" class="texto1">
-											<span
-												onmouseover="verToolTip('<%=Formato.formatoTexto(p.getUbigeo().getNombreCompleto())%>', this);"
-												onmouseout="ocultarToolTip()"><%=Formato.formatoTexto(p.getUbigeo().getNombreCompleto())%></span>
-										</td>
-									</tr>
-									<tr >
-										<td class="texto" valign="top">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.grupo"/></strong>
-										</td>
-										<td class="texto" valign="top">
-											<%
-												for (Rol rol : usuario.getRoles()) {
-													out.println(rol.getNombre() + "<br>");
-												}
-											%>&nbsp;
-										</td>
-										<td align="left" class="texto" valign="top">
-											<strong class="textstatic"><s:text name="portal.misdatos.contenido.correo"/></strong>
-										</td>
-										<td align="left" class="texto" valign="top">
-											<div id="theMail"><%
-														String[] correos = new String[0];
-														if (p.getEmail() != null) {
-															correos = p.getEmail().split(",");
-															if (correos.length == 1) {
-																out.println(correos[0].trim());
-															} else {
-																for (int u = 0; u < correos.length; u++) {
-																	out.println(correos[u].trim() + "<br/>");
-																}
-															}
+							</tr>
+							<tr >
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.sexo"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTexto(p.getSexoCompleto())%>
+								</td>
+								<td class="border-right">
+									<b><s:text name="portal.misdatos.contenido.ubicacion"/></b>
+								</td>
+								<td class="border-right">
+									<%=Formato.formatoTexto(p.getUbigeo().getNombreCompleto())%>
+								</td>
+							</tr>
+							<tr  class="line">
+								<td class="border-right" valign="top">
+									<b><s:text name="portal.misdatos.contenido.grupo"/></b>
+								</td>
+								<td class="border-right" valign="top">
+									<%
+										for (Rol rol : usuario.getRoles()) {
+											out.println(rol.getNombre() + "<br>");
+										}
+									%>&nbsp;
+								</td>
+								<td  class="border-right" valign="top">
+									<b><s:text name="portal.misdatos.contenido.correo"/></b>
+								</td>
+								<td  class="border-right" valign="top">
+									<div id="theMail"><%
+												String[] correos = new String[0];
+												if (p.getEmail() != null) {
+													correos = p.getEmail().split(",");
+													if (correos.length == 1) {
+														out.println(correos[0].trim());
+													} else {
+														for (int u = 0; u < correos.length; u++) {
+															out.println(correos[u].trim() + "<br/>");
 														}
-													%></div>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-					<center>
-								<strong><c:out value="${message}"></c:out> </strong></center>
-					<table align="right" style="margin-right: 10px;">
-						<tr>
-							<td colspan="3">
-								<strong><c:out value="${aviso}"></c:out> </strong>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<input id="buttonMod" value="<s:text name="portal.misdatos.botones.solicitar"/>"
-									type="button" onClick="verPanelCambioDatos(this)"
-									class="form_button" style="width: 160px;" />
-							</td>
-							<td>
-								<input id="buttonMod" value="<s:text name="portal.misdatos.botones.cambiar"/>" type="button"
-									onClick="javascript:verPanelCambioPassword();"
-									class="form_button" style="width: 110px;" />
-							</td>
-							<td>
-								<input class="form_button" onClick="verPanelCambioCorreo();"
-									id="button_editar" type="button" value="<s:text name="portal.misdatos.botones.modificar"/>"
-									style="width: 120px;" />
-							</td>
-						</tr>
-					</table>
-				</div>
+													}
+												}
+											%></div>
+								</td>
+							</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5" align="right">
+										<input value="<s:text name="portal.misdatos.botones.solicitar"/>"
+											type="button" onClick="verPanelCambioDatos(this)" />
+									
+										<input value="<s:text name="portal.misdatos.botones.cambiar"/>" type="button"
+											onClick="javascript:verPanelCambioPassword();"/>
+									
+										<input onClick="verPanelCambioCorreo();"
+											type="button" value="<s:text name="portal.misdatos.botones.modificar"/>" />
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+							
+							
 			</div>
-			<div id="pie">
-				<%@include file="../pie.jsp"%>
-			</div>
+			
+			<s:include value="/comun/pie.jsp"/>
+			
 		</div>
+		
 		<!--  *******************************  CAMBIAR CLAVE *********************************** -->
+		<script type="text/javascript">
+			Event.observe(window, 'load', function() {
+				setDIVs() ;
+			});
+		</script>
 		<div id="div_reinicio">
 		</div>
 		<div id="form_div_reinicio">
@@ -474,8 +443,6 @@
 				</tr>
 			</table>
 		</div>
-		<script type="text/javascript">
-				setDIVs();
-		</script>
+		
 	</body>
 </html>

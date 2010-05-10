@@ -478,3 +478,17 @@
 	
 	border: 1px solid #007ACA;
 }
+
+.modificarDatos{
+	position: absolute;
+	background-color: white;
+	visibility: hidden;
+	z-index: 1;
+	width: 350px; /* ancho de la capa a centrar */
+	height: 200px; /* alto de la capa a centrar */
+	top: 50%;
+	left: 50%;
+	margin-left: -175px; /* mitad del ancho de la capa a centrar */
+	margin-top: -100px; /* mitad del alto de la capa a centrar */	
+	
+}

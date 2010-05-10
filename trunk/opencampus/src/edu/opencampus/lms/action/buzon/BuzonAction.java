@@ -845,7 +845,7 @@ public class BuzonAction extends BaseAction {
 			m.setCarpeta("E");
 			m.setTipo("R");
 			buzonService.guardarMensajeUsuario(m);
-			setMessage("La solicitud ha sido enviado a soporte.");
+			addActionMessage("La solicitud ha sido enviado a soporte.");
 			
 		}
 		return SUCCESS;

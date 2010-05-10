@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title><s:text name="titulo.campus.virtual" /></title>
 <link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />		
