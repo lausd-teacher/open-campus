@@ -76,7 +76,7 @@
 							<tr>
 								<td>
 
-									<div id="columns">
+									<div id="columns" class="clearfix">
 									
 										<div id="column-1" class="column"></div>
 										
@@ -99,52 +99,48 @@
 														<div class="draghandle">
 														
 															<!-- Encabezado -->
-															<table cellpadding="0" cellspacing="0" width="100%" border="0" >
-																<tr>
-																	<td align="left" width="20">
-																		<img height="15" src="<c:out value='${contextPath}' />/img/icons/<c:out value="${servicio.id}"/>.gif"
-																			alt="<fmt:message key="${servicio.nombre}"/>" />
-																	</td>
-																	<td align="left">
-																		<b><fmt:message key="${servicio.nombre}"/></b>
-																	</td>
-																	<td width="15">
+															<div class="head_icon">
+																<img height="15" src="<c:out value='${contextPath}' />/img/icons/<c:out value="${servicio.id}"/>.gif"
+																	alt="<fmt:message key="${servicio.nombre}"/>" />
+															</div>
+															<div class="head_title">
+																<b><fmt:message key="${servicio.nombre}"/></b>
+															</div>
+															<div class="head_btn">
+																<c:choose>
+																	<c:when test="${servicio.permisoMinimizar == 1}">
 																		<c:choose>
-																			<c:when test="${servicio.permisoMinimizar == 1}">
-																				<c:choose>
-																				<c:when test="${servicio.visible == 0}">
-																					<img
-																						src="<c:out value='${contextPath}'/>/img/mas.jpg"
-																						alt="<s:text name="portal.servicio.comentario.maximizar"/>" style="cursor: pointer;"
-																						onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
-																				</c:when>
-																				<c:otherwise>
-																					<img
-																						src="<c:out value='${contextPath}'/>/img/menos.jpg"
-																						alt="<s:text name="portal.servicio.comentario.minimizar"/>" style="cursor: pointer;"
-																						onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
-																				</c:otherwise>
-																			</c:choose>	
-																			</c:when>
-																			<c:otherwise>
-																				<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
-																			</c:otherwise>
-																		</c:choose>
-																	</td>
-																	<td width="15">
-																		<c:choose>
-																			<c:when test="${servicio.permisoEliminar == 1}">
-																				<img src="<c:out value='${contextPath}'/>/img/cerrar.jpg"
-																					alt="<s:text name="portal.servicio.comentario.cerrar"/>" style="cursor: pointer;"
-																					onClick="removeService('<c:out value='${servicio.id}' />');">
-																			</c:when>
-																			<c:otherwise>
-																				<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
-																			</c:otherwise>
-																		</c:choose>
-																	</td>
-																</tr>
-															</table>
+																		<c:when test="${servicio.visible == 0}">
+																			<img
+																				src="<c:out value='${contextPath}'/>/img/mas.jpg"
+																				alt="<s:text name="portal.servicio.comentario.maximizar"/>" style="cursor: pointer;"
+																				onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
+																		</c:when>
+																		<c:otherwise>
+																			<img
+																				src="<c:out value='${contextPath}'/>/img/menos.jpg"
+																				alt="<s:text name="portal.servicio.comentario.minimizar"/>" style="cursor: pointer;"
+																				onClick="hideService(this,'<c:out value='${servicio.id}' />','<s:text name="portal.servicio.comentario.maximizar"/>','<s:text name="portal.servicio.comentario.minimizar"/>');">
+																		</c:otherwise>
+																	</c:choose>	
+																	</c:when>
+																	<c:otherwise>
+																		<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
+																	</c:otherwise>
+																</c:choose>
+															</div>
+															<div class="head_btn">
+																<c:choose>
+																	<c:when test="${servicio.permisoEliminar == 1}">
+																		<img src="<c:out value='${contextPath}'/>/img/cerrar.jpg"
+																			alt="<s:text name="portal.servicio.comentario.cerrar"/>" style="cursor: pointer;"
+																			onClick="removeService('<c:out value='${servicio.id}' />');">
+																	</c:when>
+																	<c:otherwise>
+																		<img src="<c:out value='${contextPath}'/>/img/nada.jpg">
+																	</c:otherwise>
+																</c:choose>
+															</div>
 															<!-- Fin encabezado -->
 															
 														</div>
@@ -155,29 +151,12 @@
 														</div>
 														<!-- Fin Contenido -->
 														
-														<div style="background-color: #cccccc; height: 20px;">
-														
-															El pie debe ser parte del contenido
-															
-															<!-- table width="100%" cellpadding="0" cellspacing="0">
-																<tr>
-																	<td width="70%" align="left">
-																			<label id="<c:out value='${servicio.id}' />_descripcion"
-																				style="font-weight: bold; font-size: 100%; padding-left: 5px;">
-																				&nbsp;
-																			</label>
-																	<br></td>
-																	<td align="right">
-																			<label
-																				style="cursor: pointer; font-weight: bold; font-size: 100%; padding-right: 5px;"
-																				onclick="abrir_<c:out value='${servicio.id}' />();"
-																				class="portal_menu_selecionando">
-																				<s:text name="portal.servicios.link"/>
-																			</label>
-																	<br></td>
-																</tr>
-															</table-->
-																
+														<div class="foot clearfix">
+															<div style="float:left;">
+																<a href="javascript:void(0);"><s:text name="portal.servicios.link"/></a>
+															</div>
+															<div style="float: right;"><img src="<c:out value='${contextPath}'/>/img/reload.jpg" class="link"
+																alt="<s:text name="portal.servicios.reload"/>" onclick="cargar_servicio('<c:out value='${servicio.id}' />');"/></div>
 														</div>
 															
 												</div>		

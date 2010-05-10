@@ -187,9 +187,11 @@ function mouseMoveHandler(e) {
 function mouseX(evt) {
 	if (evt.pageX) return evt.pageX;
 	else if (evt.clientX) {
-	   return evt.clientX + (document.documentElement.scrollLeft ?
-	   document.documentElement.scrollLeft :
-	   document.body.scrollLeft);
+		try{
+		   return evt.clientX + (document.documentElement.scrollLeft ?
+		   document.documentElement.scrollLeft :
+		   document.body.scrollLeft);
+		}catch(e){ return evt.clientX}
 	}
 	else {
 		return null;
@@ -202,9 +204,11 @@ function mouseY(evt) {
 		return evt.pageY; 
 	}
 	else if (evt.clientY) {
-	   return evt.clientY + (document.documentElement.scrollTop ?
-	   document.documentElement.scrollTop :
-	   document.body.scrollTop);
+		try{
+		   return evt.clientY + (document.documentElement.scrollTop ?
+		   document.documentElement.scrollTop :
+		   document.body.scrollTop);
+		}catch(e){ return evt.clientY}
 	}
 	else { 
 		return null;

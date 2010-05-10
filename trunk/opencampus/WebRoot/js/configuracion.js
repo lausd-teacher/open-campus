@@ -5,7 +5,7 @@ var data 	= {};
 var servicios_cargados = new Object(); 
 	
 function hideService(img,id,msgMax, msgMin){
-	var block = $(img).up('div').next();
+	var block = $(img).up('.draghandle').next();
 	
 	new Ajax.Request(xGetContextPath() +"/portal/OcultarServicio.action", 
 	{
@@ -90,28 +90,33 @@ function cargar_servicio(id){
 			}
 		},
 		onLoading : function(){startLoading('box_'+id)},
-    	onComplete : function(){stopLoading('box_'+id)}
+    	onComplete : function(){stopLoading['box_'+id]}
 	});
 	
 }
 
+var load_complete = new Object();
+
 function startLoading(idblock){
-	if(idblock && $(idblock)){
-		if($(idblock+'_loading'))
-			$(idblock+'_loading').show();
-		else
-			$(idblock).insert(new Element('div', { 'class': 'loading_portal', id: idblock+'_loading' }).insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' })));
-	}else{
-		if($('body_loading'))
-			$('body_loading').show();
-		else{
-			$(document.body).insert(new Element('div', { 'class': 'loading_portal_modal', id: 'body_loading' }).insert(new Element('div').insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' }))));
-			DarkPanel.show('body_loading',{duration	: 0.0});
+	if(!this.load_complete['box_'+id]){
+		if(idblock && $(idblock)){
+			if($(idblock+'_loading'))
+				$(idblock+'_loading').show();
+			else
+				$(idblock).insert(new Element('div', { 'class': 'loading_portal', id: idblock+'_loading' }).insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' })));
+		}else{
+			if($('body_loading'))
+				$('body_loading').show();
+			else{
+				$(document.body).insert(new Element('div', { 'class': 'loading_portal_modal', id: 'body_loading' }).insert(new Element('div').insert(new Element('img', { src: xGetContextPath()+'/img/cargando.gif' }))));
+				DarkPanel.show('body_loading',{duration	: 0.0});
+			}
 		}
 	}
 }
 
 function stopLoading(idblock){
+	this.load_complete('box_'+id) = true;
 	if(idblock && $(idblock)){
 		if($(idblock+'_loading'))
 			$(idblock+'_loading').hide();
