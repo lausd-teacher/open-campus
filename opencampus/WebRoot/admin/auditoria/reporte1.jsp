@@ -10,8 +10,8 @@
 
 
 <%
-	final String URL = "jdbc:oracle:thin:@192.168.72.12:1521:bdtecsup";
-	//final String URL = "jdbc:oracle:thin:@192.168.68.101:1521:bdtecsup";
+	final String URL = "jdbc:oracle:thin:@192.168.72.12:1521:bdopencampus";
+	//final String URL = "jdbc:oracle:thin:@192.168.68.101:1521:bdopencampus";
 
 	Connection con = null;
 	java.sql.Statement stmt = null;
@@ -92,7 +92,7 @@
 		<%
 		String sWS = request.getContextPath();
 		%>
-		<link rel="stylesheet" type="text/css" href="<%=sWS%>/css/tecsup.css">
+		<link rel="stylesheet" type="text/css" href="<%=sWS%>/css/opencampus.css">
 		<meta http-equiv="Expires=-1" content="text/html; charset=iso-8859-1">
 		<script src="fecha.js"></script>
 		<script>

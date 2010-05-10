@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.util.Formato"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.util.Formato"%>
 <%@  page import="java.util.GregorianCalendar"%>
 <%@  page import="java.util.Calendar"%>
 <%@  page import="java.text.DateFormatSymbols"%>
 <%@  page import="java.util.Collection"%>
 <%@  page import="java.util.Iterator"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.MatriculaGTest"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.MatriculaGTest"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.MatriculaGTrabajo"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.MatriculaGTrabajo"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.MatriculaGLaboratorio"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.MatriculaGLaboratorio"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.MatriculaGTrabajoGrupal"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.MatriculaGTrabajoGrupal"%>
 <%@  page
-	import="edu.tecsup.lms.modelo.aulavirtual.reporte.MatriculaGDialogo"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
+	import="edu.opencampus.lms.modelo.aulavirtual.reporte.MatriculaGDialogo"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
 
 
 <%

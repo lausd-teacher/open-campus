@@ -17,12 +17,12 @@
     	
     	<property name="annotatedClasses">
 	     <list>
-	       <value>edu.tecsup.lms.modelo.Anotacion</value>
-	       <value>edu.tecsup.lms.modelo.BaseModelo</value>
-	       <!-- value>edu.tecsup.lms.modelo.foro.Mensaje</value>
-	       <value>edu.tecsup.lms.modelo.foro.Tema</value>
-	       <value>edu.tecsup.lms.modelo.ficha.informe.FichaInforme</value>
-	       <value>edu.tecsup.lms.modelo.ficha.informe.FichaInformeDetalle</value-->
+	       <value>edu.opencampus.lms.modelo.Anotacion</value>
+	       <value>edu.opencampus.lms.modelo.BaseModelo</value>
+	       <!-- value>edu.opencampus.lms.modelo.foro.Mensaje</value>
+	       <value>edu.opencampus.lms.modelo.foro.Tema</value>
+	       <value>edu.opencampus.lms.modelo.ficha.informe.FichaInforme</value>
+	       <value>edu.opencampus.lms.modelo.ficha.informe.FichaInformeDetalle</value-->
 	     </list>
 	   </property>
 	</bean>

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="edu.tecsup.lms.util.Constante"%>
-<%@page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@page import="edu.tecsup.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

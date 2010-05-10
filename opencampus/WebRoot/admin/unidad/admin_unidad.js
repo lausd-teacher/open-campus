@@ -366,9 +366,9 @@ function trim(str){
 }
 //*************************************************************************************//
 
-var consTipo1 = "tecsup";
+var consTipo1 = "opencampus";
 var consTipo2 = "scrom";
-var tipoUnidad = "tecsup";
+var tipoUnidad = "opencampus";
 var controlUnidad = "mixto";
 
 function controlUnidadSelecionar(control) {

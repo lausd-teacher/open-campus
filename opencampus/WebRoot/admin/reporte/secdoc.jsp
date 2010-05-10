@@ -3,15 +3,15 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="edu.tecsup.lms.util.Constante"%>
-<%@page import="edu.tecsup.lms.util.Util"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
+<%@page import="edu.opencampus.lms.util.Util"%>
 <%@page import="java.util.Collection"%>
-<%@page import="edu.tecsup.lms.modelo.Sede"%>
-<%@page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.Periodo"%>
+<%@page import="edu.opencampus.lms.modelo.Sede"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.Periodo"%>
 <%@page
-	import="edu.tecsup.lms.modelo.reportesecdoc.UsuarioReporteSecDoc"%>
-<%@page import="edu.tecsup.lms.modelo.reportesecdoc.FichaReporteSecDoc"%>
+	import="edu.opencampus.lms.modelo.reportesecdoc.UsuarioReporteSecDoc"%>
+<%@page import="edu.opencampus.lms.modelo.reportesecdoc.FichaReporteSecDoc"%>
 <%
 	Collection<UsuarioReporteSecDoc> usuariosSecDoc = (Collection<UsuarioReporteSecDoc>) request
 			.getAttribute("USUARIOS_BUSQUEDA");
@@ -306,7 +306,7 @@
 							+ "</strong> - "
 							+ usuarioReporte.getNombreCompleto()%>', this);"
 												onmouseout="ocultarToolTip()">
-												<strong><%=usuarioReporte.getCodTecsup()%></strong> -
+												<strong><%=usuarioReporte.getCodopencampus()%></strong> -
 												<%=usuarioReporte.getNombreCompleto()%>
 											</label>
 										</td>

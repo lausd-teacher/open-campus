@@ -2,21 +2,21 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%@  page import="java.util.Collection"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.util.Util"%>
-<%@  page import="edu.tecsup.lms.modelo.Especialidad"%>
-<%@  page import="edu.tecsup.lms.modelo.usuario.Rol"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.util.Util"%>
+<%@  page import="edu.opencampus.lms.modelo.Especialidad"%>
+<%@  page import="edu.opencampus.lms.modelo.usuario.Rol"%>
 
-<%@  page import="edu.tecsup.lms.modelo.Sede"%>
-<%@  page import="edu.tecsup.lms.modelo.Departamento"%>
-<%@  page import="edu.tecsup.lms.modelo.Periodo"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.Etiqueta"%>
-<%@  page import="edu.tecsup.lms.modelo.Ficha"%>
-<%@  page import="edu.tecsup.lms.modelo.Curso"%>
-<%@  page import="edu.tecsup.lms.util.Formato"%>
+<%@  page import="edu.opencampus.lms.modelo.Sede"%>
+<%@  page import="edu.opencampus.lms.modelo.Departamento"%>
+<%@  page import="edu.opencampus.lms.modelo.Periodo"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.ficha.Etiqueta"%>
+<%@  page import="edu.opencampus.lms.modelo.Ficha"%>
+<%@  page import="edu.opencampus.lms.modelo.Curso"%>
+<%@  page import="edu.opencampus.lms.util.Formato"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%
 	Usuario usuario = (Usuario) request.getSession().getAttribute(

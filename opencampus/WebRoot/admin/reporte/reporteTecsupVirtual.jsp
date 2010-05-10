@@ -23,7 +23,7 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="93%" style="color:black;">
-							<strong>Auditoria Tecsup Virtual </strong>
+							<strong>Auditoria opencampus Virtual </strong>
 						</td>
 						<td width="5%">
 							<a href="#" class="salir" onClick="window.print()">Imprimir</a>
@@ -52,7 +52,7 @@
 				<c:choose>
 				<c:when test="${fn:length(REPORTE)>0}">
 					<div style="text-align: center; padding: 20px;">
-						<div><img src="<%=request.getContextPath()%>/img/logoTecsupVirtual.jpg" alt="O Tecsup Virtual"></div>
+						<div><img src="<%=request.getContextPath()%>/img/logoopencampusVirtual.jpg" alt="O opencampus Virtual"></div>
 						<div>
 							<span style="font-size: 12px;"><strong>Reporte <c:out value="${PERIODO.nombre}"/></strong></span>
 							<br/>

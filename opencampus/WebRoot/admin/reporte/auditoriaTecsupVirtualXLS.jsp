@@ -1,6 +1,6 @@
 <%
 	response.setContentType("application/vnd.ms-excel;charset=ISO-8859-1"); //Para no tener problemas con ñs y tildes
-	edu.tecsup.lms.modelo.Periodo periodo = (edu.tecsup.lms.modelo.Periodo)request.getAttribute("PERIODO");;
+	edu.opencampus.lms.modelo.Periodo periodo = (edu.opencampus.lms.modelo.Periodo)request.getAttribute("PERIODO");;
 	response.setHeader( "Content-Disposition", "inline;filename=\"Auditoria_TV_"+((periodo!=null)?periodo.getIdPeriodo():0)+".xls\"" );
 	response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
@@ -8,7 +8,7 @@
 %>
 <%@ page language="java" contentType="application/vnd.ms-excel; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.GregorianCalendar"%>
-<%@page import="edu.tecsup.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -16,7 +16,7 @@
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@  page import="java.util.Collection"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.TecsupVirtualReporte"%>
+<%@  page import="edu.opencampus.lms.modelo.reporte.opencampusVirtualReporte"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,7 +24,7 @@
 <title><s:text name="titulo.campus.virtual" />
 </title>
 <%
-	Collection<TecsupVirtualReporte> auditoria = (Collection<TecsupVirtualReporte>)request.getAttribute("AUDITORIA");
+	Collection<opencampusVirtualReporte> auditoria = (Collection<opencampusVirtualReporte>)request.getAttribute("AUDITORIA");
  %>
 </head>
 	<body link="#000000" vlink="#000000" alink="#000000" >
@@ -72,7 +72,7 @@
 	                            </tr>
 	                            <%
 	                            	int fila = 0;
-	                            	for(TecsupVirtualReporte item : auditoria){
+	                            	for(opencampusVirtualReporte item : auditoria){
 	                            	
 	                            	%>
 	                            	

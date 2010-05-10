@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Campus Virtual de Tecsup</title>
+		<title>Campus Virtual de opencampus</title>
 		<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
@@ -19,7 +19,7 @@
 						<td width="4%">&nbsp;							
 						</td>
 						<td width="96%">
-							<strong style="color:#333333">Campus Virtu@l Tecsup</strong>
+							<strong style="color:#333333">Campus Virtu@l opencampus</strong>
 						</td>
 					</tr>
 				</table>
@@ -114,7 +114,7 @@
                               <td>&nbsp;</td>
                             </tr>
                           </table></td>
-                          <td align="right" valign="bottom"><img src="<%=request.getContextPath()%>/img/tecsup.jpg" width="286" height="342"></td></tr>
+                          <td align="right" valign="bottom"><img src="<%=request.getContextPath()%>/img/opencampus.jpg" width="286" height="342"></td></tr>
                       </table>
 				      </td>
 				  </tr>

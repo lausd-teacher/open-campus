@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.GregorianCalendar"%>
-<%@page import="edu.tecsup.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -8,7 +8,7 @@
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@  page import="java.util.Collection"%>
-<%@  page import="edu.tecsup.lms.modelo.reporte.TecsupVirtualReporte"%>
+<%@  page import="edu.opencampus.lms.modelo.reporte.opencampusVirtualReporte"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,7 +24,7 @@
 		<script type="text/javascript"
 			src='<%=request.getContextPath()%>/js/aula_virtual.js'></script>
 <%
-	Collection<TecsupVirtualReporte> auditoria = (Collection<TecsupVirtualReporte>)request.getAttribute("AUDITORIA");
+	Collection<opencampusVirtualReporte> auditoria = (Collection<opencampusVirtualReporte>)request.getAttribute("AUDITORIA");
  %>
 </head>
 	<body link="#000000" vlink="#000000" alink="#000000" >
@@ -33,7 +33,7 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="93%" style="color:black;">
-							<strong>Auditoria Tecsup Virtual </strong>
+							<strong>Auditoria opencampus Virtual </strong>
 						</td>
 						<td width="5%">
 							<a href="#" class="salir" onClick="window.print()">Imprimir</a>
@@ -62,7 +62,7 @@
 				<c:choose>
 				<c:when test="${fn:length(AUDITORIA)>0}">
 					<div style="text-align: center; padding: 20px;">
-						<div><img src="<%=request.getContextPath()%>/img/logoTecsupVirtual.jpg" alt="O Tecsup Virtual"></div>
+						<div><img src="<%=request.getContextPath()%>/img/logoopencampusVirtual.jpg" alt="O opencampus Virtual"></div>
 						<div>
 							<span style="font-size: 12px;"><strong>Auditoria <c:out value="${PERIODO.nombre}"/></strong></span>
 							<br/>
@@ -101,7 +101,7 @@
 	                              
 	                            </tr>
 	                            <%
-	                            	for(TecsupVirtualReporte item : auditoria){
+	                            	for(opencampusVirtualReporte item : auditoria){
 	                            	
 	                            	%>
 	                            	
@@ -134,7 +134,7 @@
                           </td>
 					  </tr>					
 					  <tr>
-					  	<td height="15"><a href="<%=request.getContextPath()%>/reporte/AuditoriaTecsupVirtualXLS.action?busquedaPeriodo=<c:out value="${busquedaPeriodo}"/>&busquedaFecha1=<c:out value="${busquedaFecha1}"/>&busquedaFecha2=<c:out value="${busquedaFecha2}"/>"><img src="<%=request.getContextPath()%>/img/icon_download.gif" border="0" alt="Descargar Auditoria"> Descargar Excel</a></td>
+					  	<td height="15"><a href="<%=request.getContextPath()%>/reporte/AuditoriaopencampusVirtualXLS.action?busquedaPeriodo=<c:out value="${busquedaPeriodo}"/>&busquedaFecha1=<c:out value="${busquedaFecha1}"/>&busquedaFecha2=<c:out value="${busquedaFecha2}"/>"><img src="<%=request.getContextPath()%>/img/icon_download.gif" border="0" alt="Descargar Auditoria"> Descargar Excel</a></td>
 					  </tr>
 			  		</table>
 			  </c:when>

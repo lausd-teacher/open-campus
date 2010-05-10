@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="edu.tecsup.lms.util.Formato"%>
+<%@page import="edu.opencampus.lms.util.Formato"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -33,7 +33,7 @@
 			<div id="cuerpo" style="background-color: white;">
 				<div id="principal" style="width: 980px;padding-bottom: 7px;">
 			
-				<form method="post" id="tecsupVirtual">
+				<form method="post" id="opencampusVirtual">
 					<table width="975" border="0" cellpadding="3" cellspacing="0"
 					class="tablaFicha">
 						<tr class="fon_cab">
@@ -57,7 +57,7 @@
 									</c:forEach>
 								</select>
 								&nbsp;
-								<input type="button" value="Generar" class="form_button" onclick="if(validarReporte())searchAuditoria('<%=request.getContextPath()%>/reporte/ReporteTecsupVirtual.action')"/>
+								<input type="button" value="Generar" class="form_button" onclick="if(validarReporte())searchAuditoria('<%=request.getContextPath()%>/reporte/ReporteopencampusVirtual.action')"/>
 							</td>
 							<td align="right">
 								<span id="rango"></span>

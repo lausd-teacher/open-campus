@@ -14,7 +14,7 @@
 		        <td colspan="3" class="tit_cab"> Encuesta : <b> </b> </td>
 		      </tr>
 		      <tr>
-		        <td colspan="3"><p>Estimado participante, sírvase responder las siguientes preguntas, que nos  permitirán mejorar los servicios en Tecsup Virtual. Gracias. </p></td>
+		        <td colspan="3"><p>Estimado participante, sírvase responder las siguientes preguntas, que nos  permitirán mejorar los servicios en opencampus Virtual. Gracias. </p></td>
 		      </tr>
 		      <tr class="fon_color01">
 		        <td width="4%">1.</td>
@@ -32,9 +32,9 @@
 		          <tr>
 		            <td><table width="100%" border="0">
 		                <tr bgcolor="#FFFFFF" class="bor_tabla">
-		                  <td align="left">Utilización preferente de la computadora para Tecsup Virtual :</td>
+		                  <td align="left">Utilización preferente de la computadora para opencampus Virtual :</td>
 		                  <td align="left"><select name="p1_p1" size="1" id="p1_p1">
-		                    <option value="1" selected="selected">En Tecsup</option>
+		                    <option value="1" selected="selected">En opencampus</option>
 		                    <option value="2">En casa</option>
 		                    <option value="2">En oficina</option>
 		                    <option value="3">En cabina p&uacute;blica</option>
@@ -247,7 +247,7 @@
 		          <tr>
 		            <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
 		                <tr bgcolor="#FFFFFF" >
-		                  <td class="fon_pregunta" align="left">El acceso a Tecsup Virtual se realizó sin dificultades : </td>
+		                  <td class="fon_pregunta" align="left">El acceso a opencampus Virtual se realizó sin dificultades : </td>
 		                  </tr>
 		                <tr bgcolor="#FFFFFF" class="bor_tabla">
 		                  <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -289,7 +289,7 @@
 		          <tr>
 		            <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
 		                <tr bgcolor="#FFFFFF" >
-		                  <td class="fon_pregunta" align="left">La metodología de Tecsup Virtual me ha permitido : </td>
+		                  <td class="fon_pregunta" align="left">La metodología de opencampus Virtual me ha permitido : </td>
 		                  </tr>
 		                <tr bgcolor="#FFFFFF" class="bor_tabla">
 		                  <td><table width="100%" border="0" cellspacing="0">

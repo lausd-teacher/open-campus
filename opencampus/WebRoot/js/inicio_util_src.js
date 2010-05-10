@@ -25,7 +25,7 @@ function abrir_servicio_agenda(){
 }
 
 function abrir_servicio_biblioteca(){
-	abremelo('PopUp_Biblioteca','http://www.tecsup.edu.pe/library/submitLoginExt.do?frame2=CB04CE07E106C703C602&frame3=D605D50EC502D704D00C&frame1=C502D704D00CD00CCD0E&id=demo&frame4=D00CCD0ECB04CE07E106',866,(screen.height-150>800)?800:screen.height-150);
+	abremelo('PopUp_Biblioteca','http://www.opencampus.edu.pe/library/submitLoginExt.do?frame2=CB04CE07E106C703C602&frame3=D605D50EC502D704D00C&frame1=C502D704D00CD00CCD0E&id=demo&frame4=D00CCD0ECB04CE07E106',866,(screen.height-150>800)?800:screen.height-150);
 }
 
 function abrir_servicio_apuntes(){
@@ -64,7 +64,7 @@ function nuevoAjax() {
 }
 
 function abrirGuiaEstudiante() {	
-	campusGuia = window.open("http://www.tecsup.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
+	campusGuia = window.open("http://www.opencampus.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
 	campusGuia.focus();	
 }
 function cerrarVentanas() {

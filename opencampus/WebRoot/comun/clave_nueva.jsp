@@ -1,5 +1,5 @@
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
 <%Usuario usuario = (Usuario) request.getSession().getAttribute(
 			Constante.USUARIO_ACTUAL);
 			if (Constante.SEGURIDAD_USUARIO_PASSWORD_DEBE_CAMBIAR == usuario

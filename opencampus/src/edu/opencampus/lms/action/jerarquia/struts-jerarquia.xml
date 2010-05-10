@@ -1,0 +1,46 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="campus-jerarquia" extends="campus-default" namespace="/admin/jerarquia">
+	
+ 		<action name="Buscar" method="buscar" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success">/admin/jerarquia/admin_jerarquia_buscar.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+	 	<action name="Crear" method="crear" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<result name="input">/admin/jerarquia/admin_jerarquia_nuevo.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Nuevo" method="nuevo" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success">/admin/jerarquia/admin_jerarquia_nuevo.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+
+		<action name="Editar" method="editar" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success">/admin/jerarquia/admin_jerarquia_editar.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+		<action name="Modificar" method="modificar" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<result name="input">/admin/jerarquia/admin_jerarquia_editar.jsp</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+
+		<action name="Eliminar" method="eliminar" 
+			class="edu.opencampus.lms.action.jerarquia.JerarquiaAction">
+			<result name="success" type="redirect-action">Buscar</result>
+			<interceptor-ref name="administrador-campus"></interceptor-ref>
+		</action>
+		
+	</package>
+
+
+</struts>

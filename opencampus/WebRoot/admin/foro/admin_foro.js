@@ -62,7 +62,7 @@ sedes[2]=new grupo("TRUJ",sede3);
 
 var familias = new Array(3);
 familias[0]=new grupo("PFR",familia1);
-familias[1]=new grupo("Tecsup Virtual",familia2);
+familias[1]=new grupo("opencampus Virtual",familia2);
 familias[2]=new grupo("PCC",familia3);
 
 var formaciones = new Array(9);

@@ -9,10 +9,10 @@
 <%@ page errorPage="../../error_action.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.Unidad"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.ficha.Unidad"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%
 			Usuario usuario = (Usuario) request.getSession().getAttribute(

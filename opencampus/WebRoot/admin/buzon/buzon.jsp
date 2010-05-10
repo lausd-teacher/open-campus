@@ -35,7 +35,7 @@
 			<div id="cuerpo" style="background-color: white;">
 				<div id="principal" style="width: 980px;padding-bottom: 7px;">
 			
-				<form method="post" id="tecsupVirtual" action="<%=request.getContextPath()%>/admin/buzon/LimpiarBuzon.action">
+				<form method="post" id="opencampusVirtual" action="<%=request.getContextPath()%>/admin/buzon/LimpiarBuzon.action">
 					<table width="975" border="0" cellpadding="3" cellspacing="0"
 					class="tablaFicha">
 						<tr class="fon_cab">

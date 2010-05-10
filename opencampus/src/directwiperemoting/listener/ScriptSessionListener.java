@@ -10,7 +10,7 @@ import org.directwebremoting.ScriptSession;
 import org.directwebremoting.extend.RealScriptSession;
 import org.directwebremoting.impl.DefaultScriptSessionManager;
 
-import edu.tecsup.lms.util.UsuariosConectados;
+import edu.opencampus.lms.util.UsuariosConectados;
 
 public class ScriptSessionListener extends DefaultScriptSessionManager{
 	

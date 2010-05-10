@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="edu.tecsup.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
+<%@page import="edu.opencampus.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}' />
-<%@  page import="edu.tecsup.lms.util.Formato"%>
+<%@  page import="edu.opencampus.lms.util.Formato"%>
 <%@  page import="java.util.GregorianCalendar"%>
 <%@  page import="java.util.Calendar"%>
 <%@  page import="java.text.DateFormatSymbols"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.aulavirtual.reporte.ReporteDetalle"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

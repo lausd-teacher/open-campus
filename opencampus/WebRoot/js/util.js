@@ -119,7 +119,7 @@ function abrir_servicio_biblioteca(){
 	height = (height>800)?800:height;
 	var x = (screen.width-width)/2;
 	var y = (screen.height-height)/2;	
-	campusBiblioteca = window.open('http://www.tecsup.edu.pe/library/submitLoginExt.do?frame2=CB04CE07E106C703C602&frame3=D605D50EC502D704D00C&frame1=C502D704D00CD00CCD0E&id=demo&frame4=D00CCD0ECB04CE07E106', name, "width=" + width + ",height=" + height + ",toolbar=0,location=0,directories=0,status=1,menubar=0,scrollbars=1,resizable=1,top=" + y + ",left=" + x + "");
+	campusBiblioteca = window.open('http://www.opencampus.edu.pe/library/submitLoginExt.do?frame2=CB04CE07E106C703C602&frame3=D605D50EC502D704D00C&frame1=C502D704D00CD00CCD0E&id=demo&frame4=D00CCD0ECB04CE07E106', name, "width=" + width + ",height=" + height + ",toolbar=0,location=0,directories=0,status=1,menubar=0,scrollbars=1,resizable=1,top=" + y + ",left=" + x + "");
 	campusBiblioteca.focus();	
 }
 
@@ -305,7 +305,7 @@ function ocultarNombres() {
 }
 
 function abrirGuiaEstudiante() {	
-	campusGuia = window.open("http://www.tecsup.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
+	campusGuia = window.open("http://www.opencampus.edu.pe/webcampus/guia/index.swf", "Guia", "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=0,width=780,height=580,left=" + (screen.availHeight - 780) / 2 + ",top=" + (screen.availWidth - 580) / 2 + "");
 	campusGuia.focus();	
 }
 

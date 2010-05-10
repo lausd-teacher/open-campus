@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
 <%Usuario usuario = (Usuario)session.getAttribute(Constante.USUARIO_ACTUAL); %>
 <div id="avisoback" class="avisoback_red" style="display: none;">
 	<marquee behavior="scroll" scrolldelay="10" scrollamount="2"><span id="aviso">Aviso de prueba</span></marquee>
@@ -17,7 +17,7 @@
 						<td width="53%" height="20" >
 								<strong>
 									<a class="link_curso" href="<%=request.getContextPath()%>/Portal.action">
-										Tecsup Virtu@l									</a>								</strong> 
+										opencampus Virtu@l									</a>								</strong> 
 								<strong>
 &gt;								</strong>
 								<strong>

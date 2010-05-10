@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@  page import="edu.tecsup.lms.modelo.AulaVirtual"%>
-<%@  page import="edu.tecsup.lms.util.Constante"%>
-<%@  page import="edu.tecsup.lms.modelo.ficha.Unidad"%>
-<%@  page import="edu.tecsup.lms.modelo.Usuario"%>
+<%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
+<%@  page import="edu.opencampus.lms.util.Constante"%>
+<%@  page import="edu.opencampus.lms.modelo.ficha.Unidad"%>
+<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
 <%
 	AulaVirtual aula = (AulaVirtual) request.getSession().getAttribute(
 			Constante.AULA_ACTUAL);
@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="Content-Type"
 			content="text/html; charset=ISO-8859-1" />
-		<title><s:text name="Campus Virtual de Tecsup" />
+		<title><s:text name="Campus Virtual de opencampus" />
 		</title>
 		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
 			rel="stylesheet" type="text/css" />
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 		<script language='javascript'
-			src='<%=request.getContextPath()%>/js/test/edu.tecsup.gwt.test.Test.nocache.js'>
+			src='<%=request.getContextPath()%>/js/test/edu.opencampus.gwt.test.Test.nocache.js'>
 		</script>
 	</body>
 </html>

@@ -15,10 +15,10 @@
 	  <param name="beanName" value="modificarDatos"/>
 	</create> -->
 	<!-- converters Utilizados si se quiere enviar el objeto al JS
-    <convert converter="bean" match="edu.tecsup.lms.modelo.Usuario">
+    <convert converter="bean" match="edu.opencampus.lms.modelo.Usuario">
     	<param name="include" value="idUsuario, nombreCompleto, rolPredeterminado, usuarioDato"/>
     </convert>
-    <convert converter="bean" match="edu.tecsup.lms.modelo.usuario.UsuarioDato">
+    <convert converter="bean" match="edu.opencampus.lms.modelo.usuario.UsuarioDato">
    		<param name="include" value="nombreApellidoCorto, nombre1"/>
     </convert>-->    
     
