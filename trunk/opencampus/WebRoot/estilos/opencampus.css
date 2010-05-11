@@ -13,6 +13,8 @@ body {
 	border: solid #CCCCCC 1px;
 	border-right: none;
 	table-layout: fixed;
+	background-color: #ffffff;
+	table-layout: fixed;
 }
 .open_table .noborder{
 	border-right: none; !important
@@ -266,25 +268,6 @@ tr.roweven {
 .clearfix {display: block;}
 /* End hide from IE-mac */
 
-/***/
-/* ActionError */
-/***/
-
-.actionErrorCSS {
-	width: 99%;
-	border: 1px solid #F55; 
-	background-color: #FFFBE8; 
-	color: #F33;
-}
-
-.actionErrorCSS div {
-	border-bottom: 1px solid #F55; 
-	padding: 2px 0px 2px 0px; 
-	background-color: #F55; 
-	color:#FFF; 
-	font-weight: bold;
-	text-indent: 3px;
-}
 /*
  * Portal
   */
@@ -367,7 +350,7 @@ tr.roweven {
 /***/
 
 .actionMessageCSS {
-	width: 99%;
+	width: 100%;
 	border: 1px solid #7EAAD1; 
 	background-color: #E5EFF8; 
 	color: #7EAAD1;
@@ -382,6 +365,25 @@ tr.roweven {
 	text-indent: 3px;
 }
 
+/***/
+/* ActionError */
+/***/
+
+.actionErrorCSS {
+	width: 100%;
+	border: 1px solid #F55; 
+	background-color: #FFFBE8; 
+	color: #F33;
+}
+
+.actionErrorCSS div {
+	border-bottom: 1px solid #F55; 
+	padding: 2px 0px 2px 0px; 
+	background-color: #F55; 
+	color:#FFF; 
+	font-weight: bold;
+	text-indent: 3px;
+}
 /*
  * Anatips
  */
