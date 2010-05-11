@@ -1,3 +1,112 @@
+function disableCtrlKeyCombination(s_input, e) {
+	var key;
+	var isCtrl;
+	if (window.event) {
+		key = window.event.keyCode;     //IE
+		if (window.event.ctrlKey) {
+			isCtrl = true;
+		} else {
+			isCtrl = false;
+		}
+	} else {
+		key = e.which;     //firefox
+		if (e.ctrlKey) {
+			isCtrl = true;
+		} else {
+			isCtrl = false;
+		}
+	}
+	if (isCtrl) {
+		if ("c" == String.fromCharCode(key).toLowerCase()) {
+			return false;
+		}
+		if ("v" == String.fromCharCode(key).toLowerCase()) {
+			s_input.value = "";
+			return false;
+		}
+	}
+	return true;
+}
+
+function validarClave(texto) {
+	var password = new PasswordTest(texto);
+	$("clave_nivel_img").style.width = (password.value * 2.24) + "px";
+}
+
+function passwordnuevo() {
+	var s_button = document.getElementById("form_button_reinicio");
+	s_button.disabled = true;
+	var pass1 = document.getElementById("form_pass1_reinicio");
+	pass1.disabled = true;
+	var pass2 = document.getElementById("form_pass2_reinicio");
+	pass2.disabled = true;
+	var pass3 = document.getElementById("form_pass3_reinicio");
+	pass3.disabled = true;
+	if (trim(pass1.value).length!=0 && trim(pass2.value).length!=0 && trim(pass3.value).length!=0  && trim(pass1.value) == trim(pass2.value)) {
+		var ajax = nuevoAjax();
+		ajax.open("POST", xGetContextPath()  + "/DatosClave.action", true);
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send("clave=" + trim(pass3.value) + "&claveTemp=" + trim(pass1.value));
+		ajax.onreadystatechange = function () {
+			if (ajax.readyState === 4) {
+				var numero = ajax.responseText;
+				if ("0" === numero) {
+					pass1.value = "";
+					pass2.value = "";
+					pass3.value = "";
+					document.getElementById("div_reinicio").style.visibility = "hidden";
+					document.getElementById("form_div_reinicio").style.visibility = "hidden";
+				} else {
+					//alert(ajax.responseText)
+					pass1.value = "";
+					pass2.value = "";
+					pass3.value = "";
+					pass1.disabled = false;
+					pass2.disabled = false;
+					pass3.disabled = false;
+					s_button.disabled = false;
+					var s_err = document.getElementById("form_error");
+					switch (numero) {
+					  case "-1":
+						s_err.innerHTML = "La clave ingresada es muy corta.";
+						break;
+					  case "-2":
+						s_err.innerHTML = "La clave ingresada es muy simple.";
+						break;
+					  case "-3":
+						s_err.innerHTML = "La clave ingresada ya fue usada.";
+						break;
+					  case "-4":
+						s_err.innerHTML = "La clave actual no es la correcta.";
+						break;
+					  case "-5":
+						s_err.innerHTML = "La clave no pudo ser modificada.";
+						break;
+					}
+				}
+			}
+		};
+	} else {
+		pass1.value = "";
+		pass2.value = "";
+		pass3.value = "";
+		var s_err = document.getElementById("form_error");
+		s_err.innerHTML = "Las claves ingresadas no coinciden";
+		pass1.disabled = false;
+		pass2.disabled = false;
+		pass3.disabled = false;
+		s_button.disabled = false;
+	}
+	document.getElementById("clave_nivel_div").style.width = "120px";
+	xMoveTo("clave_nivel_div", xPageX("clave_nivel_img"), xPageY("clave_nivel_img"));
+}
+
+//******************************************************************//
+
+
+
+
+
 function reinicioClave() {
 	var s_reinicio = document.getElementById("div_reinicio");
 	var x_width = xWidth("cuerpo");
@@ -102,35 +211,7 @@ function enviarAGrabar(e, urls) {
 		passwordreinicio(urls);
 	}
 }
-function disableCtrlKeyCombination(s_input, e) {
-	var key;
-	var isCtrl;
-	if (window.event) {
-		key = window.event.keyCode;     //IE
-		if (window.event.ctrlKey) {
-			isCtrl = true;
-		} else {
-			isCtrl = false;
-		}
-	} else {
-		key = e.which;     //firefox
-		if (e.ctrlKey) {
-			isCtrl = true;
-		} else {
-			isCtrl = false;
-		}
-	}
-	if (isCtrl) {
-		if ("c" == String.fromCharCode(key).toLowerCase()) {
-			return false;
-		}
-		if ("v" == String.fromCharCode(key).toLowerCase()) {
-			s_input.value = "";
-			return false;
-		}
-	}
-	return true;
-}
+/*
 function validarClave(texto) {
 	var numero = passwordLevel(texto.replace(/\s+$|^\s+/g, ""));
 	if (numero > 100) {
@@ -138,7 +219,7 @@ function validarClave(texto) {
 	}
 	document.getElementById("clave_nivel_div").style.width = 120 - ((numero * 6) / 5) + "px";
 	xMoveTo("clave_nivel_div", xPageX("clave_nivel_img") + ((numero * 6) / 5), xPageY("clave_nivel_img"));
-}
+}*/
 function passwordLevel(p) {
 	var cantidad = 0;
 	v1 = "aeiou1234567890";

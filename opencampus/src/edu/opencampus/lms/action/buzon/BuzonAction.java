@@ -788,6 +788,7 @@ public class BuzonAction extends BaseAction {
 	}
 	
 	public String solicitarCambioDatos() throws Exception{
+		log.info("solicitarCambioDatos()");
 		String idUsuario = ""+getUsuarioSession().getId();
 		Mensaje m = new Mensaje();
 		Persona ud = getUsuarioSession().getPersona();
@@ -820,7 +821,7 @@ public class BuzonAction extends BaseAction {
 			contenido += "<br>Direccion: " + direccion;
 			cont++;
 		}
-
+		log.info("# de datos modificados: "+cont);
 		if (cont > 0) {
 			m.setContenido(contenido);
 			m.setTitulo("Modificación de datos personales");
@@ -845,7 +846,7 @@ public class BuzonAction extends BaseAction {
 			m.setCarpeta("E");
 			m.setTipo("R");
 			buzonService.guardarMensajeUsuario(m);
-			addActionMessage("La solicitud ha sido enviado a soporte.");
+			setMessage("La solicitud ha sido enviado a soporte.");
 			
 		}
 		return SUCCESS;

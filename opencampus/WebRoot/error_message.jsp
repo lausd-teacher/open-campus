@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <s:if test="hasActionErrors()">
 	<div class="actionErrorCSS">
 		<div>Error encontrado:</div>
@@ -22,6 +23,14 @@
 	</div>
 	<br/>
 </s:if>
+<c:if test="${message != null}">
+	<div class="actionMessageCSS">
+		<div>Informaci&oacute;n del sistema:</div>
+		<span><c:out value="${message}"></c:out></span>
+	</div>
+	<br/>
+</c:if>
+
 
 <%/*
 Changing default style of <s:actionerror/> / <s:actionmessage/> tag

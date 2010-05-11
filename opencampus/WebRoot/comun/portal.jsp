@@ -108,7 +108,7 @@
 									</div>
 									<!-- Fin Contenido -->
 									
-									<% boolean modal = false; %>
+									<% boolean modal = true; %>
 									<div class="foot clearfix">
 										<div style="float:left;">
 											<c:choose>

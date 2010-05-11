@@ -9,7 +9,7 @@
 <script language="javascript" type="text/javascript"
 	src="<%=request.getContextPath()%>/js/scriptaculous/scriptaculous.js?load=builder,effects,dragdrop"></script>
 <script language="javascript" type="text/javascript"
-	src="<%=request.getContextPath()%>/js/topup/top_up-min.js"></script>
+	src="<%=request.getContextPath()%>/js/topup/top_up-min.js?libs=core&fast_mode=1"></script>
 <script type="text/javascript">
 	jQuery.noConflict();
   	TopUp.images_path = '<%=request.getContextPath()%>/js/topup/images/';

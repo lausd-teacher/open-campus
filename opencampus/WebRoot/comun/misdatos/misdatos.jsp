@@ -20,6 +20,8 @@
 		<s:include value="/comun/jslibs.jsp"/>
 		
 		<script language="javascript" type="text/javascript"
+			src="<%=request.getContextPath()%>/js/passwordmeter.js"></script>
+		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/cambioclave.js"></script>
 		<script language="javascript" type="text/javascript" 
 			src='<%=request.getContextPath()%>/comun/misdatos/misdatos.js'></script>
@@ -173,225 +175,168 @@
 		</div>
 		
 		<!--  *******************************  CAMBIAR CLAVE *********************************** -->
-		<script type="text/javascript">
-			Event.observe(window, 'load', function() {
-				setDIVs() ;
-			});
-		</script>
-		<div id="div_reinicio">
-		</div>
+		
 		<div id="form_div_reinicio">
-			<table cellpadding="0" cellspacing="0" border="0" width="300"
-				id="id_div_reinicio" background="#FFFFFF" class="bor_tabla"
-				style="background-color: #FFFFFF; border: 2px outset;">
-				<tr class="fon_cab">
-					<td height="20" colspan="3" class="tit_cab" align="center">
-						<s:text name="portal.misdatos.botones.cambiar.titulo"/>
-					</td>
-				</tr>
-				<tr>
-					<td height="25" colspan="3" align="right">
-						&nbsp;
-						<label id="form_error"
-							style="color: red; text-align: right; padding-right: 5px;"></label>
-					</td>
-				</tr>
-				<tr>
-					<td width="140" align="right" height="25" colspan="2">
-						<span><s:text name="portal.misdatos.botones.cambiar.contenido.clave_actual"/></span>
-					</td>
-					<td align="left">
-						&nbsp;
-						<input type="password" size="17" maxlength="15"
-							id="form_pass3_reinicio" value=""
-							onKeyPress="return disableCtrlKeyCombination(this,event);"
-							onKeyDown="return disableCtrlKeyCombination(this,event);">
-					</td>
-				</tr>
-				<tr>
-					<td width="140" align="right" height="25" colspan="2">
-						<span><s:text name="portal.misdatos.botones.cambiar.contenido.nueva_clave"/></span>
-					</td>
-					<td align="left">
-						&nbsp;
-						<input type="password" size="17" maxlength="15"
-							id="form_pass2_reinicio" value=""
-							onKeyPress="return disableCtrlKeyCombination(this,event);"
-							onKeyDown="return disableCtrlKeyCombination(this,event);"
-							onkeyup="validarClave(this.value);">
-					</td>
-				</tr>
-				<tr>
-					<td width="140" align="right" height="25" colspan="2">
-						<span><s:text name="portal.misdatos.botones.cambiar.contenido.nivel_seguridad"/></span>
-					</td>
-					<td align="left">
-						&nbsp;&nbsp;
-						<img
-							src="<%=request.getContextPath()%>/img/icon_clave_dificultad.jpg"
-							id="clave_nivel_img" alt="<s:text name="portal.misdatos.botones.cambiar.contenido.nivel_seguridad.alt"/>" width="120px">
-					</td>
-				</tr>
-				<tr>
-					<td align="right" valign="middle" height="25" colspan="2">
-						<span><s:text name="portal.misdatos.botones.cambiar.contenido.confirmar_nueva_clave"/></span>
-					</td>
-					<td align="left" valign="middle">
-						&nbsp;
-						<input type="password" size="17" maxlength="15"
-							id="form_pass1_reinicio" value=""
-							onKeyPress="return disableCtrlKeyCombination(this,event);"
-							onKeyDown="return disableCtrlKeyCombination(this,event);"
-							onkeyup="enviarAGrabarClave(event,'<%=request.getContextPath()%>');">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" height="10" />
-				</tr>
-				<tr>
-					<td align="right" height="32">
-						&nbsp;
-					</td>
-					<td align="right" height="32" width="115">
-						<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.cancelar"/>" class="form_button"
-							id="form_button_reinicio" style="padding-left: 4px;"
-							onclick="javascript:ocultarPanelCambioPassword();">
-					</td>
-					<td align="left">
-						&nbsp;&nbsp;
-						<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>" class="form_button"
-							id="form_button_reinicio" style="padding-left: 4px;"
-							onclick="javascript:passwordnuevo('<%=request.getContextPath()%>');">
-
-					</td>
-				</tr>
+			<table width="280" cellpadding="3" cellspacing="0" class="open_table noborder">
+				<caption><s:text name="portal.misdatos.botones.cambiar.titulo"/></caption>
+				<tbody>
+					<tr>
+						<td width="120" align="right">
+							<b><s:text name="portal.misdatos.botones.cambiar.contenido.clave_actual"/></b>
+						</td>
+						<td>
+							<input type="password" size="17" maxlength="32"
+								id="form_pass3_reinicio" value=""
+								onKeyPress="return disableCtrlKeyCombination(this,event);"
+								onKeyDown="return disableCtrlKeyCombination(this,event);">
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<b><s:text name="portal.misdatos.botones.cambiar.contenido.nueva_clave"/></b>
+						</td>
+						<td>
+							<input type="password" size="17" maxlength="32"
+								id="form_pass2_reinicio" value=""
+								onkeyup="validarClave(this.value);">
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<b><s:text name="portal.misdatos.botones.cambiar.contenido.confirmar_nueva_clave"/></b>
+						</td>
+						<td>
+							<input type="password" size="17" maxlength="32"
+								id="form_pass1_reinicio" value=""
+								onKeyPress="return disableCtrlKeyCombination(this,event);"
+								onKeyDown="return disableCtrlKeyCombination(this,event);"">
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<b><s:text name="portal.misdatos.botones.cambiar.contenido.nivel_seguridad"/></b>
+						</td>
+						<td>
+							<div id="clave_nivel_img" style="width: 1px; height: 16px; background-image:url('img/icon_clave_dificultad.jpg'); ; background-repeat: no-repeat;"></div>
+						</td>
+					</tr>
+					<tr style="display: block">
+						<td colspan="2" align="center">
+							<label id="form_error" style="color: red;"></label>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2" align="right">
+							<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.cancelar"/>" 
+								onclick="javascript:ocultarPanelCambioPassword();">
+							<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>" 
+								onclick="javascript:passwordnuevo();">
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
-		<div id="clave_nivel_div"
-			style="position: absolute; visibility: hidden; height: 10px; width: 120px; background-color: white; top: 0px; left: 0px; z-index: 99000;">
-		</div>
 		
+		FUSIONAR MISDATOS CON CAMBIOCLAVE.JS
 		<!-- ************************************  MODIFICAR DATOS *************************************************** -->
 		
-		<div id="modificarDatos" class="modificarDatos">
-			<form
-				action="<%=request.getContextPath()%>/SolicitarCambioDatos.action"
-				method="post">
-				<table cellpadding="0" cellspacing="0" class="bor_tabla" width="500"
-					background="#FFFFFF" border="0"
-					style="background-color: #FFFFFF; border: 2px outset;">
-					<tr class="fon_cab" height="20">
-						<td class="tit_cab" colspan="4">
-							<s:text name="portal.misdatos.botones.solicitar.titulo"/>
-						</td>
-					</tr>
-					<tr height="35">
-						<td colspan="4" align="center">
-							<span class="textstatic"><b
-								style="padding-left: 25px; text-align: center;"><s:text name="portal.misdatos.botones.solicitar.comentario"/></b> </span>
-						</td>
-					</tr>
-					<tr>
-						<td width="80px">
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.nombres"/></span>
-						</td>
-						<td width="150px" align="left">
-							<input style="font-size: 9pt" name="nombres" size="20"
-								value="<%=Formato.formatoTexto(p.getNomuno())%> <%=Formato.formatoTexto(p.getNomdos())%>" />
-						</td>
-						<td width="80px">
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.telefono"/></span>
-						</td>
-						<td width="140px" align="left">
-							<input style="font-size: 9pt" name="telefono" type="text"
-								size="12"
-								value="<%=Formato.formatoTextoNull(p.getTeldomicilio())%>" />
-						</td>
-						<%-- <td><span class="textstatic">Fecha Nacimiento</span></td>
-						<td><input style="font-size:9pt" name="fec_nac" size="10" value="<%=Formato.getStringDeDate(usuarioDato.getFechaNacimiento())%>"/></td>--%>
-					</tr>
-					<tr>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.paterno"/></span>
-						</td>
-						<td align="left">
-							<input style="font-size: 9pt" name="paterno" size="20"
-								value="<%=Formato.formatoTexto(p.getApepaterno())%>" />
-						</td>
-						<td>
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.celular"/></span>
-						</td>
-						<td align="left">
-							<input style="font-size: 9pt" name="celular" type="text"
-								size="12"
-								value="<%=Formato.formatoTextoNull(p.getTelcelular())%>" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.materno"/></span>
-						</td>
-						<td align="left">
-							<input style="font-size: 9pt" name="materno" size="20"
-								value="<%=Formato.formatoTexto(p.getApematerno())%>" />
-						</td>
-
-					</tr>
-					<tr>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<%--<tr>
-					<td><span class="textstatic">Ubicaci&oacute;n</span></td>
-						<td><input name="ubicacion" style="font-size:9pt" type="text" size="40" value="<%=Formato.formatoTexto(usuario.getUsuarioDato().getUbigeo().getNombreCompleto())%>"/></td>
-						<td><span class="textstatic">Sexo</span></td>
-						<td><input <%if(usuarioDato.getSexo().equals("M"))out.print("checked");%> type="radio" name="sexo" value="M">Masculino<input <%if(usuarioDato.getSexo().equals("F"))out.print("checked");%> type="radio" name="sexo" value="F">Femenino						
-					</tr>--%>
-					<tr>
-						<td>
-							<span class="textstatic"><s:text name="portal.misdatos.botones.solicitar.contenido.direccion"/></span>
-						</td>
-						<td colspan="3" align="left">
-							<input name="direccion" style="font-size: 9pt;width: 318px;"
-								value="<%=Formato.formatoTextoNull(p.getDirdomicilio())%>" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="center">
-							<input class="form_button" onClick="noVerCambioDatos(this)"
-								type="button" value="<s:text name="portal.misdatos.botones.solicitar.botones.cancelar"/>">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input class="form_button" type="submit" value="<s:text name="portal.misdatos.botones.solicitar.botones.enviar"/>">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
+		<div id="form_div_datos">
+			<form action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post">
+				<table width="500" cellpadding="3" cellspacing="0" class="open_table">
+					<caption><s:text name="portal.misdatos.botones.solicitar.titulo"/></caption>
+					<colgroup>
+						<col width="80"/>
+						<col/>
+						<col width="80"/>
+						<col />
+					</colgroup>
+					<thead>
+						<tr>
+							<!-- td width="80"></td><td></td><td width="80"></td><td></td></tr><tr-->
+							<td colspan="4" align="center"><b><s:text name="portal.misdatos.botones.solicitar.comentario"/></b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.nombres"/></b>
+							</td>
+							<td>
+								<input style="font-size: 9pt" name="nombres" size="20"
+									value="<%=Formato.formatoTexto(p.getNomuno())%> <%=Formato.formatoTexto(p.getNomdos())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.telefono"/></b>
+							</td>
+							<td>
+								<input style="font-size: 9pt" name="telefono" type="text"
+									size="20"
+									value="<%=Formato.formatoTextoNull(p.getTeldomicilio())%>" />
+							</td>
+							<%-- <td><span class="textstatic">Fecha Nacimiento</span></td>
+							<td><input style="font-size:9pt" name="fec_nac" size="10" value="<%=Formato.getStringDeDate(usuarioDato.getFechaNacimiento())%>"/></td>--%>
+						</tr>
+						<tr class="line">
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.paterno"/></b>
+							</td>
+							<td>
+								<input style="font-size: 9pt" name="paterno" size="20"
+									value="<%=Formato.formatoTexto(p.getApepaterno())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.celular"/></b>
+							</td>
+							<td>
+								<input style="font-size: 9pt" name="celular" type="text"
+									size="12"
+									value="<%=Formato.formatoTextoNull(p.getTelcelular())%>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.materno"/></b>
+							</td>
+							<td align="left">
+								<input style="font-size: 9pt" name="materno" size="20"
+									value="<%=Formato.formatoTexto(p.getApematerno())%>" />
+							</td>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+						<%--<tr>
+						<td><span class="textstatic">Ubicaci&oacute;n</span></td>
+							<td><input name="ubicacion" style="font-size:9pt" type="text" size="40" value="<%=Formato.formatoTexto(usuario.getUsuarioDato().getUbigeo().getNombreCompleto())%>"/></td>
+							<td><span class="textstatic">Sexo</span></td>
+							<td><input <%if(usuarioDato.getSexo().equals("M"))out.print("checked");%> type="radio" name="sexo" value="M">Masculino<input <%if(usuarioDato.getSexo().equals("F"))out.print("checked");%> type="radio" name="sexo" value="F">Femenino						
+						</tr>--%>
+						<tr class="line">
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.direccion"/></b>
+							</td>
+							<td  colspan="3">
+								<input name="direccion" style="font-size: 9pt;width: 318px;"
+									value="<%=Formato.formatoTextoNull(p.getDirdomicilio())%>" />
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="4" align="right">
+								<input onClick="noVerCambioDatos(this)"
+									type="button" value="<s:text name="portal.misdatos.botones.solicitar.botones.cancelar"/>">
+								<input type="submit" value="<s:text name="portal.misdatos.botones.solicitar.botones.enviar"/>">
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</form>
 		</div>
 		
 		<!-- ********************************************* CORREO ******************************************************* -->
 		
-		<div id="form_div_correo" class="modificarDatos">
+		<div id="form_div_correo">
 			<table cellpadding="0" cellspacing="0" class="bor_tabla" width="350"
 				background="#FFFFFF" border="0"
 				style="background-color: #FFFFFF; border: 2px outset;">
