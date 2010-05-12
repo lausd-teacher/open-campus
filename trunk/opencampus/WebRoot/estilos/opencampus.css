@@ -145,6 +145,7 @@ input[type='text'], input[type='password'], textarea, select  {
 	border-left: 1px solid #CCCCCC;
 	border-bottom: 1px solid #A0A0A0;
 	border-right: 1px solid #A0A0A0;
+	padding: 1px;
 }
 input:hover {
     background-color: #DDFFAC;
@@ -520,4 +521,28 @@ div#anatips_tip {
  * Mis Datos
  */
  
-
+.modal{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	
+	width: 200px; /* ancho de la capa a centrar */
+	/*height: 200px; /* alto de la capa a centrar */
+	margin-left: -100px; /* mitad del ancho de la capa a centrar */
+	margin-top: -100px; /* mitad del alto de la capa a centrar */	
+	
+	padding: 2px;	
+	border: 2px solid #eeeeee;
+}
+#password_level{
+	 background-color:#ff0000; 
+	 text-align:center; 
+	 border:1px solid #A0A0A0; 
+	 color:#ffffff; 
+	 font-weight:bold; 
+	 width: 112px; 
+	 height: 16px; 
+	 background-image:url('../img/icon_clave_dificultad.jpg'); 
+	 background-repeat: repeat-y; 
+	 /*background-position: 100px;*/
+}
