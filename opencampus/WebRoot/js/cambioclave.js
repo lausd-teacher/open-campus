@@ -1,37 +1,4 @@
-function disableCtrlKeyCombination(s_input, e) {
-	var key;
-	var isCtrl;
-	if (window.event) {
-		key = window.event.keyCode;     //IE
-		if (window.event.ctrlKey) {
-			isCtrl = true;
-		} else {
-			isCtrl = false;
-		}
-	} else {
-		key = e.which;     //firefox
-		if (e.ctrlKey) {
-			isCtrl = true;
-		} else {
-			isCtrl = false;
-		}
-	}
-	if (isCtrl) {
-		if ("c" == String.fromCharCode(key).toLowerCase()) {
-			return false;
-		}
-		if ("v" == String.fromCharCode(key).toLowerCase()) {
-			s_input.value = "";
-			return false;
-		}
-	}
-	return true;
-}
 
-function validarClave(texto) {
-	var password = new PasswordTest(texto);
-	$("clave_nivel_img").style.width = (password.value * 2.24) + "px";
-}
 
 function passwordnuevo() {
 	var s_button = document.getElementById("form_button_reinicio");

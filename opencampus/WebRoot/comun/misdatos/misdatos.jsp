@@ -158,7 +158,7 @@
 											type="button" onClick="verPanelCambioDatos(this)" />
 									
 										<input value="<s:text name="portal.misdatos.botones.cambiar"/>" type="button"
-											onClick="javascript:verPanelCambioPassword();"/>
+											onClick="verPanelCambioPassword();"/>
 									
 										<input onClick="verPanelCambioCorreo();"
 											type="button" value="<s:text name="portal.misdatos.botones.modificar"/>" />
@@ -176,8 +176,9 @@
 		
 		<!--  *******************************  CAMBIAR CLAVE *********************************** -->
 		
-		<div id="form_div_reinicio">
-			<table width="280" cellpadding="3" cellspacing="0" class="open_table noborder">
+		<div id="form_div_reinicio" style="display: none; width: 260px; margin-left: -130px;" class="modal" >
+			<form action="<%=request.getContextPath()%>/DatosClave.action" method="post">
+			<table width="100%" cellpadding="3" cellspacing="0" class="open_table noborder">
 				<caption><s:text name="portal.misdatos.botones.cambiar.titulo"/></caption>
 				<tbody>
 					<tr>
@@ -186,9 +187,7 @@
 						</td>
 						<td>
 							<input type="password" size="17" maxlength="32"
-								id="form_pass3_reinicio" value=""
-								onKeyPress="return disableCtrlKeyCombination(this,event);"
-								onKeyDown="return disableCtrlKeyCombination(this,event);">
+								id="form_pass1_reinicio" value="" class="required">
 						</td>
 					</tr>
 					<tr>
@@ -197,7 +196,7 @@
 						</td>
 						<td>
 							<input type="password" size="17" maxlength="32"
-								id="form_pass2_reinicio" value=""
+								id="form_pass2_reinicio" value=""  class="required"
 								onkeyup="validarClave(this.value);">
 						</td>
 					</tr>
@@ -206,10 +205,8 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.confirmar_nueva_clave"/></b>
 						</td>
 						<td>
-							<input type="password" size="17" maxlength="32"
-								id="form_pass1_reinicio" value=""
-								onKeyPress="return disableCtrlKeyCombination(this,event);"
-								onKeyDown="return disableCtrlKeyCombination(this,event);"">
+							<input type="password" size="17" maxlength="32" name="clave"
+								id="form_pass3_reinicio" class="required">
 						</td>
 					</tr>
 					<tr>
@@ -217,10 +214,10 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.nivel_seguridad"/></b>
 						</td>
 						<td>
-							<div id="clave_nivel_img" style="width: 1px; height: 16px; background-image:url('img/icon_clave_dificultad.jpg'); ; background-repeat: no-repeat;"></div>
+							<div id="password_level" style="display:none;"></div>&nbsp;
 						</td>
 					</tr>
-					<tr style="display: block">
+					<tr style="display: none">
 						<td colspan="2" align="center">
 							<label id="form_error" style="color: red;"></label>
 						</td>
@@ -230,13 +227,14 @@
 					<tr>
 						<td colspan="2" align="right">
 							<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.cancelar"/>" 
-								onclick="javascript:ocultarPanelCambioPassword();">
-							<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>" 
+								onclick="ocultarPanelCambioPassword();">
+							<input type="submit" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>" 
 								onclick="javascript:passwordnuevo();">
 						</td>
 					</tr>
 				</tfoot>
 			</table>
+			</form>
 		</div>
 		
 		FUSIONAR MISDATOS CON CAMBIOCLAVE.JS

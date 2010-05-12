@@ -1,3 +1,97 @@
+function disableCtrlKeyCombination(s_input, e) {
+	var key;
+	var isCtrl;
+	if (window.event) {
+		key = window.event.keyCode;     //IE
+		if (window.event.ctrlKey) {
+			isCtrl = true;
+		} else {
+			isCtrl = false;
+		}
+	} else {
+		key = e.which;     //firefox
+		if (e.ctrlKey) {
+			isCtrl = true;
+		} else {
+			isCtrl = false;
+		}
+	}
+	if (isCtrl) {
+		if ("c" == String.fromCharCode(key).toLowerCase()) {
+			return false;
+		}
+		if ("v" == String.fromCharCode(key).toLowerCase()) {
+			s_input.value = "";
+			return false;
+		}
+	}
+	return true;
+}
+
+function validarClave(texto) {
+	if(texto){
+		$('password_level').show();
+		var password = new PasswordTest(texto);
+		//$("password_level").style.width = (password.value * 2.24) + "px";
+		var _x = (112 - password.value * 2.24 - 40);
+		$("password_level").style.backgroundPosition= _x + 'px';
+		if(_x > 0){
+			$("password_level").style.backgroundColor= '#ff0000';
+		}else{
+			$("password_level").style.backgroundColor= '#00ff00';
+		}
+		$('password_level').update(password.level);
+	}else{
+		$('password_level').hide();
+	}
+}
+
+function verPanelCambioPassword() {
+	$('form_div_reinicio').show();
+}
+
+function ocultarPanelCambioPassword() {
+	$('form_div_reinicio').hide();
+	$('password_level').hide();
+	$('form_div_reinicio').down('form').reset();
+}
+
+wf.functionName_formValidation = "myCustomValidation";
+function myCustomValidation (evt) { //ESTO PARA LA CLAVE
+	if (wf.formValidation(evt) && evt.srcElement.id == 'form_usuario_crear'){
+		
+		var isValidate = true;
+		
+		if(!validarAdjunto($('foto').value)){
+			showErrorForm('bloque_foto',"&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Se permiten únicamente archivos JPG.");
+			isValidate = false;
+		}else{
+			hideErrorForm('bloque_foto');
+		}
+		
+		if($('user_ok')){
+		
+			if($F('user_ok') != '1'){
+				showErrorForm('username','Nombre de usuario no válido.');
+				isValidate = false;
+			}else{
+				hideErrorForm('username');
+			}
+			
+		}
+		
+		if(!isValidate)
+			return wf.utilities.XBrowserPreventEventDefault(evt);
+		
+		selectAll($('rols'));
+		selectAll($('permisos'));
+		$('btn_usuario_crear').disable();
+		//loading();
+		//return wf.utilities.XBrowserPreventEventDefault(evt);
+	}
+}
+
+/*********************************************/
 
 function mostrarPassword() {
 	var boton = document.getElementById("botonPassword");
@@ -84,12 +178,7 @@ function nuevoCorreo() {
 	row.appendChild(td3);
 	tabla.appendChild(row);
 }
-function verPanelCambioPassword() {
-	document.getElementById("div_reinicio").style.visibility = "visible";
-	document.getElementById("form_div_reinicio").style.visibility = "visible";
-	document.getElementById("clave_nivel_div").style.visibility = "visible";
-	xMoveTo("clave_nivel_div", xPageX("clave_nivel_img"), xPageY("clave_nivel_img"));
-}
+
 
 function verPanelCambioCorreo() {
 	document.getElementById("div_reinicio").style.visibility = "visible";
@@ -99,19 +188,7 @@ function ocultarPanelCambioCorreo() {
 	document.getElementById("div_reinicio").style.visibility = "hidden";
 	document.getElementById("form_div_correo").style.visibility = "hidden";	
 }
-function ocultarPanelCambioPassword() {
-	document.getElementById("div_reinicio").style.visibility = "hidden";
-	document.getElementById("form_div_reinicio").style.visibility = "hidden";
-	document.getElementById("clave_nivel_div").style.visibility = "hidden";
-	document.getElementById("clave_nivel_div").style.width = "120px";
-	xMoveTo("clave_nivel_div", xPageX("clave_nivel_img"), xPageY("clave_nivel_img"));
-	var pass1 = document.getElementById("form_pass1_reinicio");
-	pass1.value = "";
-	var pass2 = document.getElementById("form_pass2_reinicio");
-	pass2.value = "";
-	var pass3 = document.getElementById("form_pass3_reinicio");
-	pass3.value = "";
-}
+
 function setDIVs() {
 	var s_reinicio = document.getElementById("div_reinicio");
 	var x_width = xWidth("contenedor");

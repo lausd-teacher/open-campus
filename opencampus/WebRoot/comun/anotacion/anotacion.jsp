@@ -14,25 +14,25 @@
 			href="<%=request.getContextPath()%>/comun/anotacion/anotacion.css"
 			rel="stylesheet" type="text/css" />
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.lastest.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.lastest.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.tooltip.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.tooltip.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.center.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.center.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.dimensions.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.dimensions.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.autogrow.sako.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.autogrow.sako.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.date.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.date.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.template.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.template.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.print.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.print.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.autolineheight.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.autolineheight.js"></script>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jquery/jquery.qem.js"></script>
+			src="<%=request.getContextPath()%>/comun/anotacion/jquery/jquery.qem.js"></script>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/comun/anotacion/anotacion.js"></script>
 		<script>

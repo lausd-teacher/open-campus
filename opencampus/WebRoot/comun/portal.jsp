@@ -19,6 +19,8 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar-es.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jscalendar/calendar-setup.js"></script>
+		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/skinnytip.js"></script>  
 
 		<script type="text/javascript">
 			Event.observe(window, 'load', function() {
@@ -108,7 +110,7 @@
 									</div>
 									<!-- Fin Contenido -->
 									
-									<% boolean modal = true; %>
+									<% boolean modal = true; %>	
 									<div class="foot clearfix">
 										<div style="float:left;">
 											<c:choose>

@@ -292,7 +292,8 @@ function cargar_servicio_agenda(){
 	var query = function (oXML) { 
 		if (oXML.readyState === 4) {
 			
-				this.intervalCalendar = setInterval("startCalendar('"+oXML.responseText+"')",100);
+				//this.intervalCalendar = setInterval("startCalendar('"+oXML.responseText+"')",100);
+				startCalendar(oXML.responseText);
 				//xInnerHtml('servicio_agenda_descripcion','<strong><span class="text_rojo">'+ (oXML.responseText.split('/').length-1) +'</span> evento(s)<strong>');
 				this.cal = ahorita;
 				this.cal.setMonth(this.cal.getMonth()-1);
