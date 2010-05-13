@@ -20,7 +20,8 @@
 
 <script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/wforms.js"></script>
 <script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/wforms-localization-es.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/anatips.js"></script>	
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/anatips.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/open_modal.js"></script>	
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jComponente.js"></script>
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/util.js"></script>

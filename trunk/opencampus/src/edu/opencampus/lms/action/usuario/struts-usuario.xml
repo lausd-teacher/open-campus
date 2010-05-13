@@ -9,11 +9,13 @@
 		
 		<action name="CambioEmail" method="cambiarEmail"
 			class="edu.opencampus.lms.action.usuario.UsuarioAction">
+			<result name="success" type="redirect-action">MisDatos</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="DatosClave" method="cambiarClave"
 			class="edu.opencampus.lms.action.usuario.UsuarioAction">
+			<result name="success" type="redirect-action">MisDatos</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
@@ -25,10 +27,8 @@
 		
 		<action name="SolicitarCambioDatos" method="solicitarCambioDatos"
 			class="edu.opencampus.lms.action.buzon.BuzonAction">
+			<result name="success" type="redirect-action">MisDatos</result>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
-			<result name="success" type="redirect-action">
-				MisDatos?message=${message}
-			</result>
 		</action>
 		
 		<action name="Directorio" method="buscar"

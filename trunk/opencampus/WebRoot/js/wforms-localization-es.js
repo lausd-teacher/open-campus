@@ -29,6 +29,15 @@ wf.arrMsg[4] = "Página siguiente";
 wf.arrMsg[5] = "Página anterior";
 
 wFORMS.showAlertOnError = false;
+wFORMS.preventSubmissionOnEnter = false;
+
+function showErrorForm(id,m){
+	wFORMS.behaviors['validation'].showError($(id),m);
+}
+
+function hideErrorForm(id){
+	wFORMS.behaviors['validation'].removeErrorMessage($(id));
+}
 
 // Alpha-Numeric Input Validation: 
 wFORMS.behaviors['validation'].isAlpha = function(s) {

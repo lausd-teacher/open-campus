@@ -154,8 +154,8 @@
 							<tfoot>
 								<tr>
 									<td colspan="5" align="right">
-										<input value="<s:text name="portal.misdatos.botones.solicitar"/>"
-											type="button" onClick="verPanelCambioDatos(this)" />
+										<input value="<s:text name="portal.misdatos.botones.solicitar"/>" 
+											type="button" onClick="verPanelCambioDatos()" />
 									
 										<input value="<s:text name="portal.misdatos.botones.cambiar"/>" type="button"
 											onClick="verPanelCambioPassword();"/>
@@ -176,9 +176,9 @@
 		
 		<!--  *******************************  CAMBIAR CLAVE *********************************** -->
 		
-		<div id="form_div_reinicio" style="display: none; width: 260px; margin-left: -130px;" class="modal" >
-			<form action="<%=request.getContextPath()%>/DatosClave.action" method="post">
-			<table width="100%" cellpadding="3" cellspacing="0" class="open_table noborder">
+		<div id="form_div_clave"  style="width: 260px;" class="open_modal" >
+			<form id="form_clave" action="<%=request.getContextPath()%>/DatosClave.action" method="post">
+			<table width="100%" cellpadding="3" cellspacing="0" class="open_table nogrid">
 				<caption><s:text name="portal.misdatos.botones.cambiar.titulo"/></caption>
 				<tbody>
 					<tr>
@@ -186,8 +186,7 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.clave_actual"/></b>
 						</td>
 						<td>
-							<input type="password" size="17" maxlength="32"
-								id="form_pass1_reinicio" value="" class="required">
+							<input type="password" name="clave" size="17" maxlength="32" class="required">
 						</td>
 					</tr>
 					<tr>
@@ -195,8 +194,7 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.nueva_clave"/></b>
 						</td>
 						<td>
-							<input type="password" size="17" maxlength="32"
-								id="form_pass2_reinicio" value=""  class="required"
+							<input type="password" size="17" maxlength="32" name="claveTemp" class="required" alt="<c:out value="${PASSWORD_LONGITUD_MINIMA}"/>"
 								onkeyup="validarClave(this.value);">
 						</td>
 					</tr>
@@ -205,8 +203,7 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.confirmar_nueva_clave"/></b>
 						</td>
 						<td>
-							<input type="password" size="17" maxlength="32" name="clave"
-								id="form_pass3_reinicio" class="required">
+							<input type="password" size="17" maxlength="32" name="claveTemp2" class="required">
 						</td>
 					</tr>
 					<tr>
@@ -214,35 +211,28 @@
 							<b><s:text name="portal.misdatos.botones.cambiar.contenido.nivel_seguridad"/></b>
 						</td>
 						<td>
-							<div id="password_level" style="display:none;"></div>&nbsp;
-						</td>
-					</tr>
-					<tr style="display: none">
-						<td colspan="2" align="center">
-							<label id="form_error" style="color: red;"></label>
+							<div id="password_level"></div>
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="2" align="right">
-							<input type="button" value="<s:text name="portal.misdatos.botones.cambiar.botones.cancelar"/>" 
+							<input type="reset" value="<s:text name="portal.misdatos.botones.cambiar.botones.cancelar"/>" 
 								onclick="ocultarPanelCambioPassword();">
-							<input type="submit" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>" 
-								onclick="javascript:passwordnuevo();">
+							<input type="submit" value="<s:text name="portal.misdatos.botones.cambiar.botones.aceptar"/>">
 						</td>
 					</tr>
-				</tfoot>
+				</tfoot>	
 			</table>
 			</form>
 		</div>
 		
-		FUSIONAR MISDATOS CON CAMBIOCLAVE.JS
 		<!-- ************************************  MODIFICAR DATOS *************************************************** -->
 		
-		<div id="form_div_datos">
-			<form action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post">
-				<table width="500" cellpadding="3" cellspacing="0" class="open_table">
+		<div id="form_div_datos"  style="width: 500px;" class="open_modal">
+			<form id="form_datos" action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post">
+				<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
 					<caption><s:text name="portal.misdatos.botones.solicitar.titulo"/></caption>
 					<colgroup>
 						<col width="80"/>
@@ -322,8 +312,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="4" align="right">
-								<input onClick="noVerCambioDatos(this)"
-									type="button" value="<s:text name="portal.misdatos.botones.solicitar.botones.cancelar"/>">
+								<input type="reset" value="<s:text name="portal.misdatos.botones.solicitar.botones.cancelar"/>" onClick="ocultarPanelCambioDatos()">
 								<input type="submit" value="<s:text name="portal.misdatos.botones.solicitar.botones.enviar"/>">
 							</td>
 						</tr>
@@ -334,56 +323,35 @@
 		
 		<!-- ********************************************* CORREO ******************************************************* -->
 		
-		<div id="form_div_correo">
-			<table cellpadding="0" cellspacing="0" class="bor_tabla" width="350"
-				background="#FFFFFF" border="0"
-				style="background-color: #FFFFFF; border: 2px outset;">
-				<tr class="fon_cab" height="20">
-					<td class="tit_cab" colspan="4">
-						<s:text name="portal.misdatos.botones.modificar.titulo"/>
-					</td>
-				</tr>
-				<tr height="22">
-					<td colspan="2" width="100" align="left">
-						<span class="textstatic"><b style="padding-left: 13px;"><s:text name="portal.misdatos.botones.modificar.contenido.correo"/>
-						</b> </span>
-					</td>
-					<td colspan="2" width="250">
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4" align="center">
-						<textarea rows="5" cols="53" id="newMail"><%
-								if (p.getEmail() != null) {
-									out.print(p.getEmail());
-								}
-							%></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<strong><s:text name="portal.misdatos.botones.modificar.comentario"/></strong>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4" align="center">
-						<input class="form_button" onClick="ocultarPanelCambioCorreo()"
-							type="button" value="<s:text name="portal.misdatos.botones.modificar.botones.cancelar"/>">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input class="form_button" type="button" value="<s:text name="portal.misdatos.botones.modificar.botones.grabar"/>" onclick="grabar('<%=request.getContextPath() %>')">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						&nbsp;
-					</td>
-				</tr>
+		<div id="form_div_correo" style="width: 300px;" class="open_modal">
+			<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
+				<caption><s:text name="portal.misdatos.botones.modificar.titulo"/></caption>
+				<tbody>
+					<tr>
+						<td>
+							<b><s:text name="portal.misdatos.botones.modificar.contenido.correo"/></b>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="2" cols="53" id="newMail"><%if(p.getEmail() != null)out.print(p.getEmail());%></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b><s:text name="portal.misdatos.botones.modificar.comentario"/></b>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td align="right">
+							<input type="reset" value="<s:text name="portal.misdatos.botones.modificar.botones.cancelar"/>" onClick="ocultarPanelCambioCorreo()">
+							<input type="button" value="<s:text name="portal.misdatos.botones.modificar.botones.grabar"/>" 
+								onclick="grabarCorreo()">
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 		
