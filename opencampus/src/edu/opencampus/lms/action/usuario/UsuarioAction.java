@@ -313,8 +313,8 @@ public class UsuarioAction extends BaseAction {
 				if (rpt == 1){
 					usuario.getPersona().setEmail(email);
 					setUsuarioSession(usuario);
+					out.print("OK");
 				}
-				out.print(rpt);
 				out.close();
 			}
 		} catch (Exception e) {
@@ -323,21 +323,42 @@ public class UsuarioAction extends BaseAction {
 		return NONE;
 	}
 	
-	public String cambiarClave() {
-		log.info("cambiarClave()");
+	public String cambiarClave() throws Exception{
+		log.info("cambiarClave() - old:["+clave+"] new:["+claveTemp+"]");
 		try {
-			PrintWriter out = getResponse().getWriter();
+			Integer estado = null;
 			if (null != clave && null != claveTemp && Constante.PASSWORD_LONGITUD_MINIMA <= claveTemp.trim().length()) {
-				int r = usuarioService.cambiarClaveUsuario(getUsuarioSession(), clave, claveTemp);
-				out.print(r);
+				estado = usuarioService.cambiarClaveUsuario(getUsuarioSession(), clave, claveTemp);
 			}else{
-				out.print(Constante.PASSWORD_CORTO);
+				estado = Constante.PASSWORD_CORTO;
 			}
-			out.close();
+			
+			switch (estado) {
+			  case 0:
+				setMessage("La clave fue actualizada correctamente.");
+				break;
+			  case -1:
+				setMessage("La clave ingresada es muy corta.");
+				break;
+			  case -2:
+				setMessage("La clave ingresada es muy simple.");
+				break;
+			  case -3:
+				setMessage("La clave ingresada ya fue usada.");
+				break;
+			  case -4:
+				setMessage("La clave actual no es la correcta.");
+				break;
+			  case -5:
+				setMessage("La clave no pudo ser modificada.");
+				break;
+			}
+			
 		} catch (Exception e) {
 			log.error(e);
+			throw new ActionException(e);
 		}
-		return NONE;
+		return SUCCESS;
 	}
 
 }

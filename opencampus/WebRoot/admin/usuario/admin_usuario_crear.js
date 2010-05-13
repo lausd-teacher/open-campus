@@ -209,14 +209,6 @@ function deleteOption(theSel, theIndex) {
 	}
 }
 
-function showErrorForm(id,m){
-	wFORMS.behaviors['validation'].showError($(id),m);
-}
-
-function hideErrorForm(id){
-	wFORMS.behaviors['validation'].removeErrorMessage($(id));
-}
-
 function selectAll(theSel){
 	var selLength = theSel.length;
 	for (i = 0; i<selLength; i = i + 1) {

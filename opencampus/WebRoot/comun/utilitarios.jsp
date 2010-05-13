@@ -1,8 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page errorPage="/error_action.jsp"%>
 <%@ page import="edu.opencampus.lms.util.Constante"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<s:include value="/comun/jslibs.jsp"/>
@@ -13,49 +20,46 @@
 			<s:include value="/comun/bienvenida.jsp"></s:include>
 
 			<div id="body">
-					<table  border="0" cellpadding="3" cellspacing="0" class="tabla01" width="99%">
-						<tr class="fon_tit_curso">
-							<td height="17" colspan="8" class="tit_cab">
-								<s:text name="portal.menu.utilitarios"/>
-							</td>
-						</tr>
+					<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
+						<caption><s:text name="portal.menu.utilitarios"/></caption>
+						<thead>
 						<tr>
-							<td width="11" align="center" class="modulo">
+							<td width="11" align="center">
 								&nbsp;
 							</td>
-							<td width="200" height="23" align="center" class="modulo">
+							<td width="200"  align="center">
 								<strong><s:text name="portal.utilitarios.producto"/></strong>
 							</td>
-							<td width="300" height="23" align="center" class="modulo">
+							<td width="300"  align="center">
 								<strong><s:text name="portal.utilitarios.descripcion"/></strong>
 							</td>
-							<td width="43" align="center" class="modulo">
+							<td width="43" align="center">
 								<strong><s:text name="portal.utilitarios.version"/></strong>
 							</td>
-							<td width="47" align="center" class="modulo">
+							<td width="47" align="center">
 								<strong><s:text name="portal.utilitarios.tamano"/></strong>
 							</td>
 
-							<td width="61" align="center" class="modulo">
+							<td width="61" align="center">
 								<strong><s:text name="portal.utilitarios.fabricante"/></strong>
 							</td>
-							<td width="50" align="center" class="modulo">
+							<td width="50" align="center">
 								<strong><s:text name="portal.utilitarios.website"/></strong>
 							</td>
 							<td width="53" align="center" class="moduloAbajo1">
 								<strong><s:text name="portal.utilitarios.descarga"/></strong>
 							</td>
 						</tr>
-						
+						</thead>
 
-						
+						<tbody>
 												
 						<tr >
 
 							<td class="bor_der_unid">
 								1
 							</td>
-							<td height="23" class="bor_der_cur">
+							<td  class="bor_der_cur">
 								<strong>Flash Player para Internet Explorer </strong>
 							</td>
 							<td class="bor_der_cur">
@@ -86,7 +90,7 @@
 							<td class="bor_der_unid">
 								2
 							</td>
-							<td height="23" class="bor_der_cur">
+							<td  class="bor_der_cur">
 								<strong>Mozilla Firefox</strong>
 							</td>
 							<td class="bor_der_cur">	
@@ -114,7 +118,7 @@
 							<td class="bor_der_unid">
 								3
 							</td>
-							<td height="23" class="bor_der_cur">
+							<td  class="bor_der_cur">
 								<strong>Adobe Reader </strong>
 							</td>
 							<td class="bor_der_cur">	
@@ -142,8 +146,8 @@
 							<td class="bor_der_unid">
 								4
 							</td>
-							<td height="23" class="bor_der_cur">
-								<strong>Flash Player para Mozilla Firefox <img border="0" src="http://www.opencampus.edu.pe/webuds/web/graficos/gif/nuevo.gif"/></strong>
+							<td  class="bor_der_cur">
+								<strong>Flash Player para Mozilla Firefox</strong>
 							</td>
 							<td class="bor_der_cur">	
 							<s:text name="portal.utilitarios.flash"/>								
@@ -165,11 +169,12 @@
 										src="<%=request.getContextPath()%>/img/icon_download.gif" alt="Descargar" border="0" /> </a>
 							</td>
 						</tr>							
+					</tbody>
 					</table>
-					<br/> 
+				
 				
 			</div>
-			<%@include file="pie.jsp"%>
+			<s:include value="/comun/pie.jsp"/>
 		</div>				
 	</body>
 </html>

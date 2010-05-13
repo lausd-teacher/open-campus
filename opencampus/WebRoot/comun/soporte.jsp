@@ -51,13 +51,7 @@
 
 		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
 			rel="stylesheet" type="text/css" />
-		<link href="<%=request.getContextPath()%>/js/menu/menu.css"
-			rel="stylesheet" type="text/css" />
 
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/menu/menu.js"></script>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
 		<script language="javascript" type="text/javascript"
@@ -65,61 +59,31 @@
 
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/util.js"></script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/dwr/engine.js'> </script>
-		<script type='text/javascript'
-			src='<%=request.getContextPath()%>/dwr/util.js'> </script>
 		<script>	   
 			var imagesDir = "<%=request.getContextPath()%>/js/openwysiwyg/icons/";
 			var cssDir = "<%=request.getContextPath()%>/js/openwysiwyg/styles/";
 			var popupsDir = "<%=request.getContextPath()%>/js/openwysiwyg/popups/";
-			function enviar(){
-				var titulo=xGetElementById("titulo").value;
-				var contenido=xGetElementById("wysiwygcontenido").body.innerHTML;
-				alert(contenido);
-				/*var ajax = nuevoAjax();
-				var url = xGetContextPath() + "/comun/buzon/EnviarMensajeSoporte.action";
-				ajax.open("POST", url, true);
-				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				ajax.send("titulo=" + );
-				ajax.onreadystatechange = function () {
-					if (ajax.readyState === 4) {
-						noLeidos();
-					}
-				};	*/
-			}
 		</script>
 
 		<script language="JavaScript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/openwysiwyg/wysiwyg.js"></script>
 	</head>
 	<body>
-	
+		<div id="container">
 		
-		<div id="contenedor">
+			<s:include value="/comun/bienvenida.jsp"/>
 			
-			<s:include value="/comun/bienvenida.jsp"></s:include>
+			<div id="body">
 			
-			<div id="cuerpo">			
-				<div id="principal" style="padding-bottom: 10px;">
+			
 <form name="form1" method="post" enctype="multipart/form-data"
 						action="<%=request.getContextPath()%>/comun/buzon/EnviarMensajeSoporte.action"
 						onsubmit="if(!xGetElementById('wysiwygcontenido').contentWindow.document.body.innerHTML.hasContenido()){ alert('Ingrese su consulta.'); return false;}else{return true;}">
 <input type="hidden" name="destino" id="destino" value="soporte_campus"  style="visibility: hidden"/>
 
-					
-					
-						<table width="600" border="0" cellpadding="3" cellspacing="0" class="tabla01" >
-
-	
-							
-							<tr class="fon_tit_curso">
-								<td height="20" align="left" colspan="6"
-									style="color: #FFFFFF; font-size: 11px; font-weight: bold; vertical-align: top; font-family: Tahoma; padding-left: 10px;"
-									class="tit_cab">
-									<s:text name="portal.menu.soporte"/>
-								</td>
-							</tr>
+						<table width="600" cellpadding="3" cellspacing="0" class="open_table nogrid " align="center">
+							<caption><s:text name="portal.menu.soporte"/></caption>
+							<tbody>
 							<tr>
 								<td height="18" colspan="6" align="center" class="moduloAbajo1" >
 								<s:text name="portal.soporte.mensaje"></s:text><br/>
@@ -174,27 +138,16 @@
 													id="enviar" value="<s:text name="portal.soporte.enviar"></s:text>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
+							</tbody>
 						</table>
 
 					</form>
-				</div>
+					
+					
 			</div>
-			<div id="pie">
-				<%@include file="pie.jsp"%>
-			</div>
-			<div id="ampliacion">
-				<div id="c1">
-					<img src="<%=request.getContextPath()%>/img/cargando.gif"
-						border="0">
-				</div>
-				<div id="cerrarampliacion">
-					<a href="javascript:ocultarImagen()" style="color: #ffffff;">[X]
-						Cerrar</a>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript">
-			resizeHeight();
-		</script>
+			
+			<s:include value="/comun/pie.jsp"/>
+			
+		</div>			
 	</body>
 </html>

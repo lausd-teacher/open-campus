@@ -7,7 +7,7 @@ body {
  	padding: 0;
 }
 /*
- * Open Table
+ * Open Table class="opentable nogrid with_hover"
  */
 .open_table {
 	border: solid #CCCCCC 1px;
@@ -16,21 +16,22 @@ body {
 	background-color: #ffffff;
 	table-layout: fixed;
 }
-.open_table .noborder{
-	border-right: none; !important
+.open_table.nogrid{
+	border-right: solid #CCCCCC 1px !important;
 }
+/* Para filas intercaladas*/
 .open_table .line{
-	background-color: #E5FEC1; !important
+	background-color: #E5FEC1 !important; 
 }
-/* puedes renombrarlo a .open_table form-line */
-.open_table td.line, .open_table th.line{ 
+/* Para formularios*/
+.open_table td.label, .open_table th.label{ 
 	vertical-align: top;
 	padding-top: 5px;
 	font-weight: bold;
 	text-indent: 3px;
-	background-color: #E5FEC1; !important
+	background-color: #E5FEC1 !important; 
 }
-
+/* Bordes a celdas manuales */ 
 .open_table .border-top, .open_table .border-t{
 	border-top: solid #CCCCCC 1px;
 }
@@ -43,6 +44,7 @@ body {
 .open_table .border-left, .open_table .border-l{
 	border-left: solid #CCCCCC 1px;
 }
+/* Partes del table*/
 .open_table caption {
 	background-image: url(../img/bg_table_caption.gif);
 	background-repeat: repeat-x;
@@ -73,10 +75,13 @@ body {
 	text-align: center;
 	vertical-align: middle;
 }
+.open_table.nogrid th, .open_table.nogrid td {
+	border-right: none !important; 
+}
 .open_table tbody tr {
 	height: 18px;
 }
-.with_hover tbody tr:hover {
+.open_table.with_hover tbody tr:hover {
 	background-color: #CEE7FF;
 }
 .open_table tbody tr th, .open_table tbody tr td {
@@ -89,6 +94,14 @@ body {
 	border-right: 1px solid #CCCCCC;
 	background-color: #CCCCCC;
 }
+.open_table tfoot tr th, .open_table tfoot tr td {
+	border-right: 1px solid #CCCCCC;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #ffffff;
+	font-weight: bold;
+}
+/* Para paginación */
 .open_table .pagination{
 	float:right;
 }
@@ -102,13 +115,19 @@ body {
 	text-decoration: none;
 	color: black;
 }
+/* Pata tablas anidadas *//***** Revisar compatibilidaes, usado en misdatos(del admin) y menu opciones!!!****/
 .open_table td table td{
-	border-right: none; !important
+	border-right: none; 
 }
+.open_table .open_table td{
+	border-right: 1px solid #CCCCCC !important;
+}
+/* Para divs */
 .open_border{
 	border: 1px solid #CCCCCC;
 		
 }
+/* Para grillas (drag&drop) */
 .open_grid{
 	border: 1px solid #CCCCCC;
 	padding: 0px;
@@ -151,6 +170,8 @@ input:hover {
     background-color: #DDFFAC;
 }
 input[type='submit'], input[type='button'], input[type='reset'], button {
+	/*background: white url("../img/bg_input_button.jpg") no-repeat top;
+    background-attachment: fixed;*//*para IE6*/
 	background-image: url("../img/bg_input_button.jpg");
 	background-color: #FFFFFF;
 	font-family: Arial, Helvetica, sans-serif;
@@ -192,7 +213,7 @@ tr.rowodd {
 }
 .nosort {
 	cursor: default;
-	background-image: none; !important;
+	background-image: none !important;
 }
 tr.roweven {
 	background-color: #E5FEC1;
@@ -235,6 +256,9 @@ tr.roweven {
     vertical-align: bottom;
 }
 
+/*
+ * Fixed CSS
+ */
 .select-free
 {
 	position:absolute;
@@ -284,8 +308,8 @@ tr.roweven {
 	padding: 3px;
 }
 #columns .column_static{
-	width: 225px; !important;
-	border: 0px; !important;
+	width: 225px !important;
+	border: 0px !important;
 }
 #columns .draghandle{
 	cursor: move;
@@ -515,34 +539,43 @@ div#anatips_tip {
 }
 .shadown{
 	background-color:#000000;
+	position: fixed !important;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
 }
 
 /*
  * Mis Datos
  */
  
-.modal{
+.open_modal{
+	position: fixed !important; 
 	position: absolute;
+	/*bottom: 0,*/
 	top: 50%;
 	left: 50%;
 	
-	width: 200px; /* ancho de la capa a centrar */
-	/*height: 200px; /* alto de la capa a centrar */
-	margin-left: -100px; /* mitad del ancho de la capa a centrar */
-	margin-top: -100px; /* mitad del alto de la capa a centrar */	
+	display: none; /* usar junto a: e.style.display = 'block';*/
 	
 	padding: 2px;	
 	border: 2px solid #eeeeee;
 }
+
 #password_level{
-	 background-color:#ff0000; 
+	 background-color:#ffffff; 
 	 text-align:center; 
-	 border:1px solid #A0A0A0; 
+	 border-top: 1px solid #CCCCCC;
+	 border-left: 1px solid #CCCCCC;
+	 border-bottom: 1px solid #A0A0A0;
+	 border-right: 1px solid #A0A0A0;
 	 color:#ffffff; 
 	 font-weight:bold; 
 	 width: 112px; 
 	 height: 16px; 
 	 background-image:url('../img/icon_clave_dificultad.jpg'); 
 	 background-repeat: repeat-y; 
-	 /*background-position: 100px;*/
+	 background-position: 200px;
 }
