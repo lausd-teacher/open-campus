@@ -760,12 +760,12 @@
 									%>
 									<tr id="tr_<%=a%>"  height="20" >
 										
-										<td style="border-bottom: 1px solid #7EAAD1;background-color: #f9f9f9;">
+										<td style="border-bottom: 1px solid #cccccc;background-color: #f9f9f9;">
 											<input type="checkbox" id="abcdefgh"
 												value="<%=usuarioReporte.getIdUsuario()%>"
 												onclick="javascript:seleccionarDIVGrupo('tr_<%=a%>',this)">
 										</td>
-										<td style="color: black;border-bottom: 1px solid #7EAAD1;background-color: #f9f9f9;" colspan="10" >
+										<td style="color: black;border-bottom: 1px solid #cccccc;background-color: #f9f9f9;" colspan="10" >
 											<label
 												onmouseover="verToolTip('<%="<strong>" + usuarioReporte.getIdUsuario()
 							+ "</strong> - "
@@ -784,15 +784,15 @@
 
 									<tr id="tr_<%=a%>_<%=b%>" class="fon_color02" height="20" style="display: none;visibility: hidden;" >
 										
-										<td width="20" style="border-bottom: 1px solid #7EAAD1;">
+										<td width="20" style="border-bottom: 1px solid #cccccc;">
 											<input type="hidden" value="<%=reporte.getIdMatricula()%>">
 										</td>
-										<td width="20"  style="border-bottom: 1px solid #7EAAD1;">
+										<td width="20"  style="border-bottom: 1px solid #cccccc;">
 												<input type="checkbox"  name="<%=reporte.getIdRol()%>" 
 												value="<%=reporte.getIdMatricula()%>"
 												onclick="javascript:seleccionarDIV('tr_<%=a%>','tr_<%=a%>_<%=b%>',this)">
 										</td>
-										<td  style="color: black;cursor: pointer;border-bottom: 1px solid #7EAAD1;">
+										<td  style="color: black;cursor: pointer;border-bottom: 1px solid #cccccc;">
 											<label style="cursor: pointer;"
 												onmouseover="verToolTip('<%=reporte.getNombre()%>', this);"
 												onmouseout="ocultarToolTip()"
@@ -805,7 +805,7 @@
 											</label>
 										</td>
 										<td  align="right"
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getSeccion()%>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -818,7 +818,7 @@
 											</label>
 										</td>
 										<td  align="right"
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getCantidadIngreso()%>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -832,7 +832,7 @@
 										</td>
 										<% if(false){ %>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getRol()%>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -846,7 +846,7 @@
 										</td>
 										<%} %>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=Util.getFichaEstadoFecha(reporte
 												.getEstado())%>', this);"
 											onmouseout="ocultarToolTip()"
@@ -861,7 +861,7 @@
 											</label>
 										</td>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getEstadoReporte()%>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -874,7 +874,7 @@
 											</label>
 										</td>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getPeriodo() + " ( <strong>"
 								+ reporte.getFechaInicio()
 								+ "</strong> a <strong>"
@@ -893,7 +893,7 @@
 										<td 
 										onmouseover="verToolTip('<%=reporte.getFamilia()%>', this);"
 											onmouseout="ocultarToolTip()"
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
 											onclick="javascript:abrirAuditoria('<%=request.getContextPath()%>','<%=reporte.getIdMatricula()%>');"
 											<%}else{ %>
@@ -905,7 +905,7 @@
 										</td>
 										<%} %>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getFormacion()%>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -918,7 +918,7 @@
 											</label>
 										</td>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											onmouseover="verToolTip('<%=reporte.getAuspiciador() %>', this);"
 											onmouseout="ocultarToolTip()"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
@@ -931,7 +931,7 @@
 											</label>
 										</td>
 										<td 
-											style="border-right: 1px solid #7EAAD1;border-bottom: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
 											onclick="javascript:abrirAuditoria('<%=request.getContextPath()%>','<%=reporte.getIdMatricula()%>');"
 											<%}else{ %>
@@ -942,7 +942,7 @@
 											</label>
 										</td>
 										<% if(false){ %>
-										<td   style="border-bottom: 1px solid #7EAAD1;"
+										<td   style="border-bottom: 1px solid #cccccc;"
 											<%if(Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE==reporte.getIdRol() ){ %>
 											onclick="javascript:abrirAuditoria('<%=request.getContextPath()%>','<%=reporte.getIdMatricula()%>');"
 											<%}else{ %>

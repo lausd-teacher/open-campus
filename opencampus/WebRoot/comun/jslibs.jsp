@@ -18,8 +18,11 @@
 <c:set var="modal_config1" scope="application" value="type = iframe, effect = show, layout = quicklook, modal = 1, shaded = 1"/>
 <% } %>
 
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/wforms.js"></script>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/wforms-localization-es.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/wforms.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/wforms-localization-es.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/fastinit.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/tablesort.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/date.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/anatips.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/open_modal.js"></script>	
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jComponente.js"></script>

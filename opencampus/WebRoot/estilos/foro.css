@@ -7,27 +7,27 @@
 	width: 970px;
 }
 .foro_bor_tabla {
-	border-bottom:solid #44659B 1px;
-	border-left:solid #44659B 1px;
-	border-right:solid #44659B 1px;
-	/*border: solid #44659B 1px;*/
+	border-bottom:solid #cccccc 1px;
+	border-left:solid #cccccc 1px;
+	border-right:solid #cccccc 1px;
+	/*border: solid #cccccc 1px;*/
 }
 .foro_bor_de{
-	border-right:solid #44659B 1px;
+	border-right:solid #cccccc 1px;
 	
 }
 .foro_bor_de_2{
-	border-right:solid #44659B 1px;
-	background-color: #E5EFF8;
+	border-right:solid #cccccc 1px;
+	background-color: #E5FEC1;
 	
 }
 .foro_bor_iz{
-	border-left:solid #44659B 1px;
+	border-left:solid #cccccc 1px;
 	
 	
 }
 .foro_bor_aba{
-	border-bottom:solid #44659B 1px;
+	border-bottom:solid #cccccc 1px;
 	
 }
 .foro_fon_tit_iz{
@@ -111,7 +111,7 @@
 	background-repeat:no-repeat;
 	vertical-align:bottom;	
 	text-align: right;
-	/*border-bottom:solid #44659B 1px;*/
+	/*border-bottom:solid #cccccc 1px;*/
 
 }
 .foro_esq_iz_2{
@@ -119,17 +119,17 @@
 	background-repeat:no-repeat;
 	
 	text-align: left;
-	/*border-bottom:solid #44659B 1px;*/
+	/*border-bottom:solid #cccccc 1px;*/
 
 }
 .foro_Modulo {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 	
@@ -138,10 +138,10 @@
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 	
@@ -152,7 +152,7 @@
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 	
@@ -162,7 +162,7 @@
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 	
@@ -172,10 +172,10 @@
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	padding: 3px 3px 3px 3px;
 	
 }
@@ -184,10 +184,10 @@
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	padding: 3px 3px 3px 3px;
 	
 }
@@ -196,54 +196,54 @@
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	padding: 3px 3px 3px 3px;
 	
 }
 .foro_ModuloDerecha {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	padding: 3px 3px 3px 3px;
 }
 .foro_ModuloAbajo {
-	border-bottom: 1px solid #7EAAD1;
+	border-bottom: 1px solid #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 }
 .foro_bor_der_unid {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	/*border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;*/
+	border-bottom-color: #cccccc;*/
 	text-align: center;
 	padding: 3px 3px 3px 3px;
 }
 .foro_bor_der_msj {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-left-width: 1px;
 	border-left-style: solid;	
-	border-left-color: #7EAAD1;
+	border-left-color: #cccccc;
 	
 	padding: 3px 3px 3px 3px;
 }
 .foro_bor_der_unid_col {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 	padding: 3px 3px 3px 3px;
 }
@@ -251,43 +251,43 @@
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 	padding: 3px 3px 3px 3px;
 }
 .foro_bor_der_cur {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	/*border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;*/
+	border-bottom-color: #cccccc;*/
 	padding: 3px 3px 3px 3px;	
 }
 .foro_bor_der_cur_start {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	padding-left: 10px;
 	/*border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;*/
+	border-bottom-color: #cccccc;*/
 	
 }
 .foro_bor_der_cur_col {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	padding: 3px 3px 3px 3px;	
 }
 .foro_bor_der_cur_fe {
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	padding: 3px 3px 3px 3px;
 	
 	
@@ -295,14 +295,14 @@
 .foro_bor_der_cur_ult {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	
-	border-bottom:solid #44659B 1px;
+	border-bottom:solid #cccccc 1px;
 	
 }
 .foro_bor_der_cur_ult_aba {
 	
-	border-bottom:solid #44659B 1px;
+	border-bottom:solid #cccccc 1px;
 	
 }
 

@@ -86,7 +86,7 @@
           <input name="text" type="text" class="form_text" id="nombre" value="" maxlength="100" size="32">
           <input name="submit" type="submit" class="form_button" value="Buscar"></td>
         </tr>
-        <tr style="background-color: #7EAAD1">
+        <tr style="background-color: #cccccc">
             <td align="right" colspan="4">&nbsp; 
                 <input type="button" value="Nuevo" id="btNuevo" onClick="mostrarNuevo(this);" class="form_button">
             </td>

@@ -18,20 +18,35 @@
 			</td>
 			<td width="5" align="center">|</td>
 			<td>
-				<span id="top_saludo"></span>
-				<script type="text/javascript">
-					Event.observe(window, 'load', function() { 
-							var hora=new Date().getHours();
-							if(hora>19){
-								$('top_saludo').update('<s:text name="portal.saludo.noche"/>');
-							}else if(hora>=12){
-								$('top_saludo').update('<s:text name="portal.saludo.tarde"/>');
-							}else{
-								$('top_saludo').update('<s:text name="portal.saludo.dia"/>');
-							}
-					});
-				</script>:
-			  <span id="top_usuario"><c:out value="${usuario_actual.nombreCompleto}"></c:out> </span>
+				<c:choose>
+					<c:when test="${param.aula==null}">
+					
+						<span id="top_saludo"></span>
+						<script type="text/javascript">
+							Event.observe(window, 'load', function() { 
+									var hora=new Date().getHours();
+									if(hora>19){
+										$('top_saludo').update('<s:text name="portal.saludo.noche"/>');
+									}else if(hora>=12){
+										$('top_saludo').update('<s:text name="portal.saludo.tarde"/>');
+									}else{
+										$('top_saludo').update('<s:text name="portal.saludo.dia"/>');
+									}
+							});
+						</script>:
+					  <span id="top_usuario"><c:out value="${usuario_actual.nombreCompleto}"></c:out> </span>
+					  
+				  </c:when>
+				  <c:otherwise>
+				  		<a href="<%=request.getContextPath() %>/Curso.action">
+							<s:text name="portal.bienvenida.cursos.alt"/>
+						</a>
+						&gt;							
+						<span id="top_usuario">
+							<c:out value="${aula.curso.nombre}"></c:out>
+						</span>
+				  </c:otherwise>
+			  </c:choose>
 		  </td>
 		  <td width="20%" align="right">
 				<span id="top_reloj"></span>
@@ -92,11 +107,15 @@
 		</tr>
 	</table>
 </div>
-<div id="banner">
-</div>
-<div id="main_menu">
-	<ct:MenuPortada><s:text name="idioma"/></ct:MenuPortada>
-</div>
+
+<c:if test="${param.aula==null}">
+	<div id="banner">
+	</div>
+	<div id="main_menu">
+		<ct:MenuPortada><s:text name="idioma"/></ct:MenuPortada>
+	</div>
+</c:if>
+
 <div id="menu_idioma"  style="width: 84px; position:absolute; left:0px; top:0px; background-color:#FFF; padding:1px; display: none;">
 	<table border="0" cellpadding="3" cellspacing="0" class="tabla01" width="100%">
 		<tr style="cursor:pointer;"  onClick="cambiarIdioma('es');"

@@ -39,7 +39,7 @@
 								<a style="color:black;font-weight:bold;" href="javascript:void(0);" 
 								onclick="regresarPortada()"><strong>Noticias</strong></a>
 								>
-								<a style="color:#44659B;font-weight: bold;">Detalle</a>
+								<a style="color:#cccccc;font-weight: bold;">Detalle</a>
 							</div>
 						</td>
 						<td width="5%">
@@ -75,7 +75,7 @@
 							<td colspan="3" valign="top">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
-										<td width="9" style="border-bottom: 1px solid #3355AE;">
+										<td width="9" style="border-bottom: 1px solid #cccccc;">
 											&nbsp;
 										</td>
 										
@@ -127,7 +127,7 @@
 											</c:otherwise>
 										</c:choose>
 										
-										<td style="border-bottom: 1px solid #3355AE;">
+										<td style="border-bottom: 1px solid #cccccc;">
 											&nbsp;
 										</td>
 									</tr>

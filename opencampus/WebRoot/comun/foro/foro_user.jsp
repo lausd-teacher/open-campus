@@ -88,7 +88,7 @@
 		                              	<c:if test="${foro.yoLoModero}"><div style="position: absolute; left:426px; text-align:right; border: 0px solid;"><img src="<%=request.getContextPath()%>/img/medal.png" alt="Soy el moderador"></div></c:if>
 		                              	<table border="0" cellspacing="0" cellpadding="2" width="100%" height="100%">
 		                              		<tr>
-		                              			<td><strong><a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${foro.idForo}"/>"><c:out value="${foro.titulo}"/></a></strong></td>
+		                              			<td><strong><a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${foro.idForo}"/>"><c:out value="${foro.titulo}"/></a></strong></td>
 		                              		</tr>
 		                              		<tr>
 		                              			<td><c:out value="${foro.descripcion}"/></td>

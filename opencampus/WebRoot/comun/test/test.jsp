@@ -101,7 +101,7 @@
 								<form id="form_<c:out value="${status.count}" />" name="form_<c:out value="${status.count}" />" onsubmit="return false;" onclick="" style="<c:if test="${status.count != 1}">display: none;</c:if>">
 									<table width="100%" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
 										<tr>
-											<td height="19" class="fon_color01" style="font-weight: bold; padding-left: 5px;color:#44659B;" align="left" valign="middle">
+											<td height="19" class="fon_color01" style="font-weight: bold; padding-left: 5px;color:#cccccc;" align="left" valign="middle">
 												<c:choose>
 													<c:when test="${test.tipo == 1}">
 														Seleccione una sola alternativa:
@@ -458,7 +458,7 @@
 										Calificación :
 									</td>
 									<td align="left"
-										style="font-size: 16px; color: #FF0000; font-weight: bold; border-bottom: 1px solid #7EAAD1; border-right: 1px solid #7EAAD1;">
+										style="font-size: 16px; color: #FF0000; font-weight: bold; border-bottom: 1px solid #cccccc; border-right: 1px solid #cccccc;">
 										<span id="nota">&nbsp;</span>
 									</td>
 								</tr>

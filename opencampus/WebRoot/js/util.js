@@ -36,9 +36,9 @@ function cerrarVentanas() {
 }
 
  function mostrarReloj(ahorita){
-	if(ahorita)this.ahorita = ahorita;
+	if(ahorita) this.ahorita = ahorita;
 	this.ahorita.setSeconds(this.ahorita.getSeconds()+1);
-	if($('top_reloj'))$('top_reloj').update( 'Lima, '+this.ahorita.format('dd-mm-yyyy hh:nn:ss a/p'));
+	if($('top_reloj'))$('top_reloj').update( 'Lima, '+this.ahorita.format('d-m-Y h:i:s a'));
 	setTimeout('mostrarReloj(false)',990);
 }
 

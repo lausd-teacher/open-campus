@@ -88,10 +88,6 @@ function myCustomValidation (evt) {
 	}
 }
 
-
-
-/*********************************************/
-
 function grabarCorreo() {
 	new Ajax.Request(xGetContextPath() +"/CambioEmail.action", 
 	{

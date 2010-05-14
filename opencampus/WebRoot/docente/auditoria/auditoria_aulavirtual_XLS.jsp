@@ -30,7 +30,7 @@
 		<style type="text/css">
 		.reporte_table{
 	border: 1px solid;
-	border-color:#7EAAD1;
+	border-color:#cccccc;
 }
 
 
@@ -44,7 +44,7 @@
 	background-color: #E5EFF8;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 
@@ -53,10 +53,10 @@
 	background-color: #E5EFF8;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 
@@ -64,23 +64,23 @@
 	
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .textoAbajo3 {
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .textoAbajo {
@@ -88,17 +88,17 @@
 	background-color: #E5EFF8;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .texto1 {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .blanco {
@@ -109,10 +109,10 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 }
 
 .unidades {
@@ -120,7 +120,7 @@ background-color:#FFFFFF
 	background-color: #E5EFF8;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
@@ -129,10 +129,10 @@ background-color:#FFFFFF
 	background-color: #E5EFF8;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -140,10 +140,10 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -151,7 +151,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
@@ -162,7 +162,7 @@ background-color:#FFFFFF
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .notaParcial {
@@ -178,46 +178,46 @@ background-color:#FFFFFF
 	text-align: center;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .modulo {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 .moduloFondo {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	background-color: #E5EFF8;
 	
 }
 .moduloFondo4 {
 	color: #000000;	
-	border: 1px solid #7EAAD1;		
+	border: 1px solid #cccccc;		
 	background-color: #E5EFF8;	
 }
 .moduloFondo3 {
 	color: #000000;	
-	border-bottom: 1px solid #7EAAD1;	
-	border-left: 1px solid #7EAAD1;	
-	border-right: 1px solid #7EAAD1;		
+	border-bottom: 1px solid #cccccc;	
+	border-left: 1px solid #cccccc;	
+	border-right: 1px solid #cccccc;		
 	background-color: #E5EFF8;	
 }
 .modulo3 {
 	color: #000000;	
-	border-bottom: 1px solid #7EAAD1;	
-	border-left: 1px solid #7EAAD1;	
-	border-right: 1px solid #7EAAD1;		
+	border-bottom: 1px solid #cccccc;	
+	border-left: 1px solid #cccccc;	
+	border-right: 1px solid #cccccc;		
 		
 }
 
@@ -225,10 +225,10 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -237,7 +237,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	
 }
 
@@ -246,7 +246,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	background-color: #E5EFF8;
 }
 
@@ -255,7 +255,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	
 }
 
@@ -264,17 +264,17 @@ padding-left:7px;
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .arribaAbajo{
-   border-top-color:#7EAAD1;
+   border-top-color:#cccccc;
    border-top-style:solid;
    border-top-width: 1px;
-   border-bottom-color:#7EAAD1;
+   border-bottom-color:#cccccc;
    border-bottom-style:solid;
    border-bottom-width: 1px;
 }
@@ -312,13 +312,13 @@ padding-left:7px;
 	border-left-width: 1px;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
-	border-bottom-color: #7EAAD1;
-	border-left-color: #7EAAD1;
+	border-bottom-color: #cccccc;
+	border-left-color: #cccccc;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-right-style: solid;
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-top-style: solid;
 }
 
@@ -356,7 +356,7 @@ padding-left:7px;
 	background-color: #E5EFF8;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .datosAbajo {
@@ -364,7 +364,7 @@ padding-left:7px;
 	font-weight: bold;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .derecha {
@@ -380,7 +380,7 @@ padding-left:7px;
 }
 
 .login {
-	color: #44659B;
+	color: #cccccc;
 	font-weight: bold;
 }
 
@@ -465,10 +465,10 @@ padding-left:7px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-weight: bold;
-	color: #44659B;
+	color: #cccccc;
 	background-color: #FFFFFF;
-	border-top: 1px solid #44659B;
-	border-left: 1px solid #44659B;
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
 	height: 20px;
 	text-align: center;
 }
@@ -555,7 +555,7 @@ padding-left:7px;
 }
 
 .links02 {
-	color: #44659B;
+	color: #cccccc;
 	font-weight: bold;
 }
 
@@ -615,26 +615,26 @@ padding-left:7px;
 }
 
 .bor_tabla {
-	border: solid #44659B 1px;
+	border: solid #cccccc 1px;
 }
 .bor_tabla_nobortop {
 	
-	border-right: solid #44659B 1px;
-	border-left: solid #44659B 1px;
-	border-bottom: solid #44659B 1px;
+	border-right: solid #cccccc 1px;
+	border-left: solid #cccccc 1px;
+	border-bottom: solid #cccccc 1px;
 }
 
 .bor_der_unid {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
 .bor_der_cur {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .bor_caja_curso {
@@ -660,8 +660,8 @@ padding-left:7px;
 }
 
 .fon_tit_curso {
-	background-color: #3355AE;
-	color: #3355AE;
+	background-color: #cccccc;
+	color: #cccccc;
 }
 
 .fon_cab_ini {
@@ -675,20 +675,20 @@ padding-left:7px;
 	background-color: #ffffff;
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #7EAAD1;
+	border-left-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .fon_cab {
-	background-color: #3355AE;
+	background-color: #cccccc;
 	background-repeat: repeat-x;
 }
 
@@ -1578,7 +1578,7 @@ ReporteDetalle rdetalle = (ReporteDetalle)request.getAttribute("REPORTE_DETALLE"
 												rightNow.set(5, 1);
 											%>
 											<td align="center">
-												<table border="0" style="border: 1px solid #7EAAD1;" cellspacing="0" cellpadding="2">
+												<table border="0" style="border: 1px solid #cccccc;" cellspacing="0" cellpadding="2">
 													<caption><strong  class="fon_tit_curso"><%=monthName.toUpperCase()%> <%=year %></strong></caption>
 											<%
 												out.println("<tr style='background-color: #E5EFF8;'>");

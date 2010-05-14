@@ -23,7 +23,7 @@
 						<td width="93%">
 								<a style="color:black;font-weight:bold;" href="<%=request.getContextPath()%>/noticia/Cargar.action" ><strong>Noticias</strong></a>
 								>
-								<a style="color:#44659B;font-weight: bold;"><c:out value="${noticia.seccion.nombre}"/></a>
+								<a style="color:#cccccc;font-weight: bold;"><c:out value="${noticia.seccion.nombre}"/></a>
 						</td>
 						<td width="5%">
 							<a href="#" class="salir" onClick="window.print()">Imprimir</a>

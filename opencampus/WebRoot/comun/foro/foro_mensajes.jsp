@@ -26,7 +26,7 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="93%">
-							<a style="color:#000000;font-weight: bold;" href="<%=request.getContextPath()%>/foro/Foro.action">Foros</a> > <a style="color:#000000;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${sessionScope.foro.idForo}"/>"><c:out value="${sessionScope.foro.titulo}"/></a> > <span style="color:#44659B;font-weight:bold;"><c:out value="${sessionScope.tema.titulo}"/></span>
+							<a style="color:#000000;font-weight: bold;" href="<%=request.getContextPath()%>/foro/Foro.action">Foros</a> > <a style="color:#000000;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${sessionScope.foro.idForo}"/>"><c:out value="${sessionScope.foro.titulo}"/></a> > <span style="color:#cccccc;font-weight:bold;"><c:out value="${sessionScope.tema.titulo}"/></span>
 						</td>
 						<td width="5%">
 							<a href="#" class="salir" onClick="window.print()">Imprimir</a>
@@ -71,17 +71,17 @@
 	                    <td align="right" width="150">
 	                    	<c:if test="${pagActual!=1}">
 	                    	<c:if test="${pagActual!=2}">
-	                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="1"/>""><<</a>                    
+	                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="1"/>""><<</a>                    
 	                   		&nbsp;
 	                   		</c:if>
-	                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual-1}"/>"> < </a> 
+	                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual-1}"/>"> < </a> 
 	                    	</c:if>
 	                    	&nbsp;<c:out value="${start+1}"/> - <c:out value="${end}"/> de <c:out value="${totalMensajes}"/> mensajes
 	                    	<c:if test="${end!=totalMensajes}">
-	                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual+1}"/>"> > </a>
+	                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual+1}"/>"> > </a>
 	                    	<c:if test="${pagActual!=(lastOne-1)}">
 	                    	&nbsp;
-	                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${lastOne}"/>"">>></a>
+	                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${lastOne}"/>"">>></a>
 	                    	</c:if>
 	                    	</c:if>
 	                    </td>
@@ -167,24 +167,24 @@
 						
 						<table width="100%">
 							<tr><td>
-								<a style="color:#000000;font-weight: bold;" href="<%=request.getContextPath()%>/foro/Foro.action">Foros</a> > <a style="color:#000000;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${sessionScope.foro.idForo}"/>"><c:out value="${sessionScope.foro.titulo}"/></a> > <span style="color:#44659B;font-weight:bold;"><c:out value="${sessionScope.tema.titulo}"/></span>
+								<a style="color:#000000;font-weight: bold;" href="<%=request.getContextPath()%>/foro/Foro.action">Foros</a> > <a style="color:#000000;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarForo.action?idForo=<c:out value="${sessionScope.foro.idForo}"/>"><c:out value="${sessionScope.foro.titulo}"/></a> > <span style="color:#cccccc;font-weight:bold;"><c:out value="${sessionScope.tema.titulo}"/></span>
 								</td><td align="right">
 								
 		                    </td>
 		                    <td align="right">
 		                    	<c:if test="${pagActual!=1}">
 		                    	<c:if test="${pagActual!=2}">
-		                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="1"/>""><<</a>                    
+		                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="1"/>""><<</a>                    
 		                   		&nbsp;
 		                   		</c:if>
-		                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual-1}"/>"> < </a> 
+		                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual-1}"/>"> < </a> 
 		                    	</c:if>
 		                    	&nbsp;<c:out value="${start+1}"/> - <c:out value="${end}"/> de <c:out value="${totalMensajes}"/> mensajes
 		                    	<c:if test="${end!=totalMensajes}">
-		                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual+1}"/>"> > </a>
+		                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${pagActual+1}"/>"> > </a>
 		                    	<c:if test="${pagActual!=(lastOne-1)}">
 		                    	&nbsp;
-		                    	<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${lastOne}"/>"">>></a>
+		                    	<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${sessionScope.tema.idTema}"/>&pagActual=<c:out value="${lastOne}"/>"">>></a>
 		                    	</c:if>
 		                    	</c:if>
 		                    </td></tr>

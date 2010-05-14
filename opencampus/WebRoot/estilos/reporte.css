@@ -1,6 +1,6 @@
 .reporte_table{
 	border: 1px solid;
-	border-color:#7EAAD1;
+	border-color:#cccccc;
 }
 
 
@@ -11,22 +11,22 @@
 
 .texto {
 	color: #000000;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 
 .textoAbajo1 {
 	padding-left: 5px;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 
@@ -34,41 +34,41 @@
 	
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .textoAbajo3 {
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .textoAbajo {
 	color: #000000;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .texto1 {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .blanco {
@@ -79,30 +79,30 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 }
 
 .unidades {
 	color: #000000;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
 .unidadesAbajo {
 	color: #000000;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -110,10 +110,10 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -121,7 +121,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
@@ -132,7 +132,7 @@ background-color:#FFFFFF
 	
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .notaParcial {
@@ -148,46 +148,46 @@ background-color:#FFFFFF
 	text-align: center;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .modulo {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 .moduloFondo {
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
-	background-color: #E5EFF8;
+	border-bottom-color: #cccccc;
+	background-color: #E5FEC1;
 	
 }
 .moduloFondo4 {
 	color: #000000;	
-	border: 1px solid #7EAAD1;		
-	background-color: #E5EFF8;	
+	border: 1px solid #cccccc;		
+	background-color: #E5FEC1;	
 }
 .moduloFondo3 {
 	color: #000000;	
-	border-bottom: 1px solid #7EAAD1;	
-	border-left: 1px solid #7EAAD1;	
-	border-right: 1px solid #7EAAD1;		
-	background-color: #E5EFF8;	
+	border-bottom: 1px solid #cccccc;	
+	border-left: 1px solid #cccccc;	
+	border-right: 1px solid #cccccc;		
+	background-color: #E5FEC1;	
 }
 .modulo3 {
 	color: #000000;	
-	border-bottom: 1px solid #7EAAD1;	
-	border-left: 1px solid #7EAAD1;	
-	border-right: 1px solid #7EAAD1;		
+	border-bottom: 1px solid #cccccc;	
+	border-left: 1px solid #cccccc;	
+	border-right: 1px solid #cccccc;		
 		
 }
 
@@ -195,10 +195,10 @@ background-color:#FFFFFF
 	color: #000000;
 	border-right-width: 1px;
 	border-right-style: solid;	
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	text-align: center;
 }
 
@@ -207,7 +207,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	
 }
 
@@ -216,8 +216,8 @@ background-color:#FFFFFF
 	color: #000000;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
-	background-color: #E5EFF8;
+	border-bottom-color: #cccccc;
+	background-color: #E5FEC1;
 }
 
 .moduloArriba1 {
@@ -225,7 +225,7 @@ background-color:#FFFFFF
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	
 }
 
@@ -234,17 +234,17 @@ padding-left:7px;
 	color: #000000;
 	border-top-width: 1px;
 	border-top-style: solid;	
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;	
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .arribaAbajo{
-   border-top-color:#7EAAD1;
+   border-top-color:#cccccc;
    border-top-style:solid;
    border-top-width: 1px;
-   border-bottom-color:#7EAAD1;
+   border-bottom-color:#cccccc;
    border-bottom-style:solid;
    border-bottom-width: 1px;
 }

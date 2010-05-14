@@ -829,7 +829,7 @@ ReporteDetalle rdetalle = (ReporteDetalle)request.getAttribute("REPORTE_DETALLE"
 												rightNow.set(5, 1);
 											%>
 											<div style="float: left; padding: 5px;">
-												<table border="0" style="border: 1px solid #7EAAD1;" cellspacing="0" cellpadding="2">
+												<table border="0" style="border: 1px solid #cccccc;" cellspacing="0" cellpadding="2">
 													<caption class="fon_tit_curso"><strong><%=monthName.toUpperCase()%> <%=year %></strong></caption>
 											<%
 												out.println("<tr style='background-color: #E5EFF8;'>");

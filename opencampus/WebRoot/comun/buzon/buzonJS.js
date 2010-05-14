@@ -29,7 +29,7 @@ function init() {
 }
 function activo(menu) {
 	xGetElementById(active).style.background = "white";
-	xGetElementById(menu).style.background = "#DFF0FF";
+	xGetElementById(menu).style.background = "#E5FEC1";
 	active = menu;
 }
 function toWhere(onde) {

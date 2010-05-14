@@ -225,9 +225,7 @@ public class DialogoDAO extends BaseDAO {
 			stmt.setInt(2, aula.getIdFicha());
 			stmt.setInt(3, idUnidad);
 			result = (ResultSet) stmt.executeQuery();
-			System.out.println(aula.getMatriculaActual().getIdMatricula()+"-"+aula.getIdFicha()+"-"+idUnidad);
 			while (result.next()) {
-				System.out.println("22222222");
 				dia = new Dialogo();
 				dia.setAsunto(result.getString("asunto"));
 				dia.setFecha(result.getString("fecha"));

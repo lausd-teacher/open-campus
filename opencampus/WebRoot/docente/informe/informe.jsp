@@ -138,7 +138,7 @@
 	    		</td>
 	    	</tr>
 	    	<tr>
-	    		<td colspan="5" style="text-align: justify; border-top: 1px solid #7EAAD1;">
+	    		<td colspan="5" style="text-align: justify; border-top: 1px solid #cccccc;">
 	    			<p>
 	    			El informe de ejecución de los cursos es una herramienta de medición, del Plan de Mejora Continua, cuyo objetivo es conocer las propuestas de mejora que plantea para el siguiente ciclo y aquellas que ha propuesto para el semestre que pasó.  
 					</p>
@@ -149,7 +149,7 @@
 	    	</tr>
 	  
 	    	<tr>
-	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 	    			<b>¿Qué mejoras, introdujo para mejorar el desarrollo del curso en el <c:out value="${aula_actual.nombrePeriodo}"></c:out>?</b>
 	    		</td>
 	    	</tr>
@@ -183,7 +183,7 @@
 	    	</tr>
 	    	
 	    	<tr>
-	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 	    			<b>¿Qué mejoras propone para mejorar el desarrollo del curso en el siguiente periodo?</b>
 	    		</td>
 	    	</tr>
@@ -217,7 +217,7 @@
 	    	</tr>
 	    	
 	    	<tr>
-	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+	    		<td colspan="5" class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 	    			<b>Comentarios:</b>
 	    		</td>
 	    	</tr>
@@ -254,7 +254,7 @@
 	    		</td>
 	    	</tr>
 	    	<tr>
-				<td colspan="5" class="tabla01_fila1" style="border-top: 1px solid #7EAAD1;">
+				<td colspan="5" class="tabla01_fila1" style="border-top: 1px solid #cccccc;">
 					<span style="float:left;">
 						<input type="button" class="form_button" value="Informes hist&oacute;ricos" onclick="window.document.location =xGetContextPath() +'/aulavirtual/CargarHistoricos.action';" style="width: 160px;"/> 
 					</span>

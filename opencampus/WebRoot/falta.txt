@@ -35,7 +35,8 @@ y cuando onmouseout que se active, ya que el evento drag esta sobreponiendo los 
 enviar una consulta y ver si hay session, si hay session pasa, sino muestra una ventana modal de login con ajax. 
 Despues de 45 minutos para evitar congestion por cada request.
 
-**definir estandares en mensjes de error de formulario, e informacion, podrias usar la logica que usa blueprint (ver Mis Datos)
+*****definir estandares en mensjes de error de formulario, e informacion, podrias usar la logica que usa blueprint 
+(ver Mis Datos), el color del message que aparece cuando se crea un curso (seccion sílabo)(amarillo) esta bacan, usarlo para message de error_action.jsp 
 
 si el silabo ve que ya se uso para una ficha en ejecucion no debe modificar sino sugiere que se duplique y modificar sobre la copia
 

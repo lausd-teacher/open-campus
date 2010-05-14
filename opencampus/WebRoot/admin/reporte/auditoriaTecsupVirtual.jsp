@@ -117,7 +117,7 @@
 	                            				
 	                            				for(int i=inicio.get(Calendar.DATE); inicio.before(fin);inicio.add(Calendar.DATE,1)){
 	                            					if(item.isDiaDeIngreso(Formato.setBaseDatosDeDate(inicio))){
-														out.print("<td style=\"background-color:#3355AE;\" class=\"tabla01\">&nbsp;</td>");
+														out.print("<td style=\"background-color:#cccccc;\" class=\"tabla01\">&nbsp;</td>");
 													}else{
 														out.print("<td class=\"tabla01\">&nbsp;</td>");
 													}

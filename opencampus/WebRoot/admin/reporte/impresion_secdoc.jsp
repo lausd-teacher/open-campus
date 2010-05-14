@@ -35,10 +35,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td  style="padding-left: 10px;height: 25px;color: #44659B;">
+						<td  style="padding-left: 10px;height: 25px;color: #cccccc;">
 							<strong><%=usuario.getNombreCompleto()%> (<%=usuario.getIdUsuario()%>)</strong>
 						</td>
-						<td align="right" style="padding-right: 10px;color: #44659B;">
+						<td align="right" style="padding-right: 10px;color: #cccccc;">
 							<strong><%=Formato.getStringDeDateCompleto(new GregorianCalendar())%></strong>
 						</td>
 					</tr>
@@ -56,31 +56,31 @@
 					pop_up align="center">
 					<tr style="background-color: #E5EFF8;">
 						<td width="40mm"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-left: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-left: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							Codigo
 						</td>
 						<td width="150mm" align="left"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							Nombre Docente
 						</td>
 						<td width="40mm"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							Codigo
 						</td>
 						<td width="200mm" align="left"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							Nombre Curso
 						</td>
 						<td width="30mm" align="center"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							Cant.
 						</td>
 						<td width="45mm"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							F. Inicio
 						</td>
 						<td width="45mm"
-							style="font-weight: bold; border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-top: solid #7EAAD1 1px;">
+							style="font-weight: bold; border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-top: solid #cccccc 1px;">
 							F. Fin
 						</td>
 					</tr>
@@ -91,31 +91,31 @@
 					%>
 					<tr>
 						<td
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px; border-left: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px; border-left: solid #cccccc 1px;">
 							<%=usuariosReporte.getCodopencampus()%>
 						</td>
 						<td align="left"
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=usuariosReporte.getNombreCompleto()%>
 						</td>
 						<td
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=fichasReporte.getCodigoCurso()%>
 						</td>
 						<td align="left"
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=fichasReporte.getNombreCurso()%>
 						</td>
 						<td align="center"
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=fichasReporte.getCantidad()%>
 						</td>
 						<td align="left"
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=fichasReporte.getFechaInicio()%>
 						</td>
 						<td align="left"
-							style="border-bottom: solid #7EAAD1 1px; border-right: solid #7EAAD1 1px;">
+							style="border-bottom: solid #cccccc 1px; border-right: solid #cccccc 1px;">
 							<%=fichasReporte.getFechaFin()%>
 						</td>
 					</tr>

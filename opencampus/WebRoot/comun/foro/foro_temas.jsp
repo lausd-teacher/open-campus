@@ -34,7 +34,7 @@
 							<a style="color:#000000;font-weight:bold;" href="<%=request.getContextPath()%>/foro/Foro.action">
 							<strong>Foros</strong></a>
 							>
-							<a style="color:#44659B;font-weight: bold;"><c:out value="${sessionScope.foro.titulo}"/></a>
+							<a style="color:#cccccc;font-weight: bold;"><c:out value="${sessionScope.foro.titulo}"/></a>
 						</td>
 						<td width="5%">
 							<a href="#" class="salir" onClick="window.print()">Imprimir</a>
@@ -220,7 +220,7 @@
 													
 												</td>											
 												<td colspan="2" class="foro_bor_der_cur_col" valign="top">
-													<a style="color:#44659B;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${tema.idTema}"/>">
+													<a style="color:#cccccc;font-weight:bold;" href="<%=request.getContextPath()%>/foro/IngresarTema.action?idTema=<c:out value="${tema.idTema}"/>">
 													<c:out value="${tema.titulo}"/></a>
 													<br><br>
 													por <strong><c:out value="${tema.nombreUsuario}" /></strong> el <c:out value="${tema.fechaCreacionToString}"/>

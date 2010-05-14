@@ -247,13 +247,13 @@
 											<table border="0" width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" >
 												<tr height="20" >
 													
-													<td width="1%" style="font-size: 13px;font-weight: bold; background: #DFF0FF none repeat scroll 0%;">&nbsp;</td>
-													<td width="5%" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;">&nbsp;</td>
-													<td width="30%" colspan="2" align="center" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >De</td>
+													<td width="1%" style="font-size: 13px;font-weight: bold; background: #E5FEC1 none repeat scroll 0%;">&nbsp;</td>
+													<td width="5%" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;">&nbsp;</td>
+													<td width="30%" colspan="2" align="center" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >De</td>
 													
-													<td width="40%" colspan="2" align="center" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >Asunto</td>
+													<td width="40%" colspan="2" align="center" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >Asunto</td>
 													
-													<td width="22%" align="center" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >Fecha</td>
+													<td width="22%" align="center" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%; border-bottom: 1px solid #CCCCCC;" >Fecha</td>
 													
 												</tr>
 												</table> 
@@ -268,13 +268,13 @@
 										<!--  <table border="0" width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid #CCCCCC;">
 												<tr height="20" >
 													
-													<td width="4%" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%;"></td>
-													<td width="3%" style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%;"></td>
-													<td style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%;" width="30%" colspan="2" align="center">De</td>
+													<td width="4%" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%;"></td>
+													<td width="3%" style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%;"></td>
+													<td style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%;" width="30%" colspan="2" align="center">De</td>
 													
-													<td style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%;" width="40%" colspan="2" align="center">Asunto</td>
+													<td style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%;" width="40%" colspan="2" align="center">Asunto</td>
 													
-													<td style="font-size: 13px;font-weight: bold; background: #EFF8FF none repeat scroll 0%;" width="32%" align="center">Fecha</td>
+													<td style="font-size: 13px;font-weight: bold; background: #C6CEC4 none repeat scroll 0%;" width="32%" align="center">Fecha</td>
 													
 												</tr>
 										</table> -->

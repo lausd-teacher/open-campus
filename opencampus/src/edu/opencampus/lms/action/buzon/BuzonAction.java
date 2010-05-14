@@ -520,7 +520,7 @@ public class BuzonAction extends BaseAction {
 	}
 	
 	public String enviarMensaje() {
-		log.info("enviarMensaje()");
+		log.info("enviarMensaje()"+destino);
 		Collection<UsuarioCorreo> usuarioscorreo = new ArrayList<UsuarioCorreo>();
 		String[] idUsuario = { String.valueOf(getUsuarioSession().getId()) };
 		Mensaje m = new Mensaje();
@@ -561,6 +561,7 @@ public class BuzonAction extends BaseAction {
 
 					UsuarioCorreo xx = null;
 					try {
+						log.info("user:"+m.getUsuario());
 						xx = buzonService.verificaUsuario(m.getUsuario());
 						m.setUsuario(xx.getIdUsuario());
 					} catch (ServiceException e) {

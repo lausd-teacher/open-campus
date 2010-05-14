@@ -150,7 +150,7 @@ public class BuzonDAO extends BaseDAO {
 		try {
 			String query = "select m.idmensaje, m.usuario_creacion, m.titulo, m.contenido, m.fecha, m.adjunto, " +
 					"um.leido,um.tipo, p.apepaterno, p.apematerno, p.nomuno,p.nomdos, um.carpeta, um.favorito, um.fecha_leido " +
-					"from cv_mensaje m, cv_mensaje_usuario um, cv_usuario u, cv_persona p  " +
+					", u.usuario from cv_mensaje m, cv_mensaje_usuario um, cv_usuario u, cv_persona p  " +
 					"where um.idmensaje = m.idmensaje and m.usuario_creacion = u.idusuario and u.idusuario = p.idpersona " +
 					"and um.idusuario = ? and um.estado = 1 and um.carpeta <> 'P' and um.favorito = 1 order by m.fecha desc";
 
@@ -167,7 +167,8 @@ public class BuzonDAO extends BaseDAO {
 				UsuarioCorreo remitente = new UsuarioCorreo();
 
 				m.setContenido(result.getString("CONTENIDO"));
-				remitente.setIdUsuario(result.getString("USUARIO_CREACION"));
+				//remitente.setIdUsuario(result.getString("USUARIO_CREACION"));
+				remitente.setIdUsuario(result.getString("usuario"));
 				remitente.setNombreCorto(Formato.formatoTexto(result
 						.getString(11)
 						+ " "
@@ -423,7 +424,7 @@ public class BuzonDAO extends BaseDAO {
 
 			String query = "select m.contenido, m.idmensaje, m.usuario_creacion, m.titulo,  m.fecha, m.adjunto, " +
 					"um.leido, um.tipo, p.apepaterno, p.apematerno, p.nomuno,p.nomdos, um.carpeta, um.favorito, um.fecha_leido " +
-					"from cv_mensaje m, cv_mensaje_usuario um, cv_usuario u, cv_persona p " +
+					", u.usuario from cv_mensaje m, cv_mensaje_usuario um, cv_usuario u, cv_persona p " +
 					"where um.idmensaje = m.idmensaje and m.usuario_creacion = u.idusuario and u.idusuario = p.idpersona and um.estado = 1 " +
 					"and um.idusuario = ? and um.carpeta = ? and (um.favorito = 0 or um.favorito = 1) " +
 					papelera +
@@ -448,7 +449,8 @@ public class BuzonDAO extends BaseDAO {
 				UsuarioCorreo remitente = new UsuarioCorreo();
 				m.setContenido(result.getString(1));
 				//log.info("Mensaje: "+result.getString(2));
-				remitente.setIdUsuario(result.getString(3));
+				//remitente.setIdUsuario(result.getString(3));
+				remitente.setIdUsuario(result.getString("usuario"));
 				remitente.setNombreCorto(Formato.formatoTexto(result
 						.getString(11)
 						+ " "

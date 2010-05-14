@@ -102,7 +102,7 @@
 						<tr id="<s:property value="id"/>_tr">
 							<td>
 								<table width="100%" border="0" cellpadding="0" cellspacing="0"
-									style="table-layout: fixed; border-bottom: 1px solid #3355AE; border-left: 1px solid #3355AE; border-right: 1px solid #3355AE;">
+									style="table-layout: fixed; border-bottom: 1px solid #cccccc; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;">
 									<tr height="20">
 										<td class="textstatic" align="left">
 											Default maximizado:

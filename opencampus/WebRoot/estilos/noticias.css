@@ -84,7 +84,7 @@
 .etiqueta_act_centro{
 	background-image:url(../img/activo_centro.jpg);
 	background-repeat:repeat-x;
-	color:#3355AE;
+	color:#cccccc;
 	text-align:center;
 	font-weight:bold;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -151,9 +151,9 @@
 	font-size:11px;
 }
 .borde_noticas{
-border-right:1px solid #3355AE;
-border-bottom:1px solid #3355AE;
-border-left:1px solid #3355AE;
+border-right:1px solid #cccccc;
+border-bottom:1px solid #cccccc;
+border-left:1px solid #cccccc;
 }
 .borde_separador_vert{
 	background-image:url(../img/separador_not_vert.jpg);
@@ -203,7 +203,7 @@ border-left:1px solid #3355AE;
 .cabecera_detalle {
 	
 	color:#000000;
-	background-color: #E0EAF3;
+	background-color: #E5FEC1;
 	font-family: Verdana;
 	
 }

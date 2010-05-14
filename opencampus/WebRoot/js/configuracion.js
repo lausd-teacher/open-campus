@@ -93,6 +93,8 @@ function cargar_servicio(id){
     	onComplete : function(){stopLoading['box_'+id]}
 	});
 	
+	//fixed //temporal solo para agenda, hasta hacerlo solo html y no javascript o uniformizar cargar_servicio_xx() //*****************
+	if(id=='servicio_agenda') setTimeout("cargar_servicio_agenda()",2000);
 }
 
 var load_complete = new Object();
@@ -295,8 +297,7 @@ function cargar_servicio_agenda(){
 				//this.intervalCalendar = setInterval("startCalendar('"+oXML.responseText+"')",100);
 				startCalendar(oXML.responseText);
 				//xInnerHtml('servicio_agenda_descripcion','<strong><span class="text_rojo">'+ (oXML.responseText.split('/').length-1) +'</span> evento(s)<strong>');
-				this.cal = ahorita;
-				this.cal.setMonth(this.cal.getMonth()-1);
+				
 		}
 	};
 	myConn.connect(xGetContextPath()+"/agenda/CargarPortada.action", "POST", null, query);
@@ -308,6 +309,10 @@ var startCalendar = function(days){
 			//importar(xGetContextPath()+'/js/jscalendar/calendar-setup.js');
 			//importar(xGetContextPath()+'/js/jscalendar/calendar-es.js');
 			xInnerHtml('box_servicio_agenda','<div id="cv_agenda" style="width:99%;"></div>');
+			
+			this.cal = new Date(ahorita);
+			this.cal.setMonth(this.cal.getMonth()-1);
+			
 			Calendar.setup(
 			    {
 			      flat         : "cv_agenda",
@@ -325,11 +330,10 @@ var startCalendar = function(days){
 			      specialDay   : days
 			    }
 			);
-			portal._updateColumnsHeight();
-			clearInterval(this.intervalCalendar);
+			//clearInterval(this.intervalCalendar);
 		}
 	}catch(e){
-		
+		//alert(e.description)
 	}
 }
 
