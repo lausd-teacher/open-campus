@@ -260,6 +260,11 @@
 		<div>
 			<%String n = (String) session.getAttribute("n"); %>
 			<%@include file="../comun/div_publicacion.jsp"%>
+			<script type="text/javascript">
+				Event.observe(window, 'load', function() {
+					mensajes(<%=n%>);
+				});
+			</script>
 		</div>
 		<div id="blocker" style="display:none; position: absolute; top: 0px; left: 0px; background-color:#ccc; width:0px;height:0px; 
 				filter:alpha(opacity=50); -moz-opacity:.50; opacity:.50;"></div>

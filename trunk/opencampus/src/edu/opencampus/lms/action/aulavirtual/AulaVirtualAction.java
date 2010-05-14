@@ -142,7 +142,7 @@ public class AulaVirtualAction extends BaseAction {
 				aula.setIngreso(ingresoService.inscribirIngreso(new Ingreso(Constante.ELEMENTO_CURSO,getUsuarioSession(),id+"")));
 								
 				//Publicaciones
-				this.publicaciones = publicacionService.listarPublicacionesNoLeidas(aula.getIdFicha(),aula.getMatriculaActual().getIdMatricula());
+				this.publicaciones = publicacionService.listarPublicacionesNoLeidas(aula.getMatriculaActual().getIdMatricula());
 				getRequest().getSession().setAttribute("n", "" + publicaciones.size());
 
 				if(aula.getMatriculaActual().isDocenteResponsable()) {

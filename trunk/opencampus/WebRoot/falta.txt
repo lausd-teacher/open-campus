@@ -1,3 +1,29 @@
+**diseño: por defaul que el open_table sea sin grid, y se adicione with_grid
+		portal_admin
+		monitorea
+		*fusionar aula_virtual del docente y estudiante
+		
+		
+		
+		**trabajo individual
+		*reporte de notas (test)
+		**mi clase
+		
+		*reporte de notas (la principal)
+		*trabajo grupal
+		*docente puede activar y desactivar test para el estudiantes
+		
+		
+		
+		bienvenido_aula.jsp del aula_virtual
+		opcciones administrativas (diseño)
+		recursos de aula (trabajo, dialogo,) (que funcione y su diseño)
+
+
+
+*icon_trab inactivo, icon_trab_activo (deshabilit_docente, habilit_docente)
+*cambiar presentacion de avisos Y LECTURAS (usar acordeon de scriptaculus) 
+---------------------------------------------------------------------------------------------------------
 //Creado por y modificado por deben de guardar el username y no el id (para que se pueda mostrar)
 //En la base de datos modificado_en debe ser CURRENT_TIMESTAMP y credo_en '0000:...' (manualmente con now())
 

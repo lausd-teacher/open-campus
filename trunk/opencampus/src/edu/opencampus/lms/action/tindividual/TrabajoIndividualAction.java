@@ -126,7 +126,7 @@ public class TrabajoIndividualAction extends BaseAction {
 		log.info("cargar()");
 		TrabajoIndividual ti = null;
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+			AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 			
 			if(cmd != null && "error".equals(cmd)){
 				idUnidad = (String)getSession().get("IDUNIDAD");
@@ -144,8 +144,8 @@ public class TrabajoIndividualAction extends BaseAction {
 				}
 				
 				if(ti.getInteraccion().getArchivoNombre() == null){
-					String source = Constante.RUTA_REPOSITORIO_UNITS+ Constante.SLASH + Formato.completarCeros(idUnidad, 8) +
-					Constante.SLASH + Constante.HOME_TRABAJO + Constante.SLASH + Constante.TRABAJO_PDF;
+					String source = Constante.RUTA_UNIDADES+  Formato.completarCeros(idUnidad, 8) +
+					Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 					File trabajo = new File(source);
 					if(trabajo.exists()){
 						ti.getInteraccion().setArchivoNombre("DEFAULT");
@@ -217,7 +217,7 @@ public class TrabajoIndividualAction extends BaseAction {
 	public String publicarTrabajop(){
 		log.info("publicarTrabajop()");
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		log.info(cmd+"-"+trabajo.getIdTrabajo()+"-"+aula.getIdFicha()+"-"+descripcion+"-"+fechaActivacion+"-"+fechaEntrega+"-"+filename+"-"+file.length()); 
 		
@@ -250,7 +250,7 @@ public class TrabajoIndividualAction extends BaseAction {
 					String origen = file.getAbsolutePath();
 					if(!"/".equals(Constante.SLASH))
 						origen = origen.replaceAll("/", Constante.SLASH);
-					String directorioDestino = Constante.HOME_TRABAJOS + Constante.SLASH + aula.getPeriodoMaestro() +
+					String directorioDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
 						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
 					String nombreDestino = Constante.TRABAJO + "_" + idUnidad + extension;
 					Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
@@ -285,7 +285,7 @@ public class TrabajoIndividualAction extends BaseAction {
 	public String eliminarTrabajo(){
 		log.info("eliminarTrabajo()");
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual)getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual)getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		try {
 			if(trabajo != null && usuario != null && aula.getPeriodoMaestro() != 0){
@@ -295,12 +295,12 @@ public class TrabajoIndividualAction extends BaseAction {
 				
 				// Renombrar Archivo
 				idUnidad = String.valueOf(trabajo.getIdUnidad());
-				String source = Constante.RUTA_REPOSITORIO_UNITS+ Constante.SLASH + Formato.completarCeros(idUnidad, 8) +
-				Constante.SLASH + Constante.HOME_TRABAJO + Constante.SLASH + Constante.TRABAJO_PDF;
+				String source = Constante.RUTA_UNIDADES+ Formato.completarCeros(idUnidad, 8) +
+				Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 				File doc = new File(source);
 				if(doc.exists()){
-					String archivoDestino = Constante.HOME_TRABAJOS + Constante.SLASH + aula.getPeriodoMaestro() +
-						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo() + Constante.SLASH + filename;
+					String archivoDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
+					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo() + Constante.SLASH + filename;
 					//Archivo.copiarArchivo(archivoDestino, archivoDestino + "_" +Formato.getStringDeDatePaBKP()+".bkp");
 					Archivo.eliminarArchivo(archivoDestino);
 					
@@ -352,7 +352,7 @@ public class TrabajoIndividualAction extends BaseAction {
 	public String enviarMensajeDeDocente(){
 		
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		String idMensaje = getRequest().getParameter("idMensaje");
 		
@@ -390,8 +390,8 @@ public class TrabajoIndividualAction extends BaseAction {
 				String origen = file.getAbsolutePath();
 				if(!"/".equals(Constante.SLASH))
 					origen = origen.replaceAll("/", Constante.SLASH);
-				String directorioDestino = Constante.HOME_TRABAJOS + Constante.SLASH + aula.getPeriodoMaestro() +
-					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
+				String directorioDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
+				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
 				String nombreDestino = Constante.TRABAJO + "_" + idMatricula + "_" + version + extension;
 				Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
 				
@@ -424,7 +424,7 @@ public class TrabajoIndividualAction extends BaseAction {
 	
 	public String verMensajesDeEstudiante(){
 		
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual ti = null;
 		
 		try {
@@ -435,8 +435,8 @@ public class TrabajoIndividualAction extends BaseAction {
 				ti = tIndividualService.obtenerTrabajoIndividual(ti);
 				
 				if(ti.getInteraccion().getArchivoNombre() == null){
-					String source = Constante.RUTA_REPOSITORIO_UNITS+ Constante.SLASH + Formato.completarCeros(idUnidad, 8) +
-					Constante.SLASH + Constante.HOME_TRABAJO + Constante.SLASH + Constante.TRABAJO_PDF;
+					String source = Constante.RUTA_UNIDADES+ Formato.completarCeros(idUnidad, 8) +
+					Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 					File trabajo = new File(source);
 					if(trabajo.exists()){
 						ti.getInteraccion().setArchivoNombre("DEFAULT");
@@ -474,7 +474,7 @@ public class TrabajoIndividualAction extends BaseAction {
 		
 		log.info("enviarMensajeDeEstudiante() "+getRequest().getParameter("idMensaje"));
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		String idMensaje = getRequest().getParameter("idMensaje");
 		
@@ -513,8 +513,8 @@ public class TrabajoIndividualAction extends BaseAction {
 				String origen = file.getAbsolutePath();
 				if(!"/".equals(Constante.SLASH))
 					origen = origen.replaceAll("/", Constante.SLASH);
-				String directorioDestino = Constante.HOME_TRABAJOS + Constante.SLASH + aula.getPeriodoMaestro() +
-					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
+				String directorioDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
+				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
 				String nombreDestino = Constante.TRABAJO + "_" + aula.getIdMatricula() + "_" + version + extension;
 				Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
 				
@@ -548,12 +548,12 @@ public class TrabajoIndividualAction extends BaseAction {
 	public String descargarTrabajo(){
 		log.info("descargarTrabajo() " + getAulaVirtualSession().getIdMatricula());
 		
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		
 		try {
 			if(aula != null && trabajo != null && aula.getPeriodoMaestro() != 0){
-				String source = Constante.HOME_TRABAJOS + Constante.SLASH + aula.getPeriodoMaestro() +
+				String source = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
 				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo() + Constante.SLASH + filename;
 				//****
 				if(aula.getRol().getIdrol() == Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE 
@@ -578,13 +578,12 @@ public class TrabajoIndividualAction extends BaseAction {
 	public String descargarTrabajoPredeterminado(){
 		log.info("descargarTrabajoPredeterminado()");
 		
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		
 		try{
 			if(aula != null && !aula.getUnidades().isEmpty() && idUnidad != null && Util.esMiUnidad(aula.getUnidades(), idUnidad)){
-				String idUnidadFormated = Formato.completarCeros(idUnidad,8);
-				String source = Constante.RUTA_REPOSITORIO_UNITS+ Constante.SLASH + idUnidadFormated +
-				Constante.SLASH + Constante.HOME_TRABAJO + Constante.SLASH + Constante.TRABAJO_PDF;
+				String source = Constante.RUTA_UNIDADES+ Formato.completarCeros(idUnidad, 8) +
+				Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 				String filenameOut = Constante.TRABAJO + "_" + idUnidad + Constante.EXTENSION_PDF;
 				
 				Archivo.downloadFile(filenameOut, source, getResponse());

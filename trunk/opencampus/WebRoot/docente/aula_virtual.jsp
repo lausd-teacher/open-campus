@@ -259,42 +259,15 @@
 		
 		<div>
 			<%String n = (String) session.getAttribute("n"); %>
+			<%@include file="../comun/div_publicacion.jsp"%>
 			<script type="text/javascript">
 				Event.observe(window, 'load', function() {
 					mensajes(<%=n%>);
 				});
 			</script>
-			<%@include file="../comun/div_publicacion.jsp"%>
 		</div>
 		<div id="blocker" style="display:none; position: absolute; top: 0px; left: 0px; background-color:#ccc; width:0px;height:0px; 
 				filter:alpha(opacity=50); -moz-opacity:.50; opacity:.50;"></div>
-		
-		
-		
-		
-		**diseño: por defaul que el open_table sea sin grid, y se adicione with_grid
-		portal_admin
-		monitorea
-		
-		*cambiar presentacion de avisos (usar acordeon de scriptaculus) (o sino asi nomas pero no funka en mozilla)
-		*fusionar aula_virtual del docente y estudiante
-		
-		*trabajo individual
-		*reporte de notas (test)
-		*mi clase
-		
-		*reporte de notas (la principal)
-		*trabajo grupal
-		*docente puede activar y desactivar test para el estudiantes
-		
-		
-		icon_trab inactivo, icon_trab_activo
-		
-		
-		bienvenido_aula.jsp del aula_virtual
-		opcciones administrativas (diseño)
-		recursos de aula (trabajo, dialogo,) (que funcione y su diseño)
-		
 		
 	</body>
 </html>
