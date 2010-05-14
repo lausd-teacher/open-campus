@@ -66,7 +66,7 @@
 							<c:forEach var="reporteNotas" items="${reporte}" varStatus="row">
 								
 								<table width="100%" height="100%" align="center" cellpadding="2"
-									cellspacing="0" class="tabla_sin_layout" border="0" style="border: 1px solid #44659B;"> 
+									cellspacing="0" class="tabla_sin_layout" border="0" style="border: 1px solid #cccccc;"> 
 									<caption style="text-align: left; font-weight: bold; background-color: #E5EFF8; padding:5px;">
 										<img src="<%=request.getContextPath()%>/img/icon_user.png"/> <c:out value="${reporteNotas.estudiante}"></c:out>
 									</caption>

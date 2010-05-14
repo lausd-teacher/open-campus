@@ -481,7 +481,7 @@
 									if (isAdmin) {
 								%>
 								<table cellpadding="0" cellspacing="0" height="100%"
-									style="border-top: 1px #7EAAD1 solid; border-right: 1px #7fa9ed solid; position: relative; right: 0px; bottom: 0px; padding-bottom: -5px;"
+									style="border-top: 1px #cccccc solid; border-right: 1px #7fa9ed solid; position: relative; right: 0px; bottom: 0px; padding-bottom: -5px;"
 									width="540" class="tabla_sin_layout">
 									<tr height="100%">
 										<%
@@ -927,7 +927,7 @@
 											</div>
 										</td>
 										<td class="ficha_item_link " align="right" width="40"
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');"
 											onmouseover="verToolTip('<%=ficha.getSecciones()%>', this);"
 											onmouseout="ocultarToolTip()">
@@ -938,14 +938,14 @@
 											</label>
 										</td>
 										<td class="ficha_item_link " width="70"
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');">
 											<label style="margin-left: 5px;">
 												<%=ficha.getStringFechaInicio()%>
 											</label>
 										</td>
 										<td width="50" class="ficha_item_link "
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');"
 											onmouseover="verToolTip('<%=ficha.getNombrePeriodo()%>', this);"
 											onmouseout="ocultarToolTip()">
@@ -954,7 +954,7 @@
 											</label>
 										</td>
 										<td class="ficha_item_link " width="35"
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');"
 											onmouseover="verToolTip('<%=ficha.getNombreFamilia()%>', this);"
 											onmouseout="ocultarToolTip()">
@@ -963,7 +963,7 @@
 											</label>
 										</td>
 										<td class="ficha_item_link " width="230"
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');"
 											onmouseover="verToolTip('<%=ficha.getNombreFormacion()%>', this);"
@@ -973,7 +973,7 @@
 											</label>
 										</td>
 										<%--										<td class="ficha_item_link" width="50"--%>
-										<%--											style="border-right: 1px solid #7EAAD1;"--%>
+										<%--											style="border-right: 1px solid #cccccc;"--%>
 										<%--											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');"--%>
 										<%--											onmouseover="verToolTip('<%=ficha.getTurno()%>', this);"--%>
 										<%--											onmouseout="ocultarToolTip()">--%>
@@ -982,7 +982,7 @@
 										<%--											</label>--%>
 										<%--										</td>--%>
 										<td class="ficha_item_link " width="40"
-											style="border-right: 1px solid #7EAAD1;"
+											style="border-right: 1px solid #cccccc;"
 											onclick="javascript:entrarAulaVirtual('<%=ficha.getIdFicha()%>');">
 											<label style="margin-left: 5px;">
 												<%=ficha.getStringSucursal()%>

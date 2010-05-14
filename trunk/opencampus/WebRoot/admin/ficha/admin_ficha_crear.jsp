@@ -89,7 +89,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<tr style="background-color: #7EAAD1">
+							<tr style="background-color: #cccccc">
 								<td align="right">
 									&nbsp;			
 								</td>

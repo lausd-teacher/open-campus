@@ -56,7 +56,7 @@
 				style="cursor:pointer; <c:if test="${conectado.value.rolPredeterminado.idrol != 145}">background-color: #F0F8E5;</c:if> <c:if test="${conectado.value.id == '100524'}">background-color: #AEDFFF;</c:if>"
 				onclick="enviarCorreo('<c:out value="${conectado.value.usuario}"/>','[Recado]')"
 				onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${conectado.value.rolPredeterminado.nombre}"/>', this);">
-				<td  height="18" width="20" style="color: #44659B;padding-bottom:1px;" align="center" valign="midle">
+				<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="midle">
 					<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 				</td>
 				<td align="left" valign="midle">
@@ -90,7 +90,7 @@
 	
 		<c:forEach items="${noticias}" var="noticia" varStatus="fila">
 			
-			<tr style="background-color: #E0EAF3;">
+			<tr style="background-color: #E5FEC1;">
 				<td align="left" width="40%" style="padding:3px;">
 					<strong><c:out value="${noticia.imagen}"/></strong>
 				</td>
@@ -132,7 +132,7 @@
 			<tr class="portal_selecionando" style="cursor:pointer; <c:if test="${cumple.rolPredeterminado.idrol != 0 && cumple.rolPredeterminado.idrol != 7}">background-color: #E0F8E5;</c:if>"
 				onclick="enviarCorreo('<c:out value="${cumple.usuario}"/>','Feliz Cumpleaños!')"
 				onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${cumple.rolPredeterminado.nombre}"/>', this);">
-				<td  height="18" width="20" style="color: #44659B;padding-bottom:1px;" align="center" valign="middle">
+				<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="middle">
 					<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 				</td>
 				<td align="left" valign="middle">
@@ -171,7 +171,7 @@
 				<c:forEach var="mensaje" items="${mensajes}">
 					<tr onMouseOver="return tooltip('Enviado por <b><c:out value='${mensaje.usuario}' /></b> el <fmt:formatDate  value="${mensaje.fecha_envio.time}" type="both" pattern="dd-MM-yyyy" />');" 
 						onMouseOut="return hideTip();">
-						<td  height="20" width="20" style="color: #44659B;padding-bottom:2px;" align="center" valign="middle">
+						<td  height="20" width="20" style="color: #cccccc;padding-bottom:2px;" align="center" valign="middle">
 							<img src="<%=request.getContextPath()%>/img/mas_portal.gif" />
 						</td>
 						<td valign="middle" align="left">

@@ -331,7 +331,7 @@
 												id="ficha_<%=a%>_<%=b%>">
 										</td>
 										<td class="ficha_item_link"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;">
+											style="border-right: 1px solid #cccccc; cursor: auto;">
 											<label
 												onmouseover="verToolTip('<%=ficha.getCodigoCurso() + " - "
 								+ ficha.getNombreCurso()%>', this);"
@@ -341,7 +341,7 @@
 
 										</td>
 										<td class="ficha_item_link" align="right"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;">
+											style="border-right: 1px solid #cccccc; cursor: auto;">
 											<label
 												onmouseover="verToolTip('<%="<strong>" + ficha.getSeccion()
 								+ "</strong>"%>', this);"
@@ -350,7 +350,7 @@
 											</label>
 										</td>
 										<td class="ficha_item_link" align="right"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;">
+											style="border-right: 1px solid #cccccc; cursor: auto;">
 											<label style="margin-right: 10px; color: red;">
 												<%=ficha.getCantidad()%>
 											</label>
@@ -358,7 +358,7 @@
 
 
 										<td class="ficha_item_link" align="left"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;">
+											style="border-right: 1px solid #cccccc; cursor: auto;">
 											<label
 												onmouseover="verToolTip('<%=ficha.getTurno()%>', this);"
 												onmouseout="ocultarToolTip()">
@@ -366,7 +366,7 @@
 											</label>
 										</td>
 										<td class="ficha_item_link"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;"
+											style="border-right: 1px solid #cccccc; cursor: auto;"
 											align="left">
 											<label
 												onmouseover="verToolTip('<%=ficha.getPeriodo()%>', this);"
@@ -375,12 +375,12 @@
 											</label>
 										</td>
 										<td class="ficha_item_link"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;"
+											style="border-right: 1px solid #cccccc; cursor: auto;"
 											align="left">
 											<%=ficha.getFechaInicio()%>
 										</td>
 										<td class="ficha_item_link"
-											style="border-right: 1px solid #7EAAD1; cursor: auto;"
+											style="border-right: 1px solid #cccccc; cursor: auto;"
 											align="left">
 											<%=ficha.getFechaFin()%>
 										</td>

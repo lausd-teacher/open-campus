@@ -263,6 +263,7 @@ function abrirDebate(url) {
 // Fin de las funciones para abrir ventanas
 function mensajes(n) {
 	if (n > 0) {
+		//DarkPanel.show('mensajes',{duration	: 0.0});
 		var X = (screen.availWidth - 300) / 2;
 		var trans = document.getElementById("transparency");
 		trans.setAttribute("style", "width:1280px;height:650px;-moz-opacity:.55;background-color:#EEE;position:absolute;top:1px;left:1px;");
@@ -351,6 +352,7 @@ function cambiarMensajeEstado(idPublicacion) {
 			var resultado = ajax.responseText;
 			if (resultado == "0") {
 				xHideD("transparency");
+				//DarkPanel.hide('mensajes');
 				/*document.getElementById('transparency').style.zIndex='-1';*/
 				//xHideD("tituloPublis");
 				//xHideD("mensajes");

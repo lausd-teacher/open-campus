@@ -6,44 +6,31 @@
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page errorPage="../../error_action.jsp" %>
+<%@ page errorPage="/error_action.jsp"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@  page import="edu.opencampus.lms.util.Constante"%>
-<%@  page import="edu.opencampus.lms.modelo.Usuario"%>
-<%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%
-	String n = (String) session.getAttribute("n");
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1">
-		<title><s:text name="titulo.campus.virtual" />
-		</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src='<%=request.getContextPath()%>/js/jComponente.js'></script>	
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
-		<script type="text/javascript"
-			src='<%=request.getContextPath()%>/js/aula_virtual.js'></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/aviso.js"></script>
-	</head>
-	<body onunload="cerrarAula()">
+		<s:include value="/comun/jslibs.jsp"/>
+		<script type="text/javascript" src='<%=request.getContextPath()%>/js/vitrina.js'></script>
+		<script type="text/javascript" src='<%=request.getContextPath()%>/js/aula_virtual.js'></script>
 		
-			<div id="contenedor">
+	</head>
+	<body>
+		<div id="container">
+		
+			<s:include value="/comun/bienvenida.jsp?aula="/>
 			
-				<%@include file="../comun/bienvenida_aula.jsp"%>
-				
-				<div id="cuerpo">
-					<div id="bienvenida" Xstyle="display: none;">
+			
+			<!-- Menu Aula Docente -->
+			<div id="bienvenida">
 						<table cellspacing="3" border="0">
 							<tr>						
 								<td width="10" class="menu_prin01" align="center">&nbsp;
@@ -65,7 +52,7 @@
 								<td width="10" class="menu_prin01" align="center">
 									|
 								</td>
-								<td width="87" align="center" style="display: none;">
+								<td width="87" align="center">
 									<span class="menu"
 										onclick="javascript:abrirReporte('<%=request.getContextPath()%>/aulavirtual/ReporteNotas.action','Reporte de Notas','640','350');">
 										<s:text name="aula.alumno.menu.reporte_notas"/> </span>
@@ -73,7 +60,7 @@
 								<td width="10" class="menu_prin01" align="center">
 									|
 								</td>
-								<td width="52" align="center" style="display: none">
+								<td width="52" align="center">
 									<span class="menu"
 										onclick="javascript:abrirMiClase('<%=request.getContextPath()%>/aulavirtual/MiClase.action','MiClase','560','350');">
 										<s:text name="aula.alumno.menu.mi_clase"/> </span>
@@ -105,164 +92,209 @@
 							</tr>
 						</table>
 					</div>
-					<div id="pop_cuerpo">
-
+			<!-- Fin Menu Aula Docente -->
+			
+			<div id="body">
+			
+					
+					
 						<%-- EXISTEN UNIDADES --%>
 
 						<c:if test="${aula!=null && fn:length(aula.silabo.unidades)>0}">
 
-							<table width="100%" align="center" cellpadding="3" cellspacing="0" class="bor_tabla" border="0" style="table-layout: fixed;">
-								<caption class="fon_cab tit_cab"><s:text name="aula.alumno.unidades"/></caption>
+							<table width="100%" cellpadding="3" cellspacing="0" border="0" class="open_table nogrid">
+								<caption><s:text name="aula.alumno.unidades"/></caption>
+								<tbody>
 								<c:forEach items="${aula.silabo.unidades}" var="unidad" varStatus="fila">
-									<c:if test="${unidad.estado == 1}">
-										<tr class="tabla01_fila<c:out value="${fila.count%2 + 1}"/>">
-											<td align="center" width="16" class="texto1"><c:out value="${fila.count}"/> </td>
+									<tr <c:if test="${fila.count%2==0}">class="line"</c:if>>
+										<td align="center" width="16" class="border-right"><c:out value="${fila.count}"/> </td>
+										
+										<!-- ********** Texto ********** -->
+										<c:set var="texto" value="${unidad.recursos[0]}" />
+										
+										<c:if test="${aula.cantidadTextos > 0}">
+											<td align="center"  width="24" class="border-right">
+												<img src="<%=request.getContextPath()%>/img/icon_libro.gif" style="cursor: pointer;" alt="Ver Texto"
+													onclick="abrirTexto('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=1&id=<c:out value="${unidad.idUnidad}"/>');"/>
+											</td>
+										</c:if>
+										
+										<!-- ********** Repaso ********** -->
+										<c:set var="repaso" value="${unidad.recursos[1]}" />
+										
+										<c:if test="${aula.cantidadRepasos > 0}">
+											<td align="left">
+												<span style="cursor: pointer; text-decoration: underline; white-space: nowrap;" 
+													onclick="abrirRepaso('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=3&id=<c:out value="${unidad.idUnidad}"/>');">
+													<c:out value="${unidad.nombreCompleto}"/>
+												</span>
+											</td>
 											
-											<!-- ********** Texto ********** -->
-											<c:set var="texto" value="${unidad.recursos[0]}" />
+											<td align="center"  width="24" class="border-right">
+												<img src="<%=request.getContextPath()%>/img/icon_download.gif" style="cursor: pointer;" alt="Descargar Repaso"
+													onclick=""/>
+											</td>
+										</c:if>
+										
+										<!-- ********** Laboratorio ********** -->
+										<c:set var="lab" value="${unidad.recursos[2]}" />
+										
+										<c:if test="${aula.cantidadLaboratorios > 0}">
+											<td align="center" width="10">
+												&nbsp;
+											</td>
 											
-											<c:if test="${aula.cantidadTextos > 0}">
-												<td align="center" class="texto1" width="24">
-													<img src="<%=request.getContextPath()%>/img/icon_libro.gif" style="cursor: pointer;" alt="Ver Texto"
-														onclick="abrirTexto('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=1&id=<c:out value="${unidad.idUnidad}"/>');"/>
-												</td>
-											</c:if>
+											<td align="center" width="22">
+												<img src="<%=request.getContextPath()%>/img/icon_lab.gif" style="cursor: pointer;" alt="Ver Laboratorio"
+													onClick="abrirLaboratorioPdf('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=2&id=<c:out value="${unidad.idUnidad}"/>');"/>
+											</td>
 											
-											<!-- ********** Repaso ********** -->
-											<c:set var="repaso" value="${unidad.recursos[1]}" />
+											<td align="left"  width="10" class="border-right">
+												<c:choose>
+													<c:when test="${unidad.flagLaboratorios > 0}">
+														<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
+													</c:when>
+													<c:otherwise>&nbsp;</c:otherwise>
+												</c:choose>
+											</td>
+										</c:if>
+										
+										<!-- ********** Dialogo ********** -->
+										<c:set var="dia" value="${unidad.recursos[3]}" />
+										
+										<c:if test="${aula.cantidadDialogos > 0}">
+											<td align="center" width="10">
+												&nbsp;
+											</td>
 											
-											<c:if test="${aula.cantidadRepasos > 0}">
-												<td align="left">
-													<span style="cursor: pointer; text-decoration: underline; white-space: nowrap;" 
-														onclick="abrirRepaso('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=3&id=<c:out value="${unidad.idUnidad}"/>');">
-														<c:out value="${unidad.nombreCompleto}"/>
-													</span>
-												</td>
-												
-												<td align="center" class="texto1" width="24">
-													<img src="<%=request.getContextPath()%>/img/icon_download.gif" style="cursor: pointer;" alt="Descargar Repaso"
-														onclick=""/>
-												</td>
-											</c:if>
+											<td align="center" width="22">
+												<img src="<%=request.getContextPath()%>/img/icon_dialog.gif" style="cursor: pointer;" alt="Sala de Diálogo"
+													onClick="abrirDialogo('<%=request.getContextPath()%>/aulavirtual/dialogo/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>','Dialogo','620','400');"/>
+											</td>
 											
-											<!-- ********** Laboratorio ********** -->
-											<c:set var="lab" value="${unidad.recursos[2]}" />
+											<td align="left"  width="10" class="border-right">
+												<c:choose>
+													<c:when test="${unidad.flagDialogos > 0}">
+														<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
+													</c:when>
+													<c:otherwise>&nbsp;</c:otherwise>
+												</c:choose>
+											</td>
+										</c:if>
+										
+										<!-- ********** Trabajo ********** -->
+										<c:set var="trabajo" value="${unidad.recursos[4]}" />
+										
+										<c:if test="${aula.cantidadTrabajos > 0}">
+											<td align="center" width="10">
+												&nbsp;
+											</td>
 											
-											<c:if test="${aula.cantidadLaboratorios > 0}">
-												<td align="center" width="10">
-													&nbsp;
-												</td>
-												
-												<td align="center" width="22">
-													<img src="<%=request.getContextPath()%>/img/icon_lab.gif" style="cursor: pointer;" alt="Ver Laboratorio"
-														onClick="abrirLaboratorioPdf('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=2&id=<c:out value="${unidad.idUnidad}"/>');"/>
-												</td>
-												
-												<td align="left" class="texto1" width="10">
-													<c:choose>
-														<c:when test="${unidad.flagLaboratorios > 0}">
-															<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
-														</c:when>
-														<c:otherwise>&nbsp;</c:otherwise>
-													</c:choose>
-												</td>
-											</c:if>
+											<td align="center" width="22">
+												<img src="<%=request.getContextPath()%>/img/icon_trab.gif" style="cursor: pointer;" alt="Trabajo Individual"
+													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tindividual/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
+											</td>
 											
-											<!-- ********** Dialogo ********** -->
-											<c:set var="dia" value="${unidad.recursos[3]}" />
+											<td align="left"  width="10" class="border-right">
+												<c:choose>
+													<c:when test="${unidad.flagTIndividual > 0}">
+														<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
+													</c:when>
+													<c:otherwise>&nbsp;</c:otherwise>
+												</c:choose>
+											</td>
+										</c:if>
+										
+										<!-- ********** Grupal ********** -->
+										<c:set var="trabajo" value="${unidad.recursos[5]}" />
+										
+										<c:if test="${aula.cantidadGrupales > 0}">
+											<td align="center" width="10">
+												&nbsp;
+											</td>
 											
-											<c:if test="${aula.cantidadDialogos > 0}">
-												<td align="center" width="10">
-													&nbsp;
-												</td>
-												
-												<td align="center" width="22">
-													<img src="<%=request.getContextPath()%>/img/icon_dialog.gif" style="cursor: pointer;" alt="Sala de Diálogo"
-														onClick="abrirDialogo('<%=request.getContextPath()%>/aulavirtual/dialogo/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>','Dialogo','620','400');"/>
-												</td>
-												
-												<td align="left" class="texto1" width="10">
-													<c:choose>
-														<c:when test="${unidad.flagDialogos > 0}">
-															<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
-														</c:when>
-														<c:otherwise>&nbsp;</c:otherwise>
-													</c:choose>
-												</td>
-											</c:if>
+											<td align="center" width="22">
+												<img src="<%=request.getContextPath()%>/img/icon_trab_grup.gif" style="cursor: pointer;" alt="Trabajo Grupal"
+													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tgrupal/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
+											</td>
 											
-											<!-- ********** Trabajo ********** -->
-											<c:set var="trabajo" value="${unidad.recursos[4]}" />
-											
-											<c:if test="${aula.cantidadTrabajos > 0}">
-												<td align="center" width="10">
-													&nbsp;
-												</td>
-												
-												<td align="center" width="22">
-													<img src="<%=request.getContextPath()%>/img/icon_trab.gif" style="cursor: pointer;" alt="Trabajo Individual"
-														onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tindividual/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
-												</td>
-												
-												<td align="left" class="texto1" width="10">
-													<c:choose>
-														<c:when test="${unidad.flagTIndividual > 0}">
-															<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
-														</c:when>
-														<c:otherwise>&nbsp;</c:otherwise>
-													</c:choose>
-												</td>
-											</c:if>
-											
-											<!-- ********** Grupal ********** -->
-											<c:set var="trabajo" value="${unidad.recursos[5]}" />
-											
-											<c:if test="${aula.cantidadGrupales > 0}">
-												<td align="center" width="10">
-													&nbsp;
-												</td>
-												
-												<td align="center" width="22">
-													<img src="<%=request.getContextPath()%>/img/icon_trab_grup.gif" style="cursor: pointer;" alt="Trabajo Grupal"
-														onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tgrupal/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
-												</td>
-												
-												<td align="left" class="texto1" width="10">
-													<c:choose>
-														<c:when test="${unidad.flagTGrupal > 0 || unidad.flagDebates > 0}">
-															<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
-														</c:when>
-														<c:otherwise>&nbsp;</c:otherwise>
-													</c:choose>
-												</td>
-											</c:if>
-											
-											<!-- ********** Test ********** -->
-											<c:set var="test" value="${unidad.recursos[6]}" />
-											
-											<c:if test="${aula.cantidadTest > 0}">
-												<td align="center" width="22">
-													<img src="<%=request.getContextPath()%>/img/icon_test.gif" style="cursor: pointer;" alt="Evaluación"
-														onClick="abrirTest('<%=request.getContextPath()%>/aulavirtual/test/Listar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
-												</td>
-												<td align="right" width="20">
-													[<c:out value="${unidad.cantidadTest}"/>]
-												</td>
-											</c:if>
-											
-										</tr>
-									</c:if>
+											<td align="left"  width="10" class="border-right">
+												<c:choose>
+													<c:when test="${unidad.flagTGrupal > 0 || unidad.flagDebates > 0}">
+														<img src="<%=request.getContextPath()%>/img/flag.gif" alt="Pendiente"/>
+													</c:when>
+													<c:otherwise>&nbsp;</c:otherwise>
+												</c:choose>
+											</td>
+										</c:if>
+										
+										<!-- ********** Test ********** -->
+										<c:set var="test" value="${unidad.recursos[6]}" />
+										
+										<c:if test="${aula.cantidadTest > 0}">
+											<td align="center" width="10">
+												&nbsp;
+											</td>
+											<td align="center" width="22">
+												<img src="<%=request.getContextPath()%>/img/icon_test.gif" style="cursor: pointer;" alt="Evaluación"
+													onClick="abrirTest('<%=request.getContextPath()%>/aulavirtual/test/Listar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
+											</td>
+											<td align="right" width="20">
+												[<c:out value="${unidad.cantidadTest}"/>]
+											</td>
+										</c:if>
+										
+									</tr>
 								</c:forEach>
+								</tbody>
 							</table>
 						
 						</c:if>
 						
-					</div>
-				</div>
-				<div id="pie">
-					<%@include file="../../comun/pie.jsp"%>
-				</div>
 			</div>
+			
+			<s:include value="/comun/pie.jsp"/>
+			
+		</div>
+		
+		<div>
+			<%String n = (String) session.getAttribute("n"); %>
+			<script type="text/javascript">
+				Event.observe(window, 'load', function() {
+					mensajes(<%=n%>);
+				});
+			</script>
+			<%@include file="../comun/div_publicacion.jsp"%>
+		</div>
+		<div id="blocker" style="display:none; position: absolute; top: 0px; left: 0px; background-color:#ccc; width:0px;height:0px; 
+				filter:alpha(opacity=50); -moz-opacity:.50; opacity:.50;"></div>
+		
+		
+		
+		
+		**diseño: por defaul que el open_table sea sin grid, y se adicione with_grid
+		portal_admin
+		monitorea
+		
+		*cambiar presentacion de avisos (usar acordeon de scriptaculus) (o sino asi nomas pero no funka en mozilla)
+		*fusionar aula_virtual del docente y estudiante
+		
+		*trabajo individual
+		*reporte de notas (test)
+		*mi clase
+		
+		*reporte de notas (la principal)
+		*trabajo grupal
+		*docente puede activar y desactivar test para el estudiantes
+		
+		
+		icon_trab inactivo, icon_trab_activo
+		
+		
+		bienvenido_aula.jsp del aula_virtual
+		opcciones administrativas (diseño)
+		recursos de aula (trabajo, dialogo,) (que funcione y su diseño)
+		
 		
 	</body>
 </html>

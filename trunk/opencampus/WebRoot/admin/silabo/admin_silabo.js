@@ -130,7 +130,7 @@ function crearCurso(form){
 		
 		ajax.open("POST", xGetContextPath()+"/admin/curso/Crear.action", true);
 		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		ajax.send("nombre="+form.nombre.value+"&idJerarquia="+form.idJerarquia.value);
+		ajax.send("nombre="+escape(form.nombre.value)+"&idJerarquia="+form.idJerarquia.value);
 		ajax.onreadystatechange = function () {
 			if (ajax.readyState === 4) {
 				if(ajax.responseText.trim() == 'OK'){

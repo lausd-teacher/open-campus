@@ -110,7 +110,7 @@
 									</div>
 									<!-- Fin Contenido -->
 									
-									<% boolean modal = true; %>	
+									<% boolean modal = false; %>	
 									<div class="foot clearfix">
 										<div style="float:left;">
 											<c:choose>
@@ -175,14 +175,7 @@
 												<%}else{ %>
 												<a href="javascript:void(0);" onclick="abrir_servicio_agenda()">
 												<%} %>
-												<s:text name="portal.servicios.link"/></a>
-												
-												<script type="text/javascript">
-													Event.observe(window, 'load', function() {
-														cargar_servicio_agenda();
-													});
-												</script>
-												
+												<s:text name="portal.servicios.link"/></a>					
 											</c:when>
 											<c:when test="${servicio.id == 'servicio_enlaces'}">
 												<!-- ENLACES-->

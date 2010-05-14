@@ -200,5 +200,14 @@ public class Unidad extends BaseModelo {
 		return "idUnidad: "+this.idUnidad+" nombreCompleto: "+this.nombreCompleto;
 	}
 	
-	
+	@Override
+	public boolean equals(Object o) {
+		if(o != null && o instanceof Unidad){
+			Unidad u = (Unidad) o;
+			if (this.idUnidad == u.getIdUnidad()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

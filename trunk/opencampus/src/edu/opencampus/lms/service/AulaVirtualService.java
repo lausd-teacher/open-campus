@@ -1,6 +1,10 @@
 package edu.opencampus.lms.service;
 
 import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import edu.opencampus.lms.dao.AulaVirtualDAO;
 import edu.opencampus.lms.excepcion.ServiceException;
@@ -9,10 +13,14 @@ import edu.opencampus.lms.modelo.Matricula;
 import edu.opencampus.lms.modelo.Silabo;
 import edu.opencampus.lms.modelo.Usuario;
 import edu.opencampus.lms.modelo.aulavirtual.MatriculaRol;
+import edu.opencampus.lms.modelo.ficha.Recurso;
+import edu.opencampus.lms.modelo.ficha.Unidad;
 import edu.opencampus.lms.util.Constante;
 
 public class AulaVirtualService {
 
+	protected Log log = LogFactory.getLog(getClass());
+	
 	private AulaVirtualDAO aulaVirtualDAO;
 
 	public void setAulaVirtualDAO(AulaVirtualDAO aulaVirtualDAO) {
@@ -101,6 +109,41 @@ public class AulaVirtualService {
 			if(aula != null){
 				if(aula.isDisponible()){
 					aula = aulaVirtualDAO.obtenerAulaVirtual(idficha, usuario, false);
+					//Eliminar unidades de estado inactivo 
+					for (Iterator<Unidad> itUnidad=aula.getSilabo().getUnidades().iterator();itUnidad.hasNext();) {
+						Unidad unidad = itUnidad.next();
+						if(unidad.getEstado() == Constante.ESTADO_INACTIVO){
+							log.info("Eliminando unidad por inactivo: "+unidad.getIdUnidad()+"-"+unidad.getNombreCompleto());
+							itUnidad.remove();
+						}else{
+							//Eliminado recursos de estado inactivo
+							for (Iterator<Recurso> itRecurso=unidad.getRecursos().iterator();itRecurso.hasNext();) {
+								Recurso recurso = itRecurso.next();
+								if(recurso.getEstado() == Constante.ESTADO_INACTIVO){
+									log.info("Eliminando recurso por inactivo: "+unidad.getIdUnidad()+"-"+recurso.getNombre());
+									unidad.getRecursos().remove(recurso);
+								}
+							}
+						}
+					}	
+					
+					//Eliminar unidades de estado inactivo 
+					//java.util.ConcurrentModificationException
+//					for (Unidad unidad : aula.getSilabo().getUnidades()) {
+//						if(unidad.getEstado() == Constante.ESTADO_INACTIVO){
+//							log.info("Eliminando unidad por inactivo: "+unidad.getIdUnidad()+"-"+unidad.getNombreCompleto());
+//							aula.getSilabo().getUnidades().remove(unidad);
+//						}else{
+//							//Eliminado recursos de estado inactivo
+//							for (Recurso recurso : unidad.getRecursos()) {
+//								if(recurso.getEstado() == Constante.ESTADO_INACTIVO){
+//									log.info("Eliminando recurso por inactivo: "+unidad.getIdUnidad()+"-"+recurso.getNombre());
+//									unidad.getRecursos().remove(recurso);
+//								}
+//							}
+//						}
+//					}
+
 				}else{
 					throw new ServiceException("El aula de id "+idficha+" se encuentra fuera de periodo. " +
 							"Inicio:"+aula.getFechaInicioToString()+" Fin:"+aula.getFechaFinToString());
@@ -110,7 +153,7 @@ public class AulaVirtualService {
 			}
 			return aula;
 		} catch (Exception e) {
-			throw new ServiceException(e.getMessage());
+			throw new ServiceException(e);
 		}
 	}
 	

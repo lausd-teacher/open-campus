@@ -65,18 +65,18 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 			         </td>
 			        </tr> 
 			        <tr>
-						<td width="244" style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #7EAAD1;">
+						<td width="244" style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #cccccc;">
 							<strong>Fecha de Activaci&oacute;n : </strong> &nbsp;
 							<f:DateToString fecha="${tg.fechaActivacion}" completo="true" />
 						</td>
-						<td width="243" style="border-right: solid 1px #7EAAD1;">
+						<td width="243" style="border-right: solid 1px #cccccc;">
 							<strong>Fecha de Entrega : </strong> &nbsp;
 							<f:DateToString fecha="${tg.fechaEntrega}" completo="true" />
 						</td>
 					</tr>
 					<tr  onmouseover="seleccionBlue(this,true)" onmouseout="seleccionBlue(this,false)">
 						<td colspan="2" align="center" onclick="mostrarRenombrarGrupo();"
-						style="border-bottom: solid 1px #7EAAD1; border-right: solid 1px #7EAAD1;; border-left: solid 1px #7EAAD1;; white-space: nowrap;">
+						style="border-bottom: solid 1px #cccccc; border-right: solid 1px #cccccc;; border-left: solid 1px #cccccc;; white-space: nowrap;">
 							<div id="title" style="width:100%; font-size: 18px;"><c:out value="${grupo.nombre}"></c:out></div>
 							<div id="titleForm" style="display: none;"><input type="text" id="titleText" maxlength="100"  style="width: 98%;"
 							value="<c:out value="${grupo.nombre}"/>" onblur="renombrarGrupo(this);"/></div>
@@ -90,7 +90,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 				<div id="transparency" style="position: absolute; top: 0px; left: 0px; background-color:#000000; width:0px;height:0px;
 				filter:alpha(opacity=50); -moz-opacity:.50; opacity:.50;"></div>
 				<div id="div_integrantes" style="position: absolute; top: -100px; left: 0px; width: 300px; visibility: hidden;">
-					<table width="100%" align="center" class="tabla01" style="table-layout: fixed; border: solid 1px #7EAAD1; background-color: #FFFFFF;">
+					<table width="100%" align="center" class="tabla01" style="table-layout: fixed; border: solid 1px #cccccc; background-color: #FFFFFF;">
 						<CAPTION>
 				          	Integrantes
 				        </CAPTION>
@@ -101,14 +101,14 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 				        </tr>
 				        <tr onmouseover="seleccionBlue(this,true)" onmouseout="seleccionBlue(this,false)"
 				        	onclick="closeDivIntegrantes()" style="cursor: pointer;">
-				        	<td align="center" style="border-top: solid 1px #7EAAD1;">
+				        	<td align="center" style="border-top: solid 1px #cccccc;">
 				        		<strong>Cerrar</strong>
 				        	</td>
 				        </tr>
 					</table>
 				</div>
 				
-				<table width="500" align="center" class="tabla01" style="table-layout: fixed; border: solid 1px #7EAAD1;">
+				<table width="500" align="center" class="tabla01" style="table-layout: fixed; border: solid 1px #cccccc;">
 				<tr>
 					<td width="30%"></td>
 					<td align="center" width="40%" style="padding-left: 10px; cursor: pointer;" onmouseover="seleccionBlue(this,true)" onmouseout="seleccionBlue(this,false)"

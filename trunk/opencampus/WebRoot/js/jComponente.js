@@ -695,9 +695,10 @@ var xBrowser = {
 };
 
 /*
+ * DEPRECATED: REEMPLAZADO POR date.js
  * the date format prototype
  */
- // a global month names array
+/* // a global month names array
 var gsMonthNames = new Array(
 	'January',
 	'February',
@@ -763,7 +764,7 @@ Number.prototype.zf = function(f)
     }
 
     return string;
-}
+}*/
 //Deshabilita la tecla ctrl + algun boton
 function disableCtrlKeyCombination(s_input, e) {
 	var key;

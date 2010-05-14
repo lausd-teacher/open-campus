@@ -82,7 +82,7 @@
 					</tr>
 				</table>
 			</div>
-			<div id="pop_cuerpo" style="background-image: url(../img/foro/fondos/backgroung_01.jpg);">
+			<div id="pop_cuerpo" style="background-image: url(../img/foro/fondos/backgroung_02.jpg);">
 				<div id="portada" style="width: 100%; height:460px;">
 	
 		<div style="float: right;">

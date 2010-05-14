@@ -16,7 +16,7 @@
 		<tr class="portal_selecionando" style="cursor:pointer; <c:if test="${cumple.rolPredeterminado.idrol != 0 && cumple.rolPredeterminado.idrol != 7}">background-color: #E0F8E5;</c:if>"
 			onclick="enviarCorreo('<c:out value="${cumple.usuario}"/>','Feliz Cumpleaños!')"
 			onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${cumple.rolPredeterminado.nombre}"/>', this);">
-			<td  height="18" width="20" style="color: #44659B;padding-bottom:1px;" align="center" valign="middle">
+			<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="middle">
 				<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 			</td>
 			<td align="left" valign="middle">

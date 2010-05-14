@@ -24,13 +24,13 @@
 	border-left-width: 1px;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
-	border-bottom-color: #7EAAD1;
-	border-left-color: #7EAAD1;
+	border-bottom-color: #cccccc;
+	border-left-color: #cccccc;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	border-right-style: solid;
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-top-style: solid;
 }
 
@@ -65,10 +65,10 @@
 .datos {
 	color: #4268C9;
 	font-weight: bold;
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .datosAbajo {
@@ -76,11 +76,11 @@
 	font-weight: bold;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 }
 
 .derecha {
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 }
 
 .datosIz {
@@ -92,12 +92,12 @@
 }
 
 .login {
-	color: #44659B;
+	color: #cccccc;
 	font-weight: bold;
 }
 
 .bienvenida {
-	font-size: 14px;
+	font-size: 11px;
 	color: #0E6BC9;
 	font-weight: bold;
 }
@@ -128,14 +128,14 @@
 
 .tit_cab_cal {
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #333333;
 	font-size: 0.9em;
 	text-decoration: none;
 }
 
 .tit_cab {
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #333333;
 	padding-left: 10px;
 	text-decoration: none;
 	vertical-align: middle;
@@ -174,15 +174,19 @@
 }
 
 .form_button {
+	background-image: url("../img/bg_input_button.jpg");
+	background-color: #FFFFFF;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-weight: bold;
-	color: #44659B;
-	background-color: #FFFFFF;
-	border-top: 1px solid #44659B;
-	border-left: 1px solid #44659B;
-	height: 20px;
+	color: #3C3C3C;
+	border-top: 1px solid #A0A0A0;
+	border-left: 1px solid #A0A0A0;
+	border-bottom: 1px solid #909090;
+	border-right: 1px solid #909090;
+	height: 22px;
 	text-align: center;
+	cursor: pointer;
 }
 
 .form_text {
@@ -267,7 +271,7 @@
 }
 
 .links02 {
-	color: #44659B;
+	color: #cccccc;
 	font-weight: bold;
 }
 
@@ -327,26 +331,26 @@
 }
 
 .bor_tabla {
-	border: solid #44659B 1px;
+	border: solid #cccccc 1px;
 }
 .bor_tabla_nobortop {
 	
-	border-right: solid #44659B 1px;
-	border-left: solid #44659B 1px;
-	border-bottom: solid #44659B 1px;
+	border-right: solid #cccccc 1px;
+	border-left: solid #cccccc 1px;
+	border-bottom: solid #cccccc 1px;
 }
 
 .bor_der_unid {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 	text-align: center;
 }
 
 .bor_der_cur {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .bor_caja_curso {
@@ -388,16 +392,16 @@
 	background-color: #ffffff;
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: #7EAAD1;
+	border-top-color: #cccccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #7EAAD1;
+	border-bottom-color: #cccccc;
 	border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #7EAAD1;
+	border-left-color: #cccccc;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #7EAAD1;
+	border-right-color: #cccccc;
 }
 
 .fon_cab {
@@ -437,11 +441,11 @@
 }
 
 .fon_color01 {
-	background-color: #E5EFF8;
+	background-color: #E5FEC1;
 }
 
 .fon_color02 {
-	background-color: #E0EAF3;
+	background-color: #E5FEC1;
 }
 
 .fon_color03 {

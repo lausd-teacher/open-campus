@@ -18,7 +18,7 @@
 			style="cursor:pointer; <c:if test="${conectado.value.rolPredeterminado.idrol != 145}">background-color: #F0F8E5;</c:if> <c:if test="${conectado.value.id == '100524'}">background-color: #AEDFFF;</c:if>"
 			onclick="enviarCorreo('<c:out value="${conectado.value.usuario}"/>','[Recado]')"
 			onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${conectado.value.rolPredeterminado.nombre}"/>', this);">
-			<td  height="18" width="20" style="color: #44659B;padding-bottom:1px;" align="center" valign="midle">
+			<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="midle">
 				<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 			</td>
 			<td align="left" valign="midle">

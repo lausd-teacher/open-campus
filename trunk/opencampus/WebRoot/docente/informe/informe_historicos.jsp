@@ -44,14 +44,14 @@
 	    	
 	    	<c:forEach items="${periodos}" var="periodo" varStatus="fila">
 		    	<tr>
-		    		<td class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+		    		<td class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 		    			<b><c:out value="${fila.count}"></c:out>.- <a href="<%=request.getContextPath()%>/aulavirtual/CargarDetalleHistorico.action?idperiodo=<c:out value="${periodo.idPeriodo}"/>" 
 		    				style="color: black;"> <c:out value="${periodo.nombre}"></c:out></a></b>
 		    		</td>
-		    		<td align="center" class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+		    		<td align="center" class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 		    			<c:out value="${periodo.fechaInicioToString}"/>
 		    		</td>
-		    		<td align="center" class="tabla01_fila1" style="border-bottom: 1px solid #7EAAD1; border-top: 1px solid #7EAAD1;">
+		    		<td align="center" class="tabla01_fila1" style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
 		    			<c:out value="${periodo.fechaFinToString}" />
 		    		</td>
 		    	</tr>
@@ -63,7 +63,7 @@
 	    	</tr>
 	    	
 	    	<tr>
-				<td colspan="3" class="tabla01_fila1" style="border-top: 1px solid #7EAAD1;">
+				<td colspan="3" class="tabla01_fila1" style="border-top: 1px solid #cccccc;">
 					<span style="float:left;">
 						<input type="button" class="form_button" value="Regresar" onclick="window.document.location =xGetContextPath() +'/aulavirtual/Informe.action';" style="width: 80px;"/> 
 					</span>

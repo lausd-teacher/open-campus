@@ -63,7 +63,7 @@
                 <input type="submit" value="Buscar" class="form_button">
             </td>
             </tr>
-            <tr style="background-color: #7EAAD1">
+            <tr style="background-color: #cccccc">
             <td align="right" colspan="4">&nbsp; 
                 <input type="button" value="Nuevo" id="btNuevo" onClick="mostrarNuevo(this);" class="form_button">
             </td>

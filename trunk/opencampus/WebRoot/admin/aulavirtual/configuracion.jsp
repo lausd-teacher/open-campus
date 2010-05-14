@@ -274,7 +274,7 @@
 																			</td>
 																		</tr>
 																		
-																		<tr style="background-color: #7EAAD1">
+																		<tr style="background-color: #cccccc">
 																			<td align="right" colspan="7">
 																				<input type="submit" value="Guardar" class="form_button"">
 																			</td>

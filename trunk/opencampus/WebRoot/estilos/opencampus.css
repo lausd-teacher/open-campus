@@ -1,4 +1,8 @@
 @CHARSET "ISO-8859-1";
+/*
+ * colores: #CCCCCC(border), #333333(text), #E5FEC1(line), #7EBEBE(hover), #539A9E, #487F93(text_hover)
+ * http://mx.answers.yahoo.com/question/index?qid=20090119160259AAiP7nG
+ */
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -30,19 +34,6 @@ body {
 	font-weight: bold;
 	text-indent: 3px;
 	background-color: #E5FEC1 !important; 
-}
-/* Bordes a celdas manuales */ 
-.open_table .border-top, .open_table .border-t{
-	border-top: solid #CCCCCC 1px;
-}
-.open_table .border-bottom, .open_table .border-b{
-	border-bottom: solid #CCCCCC 1px;
-}
-.open_table .border-right, .open_table .border-r{
-	border-right: solid #CCCCCC 1px;
-}
-.open_table .border-left, .open_table .border-l{
-	border-left: solid #CCCCCC 1px;
 }
 /* Partes del table*/
 .open_table caption {
@@ -76,13 +67,13 @@ body {
 	vertical-align: middle;
 }
 .open_table.nogrid th, .open_table.nogrid td {
-	border-right: none !important; 
+	border-right: none; 
 }
 .open_table tbody tr {
 	height: 18px;
 }
 .open_table.with_hover tbody tr:hover {
-	background-color: #CEE7FF;
+	background-color: #7EBEBE;
 }
 .open_table tbody tr th, .open_table tbody tr td {
 	border-right: 1px solid #CCCCCC;
@@ -100,6 +91,19 @@ body {
 	font-size: 11px;
 	color: #ffffff;
 	font-weight: bold;
+}
+/* Bordes a celdas manuales */ 
+.open_table .border-top, .open_table .border-t{
+	border-top: solid #CCCCCC 1px !important;
+}
+.open_table .border-bottom, .open_table .border-b{
+	border-bottom: solid #CCCCCC 1px !important;
+}
+.open_table .border-right, .open_table .border-r{
+	border-right: solid #CCCCCC 1px !important;
+}
+.open_table .border-left, .open_table .border-l{
+	border-left: solid #CCCCCC 1px !important;
 }
 /* Para paginación */
 .open_table .pagination{
@@ -376,15 +380,15 @@ tr.roweven {
 
 .actionMessageCSS {
 	width: 100%;
-	border: 1px solid #7EAAD1; 
+	border: 1px solid #cccccc; 
 	background-color: #E5EFF8; 
-	color: #7EAAD1;
+	color: #cccccc;
 }
 
 .actionMessageCSS div {
-	border-bottom: 1px solid #7EAAD1; 
+	border-bottom: 1px solid #cccccc; 
 	padding: 2px 0px 2px 0px; 
-	background-color: #7EAAD1; 
+	background-color: #cccccc; 
 	color:#FFF; 
 	font-weight: bold;
 	text-indent: 3px;
@@ -413,7 +417,7 @@ tr.roweven {
  * Anatips
  */
 div#anatips_tip { 
-	border: 1px solid #7EAAD1; 
+	border: 1px solid #cccccc; 
 	visibility: hidden; 
 	background-color: #B0D4E9; 
 	color:white; 
@@ -460,11 +464,11 @@ div#anatips_tip {
 	font-weight: bold;
 }
 #top_menu span#top_usuario{
-	color:#44659B;
+	color:#487F93;
 	font-weight: bold;
 }
 #top_menu span#top_reloj{
-	color:#44659B;
+	color:#333333;
 }
 #banner {
 	width: 100%;

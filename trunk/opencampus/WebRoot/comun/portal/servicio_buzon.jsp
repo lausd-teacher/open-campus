@@ -15,7 +15,7 @@
 			<c:forEach var="mensaje" items="${MENSAJES}">
 				<tr onmouseout="ocultarToolTip()" 
 					onmouseover="verToolTip('Enviado por <b><c:out value='${mensaje.usuario}' /></b> el <f:DateToString fecha="${mensaje.fecha_envio}" />', this);">
-					<td  height="20" width="20" style="color: #44659B;padding-bottom:2px;" align="center" valign="middle">
+					<td  height="20" width="20" style="color: #cccccc;padding-bottom:2px;" align="center" valign="middle">
 						<img src="<%=request.getContextPath()%>/img/mas_portal.gif" />
 					</td>
 					<td valign="middle" align="left">
