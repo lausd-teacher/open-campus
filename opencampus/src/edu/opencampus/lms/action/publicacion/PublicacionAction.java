@@ -161,9 +161,10 @@ public class PublicacionAction extends BaseAction{
 		log.info("cambiarEstado() "+idPublicacion);
 		try {
 			publicacionService.publicacionLeida(idPublicacion, getUsuarioSession().getAulaActual().getMatriculaActual().getIdMatricula());						
-			PUBLICACIONES = publicacionService.listarPublicacionesNoLeidas(getUsuarioSession().getAulaActual().getMatriculaActual().getIdMatricula(),getUsuarioSession().getAulaActual().getIdFicha());
+			PUBLICACIONES = publicacionService.listarPublicacionesNoLeidas(getUsuarioSession().getAulaActual().getMatriculaActual().getIdMatricula());
 			PrintWriter pw = getResponse().getWriter();
 			pw.print(PUBLICACIONES.size());
+			log.info("Quedan:"+PUBLICACIONES.size());
 			pw.flush();
 		} catch (Exception e) {
 			log.error(e);

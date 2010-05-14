@@ -208,8 +208,8 @@ public class PublicacionDAO extends BaseDAO {
 		}
 	}
 	
-	public Collection<Publicacion> listarPublicacionesNoLeidas(Integer idFicha, Integer idMatricula) throws DAOException {
-		log.info("listarPublicacionesNoLeidas("+idFicha+", "+idMatricula+")");
+	public Collection<Publicacion> listarPublicacionesNoLeidas(Integer idMatricula) throws DAOException {
+		log.info("listarPublicacionesNoLeidas("+idMatricula+")");
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		Connection cons = null;
@@ -223,11 +223,11 @@ public class PublicacionDAO extends BaseDAO {
 				"pub.IDPUBLICADOR, u.USUARIO, p.APEPATERNO, p.APEMATERNO, p.NOMUNO,p.NOMDOS, p.SEXO " +
 				"FROM cv_publicacion pub, cv_usuario u, cv_persona p " +
 				"WHERE pub.IDPUBLICADOR=u.IDUSUARIO AND u.IDUSUARIO=p.IDPERSONA AND pub.ESTADO = 1 " +
-				"AND pub.IDFICHA=? AND (SELECT COUNT(*) FROM cv_publicacion_matricula WHERE  IDPUBLICACION=pub.IDPUBLICACION AND IDMATRICULA=? AND ESTADO=1)=0 " +
+				"AND pub.IDFICHA=(SELECT IDFICHA FROM CV_MATRICULA WHERE IDMATRICULA=?) AND (SELECT COUNT(*) FROM cv_publicacion_matricula WHERE  IDPUBLICACION=pub.IDPUBLICACION AND IDMATRICULA=? AND ESTADO=1)=0 " +
 				"ORDER BY pub.FECHA DESC";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
-			stmt.setInt(1, idFicha);
+			stmt.setInt(1, idMatricula);
 			stmt.setInt(2, idMatricula);
 			result =  stmt.executeQuery();
 			while (result.next()) {

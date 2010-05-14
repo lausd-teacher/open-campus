@@ -35,9 +35,9 @@ public class PublicacionService {
 			throw new ServiceException(e.getMessage());
 		}	}
 	
-	public Collection<Publicacion> listarPublicacionesNoLeidas(Integer idMatricula, Integer idFicha)throws ServiceException{
+	public Collection<Publicacion> listarPublicacionesNoLeidas(Integer idMatricula)throws ServiceException{
 		try {
-			return publicacionDAO.listarPublicacionesNoLeidas(idMatricula,idFicha);
+			return publicacionDAO.listarPublicacionesNoLeidas(idMatricula);
 		} catch (Exception e) {			
 			throw new ServiceException(e.getMessage());
 		}
