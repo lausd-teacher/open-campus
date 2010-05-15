@@ -57,8 +57,8 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 	<f:Constante campo="FLAG_INICIA_PENDIENTE_ESTUDIANTE" var="estadoIniEst" />
 	<f:Constante campo="FLAG_PENDIENTE_DOCENTE" var="estadoDoc" />
 	<f:Constante campo="FLAG_PENDIENTE_ESTUDIANTE" var="estadoEst" />
-<%--	<f:Constante campo="TRABAJO_ESTADO_NOEXPIRADO" var="expiradoNO" />--%>
-	<f:Constante campo="TRABAJO_ESTADO_EXPIRADO" var="expiradoSI" />
+<%--	<f:Constante campo="FLAG_TRABAJO_NOEXPIRADO" var="expiradoNO" />--%>
+	<f:Constante campo="FLAG_TRABAJO_EXPIRADO" var="expiradoSI" />
 	
 		
 <div id="pop_up" style="width: 520px;">

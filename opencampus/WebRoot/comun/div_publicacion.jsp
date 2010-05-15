@@ -21,7 +21,7 @@
 					}
 				}
 			</script>
-			<div id="mensajes" style="position:absolute;z-index:1; ">
+			<div id="mensajes" style="position:absolute;z-index:1; display: none;">
 				<table width="600"  border="0" align="center" class="tabla00" id="tablaAvisos">
 					<%
 							if (!n.equals("0")) {

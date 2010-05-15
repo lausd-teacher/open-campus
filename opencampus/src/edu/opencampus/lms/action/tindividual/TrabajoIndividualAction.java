@@ -45,8 +45,18 @@ public class TrabajoIndividualAction extends BaseAction {
 	
 	public String cmd;
 	public String msg;
+	
+	public String idMensaje;
 
-    public void setMsg(String msg) {
+    public String getIdMensaje() {
+		return idMensaje;
+	}
+
+	public void setIdMensaje(String idMensaje) {
+		this.idMensaje = idMensaje;
+	}
+
+	public void setMsg(String msg) {
 		this.msg = msg;
 	}
 
@@ -138,16 +148,22 @@ public class TrabajoIndividualAction extends BaseAction {
 					ti = new TrabajoIndividual();
 					ti.setIdFicha(aula.getIdFicha());
 					ti.setIdUnidad(Integer.parseInt(idUnidad));
+					ti.setInteraccion(new TrabajoIndividualInteraccion());
 					ti = tIndividualService.obtenerTrabajoIndividual(ti);
 				}else{
 					ti = (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 				}
 				
-				if(ti.getInteraccion().getArchivoNombre() == null){
+				if(ti.getInteraccion() == null || ti.getInteraccion().getArchivoNombre() == null){//EN TRABAJO, CUANDO SE CREA EL TRABAJO CON EL DEFAUL, EL DEFAULT DEBERA COPIARSE A /HOME/OPENCAMPUS/TRABAJO/{IDPERIODO}/{IDFICHA}/{IDUNIDAD}/
+					//por el momento
+					log.info("No exste trabajo publicado");
+					ti.setIdTrabajo(Integer.parseInt(idUnidad));
+					
 					String source = Constante.RUTA_UNIDADES+  Formato.completarCeros(idUnidad, 8) +
 					Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 					File trabajo = new File(source);
 					if(trabajo.exists()){
+						log.info("Con trabajo default.");
 						ti.getInteraccion().setArchivoNombre("DEFAULT");
 					}
 				}
@@ -155,10 +171,9 @@ public class TrabajoIndividualAction extends BaseAction {
 				getSession().put(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL, ti);
 				
 				getSession().put("IDUNIDAD", idUnidad);
-				
 				if(ti.getFechaActivacion() != null){
 					Collection<TrabajoIndividualMatricula> matriculas 
-					= tIndividualService.listarTrabajoPorMatricula(ti.getIdTrabajo());
+					= tIndividualService.listarTrabajoPorMatricula(ti);
 					getRequest().setAttribute("TRABAJO_MATRICULAS", matriculas);
 				}
 			}
@@ -191,10 +206,11 @@ public class TrabajoIndividualAction extends BaseAction {
 			}else{
 				tMatricula.setNota(Integer.parseInt(nota));
 			}
-			tMatricula.setUsuarioModificacion(usuario.getIdUsuario());
+			tMatricula.setUsuarioModificacion(""+usuario.getId());
 			tMatricula.setIdTrabajo(trabajo.getIdTrabajo());
+			tMatricula.setIdFicha(trabajo.getIdFicha());
 			Matricula usuarioReceptor = new Matricula();
-			usuarioReceptor.setIdMatricula(idMatricula);
+			usuarioReceptor.setIdMatricula(Integer.parseInt(idMatricula));
 			tMatricula.setUsuarioReceptor(usuarioReceptor);
 			
 			tIndividualService.calificarTrabajo(tMatricula);
@@ -219,23 +235,24 @@ public class TrabajoIndividualAction extends BaseAction {
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
 		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
-		log.info(cmd+"-"+trabajo.getIdTrabajo()+"-"+aula.getIdFicha()+"-"+descripcion+"-"+fechaActivacion+"-"+fechaEntrega+"-"+filename+"-"+file.length()); 
+		log.info(cmd+"-"+trabajo.getIdTrabajo()+"-"+aula.getIdFicha()+"-"+descripcion+"-"+fechaActivacion+"-"+fechaEntrega+"-"+filename+"-"+((file != null )?file.length():null)); 
 		
 		try {
-			if(aula != null && usuario != null && aula.getPeriodoMaestro() != 0 
-					&& fechaActivacion != null && Formato.setDateDeJSPCompleto(fechaActivacion) != null){
+			if(aula != null && usuario != null && aula.getPeriodo().getIdPeriodo() != 0 
+					&& fechaActivacion != null && Formato.stringToCalendar(fechaActivacion,Constante.FECHA_DIA_MES_ANO_HORA_MI) != null){
 			
 				TrabajoIndividual tindividual = new TrabajoIndividual();
 				tindividual.setIdTrabajo(trabajo.getIdTrabajo());
 				tindividual.setIdFicha(aula.getIdFicha());
-				tindividual.setFechaActivacion(Formato.setDateDeJSPCompleto(fechaActivacion));
-				tindividual.setFechaEntrega(Formato.setDateDeJSPCompleto(fechaEntrega));
-				tindividual.setUsuarioCreacion(usuario.getIdUsuario());
-				tindividual.setUsuarioModificacion(usuario.getIdUsuario());
+				tindividual.setIdUnidad(trabajo.getIdTrabajo());
+				tindividual.setFechaActivacion(Formato.stringToCalendar(fechaActivacion,Constante.FECHA_DIA_MES_ANO_HORA_MI));
+				tindividual.setFechaEntrega(Formato.stringToCalendar(fechaEntrega,Constante.FECHA_DIA_MES_ANO_HORA_MI));
+				tindividual.setUsuarioCreacion(""+usuario.getId());
+				tindividual.setUsuarioModificacion(""+usuario.getId());
 				
 				TrabajoIndividualInteraccion tiInteraccion = new TrabajoIndividualInteraccion();
 				Matricula usuarioEmisor = new Matricula();
-				usuarioEmisor.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+				usuarioEmisor.setIdMatricula(aula.getMatriculaActual().getIdMatricula());
 				tiInteraccion.setUsuarioEmisor(usuarioEmisor);
 				tiInteraccion.setDescripcion(descripcion);
 			
@@ -270,6 +287,8 @@ public class TrabajoIndividualAction extends BaseAction {
 					log.info("Publicar Trabajo Nuevo");
 					tIndividualService.publicarTrabajo(tindividual);
 				}
+			}else{
+				log.error("Problemas con los parámetros");
 			}
 		} catch (ServiceException e) {
 			log.error(e.toString());
@@ -288,10 +307,11 @@ public class TrabajoIndividualAction extends BaseAction {
 		AulaVirtual aula = (AulaVirtual)getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		try {
-			if(trabajo != null && usuario != null && aula.getPeriodoMaestro() != 0){
+			if(trabajo != null && usuario != null && aula.getPeriodo().getIdPeriodo() != 0){
 				TrabajoIndividual tindividual = new TrabajoIndividual();
 				tindividual.setIdTrabajo(trabajo.getIdTrabajo());
-				tindividual.setUsuarioModificacion(usuario.getIdUsuario());
+				tindividual.setIdFicha(trabajo.getIdFicha());
+				tindividual.setUsuarioModificacion(""+usuario.getId());
 				
 				// Renombrar Archivo
 				idUnidad = String.valueOf(trabajo.getIdUnidad());
@@ -299,12 +319,13 @@ public class TrabajoIndividualAction extends BaseAction {
 				Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 				File doc = new File(source);
 				if(doc.exists()){
+					
+					tIndividualService.eliminarTrabajo(tindividual);
+					
 					String archivoDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
 					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo() + Constante.SLASH + filename;
 					//Archivo.copiarArchivo(archivoDestino, archivoDestino + "_" +Formato.getStringDeDatePaBKP()+".bkp");
 					Archivo.eliminarArchivo(archivoDestino);
-					
-					tIndividualService.eliminarTrabajo(tindividual);
 					
 				}else{
 					setMsg("No existe un documento predefinido.");
@@ -329,9 +350,10 @@ public class TrabajoIndividualAction extends BaseAction {
 		try {
 			TrabajoIndividualMatricula matricula = new TrabajoIndividualMatricula();
 			matricula.setIdTrabajo(trabajo.getIdTrabajo());
+			matricula.setIdFicha(trabajo.getIdFicha());
 			
 			Matricula usuarioReceptor = new Matricula();
-			usuarioReceptor.setIdMatricula(idMatricula);
+			usuarioReceptor.setIdMatricula(Integer.parseInt(idMatricula));
 			matricula.setUsuarioReceptor(usuarioReceptor);
 			
 			matricula = tIndividualService.obtenerInteracciones(matricula);
@@ -359,18 +381,19 @@ public class TrabajoIndividualAction extends BaseAction {
 		try {
 			TrabajoIndividualMatricula matricula = new TrabajoIndividualMatricula();
 			matricula.setIdTrabajo(trabajo.getIdTrabajo());
+			matricula.setIdFicha(aula.getIdFicha());
 			Matricula usuarioReceptor = new Matricula();
-			usuarioReceptor.setIdMatricula(idMatricula);
+			usuarioReceptor.setIdMatricula(Integer.parseInt(idMatricula));
 			matricula.setUsuarioReceptor(usuarioReceptor);
 			
 			TrabajoIndividualInteraccion interaccion = new TrabajoIndividualInteraccion();
 			interaccion.setIdMensaje(Integer.parseInt(idMensaje));
 			interaccion.setDescripcion(descripcion);
 			Matricula usuarioEmisor = new Matricula();
-			usuarioEmisor.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+			usuarioEmisor.setIdMatricula((aula.getMatriculaActual().getIdMatricula()));
 			interaccion.setUsuarioEmisor(usuarioEmisor);
-			interaccion.setUsuarioCreacion(usuario.getIdUsuario());
-			interaccion.setUsuarioModificacion(usuario.getIdUsuario());
+			interaccion.setUsuarioCreacion(""+usuario.getId());
+			interaccion.setUsuarioModificacion(""+usuario.getId());
 			interaccion.setArchivoNombre(filename);
 			
 			//File
@@ -423,7 +446,7 @@ public class TrabajoIndividualAction extends BaseAction {
 	}
 	
 	public String verMensajesDeEstudiante(){
-		
+		log.info("verMensajesDeEstudiante()"+idUnidad);
 		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual ti = null;
 		
@@ -449,8 +472,9 @@ public class TrabajoIndividualAction extends BaseAction {
 					
 					TrabajoIndividualMatricula matricula = new TrabajoIndividualMatricula();
 					matricula.setIdTrabajo(ti.getIdTrabajo());
+					matricula.setIdFicha(aula.getIdFicha());
 					Matricula usuarioReceptor = new Matricula();
-					usuarioReceptor.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+					usuarioReceptor.setIdMatricula((aula.getMatriculaActual().getIdMatricula()));
 					matricula.setUsuarioReceptor(usuarioReceptor);
 					
 					matricula = tIndividualService.obtenerInteracciones(matricula);
@@ -481,8 +505,9 @@ public class TrabajoIndividualAction extends BaseAction {
 		try {
 			TrabajoIndividualMatricula matricula = new TrabajoIndividualMatricula();
 			matricula.setIdTrabajo(trabajo.getIdTrabajo());
+			matricula.setIdFicha(aula.getIdFicha());
 			Matricula usuarioReceptor = new Matricula();
-			usuarioReceptor.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+			usuarioReceptor.setIdMatricula((aula.getMatriculaActual().getIdMatricula()));
 			matricula.setUsuarioReceptor(usuarioReceptor);
 			matricula.setFechaCreacion(trabajo.getFechaEntrega());
 			
@@ -490,10 +515,10 @@ public class TrabajoIndividualAction extends BaseAction {
 			interaccion.setIdMensaje(Integer.parseInt(idMensaje));
 			interaccion.setDescripcion(descripcion);
 			Matricula usuarioEmisor = new Matricula();
-			usuarioEmisor.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+			usuarioEmisor.setIdMatricula((aula.getMatriculaActual().getIdMatricula()));
 			interaccion.setUsuarioEmisor(usuarioEmisor);
-			interaccion.setUsuarioCreacion(usuario.getIdUsuario());
-			interaccion.setUsuarioModificacion(usuario.getIdUsuario());
+			interaccion.setUsuarioCreacion(""+usuario.getId());
+			interaccion.setUsuarioModificacion(""+usuario.getId());
 			interaccion.setArchivoNombre(filename);
 			
 			//File
@@ -515,7 +540,7 @@ public class TrabajoIndividualAction extends BaseAction {
 					origen = origen.replaceAll("/", Constante.SLASH);
 				String directorioDestino = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
 				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo();
-				String nombreDestino = Constante.TRABAJO + "_" + aula.getIdMatricula() + "_" + version + extension;
+				String nombreDestino = Constante.TRABAJO + "_" + aula.getMatriculaActual().getIdMatricula() + "_" + version + extension;
 				Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
 				
 				interaccion.setArchivoNombre(nombreDestino);
@@ -546,20 +571,19 @@ public class TrabajoIndividualAction extends BaseAction {
 	}
 	
 	public String descargarTrabajo(){
-		log.info("descargarTrabajo() " + getAulaVirtualSession().getIdMatricula());
+		log.info("descargarTrabajo() " + getUsuarioSession().getAulaActual().getMatriculaActual().getIdMatricula());
 		
 		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		TrabajoIndividual trabajo= (TrabajoIndividual)getSession().get(Constante.AULAVIRTUAL_TRABAJOINDIVIDUAL);
 		
 		try {
-			if(aula != null && trabajo != null && aula.getPeriodoMaestro() != 0){
+			if(aula != null && trabajo != null && aula.getPeriodo().getIdPeriodo() != 0){
 				String source = Constante.RUTA_TRABAJOS + aula.getPeriodo().getIdPeriodo() +
 				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + trabajo.getIdTrabajo() + Constante.SLASH + filename;
-				//****
-				if(aula.getRol().getIdrol() == Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE 
-						&& filename.indexOf(String.valueOf(aula.getIdMatricula())) == -1 && filename.split("_").length==3){
-					if(aula.getIdFamilia() == Constante.PRODUCTO_FORMACION)
-						getResponse().getWriter().print("<h2>Este intento criminal ya ha sido reportado a la oficina de la Señora Augusta Morales,<br>Acércate de inmediato a su oficina en caso contrario se aplicarán todas las medidas del caso. </h2>");
+				//**** Anti Hack URL inyection
+				if(aula.getMatriculaActual().getRol().getIdRol() == Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE 
+						&& filename.indexOf(String.valueOf(aula.getMatriculaActual().getIdMatricula())) == -1 && filename.split("_").length==3){
+					getResponse().getWriter().print("<h2>Este intento antietico y nada profesional ya ha sido reportado a la oficina de la Secretaría Docente,<br>Se aplicarán todas las medidas del caso. </h2>");
 					return NONE;
 				}
 				//****
@@ -581,7 +605,7 @@ public class TrabajoIndividualAction extends BaseAction {
 		AulaVirtual aula = (AulaVirtual) getUsuarioSession().getAulaActual();
 		
 		try{
-			if(aula != null && !aula.getUnidades().isEmpty() && idUnidad != null && Util.esMiUnidad(aula.getUnidades(), idUnidad)){
+			if(aula != null && !aula.getSilabo().getUnidades().isEmpty() && idUnidad != null && Util.esMiUnidad(aula.getSilabo().getUnidades(), idUnidad)){
 				String source = Constante.RUTA_UNIDADES+ Formato.completarCeros(idUnidad, 8) +
 				Constante.SLASH + Constante.PATH_TRABAJO + Constante.TRABAJO_PDF;
 				String filenameOut = Constante.TRABAJO + "_" + idUnidad + Constante.EXTENSION_PDF;

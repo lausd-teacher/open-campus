@@ -105,7 +105,7 @@
 								<tbody>
 								<c:forEach items="${aula.silabo.unidades}" var="unidad" varStatus="fila">
 									<tr <c:if test="${fila.count%2==0}">class="line"</c:if>>
-										<td align="center" width="16" class="border-right"><c:out value="${fila.count}"/> </td>
+										<td align="center" width="16" class="border-right"><a href="javascript:void(<c:out value="${unidad.idUnidad}"/>);"><c:out value="${fila.count}"/></a></td>
 										
 										<!-- ********** Texto ********** -->
 										<c:set var="texto" value="${unidad.recursos[0]}" />
@@ -190,7 +190,7 @@
 											
 											<td align="center" width="22">
 												<img src="<%=request.getContextPath()%>/img/icon_trab.gif" style="cursor: pointer;" alt="Trabajo Individual"
-													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tindividual/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
+													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tindividual/VerMensajesDeEstudiante.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
 											</td>
 											
 											<td align="left" class="border-right" width="10">

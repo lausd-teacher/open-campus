@@ -60,7 +60,7 @@ public class TrabajoIndividualService {
 		}
 	}
 	
-	public Collection<TrabajoIndividualMatricula> listarTrabajoPorMatricula(int idTrabajo) throws ServiceException{
+	public Collection<TrabajoIndividualMatricula> listarTrabajoPorMatricula(TrabajoIndividual idTrabajo) throws ServiceException{
 		Collection<TrabajoIndividualMatricula> matriculas = null;
 		try {
 			matriculas = trabajoIndividualDAO.listarTrabajoPorMatricula(idTrabajo);

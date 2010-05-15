@@ -5,7 +5,6 @@
 		
 		
 		
-		**trabajo individual
 		*reporte de notas (test)
 		**mi clase
 		
@@ -23,6 +22,10 @@
 
 *icon_trab inactivo, icon_trab_activo (deshabilit_docente, habilit_docente)
 *cambiar presentacion de avisos Y LECTURAS (usar acordeon de scriptaculus) 
+
+****** Cambia la estructura de trabajo individual, no se sincroniza cuando se matricula a un alumno despues de publicar trabajo
+****Corregir interceptors!!!!!!!!!
+**** Corregir el test que no traiga al html las respuestas
 ---------------------------------------------------------------------------------------------------------
 //Creado por y modificado por deben de guardar el username y no el id (para que se pueda mostrar)
 //En la base de datos modificado_en debe ser CURRENT_TIMESTAMP y credo_en '0000:...' (manualmente con now())
