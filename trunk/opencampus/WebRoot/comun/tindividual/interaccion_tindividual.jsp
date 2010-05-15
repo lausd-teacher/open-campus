@@ -29,11 +29,9 @@
 	
 	<body>
 
-<%
-AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);	
- %>	
+
 	<c:set var="ti" value='${sessionScope.TRABAJO_INDIVIDUAL}'/>
-	<c:set var="aula" value='${sessionScope.aula_actual}' />
+	<c:set var="aula" value='${sessionScope.usuario_actual.aulaActual}' />
 	<c:set var="matricula" value='${requestScope.TRABAJO_MATRICULA_INTERACCIONES}'/>
 	
 
@@ -43,7 +41,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="90%">
-							<strong>Curso : <%=aula.getNombreCurso()%> </strong>
+							<strong>Curso : <c:out value="${usuario_actual.aulaActual.curso.nombre}"></c:out> </strong>
 						</td>
 						<td width="5%"><a href="#" class="salir" onClick="window.print()">Imprimir</a> </td>
 						<td width="3%"><a href="#" class="salir" onClick="window.print()"><img
@@ -61,11 +59,10 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 			</div>
 		<div id="pop_cuerpo" style="width: 500px;"> 
 		
-			  
 	  <c:choose>
 		<c:when test="${ti.fechaActivacion != null}">
 		<c:choose>
-		<c:when test="${matricula != null && matricula.usuarioReceptor.paterno != null}">
+		<c:when test="${matricula != null && matricula.usuarioReceptor.usuario.persona.apepaterno != null}">
 		
 <%--		****** VALIDATION ********--%>
 		
@@ -73,7 +70,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 			<f:Constante campo="ROL_CAMPUS_AULAVIRTUAL_DOCENTE" var="doc" />
 			<f:Constante campo="ROL_CAMPUS_AULAVIRTUAL_MONITOR_DOCENTE" var="mon" />
 			
-			<c:if test="${aula.rol.idrol == res || aula.rol.idrol == doc || aula.rol.idrol == mon}">
+			<c:if test="${aula.matriculaActual.rol.idRol == res || aula.matriculaActual.rol.idRol == doc || aula.matriculaActual.rol.idRol == mon}">
 				<c:set var="rol" value="docente"></c:set>
 			</c:if>
 			
@@ -99,7 +96,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 						</c:choose>
 					</td>
 					<td width="310" align="center"> 
-						<c:out value='${matricula.usuarioReceptor.nombreCompletoJsp}'/>
+						<c:out value='${matricula.usuarioReceptor.usuario.nombreCompleto}'/>
 					</td>
 	                <td width="40" align="left"><strong>Nota : </strong></td>
 	                <td width="40" align="center">
@@ -287,10 +284,10 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 						        		<span style="width: 300px; float:left;">
 							        		<strong>
 								        		Enviado por: 
-								        		<c:out value="${interaccion.usuarioEmisor.paterno}" />
-								        		<c:out value="${interaccion.usuarioEmisor.materno}" />,
-								        		<c:out value="${interaccion.usuarioEmisor.nombre1}" />
-								        		<c:out value="${interaccion.usuarioEmisor.nombre2}" />
+								        		<c:out value="${interaccion.usuarioEmisor.usuario.persona.apepaterno}" />
+								        		<c:out value="${interaccion.usuarioEmisor.usuario.persona.apematerno}" />,
+								        		<c:out value="${interaccion.usuarioEmisor.usuario.persona.nomuno}" />
+								        		<c:out value="${interaccion.usuarioEmisor.usuario.persona.nomdos}" />
 							        		</strong>
 							        	</span>
 						        		<span style="width: 120px; float:right; text-align:right;">

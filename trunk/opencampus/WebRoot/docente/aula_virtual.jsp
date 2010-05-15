@@ -107,7 +107,7 @@
 								<tbody>
 								<c:forEach items="${aula.silabo.unidades}" var="unidad" varStatus="fila">
 									<tr <c:if test="${fila.count%2==0}">class="line"</c:if>>
-										<td align="center" width="16" class="border-right"><c:out value="${fila.count}"/> </td>
+										<td align="center" width="16" class="border-right"><a href="javascript:void(<c:out value="${unidad.idUnidad}"/>);"><c:out value="${fila.count}"/></a></td>
 										
 										<!-- ********** Texto ********** -->
 										<c:set var="texto" value="${unidad.recursos[0]}" />

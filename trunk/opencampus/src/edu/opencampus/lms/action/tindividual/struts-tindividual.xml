@@ -6,7 +6,7 @@
 		<action name="Cargar" method="cargar" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success">/docente/tindividual/control_tindividual.jsp</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="PublicarTrabajoX" method="publicarTrabajop" 
@@ -14,53 +14,53 @@
 			<result name="success" type="redirect-action">Cargar?idUnidad=${idUnidad}</result>
 			<result name="error" type="redirect-action">Cargar?cmd=error</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-    		<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+    		<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="EliminarTrabajo" method="eliminarTrabajo" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success" type="redirect-action">Cargar?idUnidad=${idUnidad}&amp;msg=${msg}</result>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="Calificar" method="calificar" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="VerMensajesDeDocente" method="verMensajesDeDocente" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success">/comun/tindividual/interaccion_tindividual.jsp</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="EnviarMensajeDeDocente" method="enviarMensajeDeDocente" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success" type="redirect-action">VerMensajesDeDocente?idMatricula=${idMatricula}</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="VerMensajesDeEstudiante" method="verMensajesDeEstudiante" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success">/comun/tindividual/interaccion_tindividual.jsp</result>
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="EnviarMensajeDeEstudiante" method="enviarMensajeDeEstudiante" 
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">
 			<result name="success" type="redirect-action">VerMensajesDeEstudiante?idUnidad=${idUnidad}</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="estudiante-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="DescargarTrabajo" method="descargarTrabajo"
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">			
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		<action name="DescargarTrabajoPredeterminado" method="descargarTrabajoPredeterminado"
 			class="edu.opencampus.lms.action.tindividual.TrabajoIndividualAction">			
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		

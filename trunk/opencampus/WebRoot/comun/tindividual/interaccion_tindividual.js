@@ -73,7 +73,7 @@ function mostrarFormNuevoMensaje(){
 }
 
 function mostrarFormModMensaje(){
-	xGetElementById("form_descripcion").value = xGetElementById("descripcionHTML").innerHTML
+	xGetElementById("form_descripcion").value = trim(xGetElementById("descripcionHTML").innerHTML);
 	xGetElementById('form_numCaracteres').value = xGetElementById("form_descripcion").value.length;
 	xChangeDisplay("mensaje");
 }

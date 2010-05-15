@@ -37,12 +37,13 @@ public class FormatoTag extends TagSupport {
 		JspWriter out = pageContext.getOut();
 		try {
 			String fechaToString = "";
-			if(completo)
+			if(completo){
 				fechaToString = Formato.calendarToString(fecha, Constante.FECHA_DIA_MES_ANO_HORA_MI);
-			else
+			}else{
 				fechaToString = Formato.calendarToString(fecha, Constante.FECHA_DIA_MES_ANO);
+			}
 			
-			out.print(fechaToString);
+			out.print((fechaToString!=null)?fechaToString:"");
 
 		} catch (Exception e) {
 			e.printStackTrace();

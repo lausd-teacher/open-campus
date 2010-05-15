@@ -13,7 +13,7 @@
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 <%
 Usuario usuario = (Usuario) session.getAttribute(Constante.USUARIO_ACTUAL);
-AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);			
+AulaVirtual aula = usuario.getAulaActual();			
 
 	//System.out.println("*********** Session Atribute | Value ***********");
 	Enumeration enu = session.getAttributeNames();
@@ -53,12 +53,12 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 
 	<body>
 	<c:set var="ti" value='${sessionScope.TRABAJO_INDIVIDUAL}'/>
-	<c:set var="aula" value='${sessionScope.aula_actual}' />
+	<c:set var="aula" value='${sessionScope.usuario_actual.aulaActual}' />
 	<f:Constante campo="FLAG_INICIA_PENDIENTE_ESTUDIANTE" var="estadoIniEst" />
 	<f:Constante campo="FLAG_PENDIENTE_DOCENTE" var="estadoDoc" />
 	<f:Constante campo="FLAG_PENDIENTE_ESTUDIANTE" var="estadoEst" />
-<%--	<f:Constante campo="TRABAJO_ESTADO_NOEXPIRADO" var="expiradoNO" />--%>
-	<f:Constante campo="TRABAJO_ESTADO_EXPIRADO" var="expiradoSI" />
+<%--	<f:Constante campo="FLAG_TRABAJO_NOEXPIRADO" var="expiradoNO" />--%>
+	<f:Constante campo="FLAG_TRABAJO_EXPIRADO" var="expiradoSI" />
 	
 		
 <div id="pop_up" style="width: 520px;">
@@ -66,7 +66,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="90%">
-							<strong>Cursos : <%=aula.getNombreCurso()%> </strong>
+							<strong>Cursos : <%=aula.getCurso().getNombre()%> </strong>
 						</td>
 						<td width="5%"><a href="#" class="salir" onClick="window.print()">Imprimir</a> </td>
 						<td width="3%"><a href="#" class="salir" onClick="window.print()"><img
@@ -159,7 +159,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 		
 	  
 	  <div id="form_TGrupal" style="display: <c:out value='${display}' />">
-		<form onsubmit="javascript:return validar(this.fechaActivacion.value,this.fechaEntrega.value,this.file.value,this.descripcion.value,'<f:DateToString fecha="${aula.fechaInicio}"/>','<f:DateToString fecha="${aula.fechaFin}"/>')"
+		<form onsubmit="javascript:return validar(this.fechaActivacion.value,this.fechaEntrega.value,this.file.value,this.descripcion.value,'<f:DateToString fecha="${aula.periodo.fechaInicio}"/>','<f:DateToString fecha="${aula.periodo.fechaFin}"/>')"
 		method="post" 
 		action="<c:out value='${contextPath}'/>/aulavirtual/tindividual/PublicarTrabajoX.action" enctype="multipart/form-data">
 			<table width="500" align="center" style="table-layout: fixed;" cellpadding="3" border="0" cellspacing="0" bgcolor="#FFFFFF" class="bor_tabla">
@@ -263,7 +263,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 				<tr>
 					<td colspan="4">
 						<textarea rows="6" cols="58" id="form_descripcion" onkeydown="cuentaCaracteres(this)" onkeyup="cuentaCaracteres(this)" 
-						name="descripcion"><c:out value="${ti.interaccion.descripcion}"></c:out></textarea>
+						name="descripcion" style="width: 99%"><c:out value="${ti.interaccion.descripcion}"></c:out></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -310,7 +310,7 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 	          <td width="20%">Paterno</td>
 	          <td width="20%">Materno</td>
 	          <td width="20%">Nombre</td>
-   	          <td width="10%">Secci&oacute;n</td>	          
+   	          <td width="10%">&nbsp;</td>	          
 	          <td colspan="2" width="5%">Revisi&oacute;n</td>
 	          <td width="10%">Expirado</td>
 	          <td width="10%">Nota</td>
@@ -332,10 +332,10 @@ AulaVirtual aula = (AulaVirtual)session.getAttribute(Constante.AULA_ACTUAL);
 	 		  <td align="center" class="bor_der_unid">
 	 			<b><c:out value="${fila.count}"></c:out></b>
 	          </td>
-	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.paterno}'/></td>
-	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.materno}'/></td>
-	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.nombre1}'/></td>
-	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.seccion}'/></td>
+	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.usuario.persona.apepaterno}'/></td>
+	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.usuario.persona.apematerno}'/></td>
+	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.usuario.persona.nomuno}'/>&nbsp;</td>
+	          <td class="bor_der_unid"><c:out value='${matricula.usuarioReceptor.usuario.persona.nomdos}'/>&nbsp;</td>
 
 	          <td align="center">
 	          	<c:if test='${matricula.estado != estadoIniEst}'>

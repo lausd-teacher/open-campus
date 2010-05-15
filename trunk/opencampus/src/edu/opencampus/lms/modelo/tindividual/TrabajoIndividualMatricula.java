@@ -11,6 +11,8 @@ public class TrabajoIndividualMatricula extends BaseModelo {
 	private static final long serialVersionUID = -7288128806704664616L;
 
 	private int idTrabajo;
+	
+	private int idFicha;
 
 	private Integer nota;
 
@@ -38,6 +40,14 @@ public class TrabajoIndividualMatricula extends BaseModelo {
 		this.expirado = expirado;
 		this.usuarioReceptor = usuarioReceptor;
 		this.interacciones = interacciones;
+	}
+
+	public int getIdFicha() {
+		return idFicha;
+	}
+
+	public void setIdFicha(int idFicha) {
+		this.idFicha = idFicha;
 	}
 
 	public int getEstado() {

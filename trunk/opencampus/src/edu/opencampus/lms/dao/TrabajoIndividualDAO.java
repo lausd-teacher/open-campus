@@ -12,8 +12,10 @@ import javax.sql.DataSource;
 import edu.opencampus.lms.excepcion.DAOException;
 import edu.opencampus.lms.modelo.TrabajoIndividual;
 import edu.opencampus.lms.modelo.Matricula;
+import edu.opencampus.lms.modelo.Usuario;
 import edu.opencampus.lms.modelo.tindividual.TrabajoIndividualInteraccion;
 import edu.opencampus.lms.modelo.tindividual.TrabajoIndividualMatricula;
+import edu.opencampus.lms.modelo.usuario.Persona;
 import edu.opencampus.lms.util.Constante;
 import edu.opencampus.lms.util.Formato;
 
@@ -31,6 +33,7 @@ public class TrabajoIndividualDAO extends BaseDAO {
 	
 	public TrabajoIndividual obtenerTrabajoIndividual(TrabajoIndividual ti)
 			throws DAOException {
+		log.info(ti.getIdUnidad()+"-"+ti.getIdFicha());
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -38,39 +41,42 @@ public class TrabajoIndividualDAO extends BaseDAO {
 		Matricula usuarioEmisor = null;
 		try {
 
-			String query = "SELECT T.IDTRABAJO,T.FECHA_ACTIVACION,T.FECHA_ENTREGA,M.USUARIO, "
-					+ "T.DESCRIPCION,T.ARCHIVO_NOMBRE,T.ARCHIVO_TAMANO,T.IDMATRICULA_ENVIO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS,D.NOMBRE_COMPLETO "
-					+ "FROM CV_TRABAJO_INDIVIDUAL T, CV_MATRICULA M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P, CV_UNIDAD D "
-					+ "WHERE T.IDUNIDAD=D.IDUNIDAD AND T.IDMATRICULA_ENVIO=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) AND T.IDFICHA=? AND T.IDUNIDAD=?";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			String query = "SELECT T.IDUNIDAD,T.FECHA_ACTIVACION,T.FECHA_ENTREGA,M.IDUSUARIO,  " +
+					"T.DESCRIPCION,T.ARCHIVO_NOMBRE,T.ARCHIVO_TAMANIO,T.IDMATRICULA_ENVIO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS,D.NOMBRE  " +
+					"FROM CV_TRABAJO_INDIVIDUAL T, CV_MATRICULA M, cv_usuario U, cv_persona P, CV_UNIDAD D  " +
+					"WHERE T.IDUNIDAD=D.IDUNIDAD AND T.IDMATRICULA_ENVIO=M.IDMATRICULA AND U.IDUSUARIO=M.IDUSUARIO AND U.IDUSUARIO=P.IDPERSONA " +
+					"AND T.IDFICHA=? AND T.IDUNIDAD=?";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, ti.getIdFicha());
 			stmt.setInt(2, ti.getIdUnidad());
-			result = (ResultSet) stmt.executeQuery();
+			result =  stmt.executeQuery();
 			if (result.next()) {
-				ti.setIdTrabajo(result.getInt("IDTRABAJO"));
-				ti.setFechaActivacion(Formato.getDateDeBaseDatos(result
-						.getString("FECHA_ACTIVACION")));
-				ti.setFechaEntrega(Formato.getDateDeBaseDatos(result
-						.getString("FECHA_ENTREGA")));
-				ti.setNombreUnidad(result.getString("NOMBRE_COMPLETO"));
+				ti.setIdTrabajo(result.getInt("IDUNIDAD"));
+				ti.setFechaActivacion(Formato.getDateDeBaseDatos(result.getString("FECHA_ACTIVACION")));
+				ti.setFechaEntrega(Formato.getDateDeBaseDatos(result.getString("FECHA_ENTREGA")));
+				ti.setNombreUnidad(result.getString("NOMBRE"));
 
 				interaccion = new TrabajoIndividualInteraccion();
-
 				interaccion.setDescripcion(result.getString("DESCRIPCION"));
-				interaccion
-						.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
-				interaccion.setArchivoTamanio(result
-						.getString("ARCHIVO_TAMANO"));
+				interaccion.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
+				interaccion.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
 
 				usuarioEmisor = new Matricula();
 
-				usuarioEmisor.setIdMatricula("IDMATRICULA_ENVIO");
-				usuarioEmisor.setIdUsuario("USUARIO");
-				usuarioEmisor.setPaterno("APEPATERNO");
-				usuarioEmisor.setMaterno("APEMATERNO");
-				usuarioEmisor.setNombre1("NOMUNO");
-				usuarioEmisor.setNombre2("NOMDOS");
+				usuarioEmisor.setIdMatricula(result.getInt("IDMATRICULA_ENVIO"));
+				Usuario usuario = new Usuario();
+				usuario.setId(result.getInt("IDUSUARIO"));
+				
+				Persona persona = new Persona();
+				persona.setApepaterno(result.getString("APEPATERNO"));
+				persona.setApematerno(result.getString("APEMATERNO"));
+				persona.setNomuno(result.getString("NOMUNO"));
+				persona.setNomdos(result.getString("NOMDOS"));
+				
+				usuario.setPersona(persona);
+				
+				usuarioEmisor.setUsuario(usuario);
 
 				interaccion.setUsuarioEmisor(usuarioEmisor);
 
@@ -95,7 +101,7 @@ public class TrabajoIndividualDAO extends BaseDAO {
 	}
 
 	public Collection<TrabajoIndividualMatricula> listarTrabajoPorMatricula(
-			int idTrabajo) throws DAOException {
+			TrabajoIndividual trabajo) throws DAOException {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -105,19 +111,21 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 		try {
 
-			String query = "SELECT T.IDMATRICULA,T.ESTADO,T.NOTA,T.EXPIRADO,M.USUARIO,PKG_CV_UTIL.fx_cv_string_number(M.SECCION) SECCION,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS "
-					+ "FROM CV_TRABAJO_INDIVIDUAL_NOTA T, CV_MATRICULA M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
-					+ "WHERE T.IDMATRICULA=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) AND IDTRABAJO=? AND M.IDROL=? AND M.ELIMINADO='0' AND M.ESTADO='1' ORDER BY P.APEPATERNO,P.APEMATERNO,P.NOMUNO";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
-			stmt.setInt(1, idTrabajo);
-			stmt.setInt(2, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
-			result = (ResultSet) stmt.executeQuery();
+			String query = "SELECT T.IDMATRICULA,T.ESTADO,T.NOTA,T.EXPIRADO,M.IDUSUARIO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS  " +
+					"FROM CV_TRABAJO_INDIVIDUAL_NOTA T, CV_MATRICULA M, CV_USUARIO U, CV_PERSONA P  " +
+					"WHERE T.IDMATRICULA=M.IDMATRICULA AND U.IDUSUARIO=M.IDUSUARIO AND U.IDUSUARIO=P.IDPERSONA AND T.IDUNIDAD=? AND T.IDFICHA=? AND M.IDROL=? AND M.ELIMINADO='0' AND M.ESTADO='1' " +
+					"ORDER BY P.APEPATERNO,P.APEMATERNO,P.NOMUNO";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1, trabajo.getIdUnidad());
+			stmt.setInt(2, trabajo.getIdFicha());
+			stmt.setInt(3, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
+			result =  stmt.executeQuery();
 
 			while (result.next()) {
 
 				matricula = new TrabajoIndividualMatricula();
-				matricula.setIdTrabajo(idTrabajo);
+				matricula.setIdTrabajo(trabajo.getIdUnidad());
 				matricula.setEstado(result.getInt("ESTADO"));
 				matricula.setExpirado(result.getInt("EXPIRADO"));
 
@@ -127,18 +135,19 @@ public class TrabajoIndividualDAO extends BaseDAO {
 					matricula.setNota(result.getInt("NOTA"));
 
 				usuarioReceptor = new Matricula();
-				usuarioReceptor.setIdMatricula(result.getString("IDMATRICULA"));
-				usuarioReceptor.setIdUsuario(result.getString("USUARIO"));
-				usuarioReceptor.setSeccion(result.getString("SECCION"));
-				usuarioReceptor.setNombre1(Formato.formatoTexto(result
-						.getString("NOMUNO")));
-				usuarioReceptor.setNombre2(Formato.formatoTexto(result
-						.getString("NOMDOS")));
-				usuarioReceptor.setPaterno(Formato.formatoTexto(result
-						.getString("APEPATERNO")));
-				usuarioReceptor.setMaterno(Formato.formatoTexto(result
-						.getString("APEMATERNO")));
-
+				usuarioReceptor.setIdMatricula(result.getInt("IDMATRICULA"));
+				
+				Usuario usuario = new Usuario();
+				usuario.setId(result.getInt("IDUSUARIO"));
+				
+				Persona persona = new Persona();
+				persona.setApepaterno(result.getString("APEPATERNO"));
+				persona.setApematerno(result.getString("APEMATERNO"));
+				persona.setNomuno(result.getString("NOMUNO"));
+				persona.setNomdos(result.getString("NOMDOS"));
+				
+				usuario.setPersona(persona);
+				usuarioReceptor.setUsuario(usuario);
 				matricula.setUsuarioReceptor(usuarioReceptor);
 
 				matriculas.add(matricula);
@@ -162,27 +171,25 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 	public void publicarTrabajo(TrabajoIndividual tindividual)
 			throws DAOException {
+		log.info(tindividual.getIdUnidad()+"-"+tindividual.getIdFicha());
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
 			// *** CV_TRABAJO_INDIVIDUAL
-			String query = "UPDATE CV_TRABAJO_INDIVIDUAL SET FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, "
-					+ "IDMATRICULA_ENVIO=?, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-					+ "WHERE IDTRABAJO=?";
-			cons = (Connection)dataSource.getConnection();
+			String query = "INSERT INTO CV_TRABAJO_INDIVIDUAL (IDUNIDAD, IDFICHA, IDMATRICULA_ENVIO, DESCRIPCION, FECHA_ACTIVACION, FECHA_ENTREGA, ARCHIVO_NOMBRE, ARCHIVO_TAMANIO, ESTADO) " +
+					"VALUES (?,?,?,?,?,?,?,?,?)";
+			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
-			stmt = (PreparedStatement) cons.prepareStatement(query);
-			stmt.setString(1, Formato.setBaseDatosDeDateCompleto(tindividual
-					.getFechaActivacion()));
-			stmt.setString(2, Formato.setBaseDatosDeDateCompleto(tindividual
-					.getFechaEntrega()));
-			stmt.setString(3, tindividual.getInteraccion().getDescripcion());
-			stmt.setString(4, tindividual.getInteraccion().getUsuarioEmisor()
-					.getIdMatricula());
-			stmt.setString(5, tindividual.getInteraccion().getArchivoNombre());
-			stmt.setString(6, tindividual.getInteraccion().getArchivoTamanio());
-			stmt.setString(7, tindividual.getUsuarioModificacion());
-			stmt.setInt(8, tindividual.getIdTrabajo());
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1, tindividual.getIdUnidad());
+			stmt.setInt(2, tindividual.getIdFicha());
+			stmt.setInt(3, tindividual.getInteraccion().getUsuarioEmisor().getIdMatricula());
+			stmt.setString(4, tindividual.getInteraccion().getDescripcion());
+			stmt.setString(5, Formato.calendarToTimestamp(tindividual.getFechaActivacion()));
+			stmt.setString(6, Formato.calendarToTimestamp(tindividual.getFechaEntrega()));
+			stmt.setString(7, tindividual.getInteraccion().getArchivoNombre());
+			stmt.setString(8, tindividual.getInteraccion().getArchivoTamanio());
+			stmt.setInt(9, Constante.ESTADO_ACTIVO);
 
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error en publicarTrabajo(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL");
@@ -190,31 +197,29 @@ public class TrabajoIndividualDAO extends BaseDAO {
 			}
 
 			// *** TRABAJO_INDIVIDUAL_NOTA
-			query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_NOTA (IDTRABAJO,IDMATRICULA,USUARIO_MOD,FECHA_MOD,ESTADO,EXPIRADO) "
-					+ "SELECT ?,IDMATRICULA,?,SYSDATE,?,? FROM CV_MATRICULA WHERE IDFICHA=? AND IDROL IN (?,?) AND ELIMINADO='0' AND ESTADO='1'";
-			stmt = (PreparedStatement) cons.prepareStatement(query);
-			stmt.setInt(1, tindividual.getIdTrabajo());
-			stmt.setString(2, tindividual.getUsuarioModificacion());
-			stmt.setInt(3, Constante.FLAG_INICIA_PENDIENTE_ESTUDIANTE);
-			stmt.setInt(4, Constante.TRABAJO_ESTADO_PENDIENTE);
-			stmt.setInt(5, tindividual.getIdFicha());
-			stmt.setInt(6, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
-			stmt.setInt(7, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR);
+			query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_NOTA (IDUNIDAD,IDFICHA,IDMATRICULA,MODIFICADO_POR,MODIFICADO_EN,ESTADO,EXPIRADO)  " +
+					"SELECT ?,?,IDMATRICULA,?,NOW(),?,? FROM CV_MATRICULA WHERE IDFICHA=? AND IDROL IN (?,?) AND ELIMINADO='0' AND ESTADO='1'";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1, tindividual.getIdUnidad());
+			stmt.setInt(2, tindividual.getIdFicha());
+			stmt.setString(3, tindividual.getUsuarioModificacion());
+			stmt.setInt(4, Constante.FLAG_INICIA_PENDIENTE_ESTUDIANTE);
+			stmt.setInt(5, Constante.FLAG_TRABAJO_PENDIENTE);
+			stmt.setInt(6, tindividual.getIdFicha());
+			stmt.setInt(7, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
+			stmt.setInt(8, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR);
 
-			if (0 == stmt.executeUpdate()) {
-				log.error("Error en publicarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
-				throw new DAOException("No culmino");
-			}
-
+			int afec = stmt.executeUpdate();
+			log.info(afec+" filas insertadas en CV_TRABAJO_INDIVIDUAL_NOTA");
+			
 			// *** TRABAJO_INDIVIDUAL_INTER
-			query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDTRABAJO,IDMATRICULA,INTERACCION,DESCRIPCION,IDMATRICULA_ENVIO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD,ARCHIVO_NOMBRE,ARCHIVO_TAMANO) "
-					+ "SELECT ? IDTRABAJO,IDMATRICULA,'1' INTERACCION,?,?,?,SYSDATE,?,SYSDATE,?,? "
-					+ "FROM CV_MATRICULA WHERE IDFICHA=? AND IDROL IN (?,?) AND ELIMINADO='0' AND ESTADO='1'";
-			stmt = (PreparedStatement) cons.prepareStatement(query);
-			stmt.setInt(1, tindividual.getIdTrabajo());
-			stmt.setString(2, tindividual.getInteraccion().getDescripcion());
-			stmt.setString(3, tindividual.getInteraccion().getUsuarioEmisor()
-					.getIdMatricula());
+			query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDUNIDAD,IDFICHA,IDMATRICULA,INTERACCION,DESCRIPCION,CREADO_POR,CREADO_EN,MODIFICADO_POR,MODIFICADO_EN,ARCHIVO_NOMBRE,ARCHIVO_TAMANIO)  " +
+					"SELECT ?,?,IDMATRICULA,'1' INTERACCION,?,?,NOW(),?,NOW(),?,?  " +
+					"FROM CV_MATRICULA WHERE IDFICHA=? AND IDROL IN (?,?) AND ELIMINADO='0' AND ESTADO='1'";
+			stmt =  cons.prepareStatement(query);
+			stmt.setInt(1, tindividual.getIdUnidad());
+			stmt.setInt(2, tindividual.getIdFicha());
+			stmt.setString(3, tindividual.getInteraccion().getDescripcion());
 			stmt.setString(4, tindividual.getUsuarioCreacion());
 			stmt.setString(5, tindividual.getUsuarioModificacion());
 			stmt.setString(6, tindividual.getInteraccion().getArchivoNombre());
@@ -223,10 +228,8 @@ public class TrabajoIndividualDAO extends BaseDAO {
 			stmt.setInt(9, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
 			stmt.setInt(10, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR);
 
-			if (0 == stmt.executeUpdate()) {
-				log.error("Error en publicarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
-				throw new DAOException("No culmino");
-			}
+			afec = stmt.executeUpdate();
+			log.info(afec+" filas insertadas en CV_TRABAJO_INDIVIDUAL_INTER");
 
 			cons.commit();
 		} catch (SQLException e) {
@@ -253,87 +256,61 @@ public class TrabajoIndividualDAO extends BaseDAO {
 		try {
 			// *** CV_TRABAJO_INDIVIDUAL
 			String query = "";
-			cons = (Connection)dataSource.getConnection();
+			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 			if (tindividual.getInteraccion().getArchivoNombre() != null) {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL SET FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, "
-						+ "IDMATRICULA_ENVIO=?, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-						+ "WHERE IDTRABAJO=?";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
-				stmt.setString(1, Formato
-						.setBaseDatosDeDateCompleto(tindividual
-								.getFechaActivacion()));
-				stmt.setString(2, Formato
-						.setBaseDatosDeDateCompleto(tindividual
-								.getFechaEntrega()));
-				stmt
-						.setString(3, tindividual.getInteraccion()
-								.getDescripcion());
-				stmt.setString(4, tindividual.getInteraccion()
-						.getUsuarioEmisor().getIdMatricula());
-				stmt.setString(5, tindividual.getInteraccion()
-						.getArchivoNombre());
-				stmt.setString(6, tindividual.getInteraccion()
-						.getArchivoTamanio());
-				stmt.setString(7, tindividual.getUsuarioModificacion());
-				stmt.setInt(8, tindividual.getIdTrabajo());
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL SET FECHA_ACTIVACION=?, FECHA_ENTREGA=?, DESCRIPCION=?,  " +
+						"IDMATRICULA_ENVIO=?, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANIO=? " +
+						"WHERE IDUNIDAD=? AND IDFICHA=?";
+				stmt =  cons.prepareStatement(query);
+				stmt.setString(1, Formato.calendarToTimestamp(tindividual.getFechaActivacion()));
+				stmt.setString(2, Formato.calendarToTimestamp(tindividual.getFechaEntrega()));
+				stmt.setString(3, tindividual.getInteraccion().getDescripcion());
+				stmt.setInt(4, tindividual.getInteraccion().getUsuarioEmisor().getIdMatricula());
+				stmt.setString(5, tindividual.getInteraccion().getArchivoNombre());
+				stmt.setString(6, tindividual.getInteraccion().getArchivoTamanio());
+				stmt.setInt(7, tindividual.getIdTrabajo());
+				stmt.setInt(8, tindividual.getIdFicha());
 			} else {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL SET FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, "
-						+ "IDMATRICULA_ENVIO=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-						+ "WHERE IDTRABAJO=?";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
-				stmt.setString(1, Formato
-						.setBaseDatosDeDateCompleto(tindividual
-								.getFechaActivacion()));
-				stmt.setString(2, Formato
-						.setBaseDatosDeDateCompleto(tindividual
-								.getFechaEntrega()));
-				stmt
-						.setString(3, tindividual.getInteraccion()
-								.getDescripcion());
-				stmt.setString(4, tindividual.getInteraccion()
-						.getUsuarioEmisor().getIdMatricula());
-				stmt.setString(5, tindividual.getUsuarioModificacion());
-				stmt.setInt(6, tindividual.getIdTrabajo());
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL SET FECHA_ACTIVACION=?, FECHA_ENTREGA=?, DESCRIPCION=?,  " +
+						"IDMATRICULA_ENVIO=?  " +
+						"WHERE IDUNIDAD=? AND IDFICHA=?";
+				stmt =  cons.prepareStatement(query);
+				stmt.setString(1, Formato.calendarToTimestamp(tindividual.getFechaActivacion()));
+				stmt.setString(2, Formato.calendarToTimestamp(tindividual.getFechaEntrega()));
+				stmt.setString(3, tindividual.getInteraccion().getDescripcion());
+				stmt.setInt(4, tindividual.getInteraccion().getUsuarioEmisor().getIdMatricula());
+				stmt.setInt(5, tindividual.getIdTrabajo());
+				stmt.setInt(6, tindividual.getIdFicha());
 			}
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error modificarTrabajo(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL");
+				log.error("Error modificarTrabajo(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL");
 				throw new DAOException("No culmino");
 			}
 
 			// *** TRABAJO_INDIVIDUAL_INTER
 			if (tindividual.getInteraccion().getArchivoNombre() != null) {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET DESCRIPCION=?, IDMATRICULA_ENVIO=?, USUARIO_MOD=?,FECHA_MOD=SYSDATE, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=? "
-						+ "WHERE IDTRABAJO=? AND INTERACCION='1'";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
-				stmt
-						.setString(1, tindividual.getInteraccion()
-								.getDescripcion());
-				stmt.setString(2, tindividual.getInteraccion()
-						.getUsuarioEmisor().getIdMatricula());
-				stmt.setString(3, tindividual.getUsuarioModificacion());
-				stmt.setString(4, tindividual.getInteraccion()
-						.getArchivoNombre());
-				stmt.setString(5, tindividual.getInteraccion()
-						.getArchivoTamanio());
-				stmt.setInt(6, tindividual.getIdTrabajo());
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET DESCRIPCION=?, MODIFICADO_POR=?,MODIFICADO_EN=NOW(), ARCHIVO_NOMBRE=?, ARCHIVO_TAMANIO=?  " +
+						"WHERE IDUNIDAD=? AND IDFICHA=? AND INTERACCION='1'";
+				stmt =  cons.prepareStatement(query);
+				stmt.setString(1, tindividual.getInteraccion().getDescripcion());
+				stmt.setString(2, tindividual.getUsuarioModificacion());
+				stmt.setString(3, tindividual.getInteraccion().getArchivoNombre());
+				stmt.setString(4, tindividual.getInteraccion().getArchivoTamanio());
+				stmt.setInt(5, tindividual.getIdTrabajo());
+				stmt.setInt(6, tindividual.getIdFicha());
 			} else {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET DESCRIPCION=?, IDMATRICULA_ENVIO=?, USUARIO_MOD=?,FECHA_MOD=SYSDATE "
-						+ "WHERE IDTRABAJO=? AND INTERACCION='1'";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
-				stmt
-						.setString(1, tindividual.getInteraccion()
-								.getDescripcion());
-				stmt.setString(2, tindividual.getInteraccion()
-						.getUsuarioEmisor().getIdMatricula());
-				stmt.setString(3, tindividual.getUsuarioModificacion());
-				stmt.setInt(4, tindividual.getIdTrabajo());
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET DESCRIPCION=?, MODIFICADO_POR=?,MODIFICADO_EN=NOW()  " +
+						"WHERE IDUNIDAD=? AND IDFICHA=? AND INTERACCION='1'";
+				stmt =  cons.prepareStatement(query);
+				stmt.setString(1, tindividual.getInteraccion().getDescripcion());
+				stmt.setString(2, tindividual.getUsuarioModificacion());
+				stmt.setInt(3, tindividual.getIdTrabajo());
+				stmt.setInt(4, tindividual.getIdFicha());
 			}
 
 			if (0 == stmt.executeUpdate()) {
-				log
-						.error("Error en modificarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
+				log.error("Error en modificarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
 				throw new DAOException("No culmino");
 			}
 
@@ -362,35 +339,34 @@ public class TrabajoIndividualDAO extends BaseDAO {
 		try {
 			// *** CV_TRABAJO_INDIVIDUAL
 			String query = "";
-			cons = (Connection)dataSource.getConnection();
+			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 
-			query = "UPDATE CV_TRABAJO_INDIVIDUAL SET ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-					+ "WHERE IDTRABAJO=?";
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			query = "UPDATE CV_TRABAJO_INDIVIDUAL SET ARCHIVO_NOMBRE=?, ARCHIVO_TAMANIO=? " +
+					"WHERE IDUNIDAD=? AND IDFICHA=?";
+			stmt =  cons.prepareStatement(query);
 			stmt.setString(1, null);
 			stmt.setString(2, null);
-			stmt.setString(3, tindividual.getUsuarioModificacion());
-			stmt.setInt(4, tindividual.getIdTrabajo());
+			stmt.setInt(3, tindividual.getIdTrabajo());
+			stmt.setInt(4, tindividual.getIdFicha());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error modificarTrabajo(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL");
+				log.error("Error modificarTrabajo(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL");
 				throw new DAOException("No culmino");
 			}
 
 			// *** TRABAJO_INDIVIDUAL_INTER
-			query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET USUARIO_MOD=?,FECHA_MOD=SYSDATE, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=? "
-					+ "WHERE IDTRABAJO=? AND INTERACCION='1'";
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER SET MODIFICADO_POR=?,MODIFICADO_EN=NOW(), ARCHIVO_NOMBRE=?, ARCHIVO_TAMANIO=? "
+					+ "WHERE IDUNIDAD=? AND IDFICHA=? AND INTERACCION='1'";
+			stmt =  cons.prepareStatement(query);
 			stmt.setString(1, tindividual.getUsuarioModificacion());
 			stmt.setString(2, null);
 			stmt.setString(3, null);
 			stmt.setInt(4, tindividual.getIdTrabajo());
+			stmt.setInt(5, tindividual.getIdFicha());
 
 			if (0 == stmt.executeUpdate()) {
-				log
-						.error("Error en modificarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
+				log.error("Error en modificarTrabajo(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
 				throw new DAOException("No culmino");
 			}
 
@@ -414,25 +390,26 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 	public void calificarTrabajo(TrabajoIndividualMatricula tMatricula)
 			throws DAOException {
+		log.info(tMatricula.getIdTrabajo()+"-"+tMatricula.getIdFicha());
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
 
-			String query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET NOTA=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-					+ "WHERE IDTRABAJO=? AND IDMATRICULA=?";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			String query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET NOTA=?, MODIFICADO_POR=?, MODIFICADO_EN=now() "
+					+ "WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=?";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
 			if (tMatricula.getNota() == null)
 				stmt.setString(1, null);
 			else
 				stmt.setInt(1, tMatricula.getNota());
 			stmt.setString(2, tMatricula.getUsuarioModificacion());
 			stmt.setInt(3, tMatricula.getIdTrabajo());
-			stmt.setString(4, tMatricula.getUsuarioReceptor().getIdMatricula());
+			stmt.setInt(4, tMatricula.getIdFicha());
+			stmt.setInt(5, tMatricula.getUsuarioReceptor().getIdMatricula());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error calificarTrabajo(TrabajoIndividualMatricula tMatricula)");
+				log.error("Error calificarTrabajo(TrabajoIndividualMatricula tMatricula)");
 				throw new DAOException("No culmino");
 			}
 
@@ -450,6 +427,7 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 	public TrabajoIndividualMatricula obtenerInteracciones(
 			TrabajoIndividualMatricula matricula) throws DAOException {
+		log.info(matricula.getIdTrabajo()+"-"+matricula.getIdFicha());
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -459,15 +437,16 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 		try {
 
-			String query = "SELECT T.IDTRABAJO,T.IDMATRICULA,T.NOTA,T.ESTADO,T.EXPIRADO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS "
-					+ "FROM CV_TRABAJO_INDIVIDUAL_NOTA T, CV_MATRICULA M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
-					+ "WHERE T.IDMATRICULA=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) "
-					+ "AND T.IDTRABAJO=? AND T.IDMATRICULA=?";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			String query = "SELECT T.IDUNIDAD,T.IDMATRICULA,T.NOTA,T.ESTADO,T.EXPIRADO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS " +
+					"FROM CV_TRABAJO_INDIVIDUAL_NOTA T, CV_MATRICULA M, CV_USUARIO U, CV_PERSONA P " +
+					"WHERE T.IDMATRICULA=M.IDMATRICULA AND U.IDUSUARIO=M.IDUSUARIO AND U.IDUSUARIO=P.IDPERSONA " +
+					"AND T.IDUNIDAD=? AND T.IDFICHA=? AND T.IDMATRICULA=?";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, matricula.getIdTrabajo());
-			stmt.setString(2, matricula.getUsuarioReceptor().getIdMatricula());
-			result = (ResultSet) stmt.executeQuery();
+			stmt.setInt(2, matricula.getIdFicha());
+			stmt.setInt(3, matricula.getUsuarioReceptor().getIdMatricula());
+			result =  stmt.executeQuery();
 
 			if (result.next()) {
 
@@ -478,58 +457,59 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 				matricula.setEstado(result.getInt("ESTADO"));
 				matricula.setExpirado(result.getInt("EXPIRADO"));
-				matricula.getUsuarioReceptor().setPaterno(
-						Formato.formatoTexto(result.getString("APEPATERNO")));
-				matricula.getUsuarioReceptor().setMaterno(
-						Formato.formatoTexto(result.getString("APEMATERNO")));
-				matricula.getUsuarioReceptor().setNombre1(
-						Formato.formatoTexto(result.getString("NOMUNO")));
-				matricula.getUsuarioReceptor().setNombre2(
-						Formato.formatoTexto(result.getString("NOMDOS")));
+				
+				Usuario usuario = new Usuario();
+
+				Persona persona = new Persona();
+				persona.setApepaterno(result.getString("APEPATERNO"));
+				persona.setApematerno(result.getString("APEMATERNO"));
+				persona.setNomdos(result.getString("NOMDOS"));
+				persona.setNomuno(result.getString("NOMUNO"));
+				
+				usuario.setPersona(persona);
+				
+				Matricula receptor = matricula.getUsuarioReceptor();
+				receptor.setUsuario(usuario);
+				matricula.setUsuarioReceptor(receptor);
 
 				// Crear Colección de interacciones
-				query = "SELECT T.IDMATRICULA_ENVIO,T.INTERACCION,T.DESCRIPCION,T.USUARIO_CREACION,T.FECHA_CREACION,T.USUARIO_MOD,T.FECHA_MOD, "
-						+ "T.ARCHIVO_NOMBRE,T.ARCHIVO_TAMANO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS "
-						+ "FROM CV_TRABAJO_INDIVIDUAL_INTER T, CV_MATRICULA M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
-						+ "WHERE T.IDMATRICULA_ENVIO=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) "
-						+ "AND T.IDTRABAJO=? AND T.IDMATRICULA=? ORDER BY T.INTERACCION";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
+				query = "SELECT M.IDMATRICULA,T.INTERACCION,T.DESCRIPCION,T.CREADO_POR,T.CREADO_EN,T.MODIFICADO_POR,T.MODIFICADO_EN,  " +
+						"T.ARCHIVO_NOMBRE,T.ARCHIVO_TAMANIO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS  " +
+						"FROM CV_TRABAJO_INDIVIDUAL_INTER T, CV_MATRICULA M, CV_USUARIO U, CV_PERSONA P  " +
+						"WHERE U.IDUSUARIO=T.CREADO_POR AND U.IDUSUARIO=P.IDPERSONA AND M.IDUSUARIO=U.IDUSUARIO " +
+						"AND T.IDUNIDAD=? AND T.IDFICHA=? AND T.IDMATRICULA=? ORDER BY T.INTERACCION";
+				stmt =  cons.prepareStatement(query);
 				stmt.setInt(1, matricula.getIdTrabajo());
-				stmt.setString(2, matricula.getUsuarioReceptor()
-						.getIdMatricula());
-				result = (ResultSet) stmt.executeQuery();
+				stmt.setInt(2, matricula.getIdFicha());
+				stmt.setInt(3, matricula.getUsuarioReceptor().getIdMatricula());
+				result =  stmt.executeQuery();
 
 				while (result.next()) {
 
 					interaccion = new TrabajoIndividualInteraccion();
 					interaccion.setIdMensaje(result.getInt("INTERACCION"));
 					interaccion.setDescripcion(result.getString("DESCRIPCION"));
-					interaccion.setUsuarioCreacion(result
-							.getString("USUARIO_CREACION"));
-					interaccion.setUsuarioModificacion(result
-							.getString("USUARIO_MOD"));
-					interaccion.setFechaCreacion(Formato
-							.getDateDeBaseDatos(result
-									.getString("FECHA_CREACION")));
-					interaccion.setFechaModificacion(Formato
-							.getDateDeBaseDatos(result.getString("FECHA_MOD")));
-					interaccion.setArchivoNombre(result
-							.getString("ARCHIVO_NOMBRE"));
-					interaccion.setArchivoTamanio(result
-							.getString("ARCHIVO_TAMANO"));
+					interaccion.setUsuarioCreacion(result.getString("CREADO_POR"));
+					interaccion.setUsuarioModificacion(result.getString("MODIFICADO_POR"));
+					interaccion.setFechaCreacion(Formato.getDateDeBaseDatos(result.getString("CREADO_EN")));
+					interaccion.setFechaModificacion(Formato.getDateDeBaseDatos(result.getString("MODIFICADO_EN")));
+					interaccion.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
+					interaccion.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
 
 					emisor = new Matricula();
-					emisor
-							.setIdMatricula(result
-									.getString("IDMATRICULA_ENVIO"));
-					emisor.setPaterno(Formato.formatoTexto(result
-							.getString("APEPATERNO")));
-					emisor.setMaterno(Formato.formatoTexto(result
-							.getString("APEMATERNO")));
-					emisor.setNombre1(Formato.formatoTexto(result
-							.getString("NOMUNO")));
-					emisor.setNombre2(Formato.formatoTexto(result
-							.getString("NOMDOS")));
+					emisor.setIdMatricula(result.getInt("IDMATRICULA"));
+					
+					Usuario usuario2 = new Usuario();
+
+					Persona persona2 = new Persona();
+					persona2.setApepaterno(result.getString("APEPATERNO"));
+					persona2.setApematerno(result.getString("APEMATERNO"));
+					persona2.setNomdos(result.getString("NOMDOS"));
+					persona2.setNomuno(result.getString("NOMUNO"));
+					
+					usuario2.setPersona(persona2);
+					
+					emisor.setUsuario(usuario2);
 
 					interaccion.setUsuarioEmisor(emisor);
 
@@ -561,13 +541,14 @@ public class TrabajoIndividualDAO extends BaseDAO {
 		ResultSet result = null;
 		try {
 
-			String query = "SELECT ESTADO,EXPIRADO,NOTA FROM CV_TRABAJO_INDIVIDUAL_NOTA "
-					+ "WHERE IDTRABAJO=? AND IDMATRICULA=?";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			String query = "SELECT ESTADO,EXPIRADO,NOTA FROM CV_TRABAJO_INDIVIDUAL_NOTA  " +
+					"WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=?";
+			cons = dataSource.getConnection();
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, matricula.getIdTrabajo());
-			stmt.setString(2, matricula.getUsuarioReceptor().getIdMatricula());
-			result = (ResultSet) stmt.executeQuery();
+			stmt.setInt(2, matricula.getIdFicha());
+			stmt.setInt(3, matricula.getUsuarioReceptor().getIdMatricula());
+			result =  stmt.executeQuery();
 
 			if (result.next()) {
 				if (result.getString("NOTA") == null)
@@ -601,19 +582,18 @@ public class TrabajoIndividualDAO extends BaseDAO {
 
 		try {
 			// *** CV_TRABAJO_INDIVIDUAL_INTER
-			String query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDTRABAJO, IDMATRICULA, INTERACCION, "
-					+ "IDMATRICULA_ENVIO, DESCRIPCION, USUARIO_CREACION, "
-					+ "FECHA_CREACION, USUARIO_MOD, FECHA_MOD, ARCHIVO_NOMBRE, ARCHIVO_TAMANO)  "
-					+ "VALUES (?, ?, ? , ?, ?, ?, SYSDATE, ?, SYSDATE, ?, ?)";
+			String query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDUNIDAD, IDFICHA, IDMATRICULA, INTERACCION, DESCRIPCION,  " +
+					"CREADO_POR, CREADO_EN, MODIFICADO_POR, MODIFICADO_EN, ARCHIVO_NOMBRE, ARCHIVO_TAMANIO)   " +
+					"VALUES (?, ?, ? , ?, ?, ?, NOW(), ?, NOW(), ?, ?)";
 
-			cons = (Connection)dataSource.getConnection();
+			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, matricula.getIdTrabajo());
-			stmt.setString(2, matricula.getUsuarioReceptor().getIdMatricula());
-			stmt.setInt(3, interaccion.getIdMensaje() + 1);
-			stmt.setString(4, interaccion.getUsuarioEmisor().getIdMatricula());
+			stmt.setInt(2, matricula.getIdFicha());
+			stmt.setInt(3, matricula.getUsuarioReceptor().getIdMatricula());
+			stmt.setInt(4, interaccion.getIdMensaje() + 1);
 			stmt.setString(5, interaccion.getDescripcion());
 			stmt.setString(6, interaccion.getUsuarioCreacion());
 			stmt.setString(7, interaccion.getUsuarioModificacion());
@@ -621,21 +601,20 @@ public class TrabajoIndividualDAO extends BaseDAO {
 			stmt.setString(9, interaccion.getArchivoTamanio());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error nuevoMensajeDeDocente(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL_INTER");
+				log.error("Error nuevoMensajeDeDocente(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL_INTER");
 				throw new DAOException("No culmino");
 			}
 
 			// *** TRABAJO_INDIVIDUAL_NOTA
-			query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=? WHERE IDTRABAJO=? AND IDMATRICULA=?";
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=? WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=?";
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, Constante.FLAG_PENDIENTE_ESTUDIANTE);
 			stmt.setInt(2, matricula.getIdTrabajo());
-			stmt.setString(3, matricula.getUsuarioReceptor().getIdMatricula());
+			stmt.setInt(3, matricula.getIdFicha());
+			stmt.setInt(4, matricula.getUsuarioReceptor().getIdMatricula());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error en nuevoMensajeDeDocente(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
+				log.error("Error en nuevoMensajeDeDocente(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
 				throw new DAOException("No culmino");
 			}
 
@@ -662,25 +641,23 @@ public class TrabajoIndividualDAO extends BaseDAO {
 			throws DAOException {
 		Connection cons = null;
 		PreparedStatement stmt = null;
-		TrabajoIndividualInteraccion interaccion = (TrabajoIndividualInteraccion) matricula
-				.getInteracciones().iterator().next();
+		TrabajoIndividualInteraccion interaccion = (TrabajoIndividualInteraccion) matricula.getInteracciones().iterator().next();
 
 		try {
-			cons = (Connection)dataSource.getConnection();
+			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 
 			// *** CV_TRABAJO_INDIVIDUAL_INTER
 
-			String query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDTRABAJO, IDMATRICULA, INTERACCION, "
-					+ "IDMATRICULA_ENVIO, DESCRIPCION, USUARIO_CREACION, "
-					+ "FECHA_CREACION, USUARIO_MOD, FECHA_MOD, ARCHIVO_NOMBRE, ARCHIVO_TAMANO)  "
-					+ "VALUES (?, ?, ? , ?, ?, ?, SYSDATE, ?, SYSDATE, ?, ?)";
+			String query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDUNIDAD, IDFICHA, IDMATRICULA, INTERACCION, DESCRIPCION,  " +
+					"CREADO_POR, CREADO_EN, MODIFICADO_POR, MODIFICADO_EN, ARCHIVO_NOMBRE, ARCHIVO_TAMANIO)   " +
+					"VALUES (?, ?, ? , ?, ?, ?, NOW(), ?, NOW(), ?, ?)";
 
-			stmt = (PreparedStatement) cons.prepareStatement(query);
+			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, matricula.getIdTrabajo());
-			stmt.setString(2, matricula.getUsuarioReceptor().getIdMatricula());
-			stmt.setInt(3, interaccion.getIdMensaje() + 1);
-			stmt.setString(4, interaccion.getUsuarioEmisor().getIdMatricula());
+			stmt.setInt(2, matricula.getIdFicha());
+			stmt.setInt(3, matricula.getUsuarioReceptor().getIdMatricula());
+			stmt.setInt(4, interaccion.getIdMensaje() + 1);
 			stmt.setString(5, interaccion.getDescripcion());
 			stmt.setString(6, interaccion.getUsuarioCreacion());
 			stmt.setString(7, interaccion.getUsuarioModificacion());
@@ -688,33 +665,31 @@ public class TrabajoIndividualDAO extends BaseDAO {
 			stmt.setString(9, interaccion.getArchivoTamanio());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error nuevoMensajeDeDocente(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL_INTER");
+				log.error("Error nuevoMensajeDeDocente(TrabajoIndividual tindividual) - CV_TRABAJO_INDIVIDUAL_INTER");
 				throw new DAOException("No culmino");
 			}
 
 			// *** TRABAJO_INDIVIDUAL_NOTA
 			if (!"".equals(interaccion.getArchivoNombre())
 					&& matricula.getExpirado() != 0) {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=?, EXPIRADO=? WHERE IDTRABAJO=? AND IDMATRICULA=?";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=?, EXPIRADO=? WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=?";
+				stmt =  cons.prepareStatement(query);
 				stmt.setInt(1, Constante.FLAG_PENDIENTE_DOCENTE);
 				stmt.setInt(2, matricula.getExpirado());
 				stmt.setInt(3, matricula.getIdTrabajo());
-				stmt.setString(4, matricula.getUsuarioReceptor()
-						.getIdMatricula());
+				stmt.setInt(4, matricula.getIdFicha());
+				stmt.setInt(5, matricula.getUsuarioReceptor().getIdMatricula());
 			} else {
-				query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=? WHERE IDTRABAJO=? AND IDMATRICULA=?";
-				stmt = (PreparedStatement) cons.prepareStatement(query);
+				query = "UPDATE CV_TRABAJO_INDIVIDUAL_NOTA SET ESTADO=? WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=?";
+				stmt =  cons.prepareStatement(query);
 				stmt.setInt(1, Constante.FLAG_PENDIENTE_DOCENTE);
 				stmt.setInt(2, matricula.getIdTrabajo());
-				stmt.setString(3, matricula.getUsuarioReceptor()
-						.getIdMatricula());
+				stmt.setInt(3, matricula.getIdFicha());
+				stmt.setInt(4, matricula.getUsuarioReceptor().getIdMatricula());
 			}
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error en nuevoMensajeDeDocente(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
+				log.error("Error en nuevoMensajeDeDocente(TrabajoIndividual tindividual) - TRABAJO_INDIVIDUAL_NOTA");
 				throw new DAOException("No culmino");
 			}
 
@@ -745,34 +720,34 @@ public class TrabajoIndividualDAO extends BaseDAO {
 				.getInteracciones().iterator().next();
 
 		try {
-			cons = (Connection)dataSource.getConnection();
+			cons = dataSource.getConnection();
 
 			if (!"".equals(interaccion.getArchivoNombre())) {
 				String query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER "
-						+ "SET DESCRIPCION=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=? "
-						+ "WHERE IDTRABAJO=? AND IDMATRICULA=? AND INTERACCION=?";
+						+ "SET DESCRIPCION=?, MODIFICADO_POR=?, MODIFICADO_EN=NOW(), ARCHIVO_NOMBRE=?, ARCHIVO_TAMANIO=? "
+						+ "WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=? AND INTERACCION=?";
 
-				stmt = (PreparedStatement) cons.prepareStatement(query);
+				stmt =  cons.prepareStatement(query);
 				stmt.setString(1, interaccion.getDescripcion());
 				stmt.setString(2, interaccion.getUsuarioModificacion());
 				stmt.setString(3, interaccion.getArchivoNombre());
 				stmt.setString(4, interaccion.getArchivoTamanio());
 				stmt.setInt(5, matricula.getIdTrabajo());
-				stmt.setString(6, matricula.getUsuarioReceptor()
-						.getIdMatricula());
-				stmt.setInt(7, interaccion.getIdMensaje());
+				stmt.setInt(6, matricula.getIdFicha());
+				stmt.setInt(7, matricula.getUsuarioReceptor().getIdMatricula());
+				stmt.setInt(8, interaccion.getIdMensaje());
 			} else {
 				String query = "UPDATE CV_TRABAJO_INDIVIDUAL_INTER "
-						+ "SET DESCRIPCION=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-						+ "WHERE IDTRABAJO=? AND IDMATRICULA=? AND INTERACCION=?";
+						+ "SET DESCRIPCION=?, MODIFICADO_POR=?, MODIFICADO_EN=NOW() "
+						+ "WHERE IDUNIDAD=? AND IDFICHA=? AND IDMATRICULA=? AND INTERACCION=?";
 
-				stmt = (PreparedStatement) cons.prepareStatement(query);
+				stmt =  cons.prepareStatement(query);
 				stmt.setString(1, interaccion.getDescripcion());
 				stmt.setString(2, interaccion.getUsuarioModificacion());
 				stmt.setInt(3, matricula.getIdTrabajo());
-				stmt.setString(4, matricula.getUsuarioReceptor()
-						.getIdMatricula());
-				stmt.setInt(5, interaccion.getIdMensaje());
+				stmt.setInt(4, matricula.getIdFicha());
+				stmt.setInt(5, matricula.getUsuarioReceptor().getIdMatricula());
+				stmt.setInt(6, interaccion.getIdMensaje());
 			}
 
 			if (1 != stmt.executeUpdate()) {

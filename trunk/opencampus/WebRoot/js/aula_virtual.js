@@ -266,15 +266,16 @@ function mensajes(n) {
 		//DarkPanel.show('mensajes',{duration	: 0.0});
 		var X = (screen.availWidth - 300) / 2;
 		var trans = document.getElementById("transparency");
-		trans.setAttribute("style", "width:1280px;height:650px;-moz-opacity:.55;background-color:#EEE;position:absolute;top:1px;left:1px;");
+		trans.setAttribute("style", "width:"+xClientWidth()+"px;height:"+xClientHeight()+"px;-moz-opacity:.55;background-color:#EEE;position:absolute;top:1px;left:1px;");
 		trans.style.filter = "alpha(opacity=55)";
-		trans.style.width = 1280;
-		trans.style.height = 650;
+		trans.style.width = xClientWidth();
+		trans.style.height = xClientHeight();
 		trans.style.position = "absolute";
 		trans.style.top = 1;
 		trans.style.left = 1;
 		trans.style.background = "EEE";		
 		var mensajes = document.getElementById("mensajes");
+		xShowD("mensajes")
 		var left = (xClientWidth()-xWidth('mensajes'))/2;
 		mensajes.setAttribute("style", "position:absolute;top:50px;left:"+left+"px;");
 		mensajes.style.position = "absolute";

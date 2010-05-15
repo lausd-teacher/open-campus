@@ -489,7 +489,7 @@ public class Util {
 			String idUnidad) {
 		if (unidades != null && idUnidad != null) {
 			for (Unidad uni : unidades) {
-				if (uni.getIdUnidad().equals(idUnidad)) {
+				if (uni.getIdUnidad() == Integer.parseInt(idUnidad)) {
 					return true;
 				}
 			}

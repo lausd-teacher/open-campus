@@ -540,12 +540,12 @@ public class Constante {
 
 	public static int FLAG_TRABAJO_EXPIRADO = 2;
 
-	@Deprecated
-	public static int TRABAJO_ESTADO_PENDIENTE = 0; // desaparecer
-	@Deprecated
-	public static int TRABAJO_ESTADO_NOEXPIRADO = 1; // desaparecer
-	@Deprecated
-	public static int TRABAJO_ESTADO_EXPIRADO = 2; // desaparecer
+//	@Deprecated
+//	public static int TRABAJO_ESTADO_PENDIENTE = 0; // desaparecer
+//	@Deprecated
+//	public static int TRABAJO_ESTADO_NOEXPIRADO = 1; // desaparecer
+//	@Deprecated
+//	public static int TRABAJO_ESTADO_EXPIRADO = 2; // desaparecer
 
 	/*
 	 * MODULOS DEL AULA VIRTUAL

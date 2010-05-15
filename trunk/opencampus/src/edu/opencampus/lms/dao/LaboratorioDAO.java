@@ -204,7 +204,7 @@ public class LaboratorioDAO extends BaseDAO {
 			stmt.setInt(1, tindividual.getIdTrabajo());
 			stmt.setString(2, tindividual.getUsuarioModificacion());
 			stmt.setInt(3, Constante.FLAG_INICIA_PENDIENTE_ESTUDIANTE);
-			stmt.setInt(4, Constante.TRABAJO_ESTADO_PENDIENTE);
+			stmt.setInt(4, Constante.FLAG_TRABAJO_PENDIENTE);
 			stmt.setInt(5, tindividual.getIdFicha());
 			stmt.setInt(6, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
 			stmt.setInt(7, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR);
