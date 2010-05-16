@@ -516,19 +516,6 @@ public class Util {
 	 */
 	public static Map<String, String> obtenerUsuariosRedireccionCorreo() {
 		Map<String, String> usuarios = new HashMap<String, String>();
-		usuarios.put("abejarano", "abejarano@opencampus.edu.pe");
-		usuarios.put("drodriguez", "drodriguez@opencampus.edu.pe");
-		usuarios.put("jbastante", "jbastante@opencampus.edu.pe");
-		usuarios.put("lmaza", "lmaza@opencampus.edu.pe");
-		usuarios.put("mchuquiruna", "mchuquiruna@opencampus.edu.pe");
-		usuarios.put("amarchese", "amarchese@opencampus.edu.pe");
-		usuarios.put("amorales", "amorales@opencampus.edu.pe");
-		usuarios.put("jmusayon", "jmusayon@opencampus.edu.pe");
-		usuarios.put("eramirez", "eramirez@opencampus.edu.pe");
-		usuarios.put("mrivera", "mrivera@opencampus.edu.pe");		
-		usuarios.put("ofrech", " ofrech@opencampus.edu.pe");
-		usuarios.put("dmunoz", " dmunoz@opencampus.edu.pe");
-		usuarios.put("mvicente", "mvicente@opencampus.edu.pe");
 		usuarios.put("ebenites", "ebenites@opencampus.edu.pe");
 		return usuarios;
 	}

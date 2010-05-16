@@ -7,6 +7,7 @@ import edu.opencampus.lms.action.BaseAction;
 import edu.opencampus.lms.excepcion.ActionException;
 import edu.opencampus.lms.modelo.AulaVirtual;
 import edu.opencampus.lms.modelo.Silabo;
+import edu.opencampus.lms.modelo.aulavirtual.MatriculaRol;
 import edu.opencampus.lms.modelo.ficha.Publicacion;
 import edu.opencampus.lms.modelo.usuario.Ingreso;
 import edu.opencampus.lms.service.AulaVirtualService;
@@ -31,6 +32,8 @@ public class AulaVirtualAction extends BaseAction {
 	
 	private Collection<Publicacion> publicaciones;
 
+	private Collection<MatriculaRol> grupos;
+	
 	private Integer idunidad;
 
 	private Integer id;
@@ -43,6 +46,10 @@ public class AulaVirtualAction extends BaseAction {
 
 	public Integer getRuta() {
 		return ruta;
+	}
+
+	public Collection<MatriculaRol> getGrupos() {
+		return grupos;
 	}
 
 	public void setRuta(Integer ruta) {
@@ -212,191 +219,20 @@ public class AulaVirtualAction extends BaseAction {
 		return NONE;
 	}
 	
-/*
-	public String miClase() {
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
-		Collection<TipoMatriculaRol> usuarios = new ArrayList<TipoMatriculaRol>();
+	public String miClase() throws ActionException{
+		log.info("miClase()");
 		try {
-			if (null != aula && 0 != aula.getIdFicha()) {
-				usuarios = getMatriculaService().obtenerUsuarioMatricula(
-						aula.getIdFicha());
-			}
-		} catch (ServiceException e) {
+			grupos = aulaVirtualService.obtenerMatriculas(getUsuarioSession().getAulaActual().getIdFicha());
+		} catch (Exception e) {
+			log.error(e);
+			throw new ActionException(e);
 		}
-		getRequest().setAttribute("USUARIOS_MATRICULADOS", usuarios);
 		return SUCCESS;
 	}
-
 	
-
-	public String copiarRepaso() {
-		log.info("AulaVirtualAction: copiarRepaso: inicio");
-		String idunidad = getRequest().getParameter("idunidad");
-		Ingreso ingreso = new Ingreso(0, getUsuarioSession().getIdUsuario(),
-				Constante.ELEMENTO_REPASO_ENLACE, getAulaVirtualSession()
-						.getIdFicha()
-						+ "", idunidad, "", "", getRequest().getRemoteAddr(),
-				getRequest().getHeader("user-agent"));
-		try {
-			ingresoService.inscribirIngreso(ingreso);
-		} catch (ServiceException e) {
-			log.info(e.getMessage());
-		}
-		String idunidadconceros = Formato.completarCeros(idunidad,
-				8);
-		// String pathsession = ServletActionContext.getServletContext()
-		// .getRealPath(Constante.RUTA_WEB_TEMPORAL)
-		// + Constante.SLASH + getSession().getId();
-		String pathsession = Constante.RUTA_REPOSITORIO_TEMPORAL
-				+ Constante.SLASH + getRequest().getSession().getId();
-
-		String origen = Constante.RUTA_REPOSITORIO_UNITS + Constante.SLASH
-				+ idunidadconceros + Constante.SLASH + Constante.HOME_REPASO;
-
-		Archivo.copiarRepaso(origen, idunidad, pathsession);
-		log.info("CopiarRecursoAction: copiarRepaso: Directorio copiado: "
-				+ pathsession + "/" + idunidad);
-		log.info("CopiarRecursoAction: copiarRepaso: origen: " + origen);
-		return NONE;
-	}
-
-	public String copiarTexto() {
-		log.info("AulaVirtualAction: copiarTexto: inicio");
-		String idunidad = getRequest().getParameter("idunidad");
-		Ingreso ingreso = new Ingreso(0, getUsuarioSession().getIdUsuario(),
-				Constante.ELEMENTO_TEXTO, getAulaVirtualSession().getIdFicha()
-						+ "", idunidad, "", "", getRequest().getRemoteAddr(),
-				getRequest().getHeader("user-agent"));
-		try {
-			ingresoService.inscribirIngreso(ingreso);
-		} catch (ServiceException e) {
-			log.info(e.getMessage());
-		}
-		String indice = getRequest().getParameter("indice");
-		String idunidadconceros = Formato.completarCeros(idunidad,
-				8);
-
-		String pathsession = Constante.RUTA_REPOSITORIO_TEMPORAL
-				+ Constante.SLASH + getRequest().getSession().getId();
-
-		String origen = Constante.RUTA_REPOSITORIO_UNITS + Constante.SLASH
-				+ idunidadconceros + Constante.SLASH + Constante.HOME_TEXTO
-				+ Constante.SLASH + Constante.TEXTO_PDF;
-		try {
-			Archivo.crearDirectorio(pathsession);
-			Archivo.crearDirectorio(pathsession + Constante.SLASH + idunidad);
-			Archivo.copiarArchivo(origen, pathsession + Constante.SLASH
-					+ idunidad + Constante.SLASH + Constante.TEXTO + indice
-					+ Constante.EXTENSION_PDF);
-		} catch (IOException e) {
-			log.info("AulaVirtualAction: copiarTexto: IOException: " + e);
-		}
-		log.info("AulaVirtualAction: copiarTexto: origen: " + origen);
-		return null;
-	}
-
-	public String copiarLaboratorio() {
-		log.info("AulaVirtualAction: copiarLaboratorio: inicio");
-		String idunidad = getRequest().getParameter("idunidad");
-		Ingreso ingreso = new Ingreso(0, getUsuarioSession().getIdUsuario(),
-				Constante.ELEMENTO_LABORATORIO, getAulaVirtualSession()
-						.getIdFicha()
-						+ "", idunidad, "", "", getRequest().getRemoteAddr(),
-				getRequest().getHeader("user-agent"));
-		try {
-			ingresoService.inscribirIngreso(ingreso);
-		} catch (ServiceException e) {
-			log.info(e.getMessage());
-		}
-		String indice = getRequest().getParameter("indice");
-		String idunidadconceros = Formato.completarCeros(idunidad,
-				8);
-		String pathsession = Constante.RUTA_REPOSITORIO_TEMPORAL
-				+ Constante.SLASH + getRequest().getSession().getId();
-		String origen = Constante.RUTA_REPOSITORIO_UNITS + Constante.SLASH
-				+ idunidadconceros + Constante.SLASH
-				+ Constante.HOME_LABORATORIO + Constante.SLASH
-				+ Constante.LAB_PDF;
-		try {
-			Archivo.crearDirectorio(pathsession);
-			Archivo.crearDirectorio(pathsession + Constante.SLASH + idunidad);
-			Archivo.copiarArchivo(origen, pathsession + Constante.SLASH
-					+ idunidad + Constante.SLASH + Constante.LAB + indice
-					+ Constante.EXTENSION_PDF);
-		} catch (IOException e) {
-			log.info("AulaVirtualAction: copiarLaboratorio: IOException: " + e);
-		}
-		log.info("AulaVirtualAction: copiarLaboratorio: origen: " + origen);
-		return null;
-	}
-
-	public String copiarRepasoOff() {
-		log.info("CopiarRecursoAction: copiarRepasoOff: inicio");
-		String idunidad = getRequest().getParameter("idunidad");
-		Ingreso ingreso = new Ingreso(0, getUsuarioSession().getIdUsuario(),
-				Constante.ELEMENTO_REPASO, getAulaVirtualSession().getIdFicha()
-						+ "", idunidad, "", "", getRequest().getRemoteAddr(),
-				getRequest().getHeader("user-agent"));
-		try {
-			ingresoService.inscribirIngreso(ingreso);
-		} catch (ServiceException e) {
-			log.info(e.getMessage());
-		}
-		String indice = getRequest().getParameter("indice");
-		String idunidadconceros = Formato.completarCeros(idunidad,
-				8);
-		String source = Constante.RUTA_REPOSITORIO_UNITS + Constante.SLASH
-				+ idunidadconceros + Constante.SLASH
-				+ Constante.HOME_REPASO_OFF + Constante.SLASH
-				+ Constante.REPASO_EXE;
-		int data;
-		ServletOutputStream stream = null;
-		BufferedInputStream buffer = null;
-		try {
-			getResponse().setHeader(
-					"Content-Disposition",
-					"attachment; filename=\"" + Constante.REPASO + indice
-							+ Constante.EXTENSION_EXE + "\"");
-			log.info("source: " + source);
-			buffer = new BufferedInputStream(new FileInputStream(source));
-			stream = getResponse().getOutputStream();
-			log.info("before read");
-			while ((data = buffer.read()) != -1) {
-				stream.write(data);
-			}
-			log.info("after read");
-			buffer.close();
-			stream.flush();
-			stream.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			getResponse().setHeader("Content-Disposition", null);
-			if (stream != null) {
-				try {
-					stream.flush();
-				} catch (IOException e1) {
-					log.info(e1.getMessage());
-				}
-				try {
-					stream.close();
-				} catch (IOException e) {
-					log.info(e.getMessage());
-				}
-			}
-			if (buffer != null) {
-				try {
-					buffer.close();
-				} catch (IOException e) {
-					log.info(e.getMessage());
-				}
-			}
-		}
-		return NONE;
-	}
-
+/*
+	
+	//para deshabilitar test por parte del docente
 	public String fichaUnidadRecursoTestCambiarEstadoEstudiante() {
 		String idFicha = String.valueOf(((AulaVirtual) getSession()
 				.get(Constante.AULA_ACTUAL)).getIdFicha());

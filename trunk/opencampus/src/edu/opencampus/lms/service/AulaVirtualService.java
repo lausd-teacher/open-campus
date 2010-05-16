@@ -51,6 +51,14 @@ public class AulaVirtualService {
 		}
 	}
 	
+	public Collection<MatriculaRol> obtenerMatriculas(Integer idFicha) throws ServiceException {
+		try {
+			return aulaVirtualDAO.obtenerMatriculas(idFicha);
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
 	public Collection<Usuario> buscarNoMatriculados(String[] nombres, int idFicha) throws ServiceException {
 		try {
 			return aulaVirtualDAO.buscarNoMatriculados(nombres, idFicha);
