@@ -157,6 +157,11 @@
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
+		<action name="MiClase" method="miClase"
+			class="edu.opencampus.lms.action.aulavirtual.AulaVirtualAction">
+			<result name="success">/comun/aulavirtual/mi_clase.jsp</result>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
+		</action>
 
 
 
@@ -166,12 +171,6 @@
 		<action name="SalirDelAula" method="salir"
 			class="edu.opencampus.lms.action.aulavirtual.AulaVirtualAction">
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
-		</action>
-		
-		<action name="MiClase" method="miClase"
-			class="edu.opencampus.lms.action.aulavirtual.AulaVirtualAction">
-			<result name="success">/comun/aulavirtual/mi_clase.jsp</result>
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
 		</action>
 		
 		<action name="CopiarRepaso" method="copiarRepaso"

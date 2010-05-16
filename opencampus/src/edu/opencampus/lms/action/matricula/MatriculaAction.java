@@ -12,7 +12,7 @@ import edu.opencampus.lms.modelo.Matricula;
 import edu.opencampus.lms.service.FichaService;
 import edu.opencampus.lms.service.MatriculaService;
 import edu.opencampus.lms.util.Constante;
-
+@Deprecated
 public class MatriculaAction extends BaseAction {
 
 	private static final long serialVersionUID = 8619768212478061973L;

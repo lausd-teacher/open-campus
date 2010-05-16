@@ -71,6 +71,8 @@ function changeImage(img){
 	}
 }
 
+
+
 /* Abrir Servicios */
 
 function abrir_servicio_curso(){

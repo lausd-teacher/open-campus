@@ -6,7 +6,6 @@
 		
 		
 		*reporte de notas (test)
-		**mi clase
 		
 		*reporte de notas (la principal)
 		*trabajo grupal
@@ -19,7 +18,7 @@
 		recursos de aula (trabajo, dialogo,) (que funcione y su diseño)
 
 
-
+**en mi clase indicar datos publicos de los participantes, (fichas que lleva y formacion que lleva y llevó y aprobó)
 *icon_trab inactivo, icon_trab_activo (deshabilit_docente, habilit_docente)
 *cambiar presentacion de avisos Y LECTURAS (usar acordeon de scriptaculus) 
 

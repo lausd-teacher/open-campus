@@ -447,6 +447,81 @@ public class AulaVirtualDAO extends BaseDAO {
 		return grupos;
 	}
 	
+	public Collection<MatriculaRol> obtenerMatriculas(Integer idFicha) throws DAOException {
+		log.info("obtenerMatriculas("+idFicha+")");
+		ResultSet result1 = null;
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		Connection cons = null;
+		
+		Collection<MatriculaRol> grupos = new ArrayList<MatriculaRol>();
+		List<Matricula> matriculas = null;
+		Matricula matricula = null;
+		Persona persona = null;
+		Usuario usuario = null;
+		MatriculaRol grupo = null;
+		try {
+ 			String query = "SELECT idrol,nombre FROM cv_matricula_rol WHERE idrol in (2,4) order by idrol";
+			cons = dataSource.getConnection();
+			stmt = cons.prepareStatement(query);
+			result =  stmt.executeQuery();
+			query = "SELECT " +
+					"cv_matricula.IDMATRICULA, cv_matricula.ESTADO, cv_matricula.PRINCIPAL, cv_matricula.CONSTANCIA, cv_usuario.USUARIO, " +
+					"cv_usuario.IDUSUARIO, cv_persona.NOMUNO, cv_persona.NOMDOS, cv_persona.APEPATERNO, cv_persona.APEMATERNO " +
+					"FROM opencampus.cv_matricula " +
+					"INNER JOIN opencampus.cv_usuario ON (cv_matricula.IDUSUARIO = cv_usuario.IDUSUARIO) " +
+					"INNER JOIN opencampus.cv_persona ON (cv_persona.IDPERSONA = cv_usuario.IDUSUARIO) " +
+					"WHERE (cv_matricula.ESTADO = 1 AND cv_matricula.ELIMINADO = 0 AND cv_matricula.IDFICHA=? AND cv_matricula.IDROL =?) " +
+					"ORDER BY cv_persona.APEPATERNO ASC, cv_persona.APEMATERNO ASC, cv_persona.NOMUNO ASC, cv_persona.NOMDOS ASC";
+			stmt =  cons.prepareStatement(query);
+			while (result.next()) {
+				grupo = new MatriculaRol(result.getInt("idrol"), result.getString("nombre"));
+				stmt.setInt(1, idFicha);
+				stmt.setInt(2, result.getInt("idrol"));
+				result1 =  stmt.executeQuery();
+				matriculas = new ArrayList<Matricula>();
+				while (result1.next()) {
+					matricula = new Matricula();
+					matricula.setIdMatricula(result1.getInt("IDMATRICULA"));
+					matricula.setEstado(result1.getInt("ESTADO"));
+					matricula.setPrincipal(result1.getInt("PRINCIPAL"));
+					matricula.setConstancia(result1.getInt("CONSTANCIA"));
+					
+					usuario = new Usuario();
+					usuario.setId(result1.getInt("IDUSUARIO"));
+					usuario.setUsuario(result1.getString("USUARIO"));
+					
+					persona = new Persona();
+					persona.setNomuno(result1.getString("NOMUNO"));
+					persona.setNomdos(result1.getString("NOMDOS"));
+					persona.setApepaterno(result1.getString("APEPATERNO"));
+					persona.setApematerno(result1.getString("APEMATERNO"));
+					
+					usuario.setPersona(persona);
+					
+					matricula.setUsuario(usuario);
+					
+					matriculas.add(matricula);
+				}
+				
+				grupo.setMatriculas(matriculas);
+				grupos.add(grupo);
+			}
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e);
+			throw new DAOException(e.toString());
+		} finally {
+			closeResultSet(result1);
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+		return grupos;
+	}
+	
 	public Collection<Usuario> buscarNoMatriculados(String[] nombres, int idFicha) throws DAOException {
 		log.info("obtenerUsuarioNoMatriculados("+nombres+", "+idFicha+")");
 		PreparedStatement stmt = null;
