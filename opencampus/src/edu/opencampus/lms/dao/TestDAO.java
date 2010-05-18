@@ -656,8 +656,8 @@ public class TestDAO extends BaseDAO {
 		Connection cons = null;
 		try {
 //			String query = "SELECT DESHABILITADO_DOC,DESHABILITADO_ESTU,ESTADO,"
-//					+ "(SELECT COUNT(*) FROM CV_FICHA_UNIDAD WHERE IDFICHA=UFR.IDFICHA AND IDUNIDAD=UFR.IDUNIDAD AND ESTADO=1) EXISTEUNIDAD "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO UFR "
+//					+ "(SELECT COUNT(*) FROM cv_ficha_unidad WHERE IDFICHA=UFR.IDFICHA AND IDUNIDAD=UFR.IDUNIDAD AND ESTADO=1) EXISTEUNIDAD "
+//					+ "FROM cv_ficha_unidad_RECURSO UFR "
 //					+ "WHERE IDFICHA=? AND IDUNIDAD=? AND IDRECURSO=?";
 //			cons =  dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);

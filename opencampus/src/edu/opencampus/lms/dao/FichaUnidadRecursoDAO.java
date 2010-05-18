@@ -37,7 +37,7 @@ public class FichaUnidadRecursoDAO extends BaseDAO {
 		
 		log.info("modificar(FichaUnidadRecurso fichaUnidadRecurso)");
 		try {
-			String query = "UPDATE CV_FICHA_UNIDAD_RECURSO SET FECHA_MOD=sysdate, USUARIO_MOD=?, PESO=?, CALIFICA=?, DESHABILITADO_DOC=?, DESHABILITADO_ESTU=?, ESTADO=? "
+			String query = "UPDATE cv_ficha_unidad_RECURSO SET FECHA_MOD=sysdate, USUARIO_MOD=?, PESO=?, CALIFICA=?, DESHABILITADO_DOC=?, DESHABILITADO_ESTU=?, ESTADO=? "
 					+ " WHERE IDFICHA=? AND IDUNIDAD=? AND IDRECURSO=? ";
 					
 			cons = (Connection)dataSource.getConnection();
@@ -84,7 +84,7 @@ public class FichaUnidadRecursoDAO extends BaseDAO {
 		FichaUnidadRecurso vo = new FichaUnidadRecurso();
 		try {
 			String query = "SELECT IDFICHA, IDUNIDAD, IDRECURSO, FECHA_MOD, USUARIO_MOD, PESO, CALIFICA, DESHABILITADO_DOC, DESHABILITADO_ESTU, ESTADO "
-					+ "FROM CV_FICHA_UNIDAD_RECURSO WHERE IDFICHA=? AND IDUNIDAD=?";
+					+ "FROM cv_ficha_unidad_RECURSO WHERE IDFICHA=? AND IDUNIDAD=?";
 			cons = (Connection)dataSource.getConnection();
 			
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -130,7 +130,7 @@ public class FichaUnidadRecursoDAO extends BaseDAO {
 		FichaUnidadRecurso vo = new FichaUnidadRecurso();
 		try {
 			String query = "SELECT IDFICHA, IDUNIDAD, IDRECURSO, FECHA_MOD, USUARIO_MOD, PESO, CALIFICA, DESHABILITADO_DOC, DESHABILITADO_ESTU, ESTADO "
-					+ "FROM CV_FICHA_UNIDAD_RECURSO WHERE IDFICHA=? AND IDUNIDAD=? AND IDRECURSO=?";
+					+ "FROM cv_ficha_unidad_RECURSO WHERE IDFICHA=? AND IDUNIDAD=? AND IDRECURSO=?";
 			cons = (Connection)dataSource.getConnection();
 			
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -172,7 +172,7 @@ public class FichaUnidadRecursoDAO extends BaseDAO {
 		Connection cons = null;
 		
 		try {
-			String query = "UPDATE CV_FICHA_UNIDAD_RECURSO SET FECHA_MOD=sysdate, USUARIO_MOD=? ";
+			String query = "UPDATE cv_ficha_unidad_RECURSO SET FECHA_MOD=sysdate, USUARIO_MOD=? ";
 					
 			if(tipo.equals("D")){
 				query += ", DESHABILITADO_DOC=? ";

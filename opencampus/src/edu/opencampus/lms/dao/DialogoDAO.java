@@ -43,7 +43,7 @@ public class DialogoDAO extends BaseDAO {
 			if(modelo.getPredecesor() == 0){
 				modelo.setOwner(0);
 			}else{
-				query = "SELECT OWNER FROM CV_DIALOGO WHERE IDDIALOGO=?";
+				query = "SELECT OWNER FROM cv_dialogo WHERE IDDIALOGO=?";
 				stmt = (PreparedStatement) cons.prepareStatement(query);
 				stmt.setInt(1, modelo.getPredecesor());
 				result = (ResultSet) stmt.executeQuery();
@@ -55,7 +55,7 @@ public class DialogoDAO extends BaseDAO {
 				}
 			}
 			
-			query = "INSERT INTO CV_DIALOGO(IDFICHA,IDUNIDAD,"
+			query = "INSERT INTO cv_dialogo(IDFICHA,IDUNIDAD,"
 					+ "IDMATRICULA_ENVIO,ASUNTO,TEXTO,FECHA,OWNER,PREDECESOR,"
 					+ "ESTADO) VALUES (?,?,?,?,?,now(),?,?,1)";
 						
@@ -75,9 +75,9 @@ public class DialogoDAO extends BaseDAO {
 			result.next();
 			Integer id = result.getInt(1);
 			
-			query = "INSERT INTO CV_DIALOGO_MATRICULA(IDDIALOGO,IDMATRICULA"
+			query = "INSERT INTO cv_dialogo_matricula(IDDIALOGO,IDMATRICULA"
 					+ ",LEIDO) SELECT ?,IDMATRICULA,'0' FROM"
-					+ " CV_MATRICULA WHERE IDFICHA=?";
+					+ " cv_matricula WHERE IDFICHA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, id);
 			stmt.setInt(2, aula.getIdFicha());
@@ -91,7 +91,7 @@ public class DialogoDAO extends BaseDAO {
 				modelo.setIdDialogo(result.getInt(1));
 				modelo.setFecha(result.getString(2));
 			}
-			query = "UPDATE CV_DIALOGO_MATRICULA SET LEIDO=1,FECHA=now() "
+			query = "UPDATE cv_dialogo_matricula SET LEIDO=1,FECHA=now() "
 					+ "WHERE IDDIALOGO=? AND IDMATRICULA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, modelo.getIdDialogo());
@@ -127,7 +127,7 @@ public class DialogoDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "UPDATE CV_DIALOGO SET estado=0"
+			String query = "UPDATE cv_dialogo SET estado=0"
 					+ "  WHERE IDDialogo=?";
 			stmt = (PreparedStatement) conec.prepareStatement(query);
 			stmt.setString(1, usuario);
@@ -159,7 +159,7 @@ public class DialogoDAO extends BaseDAO {
 		ResultSet result = null;
 		Connection cons = null;
 		try {
-			String query = "UPDATE CV_DIALOGO SET estado=0"
+			String query = "UPDATE cv_dialogo SET estado=0"
 					+ "  WHERE IDDialogo=?";
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
@@ -210,11 +210,11 @@ public class DialogoDAO extends BaseDAO {
 			String query = "SELECT CVDI.IDDIALOGO, CVDI.ASUNTO, DATE_FORMAT(CVDI.FECHA,'%d-%m-%Y %H:%i') FECHA, " +
 					"CVDI.OWNER, CVDI.PREDECESOR, CVDIMA.LEIDO, " +
 					"GEN.NOMUNO,GEN.NOMDOS,GEN.APEPATERNO,GEN.APEMATERNO,SEU.USUARIO,CVR.IDROL, " +
-					"(SELECT COUNT(*) FROM CV_DIALOGO CD,CV_DIALOGO_MATRICULA CDM  " +
+					"(SELECT COUNT(*) FROM cv_dialogo CD,cv_dialogo_matricula CDM  " +
 					"WHERE CD.OWNER=CVDI.IDDIALOGO AND CD.IDDIALOGO=CDM.IDDIALOGO AND CDM.IDMATRICULA=CVDIMA.IDMATRICULA AND CD.ESTADO=1) SUBPLACTICA, " +
-					"(SELECT COUNT(*) FROM CV_DIALOGO CD,CV_DIALOGO_MATRICULA CDM " +
+					"(SELECT COUNT(*) FROM cv_dialogo CD,cv_dialogo_matricula CDM " +
 					"WHERE CD.OWNER=CVDI.IDDIALOGO AND CD.IDDIALOGO=CDM.IDDIALOGO AND CDM.IDMATRICULA=CVDIMA.IDMATRICULA AND CD.ESTADO=1 AND CDM.LEIDO='0') NOSUBPLACTICA " +
-					"FROM CV_MATRICULA_ROL CVR, CV_MATRICULA CVM, CV_DIALOGO CVDI,CV_DIALOGO_MATRICULA CVDIMA,CV_PERSONA GEN,CV_USUARIO SEU " +
+					"FROM cv_matricula_rol CVR, cv_matricula CVM, cv_dialogo CVDI,cv_dialogo_matricula CVDIMA,CV_PERSONA GEN,CV_USUARIO SEU " +
 					"WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA_ENVIO AND CVM.IDUSUARIO=SEU.IDUSUARIO AND SEU.IDUSUARIO=GEN.IDPERSONA " +
 					"AND CVDI.ESTADO=1 AND CVDI.IDDIALOGO=CVDIMA.IDDIALOGO AND CVDI.OWNER=0  AND CVR.IDROL=CVM.IDROL "
 					+ "AND CVDI.PREDECESOR=0 AND CVDIMA.IDMATRICULA=? AND CVDI.IDFICHA=? AND CVDI.IDUNIDAD=? "
@@ -272,11 +272,11 @@ public class DialogoDAO extends BaseDAO {
 		Connection cons = null;
 		try {
 			String query = "SELECT CVDI.IDDIALOGO,DATE_FORMAT(CVDI.FECHA,'%d-%m-%Y %H:%i') FECHA, " +
-					"IFNULL(CVDI.ASUNTO,(SELECT CONCAT('RE: ',ASUNTO) FROM CV_DIALOGO WHERE IDDIALOGO=CVDI.OWNER)) ASUNTO," +
+					"IFNULL(CVDI.ASUNTO,(SELECT CONCAT('RE: ',ASUNTO) FROM cv_dialogo WHERE IDDIALOGO=CVDI.OWNER)) ASUNTO," +
 					"CVDI.OWNER,CVDI.PREDECESOR,CVDIMA.LEIDO," +
 					"GEN.NOMUNO,GEN.NOMDOS,GEN.APEPATERNO,GEN.APEMATERNO,SEU.USUARIO,CVR.IDROL, " +
-					"(SELECT COUNT(*) FROM CV_DIALOGO WHERE PREDECESOR=CVDI.IDDIALOGO AND ESTADO=1) SUBPLACTICA " +
-					"FROM CV_MATRICULA_ROL CVR,CV_MATRICULA CVM,CV_DIALOGO CVDI,CV_DIALOGO_MATRICULA CVDIMA," +
+					"(SELECT COUNT(*) FROM cv_dialogo WHERE PREDECESOR=CVDI.IDDIALOGO AND ESTADO=1) SUBPLACTICA " +
+					"FROM cv_matricula_rol CVR,cv_matricula CVM,cv_dialogo CVDI,cv_dialogo_matricula CVDIMA," +
 					"CV_PERSONA GEN,CV_USUARIO SEU " +
 					"WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA_ENVIO AND CVM.IDUSUARIO=SEU.IDUSUARIO AND SEU.IDUSUARIO=GEN.IDPERSONA  " +
 					"AND CVDI.ESTADO=1 AND CVDI.IDDIALOGO=CVDIMA.IDDIALOGO AND CVR.IDROL=CVM.IDROL  "
@@ -334,14 +334,14 @@ public class DialogoDAO extends BaseDAO {
 				query = "SELECT CVDI.IDDIALOGO,CVDI.ASUNTO,CVDI.TEXTO,DATE_FORMAT(CVDI.FECHA,'%d-%m-%Y %H:%i') FECHA," +
 						"CVDI.OWNER,CVDI.PREDECESOR,CVDIMA.LEIDO," +
 						"GEN.NOMUNO,GEN.APEPATERNO,SEU.USUARIO,CVM.IDROL " +
-						"FROM CV_MATRICULA CVM,CV_DIALOGO CVDI,CV_DIALOGO_MATRICULA CVDIMA," +
+						"FROM cv_matricula CVM,cv_dialogo CVDI,cv_dialogo_matricula CVDIMA," +
 						"CV_PERSONA GEN,CV_USUARIO SEU " +
 						"WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA_ENVIO AND CVM.IDUSUARIO=SEU.IDUSUARIO AND SEU.IDUSUARIO=GEN.IDPERSONA " +
 						"AND CVDI.ESTADO=1 AND CVDI.IDDIALOGO=CVDIMA.IDDIALOGO   "
 						+ "AND CVDIMA.IDMATRICULA=? AND CVDI.IDDIALOGO=?";
 			} else {
 				query = "SELECT CVDI.TEXTO "
-						+ "FROM CV_DIALOGO CVDI,CV_DIALOGO_MATRICULA CVDIMA "
+						+ "FROM cv_dialogo CVDI,cv_dialogo_matricula CVDIMA "
 						+ "WHERE CVDI.ESTADO=1 AND CVDI.IDDIALOGO=CVDIMA.IDDIALOGO "
 						+ "AND CVDIMA.IDMATRICULA=? AND CVDI.IDDIALOGO=?";
 			}
@@ -396,8 +396,8 @@ public class DialogoDAO extends BaseDAO {
 		Connection cons = null;
 		try {
 //			String query = "SELECT DESHABILITADO_DOC,DESHABILITADO_ESTU,ESTADO,"
-//					+ "(SELECT COUNT(*) FROM CV_FICHA_UNIDAD WHERE IDFICHA=UFR.IDFICHA AND IDUNIDAD=UFR.IDUNIDAD AND ESTADO=1) EXISTEUNIDAD "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO UFR "
+//					+ "(SELECT COUNT(*) FROM cv_ficha_unidad WHERE IDFICHA=UFR.IDFICHA AND IDUNIDAD=UFR.IDUNIDAD AND ESTADO=1) EXISTEUNIDAD "
+//					+ "FROM cv_ficha_unidad_RECURSO UFR "
 //					+ "WHERE IDFICHA=? AND IDUNIDAD=? AND IDRECURSO=?";
 //			cons = (Connection) dataSource.getConnection();
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -457,7 +457,7 @@ public class DialogoDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		Connection cons = null;
 		try {
-			String query = "UPDATE CV_DIALOGO_MATRICULA SET LEIDO=?,FECHA=now() "
+			String query = "UPDATE cv_dialogo_matricula SET LEIDO=?,FECHA=now() "
 					+ "WHERE IDDIALOGO=? AND IDMATRICULA=?";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);

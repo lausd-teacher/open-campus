@@ -223,7 +223,7 @@ public class PublicacionDAO extends BaseDAO {
 				"pub.IDPUBLICADOR, u.USUARIO, p.APEPATERNO, p.APEMATERNO, p.NOMUNO,p.NOMDOS, p.SEXO " +
 				"FROM cv_publicacion pub, cv_usuario u, cv_persona p " +
 				"WHERE pub.IDPUBLICADOR=u.IDUSUARIO AND u.IDUSUARIO=p.IDPERSONA AND pub.ESTADO = 1 " +
-				"AND pub.IDFICHA=(SELECT IDFICHA FROM CV_MATRICULA WHERE IDMATRICULA=?) AND (SELECT COUNT(*) FROM cv_publicacion_matricula WHERE  IDPUBLICACION=pub.IDPUBLICACION AND IDMATRICULA=? AND ESTADO=1)=0 " +
+				"AND pub.IDFICHA=(SELECT IDFICHA FROM cv_matricula WHERE IDMATRICULA=?) AND (SELECT COUNT(*) FROM cv_publicacion_matricula WHERE  IDPUBLICACION=pub.IDPUBLICACION AND IDMATRICULA=? AND ESTADO=1)=0 " +
 				"ORDER BY pub.FECHA DESC";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);

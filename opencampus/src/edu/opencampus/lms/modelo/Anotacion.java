@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "CV_ANOTACION")
+@Table(name = "cv_anotacion")
 //@SequenceGenerator(name = "SEQANOTACION", sequenceName = "SEQANOTACION", allocationSize = 1)
 public class Anotacion implements Serializable {
 
