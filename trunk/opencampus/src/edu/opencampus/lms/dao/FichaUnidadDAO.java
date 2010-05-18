@@ -37,7 +37,7 @@ public class FichaUnidadDAO extends BaseDAO {
 		
 		log.info("modificar(FichaUnidad fichaUnidad)");
 		try {
-			String query = "UPDATE CV_FICHA_UNIDAD SET ESTADO=?, FECHA_MOD=sysdate, USUARIO_MOD=? "
+			String query = "UPDATE cv_ficha_unidad SET ESTADO=?, FECHA_MOD=sysdate, USUARIO_MOD=? "
 					+ " WHERE IDFICHA=? AND IDSILABO=? AND IDUNIDAD=? ";
 					
 			cons = (Connection)dataSource.getConnection();
@@ -79,7 +79,7 @@ public class FichaUnidadDAO extends BaseDAO {
 		FichaUnidad vo = new FichaUnidad();
 		try {
 			String query = "SELECT IDFICHA, IDSILABO, IDUNIDAD, ESTADO, FECHA_MOD, USUARIO_MOD "
-					+ "FROM CV_FICHA_UNIDAD WHERE IDFICHA=? AND IDSILABO=?";
+					+ "FROM cv_ficha_unidad WHERE IDFICHA=? AND IDSILABO=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idFicha);
@@ -121,7 +121,7 @@ public class FichaUnidadDAO extends BaseDAO {
 		FichaUnidad vo = new FichaUnidad();
 		try {
 			String query = "SELECT IDFICHA, IDSILABO, IDUNIDAD, ESTADO, FECHA_MOD, USUARIO_MOD "
-					+ "FROM CV_FICHA_UNIDAD WHERE IDFICHA=? AND IDSILABO=? AND IDUNIDAD=?";
+					+ "FROM cv_ficha_unidad WHERE IDFICHA=? AND IDSILABO=? AND IDUNIDAD=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idFicha);

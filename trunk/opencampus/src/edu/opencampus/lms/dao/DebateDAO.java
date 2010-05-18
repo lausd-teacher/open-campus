@@ -42,7 +42,7 @@ public class DebateDAO extends BaseDAO {
 			if(modelo.getPredecesor() == 0){
 				modelo.setOwner(0);
 			}else{
-				query = "SELECT OWNER FROM CV_DEBATE WHERE IDDEBATE=?";
+				query = "SELECT OWNER FROM cv_debate WHERE IDDEBATE=?";
 				stmt = (PreparedStatement) cons.prepareStatement(query);
 				stmt.setInt(1, modelo.getPredecesor());
 				result = (ResultSet) stmt.executeQuery();
@@ -53,7 +53,7 @@ public class DebateDAO extends BaseDAO {
 						modelo.setOwner(result.getInt("OWNER"));
 				}
 			}
-			query = "INSERT INTO CV_DEBATE(IDDEBATE,IDTRABAJO,"
+			query = "INSERT INTO cv_debate(IDDEBATE,IDTRABAJO,"
 					+ "IDGRUPO,IDMATRICULA,ASUNTO,TEXTO,FECHA,OWNER,PREDECESOR,"
 					+ "ESTADO) VALUES (SEQCVDEBATE.NEXTVAL,?,?,?,?,?,SYSDATE,?,?,1)";
 						
@@ -66,17 +66,17 @@ public class DebateDAO extends BaseDAO {
 			stmt.setInt(6, modelo.getOwner());
 			stmt.setInt(7, modelo.getPredecesor());
 			if (1 != stmt.executeUpdate()) {
-				throw new DAOException("DebateDAO: crearPlactica(): Error en CV_DEBATE");
+				throw new DAOException("DebateDAO: crearPlactica(): Error en cv_debate");
 			}
-			query = "INSERT INTO CV_DEBATE_MATRICULA(IDDEBATE, IDMATRICULA,LEIDO) " +
+			query = "INSERT INTO cv_debate_matricula(IDDEBATE, IDMATRICULA,LEIDO) " +
 					"SELECT SEQCVDEBATE.CURRVAL,IDMATRICULA,'0' FROM CV_GRUPO_TRABAJO_MATRICULA " +
 					"WHERE IDGRUPO=? AND IDTRABAJO=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idGrupo);
 			stmt.setInt(2, aula.getTrabajoGrupalActual());
 			stmt.executeUpdate();
-			query = "INSERT INTO CV_DEBATE_MATRICULA(IDDEBATE,IDMATRICULA,LEIDO) " +
-					"SELECT SEQCVDEBATE.CURRVAL,IDMATRICULA,'0' FROM CV_MATRICULA " +
+			query = "INSERT INTO cv_debate_matricula(IDDEBATE,IDMATRICULA,LEIDO) " +
+					"SELECT SEQCVDEBATE.CURRVAL,IDMATRICULA,'0' FROM cv_matricula " +
 					"WHERE ELIMINADO=0 AND ESTADO=1 AND IDROL IN(1,2,3) " +
 					"AND IDFICHA=(SELECT IDFICHA FROM CV_TRABAJO_GRUPAL WHERE IDTRABAJO=?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -89,13 +89,13 @@ public class DebateDAO extends BaseDAO {
 				modelo.setIdDebate(result.getInt(1));
 				modelo.setFecha(result.getString(2));
 			}
-			query = "UPDATE CV_DEBATE_MATRICULA SET LEIDO=1,FECHA=SYSDATE " +
+			query = "UPDATE cv_debate_matricula SET LEIDO=1,FECHA=SYSDATE " +
 					"WHERE IDDEBATE=? AND IDMATRICULA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, modelo.getIdDebate());
 			stmt.setInt(2, aula.getIdMatricula());
 			if (1 != stmt.executeUpdate()) {
-				throw new DAOException("DebateDAO: crearPlactica(): Error en CV_DEBATE_GRUPAL_MATRICULA");
+				throw new DAOException("DebateDAO: crearPlactica(): Error en cv_debate_GRUPAL_MATRICULA");
 			}
 			cons.commit();
 		} catch (SQLException e) {
@@ -125,7 +125,7 @@ public class DebateDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "UPDATE CV_DEBATE SET estado=0,"
+			String query = "UPDATE cv_debate SET estado=0,"
 					+ "FECHA_eliminacion=SYSDATE,usuario_eliminacion=?"
 					+ "  WHERE IDDEBATE=?";
 			stmt = (PreparedStatement) conec.prepareStatement(query);
@@ -135,7 +135,7 @@ public class DebateDAO extends BaseDAO {
 				throw new DAOException(
 						"DebateDAO: eliminarPlacticaSub(): Error");
 			}
-			query = "SELECT IDDEBATE from CV_DEBATE where predecesor=?";
+			query = "SELECT IDDEBATE from cv_debate where predecesor=?";
 			stmt = (PreparedStatement) conec.prepareStatement(query);
 			stmt.setInt(1, idDebate);
 			result = (ResultSet) stmt.executeQuery();
@@ -158,7 +158,7 @@ public class DebateDAO extends BaseDAO {
 		ResultSet result = null;
 		Connection cons = null;
 		try {
-			String query = "UPDATE CV_DEBATE SET estado=0,"
+			String query = "UPDATE cv_debate SET estado=0,"
 					+ "FECHA_eliminacion=SYSDATE,usuario_eliminacion=?"
 					+ "  WHERE IDDEBATE=?";
 			cons = (Connection) dataSource.getConnection();
@@ -169,7 +169,7 @@ public class DebateDAO extends BaseDAO {
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException("DebateDAO: eliminarPlactica(): Error");
 			}
-			query = "SELECT IDDEBATE from CV_DEBATE where predecesor=?";
+			query = "SELECT IDDEBATE from cv_debate where predecesor=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idDebate);
 			result = (ResultSet) stmt.executeQuery();
@@ -209,11 +209,11 @@ public class DebateDAO extends BaseDAO {
 		try {
 			String query = "SELECT CVDI.IDDEBATE, CVDI.ASUNTO, CVDI.TEXTO, TO_CHAR(CVDI.FECHA,'DD-MM-YYYY HH24:MI') FECHA,CVDI.OWNER, CVDI.PREDECESOR,CVDI.ESTADO,CVDIMA.LEIDO,CVDIMA.IMPORTANTE, " +
 					"GEN.NOMUNO,GEN.NOMDOS,GEN.APEPATERNO,GEN.APEMATERNO,SEU.USUARIO,CVR.IDROL, " +
-					"(SELECT COUNT(*) FROM CV_DEBATE CDG, CV_DEBATE_MATRICULA CDGM " +
+					"(SELECT COUNT(*) FROM cv_debate CDG, cv_debate_matricula CDGM " +
 					"WHERE CDG.OWNER=CVDI.IDDEBATE AND CDG.IDDEBATE=CDGM.IDDEBATE AND CDGM.IDMATRICULA=CVDIMA.IDMATRICULA AND CDG.ESTADO=1) SUBPLACTICA," +
-					"(SELECT COUNT(*) FROM CV_DEBATE CDG,CV_DEBATE_MATRICULA CDGM " +
+					"(SELECT COUNT(*) FROM cv_debate CDG,cv_debate_matricula CDGM " +
 					"WHERE CDG.OWNER=CVDI.IDDEBATE AND CDG.IDDEBATE=CDGM.IDDEBATE AND CDGM.IDMATRICULA=CVDIMA.IDMATRICULA AND CDG.ESTADO=1 AND CDGM.LEIDO='0') NOSUBPLACTICA " +
-					"FROM CV_DEBATE CVDI,CV_DEBATE_MATRICULA CVDIMA,GENERAL.GEN_PERSONA GEN,SEGURIDAD.SEG_USUARIO SEU,CV_MATRICULA CVM,CV_ROL CVR " +
+					"FROM cv_debate CVDI,cv_debate_matricula CVDIMA,GENERAL.GEN_PERSONA GEN,SEGURIDAD.SEG_USUARIO SEU,cv_matricula CVM,CV_ROL CVR " +
 					"WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA AND CVM.USUARIO=SEU.USUARIO AND SEU.CODSUJETO=GEN.CODPERSONA AND CVDI.ESTADO=1 AND CVDI.IDDEBATE=CVDIMA.IDDEBATE " +
 					"AND CVDIMA.IDMATRICULA=? AND CVDI.OWNER=0 AND CVDI.PREDECESOR=0 AND CVR.IDROL=CVM.IDROL AND CVDI.IDTRABAJO=? AND CVDI.IDGRUPO=? ORDER BY FECHA DESC";
 			cons = (Connection) dataSource.getConnection();
@@ -270,11 +270,11 @@ public class DebateDAO extends BaseDAO {
 		Connection cons = null;
 		try {
 			String query = "SELECT CVDI.IDDEBATE,TO_CHAR(CVDI.FECHA,'DD-MM-YYYY HH24:MI') FECHA,"
-					+ "NVL(CVDI.ASUNTO,(SELECT 'RE: '||ASUNTO FROM CV_DEBATE WHERE IDDEBATE=CVDI.OWNER)) ASUNTO,"
+					+ "NVL(CVDI.ASUNTO,(SELECT 'RE: '||ASUNTO FROM cv_debate WHERE IDDEBATE=CVDI.OWNER)) ASUNTO,"
 					+ "CVDI.OWNER,CVDI.PREDECESOR,CVDIMA.LEIDO,"
 					+ "GEN.NOMUNO,GEN.NOMDOS,GEN.APEPATERNO,GEN.APEMATERNO,SEU.USUARIO,CVR.IDROL,"
-					+ "(SELECT COUNT(*) FROM CV_DEBATE WHERE PREDECESOR=CVDI.IDDEBATE AND ESTADO=1) SUBPLACTICA "
-					+ "FROM CV_ROL CVR,CV_MATRICULA CVM,CV_DEBATE CVDI,CV_DEBATE_MATRICULA CVDIMA,"
+					+ "(SELECT COUNT(*) FROM cv_debate WHERE PREDECESOR=CVDI.IDDEBATE AND ESTADO=1) SUBPLACTICA "
+					+ "FROM CV_ROL CVR,cv_matricula CVM,cv_debate CVDI,cv_debate_matricula CVDIMA,"
 					+ "GENERAL.GEN_PERSONA GEN,SEGURIDAD.SEG_USUARIO SEU "
 					+ "WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA AND CVM.USUARIO=SEU.USUARIO AND SEU.CODSUJETO=GEN.CODPERSONA "
 					+ "AND CVDI.ESTADO=1 AND CVDI.IDDEBATE=CVDIMA.IDDEBATE AND CVR.IDROL=CVM.IDROL "
@@ -332,14 +332,14 @@ public class DebateDAO extends BaseDAO {
 				query = "SELECT CVDI.IDDEBATE,CVDI.ASUNTO,CVDI.TEXTO,TO_CHAR(CVDI.FECHA,'DD-MM-YYYY HH24:MI') FECHA,"
 						+ "CVDI.OWNER,CVDI.PREDECESOR,CVDIMA.LEIDO,"
 						+ "GEN.NOMUNO,GEN.APEPATERNO,SEU.USUARIO,CVM.IDROL "
-						+ "FROM CV_MATRICULA CVM,CV_DEBATE CVDI,CV_DEBATE_MATRICULA CVDIMA,"
+						+ "FROM cv_matricula CVM,cv_debate CVDI,cv_debate_matricula CVDIMA,"
 						+ "GENERAL.GEN_PERSONA GEN,SEGURIDAD.SEG_USUARIO SEU "
 						+ "WHERE CVM.IDMATRICULA=CVDI.IDMATRICULA AND CVM.USUARIO=SEU.USUARIO AND SEU.CODSUJETO=GEN.CODPERSONA "
 						+ "AND CVDI.ESTADO=1 AND CVDI.IDDEBATE=CVDIMA.IDDEBATE "
 						+ "AND CVDIMA.IDMATRICULA=? AND CVDI.IDDEBATE=?";
 			} else {
 				query = "SELECT CVDI.TEXTO "
-						+ "FROM CV_DEBATE CVDI,CV_DEBATE_MATRICULA CVDIMA "
+						+ "FROM cv_debate CVDI,cv_debate_matricula CVDIMA "
 						+ "WHERE CVDI.ESTADO=1 AND CVDI.IDDEBATE=CVDIMA.IDDEBATE "
 						+ "AND CVDIMA.IDMATRICULA=? AND CVDI.IDDEBATE=?";
 			}
@@ -392,7 +392,7 @@ public class DebateDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		Connection cons = null;
 		try {
-			String query = "UPDATE CV_DEBATE_MATRICULA SET LEIDO=?,FECHA=SYSDATE "
+			String query = "UPDATE cv_debate_matricula SET LEIDO=?,FECHA=SYSDATE "
 					+ "WHERE IDDEBATE=? AND IDMATRICULA=?";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);

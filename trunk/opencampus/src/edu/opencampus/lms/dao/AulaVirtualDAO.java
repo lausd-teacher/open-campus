@@ -586,7 +586,7 @@ public class AulaVirtualDAO extends BaseDAO {
 		boolean tipo = false;
 		try {
 			cons =  dataSource.getConnection();
-			String query = "SELECT IDMATRICULA FROM CV_MATRICULA WHERE ELIMINADO=0 AND IDFICHA=? AND IDUSUARIO=?";
+			String query = "SELECT IDMATRICULA FROM cv_matricula WHERE ELIMINADO=0 AND IDFICHA=? AND IDUSUARIO=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, idficha);
 			stmt.setInt(2, idusuario);
@@ -693,8 +693,8 @@ public class AulaVirtualDAO extends BaseDAO {
 			result.next();
 			id = result.getInt(1);
 			
-//			query = "INSERT INTO CV_DIALOGO_MATRICULA (IDDIALOGO,IDMATRICULA,LEIDO)"
-//					+ " SELECT IDDIALOGO,?,'0' FROM CV_DIALOGO"
+//			query = "INSERT INTO cv_dialogo_matricula (IDDIALOGO,IDMATRICULA,LEIDO)"
+//					+ " SELECT IDDIALOGO,?,'0' FROM cv_dialogo"
 //					+ " WHERE IDFICHA=?";
 //			stmt =  cons
 //					.prepareStatement(query);
@@ -712,9 +712,9 @@ public class AulaVirtualDAO extends BaseDAO {
 //			if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == int_rol
 //					|| Constante.ROL_CAMPUS_AULAVIRTUAL_MONITOR_DOCENTE == int_rol
 //					|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == int_rol) {
-//				query = "INSERT INTO CV_DEBATE_MATRICULA (IDDEBATE,"
+//				query = "INSERT INTO cv_debate_matricula (IDDEBATE,"
 //						+ "IDMATRICULA,LEIDO) SELECT cvdegr.IDDEBATE,seqcvmatricula."
-//						+ "CURRVAL,'0' FROM CV_DEBATE cvdegr,CV_GRUPO_TRABAJO "
+//						+ "CURRVAL,'0' FROM cv_debate cvdegr,CV_GRUPO_TRABAJO "
 //						+ "cvgrtr,cv_trabajo_grupal cvtrgr WHERE cvdegr.idtrabajo="
 //						+ "cvgrtr.idtrabajo and cvdegr.idgrupo=cvgrtr.idgrupo and "
 //						+ "cvgrtr.estado='1' and cvtrgr.idtrabajo=cvgrtr.idtrabajo "
@@ -726,7 +726,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			}
 //			if (Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == int_rol
 //					|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR == int_rol) {
-//				query = "SELECT U.IDUNIDAD FROM CV_FICHA F, CV_FICHA_UNIDAD U "
+//				query = "SELECT U.IDUNIDAD FROM cv_ficha F, cv_ficha_unidad U "
 //						+ "WHERE F.IDFICHA=U.IDFICHA AND F.IDSILABO=U.IDSILABO"
 //						+ " AND F.IDFICHA=?";
 //				stmt =  cons
@@ -948,12 +948,12 @@ public class AulaVirtualDAO extends BaseDAO {
 					"COFA.NOMCORTO NOMBREFAMILIA,CVFI.CODIGO_FAMILIA,COPR.NOMBRE NOMBRECURSO,CVFI.CODIGO_CURSO, " +
 					"CVFI.CODIGO_PERIODO,GEPE.NOMBRE PERIODO,CVFI.IDSILABO,CVFI.TURNO, GEPE.DIAS_EDICION AS DIAS_EDICION_PERIODO, " +
 					"GEPE.DIAS_REVISION AS DIAS_REVISION_PERIODO, CVMA.IDROL,CVRO.NOMBRE ROLNOMBRE,CVMA.IDMATRICULA, " +
-					"PKG_CV_FICHA.FX_CV_AULA_FORMASEC(CVFI.IDFICHA) AS FORMASEC, CVFI.PERIODO_MAESTRO, " +
-					"(SELECT CODIGO FROM CV_FICHA_FORMACION F WHERE IDFICHA=CVFI.IDFICHA AND CODIGO=(SELECT MAX(CODIGO) FROM CV_FICHA_FORMACION WHERE IDFICHA=F.IDFICHA)) CODIGO_FORMACION,  " +
-					"PKG_CV_COM_PRODUCTO.FX_CV_COM_PRODUCTO_NOMBRE_ID((SELECT CODIGO FROM CV_FICHA_FORMACION F WHERE IDFICHA=CVFI.IDFICHA AND CODIGO=(SELECT MAX(CODIGO) FROM CV_FICHA_FORMACION WHERE IDFICHA=F.IDFICHA))) NOMBRE_FORMACION, " +
-					"PKG_CV_FICHA.FX_CV_FICHA_CODOCENTE_DEFAULT(CVFI.IDFICHA) COD_DOCENTE, PKG_CV_FICHA.FX_CV_FICHA_DOCENTE_DEFAULT(CVFI.IDFICHA) DOCENTE " +
-					"FROM CV_FICHA CVFI,GENERAL.GEN_DEPARTAMENTO GEDE,COMERCIAL.COM_PRODUCTO COPR, " +
-					"COMERCIAL.COM_FAMILIA COFA,CV_PERIODO GEPE,CV_MATRICULA CVMA,CV_ROL CVRO " +
+					"PKG_cv_ficha.FX_CV_AULA_FORMASEC(CVFI.IDFICHA) AS FORMASEC, CVFI.PERIODO_MAESTRO, " +
+					"(SELECT CODIGO FROM cv_ficha_FORMACION F WHERE IDFICHA=CVFI.IDFICHA AND CODIGO=(SELECT MAX(CODIGO) FROM cv_ficha_FORMACION WHERE IDFICHA=F.IDFICHA)) CODIGO_FORMACION,  " +
+					"PKG_CV_COM_PRODUCTO.FX_CV_COM_PRODUCTO_NOMBRE_ID((SELECT CODIGO FROM cv_ficha_FORMACION F WHERE IDFICHA=CVFI.IDFICHA AND CODIGO=(SELECT MAX(CODIGO) FROM cv_ficha_FORMACION WHERE IDFICHA=F.IDFICHA))) NOMBRE_FORMACION, " +
+					"PKG_cv_ficha.FX_cv_ficha_CODOCENTE_DEFAULT(CVFI.IDFICHA) COD_DOCENTE, PKG_cv_ficha.FX_cv_ficha_DOCENTE_DEFAULT(CVFI.IDFICHA) DOCENTE " +
+					"FROM cv_ficha CVFI,GENERAL.GEN_DEPARTAMENTO GEDE,COMERCIAL.COM_PRODUCTO COPR, " +
+					"COMERCIAL.COM_FAMILIA COFA,CV_PERIODO GEPE,cv_matricula CVMA,CV_ROL CVRO " +
 					"WHERE CVFI.CODIGO_DEPARTAMENTO=GEDE.CODIGO AND CVFI.CODIGO_CURSO=COPR.CODIGO " +
 					"AND CVFI.CODIGO_FAMILIA=COFA.CODIGO AND CVFI.CODIGO_PERIODO=GEPE.CODIGO(+) " +
 					"AND CVFI.IDFICHA=? AND CVFI.IDFICHA=CVMA.IDFICHA AND TRIM(CVMA.USUARIO)=? " +
@@ -1050,7 +1050,7 @@ public class AulaVirtualDAO extends BaseDAO {
 					Unidad unidad;
 					Recurso recurso;
 					query = "SELECT US.INDICE,U.IDUNIDAD,U.NOMBRE_CORTO,U.NOMBRE_COMPLETO,U.ALTO,U.ANCHO,FU.ESTADO"
-							+ " FROM CV_UNIDAD U, CV_UNIDAD_SILABO US,CV_FICHA_UNIDAD FU WHERE "
+							+ " FROM CV_UNIDAD U, CV_UNIDAD_SILABO US,cv_ficha_unidad FU WHERE "
 							+ " US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD AND U.IDUNIDAD=US.IDUNIDAD "
 							+ "AND IDFICHA=? AND FU.ESTADO=1 ORDER BY INDICE";
 					stmt =  cons
@@ -1059,7 +1059,7 @@ public class AulaVirtualDAO extends BaseDAO {
 					result =  stmt.executeQuery();
 					query = "SELECT R.IDRECURSO,R.NOMBRE,FUR.ESTADO,FUR.DESHABILITADO_DOC,FUR."
 							+ "DESHABILITADO_ESTU,FUR.CALIFICA,FUR.PESO FROM CV_RECURSO R,"
-							+ "CV_UNIDAD_RECURSO UR, CV_FICHA_UNIDAD_RECURSO FUR WHERE FUR."
+							+ "CV_UNIDAD_RECURSO UR, cv_ficha_unidad_RECURSO FUR WHERE FUR."
 							+ "IDUNIDAD=UR.IDUNIDAD AND FUR.IDRECURSO=UR.IDRECURSO AND R.IDRECURSO"
 							+ "=UR.IDRECURSO AND FUR.IDFICHA=? AND FUR.IDUNIDAD=? ORDER BY IDRECURSO";
 					stmt =  cons
@@ -1071,7 +1071,7 @@ public class AulaVirtualDAO extends BaseDAO {
 						query = "SELECT "
 								+ "(SELECT COUNT(IDTEST) FROM CV_TEST WHERE IDUNIDAD=? AND ESTADO=1 ) as cantTest,"
 								+ "(SELECT COUNT(T.IDTRABAJO) FROM CV_TRABAJO_INDIVIDUAL T, "
-								+ "CV_TRABAJO_INDIVIDUAL_NOTA N, CV_FICHA_UNIDAD_RECURSO U "
+								+ "CV_TRABAJO_INDIVIDUAL_NOTA N, cv_ficha_unidad_RECURSO U "
 								+ "WHERE T.IDTRABAJO=N.IDTRABAJO AND T.IDUNIDAD=U.IDUNIDAD "
 								+ "AND T.IDFICHA=U.IDFICHA AND U.IDRECURSO=T.IDRECURSO AND "
 								+ "U.ESTADO='1' AND U.DESHABILITADO_DOC='1' AND N.ESTADO='1'"
@@ -1086,15 +1086,15 @@ public class AulaVirtualDAO extends BaseDAO {
 								+ " AND fiunre.idficha=? AND fiunre.idunidad=? AND fiunre."
 								+ "idrecurso=? and fiunre.DESHABILITADO_DOC='1') as cantDialogo,"
 								+ "(SELECT COUNT(T.IDTRABAJO) FROM CV_LABORATORIO T,"
-								+ "CV_LABORATORIO_NOTA N,CV_FICHA_UNIDAD_RECURSO U WHERE T."
+								+ "CV_LABORATORIO_NOTA N,cv_ficha_unidad_RECURSO U WHERE T."
 								+ "IDTRABAJO=N.IDTRABAJO AND T.IDUNIDAD=U.IDUNIDAD AND T.IDFICHA="
 								+ "U.IDFICHA AND U.IDRECURSO=T.IDRECURSO AND U.ESTADO='1' AND U."
 								+ "DESHABILITADO_DOC='1' AND N.ESTADO='1' AND N.NOTA IS NULL AND "
 								+ "SYSDATE >= T.FECHA_ACTIVACION AND T.IDFICHA=? AND T.IDUNIDAD=?"
 								+ ") as cantLaboratorio,"
-								+ "(SELECT (SELECT COUNT(CVDI.IDDEBATE) FROM CV_DEBATE"
-								+ " CVDI,CV_DEBATE_MATRICULA CVDIMA,CV_TRABAJO_GRUPAL CVTRGR,"
-								+ "CV_GRUPO_TRABAJO CVGRTR, CV_FICHA_UNIDAD_RECURSO U WHERE CVDIMA."
+								+ "(SELECT (SELECT COUNT(CVDI.IDDEBATE) FROM cv_debate"
+								+ " CVDI,cv_debate_matricula CVDIMA,CV_TRABAJO_GRUPAL CVTRGR,"
+								+ "CV_GRUPO_TRABAJO CVGRTR, cv_ficha_unidad_RECURSO U WHERE CVDIMA."
 								+ "IDDEBATE=CVDI.IDDEBATE AND CVGRTR.IDTRABAJO=CVDI."
 								+ "IDTRABAJO AND CVGRTR.IDGRUPO=CVDI.IDGRUPO AND CVGRTR.IDTRABAJO="
 								+ "CVTRGR.IDTRABAJO AND U.IDRECURSO=CVTRGR.IDRECURSO AND CVTRGR."
@@ -1102,7 +1102,7 @@ public class AulaVirtualDAO extends BaseDAO {
 								+ "=0 AND CVDI.ESTADO=1 AND CVGRTR.ESTADO =1 AND U.ESTADO='1' AND "
 								+ "CVGRTR.ESTADO='1' AND U.DESHABILITADO_DOC='1' AND CVTRGR.IDFICHA=?"
 								+ " AND CVTRGR.IDUNIDAD=? AND CVDIMA.IDMATRICULA = ?)+(SELECT COUNT"
-								+ "(T.IDTRABAJO) FROM CV_TRABAJO_GRUPAL T,CV_GRUPO_TRABAJO G,CV_FICHA"
+								+ "(T.IDTRABAJO) FROM CV_TRABAJO_GRUPAL T,CV_GRUPO_TRABAJO G,cv_ficha"
 								+ "_UNIDAD_RECURSO U WHERE T.IDFICHA=U.IDFICHA AND T.IDUNIDAD=U.IDUNIDAD"
 								+ " AND U.IDRECURSO=T.IDRECURSO AND T.IDTRABAJO=G.IDTRABAJO AND U.ESTADO"
 								+ "='1' AND U.DESHABILITADO_DOC='1' AND G.ESTADO='1' AND G.BANDERA = '1'"
@@ -1114,7 +1114,7 @@ public class AulaVirtualDAO extends BaseDAO {
 						if (Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == rolTemp
 								.getIdrol()) {
 							query = "SELECT (SELECT COUNT(T.IDTRABAJO) FROM CV_TRABAJO_INDIVIDUAL T,"
-									+ "CV_TRABAJO_INDIVIDUAL_NOTA N, CV_FICHA_UNIDAD_RECURSO U WHERE"
+									+ "CV_TRABAJO_INDIVIDUAL_NOTA N, cv_ficha_unidad_RECURSO U WHERE"
 									+ " T.IDTRABAJO=N.IDTRABAJO AND T.IDUNIDAD=U.IDUNIDAD AND T.IDFICHA"
 									+ "=U.IDFICHA AND U.IDRECURSO=T.IDRECURSO AND U.ESTADO='1' AND U."
 									+ "DESHABILITADO_ESTU='1' AND N.ESTADO IN (0,2) AND N.NOTA IS NULL"
@@ -1128,14 +1128,14 @@ public class AulaVirtualDAO extends BaseDAO {
 									+ " AND fiunre.idficha = ? AND fiunre.idunidad = ? AND fiunre.idrecurso = ?"
 									+ " and fiunre.DESHABILITADO_ESTU='1')as cantDialogo,"
 									+ "(SELECT COUNT(T.IDTRABAJO) FROM CV_LABORATORIO T, CV_LABORATORIO_NOTA N,"
-									+ "CV_FICHA_UNIDAD_RECURSO U WHERE T.IDTRABAJO=N.IDTRABAJO AND T.IDUNIDAD="
+									+ "cv_ficha_unidad_RECURSO U WHERE T.IDTRABAJO=N.IDTRABAJO AND T.IDUNIDAD="
 									+ "U.IDUNIDAD AND T.IDFICHA=U.IDFICHA AND U.IDRECURSO=T.IDRECURSO AND U."
 									+ "ESTADO='1' AND U.DESHABILITADO_ESTU='1' AND N.ESTADO IN (0,2) AND N.NOTA"
 									+ " IS NULL AND SYSDATE >= T.FECHA_ACTIVACION AND T.IDFICHA=? AND T.IDUNIDAD"
 									+ "=? AND N.IDMATRICULA=?) as cantLaboratorio,"
-									+ "(SELECT (SELECT COUNT(CVDI.IDDEBATE) FROM CV_DEBATE CVDI,"
-									+ "CV_DEBATE_MATRICULA CVDIMA,CV_TRABAJO_GRUPAL CVTRGR,CV_GRUPO_TRABAJO"
-									+ " CVGRTR, CV_FICHA_UNIDAD_RECURSO U WHERE CVDIMA.IDDEBATE = CVDI."
+									+ "(SELECT (SELECT COUNT(CVDI.IDDEBATE) FROM cv_debate CVDI,"
+									+ "cv_debate_matricula CVDIMA,CV_TRABAJO_GRUPAL CVTRGR,CV_GRUPO_TRABAJO"
+									+ " CVGRTR, cv_ficha_unidad_RECURSO U WHERE CVDIMA.IDDEBATE = CVDI."
 									+ "IDDEBATE AND CVGRTR.IDTRABAJO = CVDI.IDTRABAJO AND CVGRTR.IDGRUPO "
 									+ "= CVDI.IDGRUPO AND CVGRTR.IDTRABAJO = CVTRGR.IDTRABAJO AND U.IDRECURSO="
 									+ "CVTRGR.IDRECURSO AND CVTRGR.IDUNIDAD=U.IDUNIDAD AND CVTRGR.IDFICHA=U."
@@ -1143,7 +1143,7 @@ public class AulaVirtualDAO extends BaseDAO {
 									+ "AND U.ESTADO='1' AND CVGRTR.ESTADO='1' AND U.DESHABILITADO_ESTU='1' "
 									+ "AND CVTRGR.IDFICHA=? AND CVTRGR.IDUNIDAD=? AND CVDIMA.IDMATRICULA = ? "
 									+ ") + (SELECT COUNT(T.IDTRABAJO) FROM CV_TRABAJO_GRUPAL T,CV_GRUPO_TRABAJO G,"
-									+ " CV_GRUPO_TRABAJO_MATRICULA M, CV_FICHA_UNIDAD_RECURSO U "
+									+ " CV_GRUPO_TRABAJO_MATRICULA M, cv_ficha_unidad_RECURSO U "
 									+ "WHERE T.IDFICHA=U.IDFICHA AND T.IDUNIDAD=U.IDUNIDAD AND T.IDRECURSO=U."
 									+ "IDRECURSO AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=M.IDTRABAJO AND G."
 									+ "IDGRUPO=M.IDGRUPO AND U.ESTADO='1' AND U.DESHABILITADO_ESTU='1' AND G."
@@ -1296,7 +1296,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //		try {
 //			String query = "SELECT FU.IDUNIDAD, FU.IDFICHA "
-//					+ "FROM CV_FICHA_UNIDAD FU, CV_MATRICULA M "
+//					+ "FROM cv_ficha_unidad FU, cv_matricula M "
 //					+ "WHERE M.IDFICHA=FU.IDFICHA AND FU.ESTADO=1 AND M.IDMATRICULA=?";
 //			
 ////			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -1307,7 +1307,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setInt(1, idMatricula);
 //			result =  stmt.executeQuery();
 //
-//			query = "SELECT IDRECURSO,ESTADO,CALIFICA FROM CV_FICHA_UNIDAD_RECURSO  "
+//			query = "SELECT IDRECURSO,ESTADO,CALIFICA FROM cv_ficha_unidad_RECURSO  "
 //					+ "WHERE IDFICHA=? AND IDUNIDAD=? ORDER BY IDRECURSO";
 //
 //			stmt =  cons.prepareStatement(query);
@@ -1409,7 +1409,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		ResultSet result = null;
 //		Connection cons = null;
 //		try {
-//			String query = "UPDATE CV_FICHA SET IDSILABO=? WHERE IDFICHA=?";
+//			String query = "UPDATE cv_ficha SET IDSILABO=? WHERE IDFICHA=?";
 //			cons =  dataSource.getConnection();
 //			cons.setAutoCommit(false);
 //			stmt =  cons.prepareStatement(query);
@@ -1417,9 +1417,9 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setInt(2, aulaVirtual.getIdFicha());
 //			if (stmt.executeUpdate() == 0) {
 //				throw new DAOException("No se pudo insertar comando:"
-//						+ " asignarSilabo()-UPDATE CV_FICHA");
+//						+ " asignarSilabo()-UPDATE cv_ficha");
 //			}
-//			query = "INSERT INTO CV_FICHA_UNIDAD (IDFICHA,IDUNIDAD,ESTADO,USUARIO_MOD,"
+//			query = "INSERT INTO cv_ficha_unidad (IDFICHA,IDUNIDAD,ESTADO,USUARIO_MOD,"
 //					+ "FECHA_MOD,IDSILABO) SELECT ?,IDUNIDAD,1,?,SYSDATE,IDSILABO "
 //					+ "FROM CV_UNIDAD_SILABO WHERE IDSILABO=? ORDER BY INDICE";
 //			stmt =  cons.prepareStatement(query);
@@ -1429,10 +1429,10 @@ public class AulaVirtualDAO extends BaseDAO {
 //			if (0 == stmt.executeUpdate()) {
 //				cons.rollback();
 //				throw new DAOException("No se pudo insertar comando: "
-//						+ "asignarSilabo()-INSERT INTO CV_FICHA_UNIDAD");
+//						+ "asignarSilabo()-INSERT INTO cv_ficha_unidad");
 //			}
-//			// INICIALIZACION DE CV_FICHA_UNIDAD_RECURSO
-//			query = "INSERT INTO CV_FICHA_UNIDAD_RECURSO(IDFICHA,IDUNIDAD,IDRECURSO,USUARIO_MOD,FECHA_MOD,"
+//			// INICIALIZACION DE cv_ficha_unidad_RECURSO
+//			query = "INSERT INTO cv_ficha_unidad_RECURSO(IDFICHA,IDUNIDAD,IDRECURSO,USUARIO_MOD,FECHA_MOD,"
 //					+ "ESTADO,DESHABILITADO_DOC,DESHABILITADO_ESTU,PESO,CALIFICA) "
 //					+ "SELECT ?,UR.IDUNIDAD,UR.IDRECURSO,?,SYSDATE,?,?,?,?,? "
 //					+ "FROM CV_UNIDAD_RECURSO UR,CV_UNIDAD_SILABO US "
@@ -1452,7 +1452,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_TEXTO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_REPASO
@@ -1464,7 +1464,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_REPASO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_LABORATORIO
@@ -1476,7 +1476,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_LABORATORIO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_DIALOGO
@@ -1488,7 +1488,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_DIALOGO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_TRABAJO
@@ -1500,7 +1500,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_TRABAJO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_ACTIVIDAD_GRUPAL
@@ -1512,7 +1512,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_ACTIVIDAD_GRUPAL);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_TEST
@@ -1524,7 +1524,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_TEST);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_PRACTICA
@@ -1536,7 +1536,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_PRACTICA);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_REPASO_ENLACE
@@ -1548,7 +1548,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_REPASO_ENLACE);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_TEXTO_FUENTES
@@ -1560,7 +1560,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_TEXTO_FUENTES);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_REPASO_FUENTES
@@ -1572,7 +1572,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_REPASO_FUENTES);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// RECURSO_ID_VIDEO
@@ -1584,11 +1584,11 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setString(9, Constante.RECURSO_ID_VIDEO);
 //			if (0 == stmt.executeUpdate()) {
 //				throw new DAOException(
-//						"Ningun registro insertado: CV_FICHA_UNIDAD_RECURSO");
+//						"Ningun registro insertado: cv_ficha_unidad_RECURSO");
 //			}
 //
 //			// PESOS PARA CADA RECURSO ****
-//			query = "UPDATE CV_FICHA_RECURSO SET PESO=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
+//			query = "UPDATE cv_ficha_recurso SET PESO=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
 //				+ " WHERE IDFICHA=? AND IDRECURSO=?";		
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setString(2, aulaVirtual.getUsuarioModificacion());		
@@ -1598,42 +1598,42 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setInt(1, 0);
 //			stmt.setString(4, Constante.RECURSO_ID_LABORATORIO);
 //			if (1 != stmt.executeUpdate()) {
-//				throw new DAOException("Error en pesos para cada recurso CV_FICHA_RECURSO");
+//				throw new DAOException("Error en pesos para cada recurso cv_ficha_recurso");
 //			}
 //			
 //			// RECURSO_ID_DIALOGO
 //			stmt.setInt(1, 0);
 //			stmt.setString(4, Constante.RECURSO_ID_DIALOGO);
 //			if (1 != stmt.executeUpdate()) {
-//				throw new DAOException("Error en pesos para cada recurso CV_FICHA_RECURSO");
+//				throw new DAOException("Error en pesos para cada recurso cv_ficha_recurso");
 //			}
 //			
 //			// RECURSO_ID_TRABAJO
 //			stmt.setInt(1, 0);
 //			stmt.setString(4, Constante.RECURSO_ID_TRABAJO);
 //			if (1 != stmt.executeUpdate()) {
-//				throw new DAOException("Error en pesos para cada recurso CV_FICHA_RECURSO");
+//				throw new DAOException("Error en pesos para cada recurso cv_ficha_recurso");
 //			}
 //			
 //			// RECURSO_ID_ACTIVIDAD_GRUPAL
 //			stmt.setInt(1, 0);
 //			stmt.setString(4, Constante.RECURSO_ID_ACTIVIDAD_GRUPAL);
 //			if (1 != stmt.executeUpdate()) {
-//				throw new DAOException("Error en pesos para cada recurso CV_FICHA_RECURSO");
+//				throw new DAOException("Error en pesos para cada recurso cv_ficha_recurso");
 //			}
 //			
 //			// RECURSO_ID_TEST
 //			stmt.setInt(1, 100);
 //			stmt.setString(4, Constante.RECURSO_ID_TEST);
 //			if (1 != stmt.executeUpdate()) {
-//				throw new DAOException("Error en pesos para cada recurso CV_FICHA_RECURSO");
+//				throw new DAOException("Error en pesos para cada recurso cv_ficha_recurso");
 //			}
 //			
 //			// INICIALIZACION DE TRABAJOS ****
 //			query = "INSERT INTO CV_TRABAJO_INDIVIDUAL (IDTRABAJO,IDFICHA,IDUNIDAD,IDRECURSO,"
 //					+ "FECHA_CREACION,USUARIO_CREACION,FECHA_MOD,USUARIO_MOD) SELECT "
 //					+ "SEQCVTRABAJOINDIVIDUAL.NEXTVAL,IDFICHA,IDUNIDAD,IDRECURSO,SYSDATE,?,"
-//					+ "SYSDATE,? FROM CV_FICHA_UNIDAD_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
+//					+ "SYSDATE,? FROM cv_ficha_unidad_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setString(1, aulaVirtual.getUsuarioModificacion());
 //			stmt.setString(2, aulaVirtual.getUsuarioModificacion());
@@ -1647,7 +1647,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			query = "INSERT INTO CV_LABORATORIO (IDTRABAJO,IDFICHA,IDUNIDAD,IDRECURSO,"
 //					+ "FECHA_CREACION,USUARIO_CREACION,FECHA_MOD,USUARIO_MOD) SELECT "
 //					+ "SEQCVLABORATORIO.NEXTVAL,IDFICHA,IDUNIDAD,IDRECURSO,SYSDATE,?,"
-//					+ "SYSDATE,? FROM CV_FICHA_UNIDAD_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
+//					+ "SYSDATE,? FROM cv_ficha_unidad_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setString(1, aulaVirtual.getUsuarioModificacion());
 //			stmt.setString(2, aulaVirtual.getUsuarioModificacion());
@@ -1661,7 +1661,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			query = "INSERT INTO CV_TRABAJO_GRUPAL (IDTRABAJO,IDFICHA,IDUNIDAD,IDRECURSO,"
 //					+ "FECHA_CREACION,USUARIO_CREACION,FECHA_MOD,USUARIO_MOD) SELECT "
 //					+ "SEQCVTRABAJOGRUPAL.NEXTVAL,IDFICHA,IDUNIDAD,IDRECURSO,SYSDATE,?,"
-//					+ "SYSDATE,? FROM CV_FICHA_UNIDAD_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
+//					+ "SYSDATE,? FROM cv_ficha_unidad_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setString(1, aulaVirtual.getUsuarioModificacion());
 //			stmt.setString(2, aulaVirtual.getUsuarioModificacion());
@@ -1702,7 +1702,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		PlanDocente plan = new PlanDocente();
 //		try {
 //			String query = "SELECT CVFI.IDSILABO,DOPLTEPE.OBJETIVO,DOPLTEPE.INTRODUCCION,DOPLTEPE.BIBLIOGRAFIA,METODOLOGIA,OBJGEN,TEVA.NOMBRE TEVALUACION "
-//					+ "FROM CV_FICHA CVFI,DOCENCIA.DOC_PLAN_TEMA_PERIODO DOPLTEPE,DOCENCIA.DOC_TIPO_EVALUACION TEVA,COMERCIAL.COM_PRODUCTO COM "
+//					+ "FROM cv_ficha CVFI,DOCENCIA.DOC_PLAN_TEMA_PERIODO DOPLTEPE,DOCENCIA.DOC_TIPO_EVALUACION TEVA,COMERCIAL.COM_PRODUCTO COM "
 //					+ "WHERE DOPLTEPE.CODCURSO=CVFI.CODIGO_CURSO AND TEVA.CODIGO=CODTIPEVAL "
 //					+ "AND DOPLTEPE.CODPERIODO=pkg_cv_ficha_util.fx_cv_ficha_periodo_uds(CVFI.IDFICHA) "
 //					+ "AND CVFI.IDFICHA=?";
@@ -1720,7 +1720,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			}
 //
 //			query = "SELECT U.NOMBRE_COMPLETO FROM CV_UNIDAD U,CV_UNIDAD_SILABO US,"
-//					+ "CV_FICHA_UNIDAD FU WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD"
+//					+ "cv_ficha_unidad FU WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD"
 //					+ "=FU.IDUNIDAD AND FU.ESTADO=1 AND U.IDUNIDAD=US.IDUNIDAD AND IDFICHA=? ORDER BY INDICE";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, aula.getIdFicha());
@@ -1730,7 +1730,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			}
 //
 //			// Contar cuantos recursos tiene una ficha
-//			query = "SELECT COUNT(*) AS RECURSOS_TOTAL FROM CV_FICHA_RECURSO WHERE  IDFICHA=?";
+//			query = "SELECT COUNT(*) AS RECURSOS_TOTAL FROM cv_ficha_recurso WHERE  IDFICHA=?";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, aula.getIdFicha());
 //			result =  stmt.executeQuery();
@@ -1739,7 +1739,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //			// Obtener los pesos de las actividades
 //			query = "SELECT FR.IDFICHA, FR.IDRECURSO, FR.PESO, FR.USUARIO_MOD, FR.FECHA_MOD, R.NOMBRE "
-//					+ "FROM CV_FICHA_RECURSO FR, CV_RECURSO R "
+//					+ "FROM cv_ficha_recurso FR, CV_RECURSO R "
 //					+ "WHERE FR.IDRECURSO=R.IDRECURSO AND FR.IDFICHA=? AND FR.IDRECURSO=?";
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, aula.getIdFicha());
@@ -1823,7 +1823,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			stmt.setInt(1, idFicha);
 //			result =  stmt.executeQuery();
 //			
-//			query = "SELECT US.IDUNIDAD FROM CV_FICHA_UNIDAD FU, CV_UNIDAD_SILABO US  "
+//			query = "SELECT US.IDUNIDAD FROM cv_ficha_unidad FU, CV_UNIDAD_SILABO US  "
 //				+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD "
 //				+ "AND FU.IDFICHA=? AND FU.ESTADO=1 ORDER BY US.INDICE";
 //
@@ -1845,7 +1845,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				
 //				//************ Seleccion de Notas por unidad ************//
 //				query = "SELECT MIN(D.NOTA) MINIMO,MAX(D.NOTA) MAXIMO,ROUND(AVG(D.NOTA),2) PROMEDIO,COUNT(*) VECES "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_NOTA_TEST D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_NOTA_TEST D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND D.ESTADO='1' AND R.IDFICHA=? AND D.IDMATRICULA=? AND R.IDUNIDAD=?";
 //	
@@ -1975,7 +1975,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //					+ " AND fecha_ingreso <= pkg_cv_ficha.fx_cv_ficha_fechafin(ma.idmatricula) "
 //					+ " and valor=(select idficha from cv_matricula where idmatricula = ma.idmatricula)) cantidadingreso"
 //					+ ",pkg_cv_ficha.fx_cv_ficha_cantdias(ma.idmatricula) cantidadclases,(SELECT "
-//					+ "count(U.IDUNIDAD) FROM CV_UNIDAD U,CV_UNIDAD_SILABO US,CV_FICHA_UNIDAD  FU "
+//					+ "count(U.IDUNIDAD) FROM CV_UNIDAD U,CV_UNIDAD_SILABO US,cv_ficha_unidad  FU "
 //					+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD AND U.IDUNIDAD=US."
 //					+ "IDUNIDAD AND IDFICHA=ma.idficha AND FU.ESTADO=1) cantidadunidad from "
 //					+ "cv_matricula ma,seguridad.seg_usuario seus,cv_ficha cvfi,"
@@ -2011,7 +2011,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			// / NOTAS
 //			// *************************************************************
 //
-//			query = "SELECT IDFICHA FROM CV_MATRICULA WHERE IDMATRICULA=?";
+//			query = "SELECT IDFICHA FROM cv_matricula WHERE IDMATRICULA=?";
 //
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, idMatricula);
@@ -2021,7 +2021,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				int idFicha = result.getInt("IDFICHA");
 //
-//				query = "SELECT US.IDUNIDAD FROM CV_FICHA_UNIDAD FU, CV_UNIDAD_SILABO US  "
+//				query = "SELECT US.IDUNIDAD FROM cv_ficha_unidad FU, CV_UNIDAD_SILABO US  "
 //						+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD "
 //						+ "AND FU.IDFICHA=? AND FU.ESTADO=1 ORDER BY US.INDICE";
 //
@@ -2031,7 +2031,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// TEST ******
 //				query = "SELECT MIN(D.NOTA) MINIMO,MAX(D.NOTA) MAXIMO,ROUND(AVG(D.NOTA),2) PROMEDIO,COUNT(*) VECES "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_NOTA_TEST D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_NOTA_TEST D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND D.ESTADO='1' AND R.IDFICHA=? AND D.IDMATRICULA=? AND R.IDUNIDAD=?";
 //
@@ -2055,7 +2055,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //						"AND T.IDUNIDAD=R.IDUNIDAD AND T.IDFICHA=R.IDFICHA AND I.IDMATRICULA=?  " +
 //						"AND I.INTERACCION=(SELECT MIN(INTERACCION) FROM CV_TRABAJO_INDIVIDUAL_INTER " +
 //						"WHERE IDTRABAJO=I.IDTRABAJO AND IDMATRICULA=I.IDMATRICULA AND IDMATRICULA_ENVIO=I.IDMATRICULA AND ARCHIVO_NOMBRE IS NOT NULL)) ENTREGADO " +
-//						"FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL TI " +
+//						"FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL TI " +
 //						"WHERE R.IDFICHA=TI.IDFICHA AND R.IDUNIDAD=TI.IDUNIDAD AND R.IDRECURSO=TI.IDRECURSO " +
 //						"AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND R.IDUNIDAD=?";
 //
@@ -2080,7 +2080,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //						"AND T.IDUNIDAD=R.IDUNIDAD AND T.IDFICHA=R.IDFICHA AND I.IDMATRICULA=? " +
 //						"AND I.INTERACCION=(SELECT MIN(INTERACCION) FROM CV_LABORATORIO_INTER " +
 //						"WHERE IDTRABAJO=I.IDTRABAJO AND IDMATRICULA=I.IDMATRICULA AND IDMATRICULA_ENVIO=I.IDMATRICULA AND ARCHIVO_NOMBRE IS NOT NULL)) ENTREGADO " +
-//						"FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO TI " +
+//						"FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO TI " +
 //						"WHERE R.IDFICHA=TI.IDFICHA AND R.IDUNIDAD=TI.IDUNIDAD AND R.IDRECURSO=TI.IDRECURSO " +
 //						"AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND R.IDUNIDAD=?";
 //
@@ -2108,13 +2108,13 @@ public class AulaVirtualDAO extends BaseDAO {
 //						"AND N.IDMATRICULA = ? " +
 //						"AND I.IDMENSAJE=(SELECT MIN(IDMENSAJE) FROM CV_GRUPO_TRABAJO_MSG " +
 //						"WHERE IDTRABAJO=I.IDTRABAJO AND IDGRUPO=I.IDGRUPO AND IDMATRICULA_EMISOR=N.IDMATRICULA AND ARCHIVO_NOMBRE IS NOT NULL)) ENTREGADO," +
-//						"(SELECT COUNT(*) FROM CV_GRUPO_TRABAJO G, CV_DEBATE D, CV_GRUPO_TRABAJO_MATRICULA N " +
+//						"(SELECT COUNT(*) FROM CV_GRUPO_TRABAJO G, cv_debate D, CV_GRUPO_TRABAJO_MATRICULA N " +
 //						"WHERE G.IDTRABAJO=N.IDTRABAJO AND G.IDGRUPO=N.IDGRUPO AND G.IDTRABAJO=D.IDTRABAJO AND G.IDGRUPO=D.IDGRUPO " +
 //						"AND D.IDTRABAJO=TG.IDTRABAJO AND G.ESTADO='1'  AND D.ESTADO='1' AND N.IDMATRICULA=?) DEBATE_TOTAL, " +
-//						"(SELECT COUNT(*) FROM CV_GRUPO_TRABAJO G, CV_DEBATE D, CV_GRUPO_TRABAJO_MATRICULA N " +
+//						"(SELECT COUNT(*) FROM CV_GRUPO_TRABAJO G, cv_debate D, CV_GRUPO_TRABAJO_MATRICULA N " +
 //						"WHERE G.IDTRABAJO=N.IDTRABAJO AND G.IDGRUPO=N.IDGRUPO AND G.IDTRABAJO=D.IDTRABAJO AND G.IDGRUPO=D.IDGRUPO " +
 //						"AND D.IDTRABAJO=TG.IDTRABAJO AND G.ESTADO='1'  AND D.ESTADO='1' AND D.IDMATRICULA=N.IDMATRICULA AND N.IDMATRICULA=?) DEBATE_HECHAS " +
-//						"FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL TG " +
+//						"FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL TG " +
 //						"WHERE R.IDFICHA=TG.IDFICHA AND R.IDUNIDAD=TG.IDUNIDAD AND R.IDRECURSO=TG.IDRECURSO " +
 //						"AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND R.IDUNIDAD=?";
 //
@@ -2129,7 +2129,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// DIALOGO ******
 //				query = "SELECT COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO  "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND R.IDUNIDAD=?";
 //
@@ -2137,7 +2137,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmt5.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) HECHAS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO  "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND D.IDMATRICULA=? AND R.IDUNIDAD=?";
 //
@@ -2287,7 +2287,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// Promedio
 //
-//				query = "SELECT IDRECURSO,PESO FROM CV_FICHA_RECURSO "
+//				query = "SELECT IDRECURSO,PESO FROM cv_ficha_recurso "
 //						+ "WHERE IDFICHA=?";
 //				stmt =  cons.prepareStatement(query);
 //				stmt.setInt(1, idFicha);
@@ -2497,7 +2497,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //					+ " AND fecha_ingreso <= pkg_cv_ficha.fx_cv_ficha_fechafin(ma.idmatricula) "
 //					+ "and valor=(select idficha from cv_matricula where idmatricula = ma.idmatricula)) cantidadingreso"
 //					+ ",pkg_cv_ficha.fx_cv_ficha_cantdias(ma.idmatricula) cantidadclases,(SELECT "
-//					+ "count(U.IDUNIDAD) FROM CV_UNIDAD U,CV_UNIDAD_SILABO US,CV_FICHA_UNIDAD  FU "
+//					+ "count(U.IDUNIDAD) FROM CV_UNIDAD U,CV_UNIDAD_SILABO US,cv_ficha_unidad  FU "
 //					+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD AND U.IDUNIDAD=US."
 //					+ "IDUNIDAD AND IDFICHA=ma.idficha AND FU.ESTADO=1) cantidadunidad from "
 //					+ "cv_matricula ma,seguridad.seg_usuario seus,cv_ficha cvfi,"
@@ -2533,7 +2533,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			// / NOTAS
 //			// *************************************************************
 //
-//			query = "SELECT IDFICHA FROM CV_MATRICULA WHERE IDMATRICULA=?";
+//			query = "SELECT IDFICHA FROM cv_matricula WHERE IDMATRICULA=?";
 //
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, idMatricula);
@@ -2543,7 +2543,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				int idFicha = result.getInt("IDFICHA");
 //
-//				query = "SELECT US.IDUNIDAD FROM CV_FICHA_UNIDAD FU, CV_UNIDAD_SILABO US  "
+//				query = "SELECT US.IDUNIDAD FROM cv_ficha_unidad FU, CV_UNIDAD_SILABO US  "
 //						+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD "
 //						+ "AND FU.IDFICHA=? AND FU.ESTADO=1 ORDER BY US.INDICE";
 //
@@ -2553,7 +2553,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				
 //				// INDIVIDUAL ******
 //				query = "SELECT COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL_NOTA N, CV_TRABAJO_INDIVIDUAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL_NOTA N, CV_TRABAJO_INDIVIDUAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=N.IDTRABAJO "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2562,7 +2562,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmt.setInt(1, idFicha);
 //
 //				query = "SELECT T.FECHA_ACTIVACION, T.FECHA_ENTREGA "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
 //
@@ -2570,7 +2570,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtT2.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) CALIFICADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL_NOTA N, CV_TRABAJO_INDIVIDUAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL_NOTA N, CV_TRABAJO_INDIVIDUAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=N.IDTRABAJO AND N.NOTA IS NOT NULL "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2579,7 +2579,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtT3.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(DISTINCT I.IDMATRICULA) ENTREGADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL_INTER I, CV_TRABAJO_INDIVIDUAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL_INTER I, CV_TRABAJO_INDIVIDUAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=I.IDTRABAJO AND I.IDMATRICULA=I.IDMATRICULA_ENVIO AND I.ARCHIVO_NOMBRE IS NOT NULL "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2588,7 +2588,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtT4.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) EXPIRADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL_INTER I, CV_TRABAJO_INDIVIDUAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL_INTER I, CV_TRABAJO_INDIVIDUAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=I.IDTRABAJO AND T.FECHA_ENTREGA - I.FECHA_CREACION <0 "
 //						+ "AND I.INTERACCION=(SELECT MIN(INTERACCION) FROM CV_TRABAJO_INDIVIDUAL_INTER "
@@ -2600,7 +2600,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// LABORATORIO ******
 //				query = "SELECT COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO_NOTA N, CV_LABORATORIO T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO_NOTA N, CV_LABORATORIO T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=N.IDTRABAJO "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2609,7 +2609,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtL1.setInt(1, idFicha);
 //
 //				query = "SELECT T.FECHA_ACTIVACION, T.FECHA_ENTREGA "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
 //
@@ -2617,7 +2617,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtL2.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) CALIFICADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO_NOTA N, CV_LABORATORIO T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO_NOTA N, CV_LABORATORIO T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=N.IDTRABAJO AND N.NOTA IS NOT NULL "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2626,7 +2626,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtL3.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(DISTINCT I.IDMATRICULA) ENTREGADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO_INTER I, CV_LABORATORIO T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO_INTER I, CV_LABORATORIO T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=I.IDTRABAJO AND I.IDMATRICULA=I.IDMATRICULA_ENVIO AND I.ARCHIVO_NOMBRE IS NOT NULL "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2635,7 +2635,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtL4.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) EXPIRADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO_INTER I, CV_LABORATORIO T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO_INTER I, CV_LABORATORIO T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=I.IDTRABAJO AND T.FECHA_ENTREGA - I.FECHA_CREACION <0 "
 //						+ "AND I.INTERACCION=(SELECT MIN(INTERACCION) FROM CV_LABORATORIO_INTER "
@@ -2647,7 +2647,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// GRUPAL ******
 //				query = "SELECT COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.ESTADO='1' "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2656,7 +2656,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG1.setInt(1, idFicha);
 //
 //				query = "SELECT T.FECHA_ACTIVACION, T.FECHA_ENTREGA "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
 //
@@ -2664,7 +2664,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG2.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(N.NOTA_PROMEDIO) CALIFICADOS, COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MATRICULA N "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MATRICULA N "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=N.IDTRABAJO AND G.IDGRUPO=N.IDGRUPO AND G.ESTADO='1' "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2673,7 +2673,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG3.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(DISTINCT M.IDGRUPO) ENTREGADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MSG M "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MSG M "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=M.IDTRABAJO AND G.IDGRUPO=M.IDGRUPO AND G.ESTADO='1' AND M.ARCHIVO_NOMBRE IS NOT NULL "
 //						+ "AND IDMATRICULA_EMISOR IN (SELECT IDMATRICULA FROM CV_GRUPO_TRABAJO_MATRICULA WHERE IDTRABAJO=G.IDTRABAJO AND IDGRUPO=G.IDGRUPO) "
@@ -2683,7 +2683,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG4.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) EXPIRADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MSG M "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MSG M "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=M.IDTRABAJO AND G.IDGRUPO=M.IDGRUPO AND G.ESTADO='1' AND T.FECHA_ENTREGA - M.FECHA_CREACION <0 "
 //						+ "AND M.IDMENSAJE = (SELECT MIN(IDMENSAJE) FROM CV_GRUPO_TRABAJO_MSG WHERE IDTRABAJO=G.IDTRABAJO AND IDGRUPO=G.IDGRUPO "
@@ -2694,7 +2694,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG5.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) ASIGNADOS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
+//						+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1' "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.ESTADO='1' AND G.ARCHIVO_NOMBRE IS NOT NULL "
 //						+ "AND T.IDFICHA=? AND T.IDUNIDAD=?";
@@ -2703,7 +2703,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG6.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) DEBATE_TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DEBATE D, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_debate D, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1'  "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=D.IDTRABAJO AND G.IDGRUPO=D.IDGRUPO AND D.ESTADO='1' AND G.ESTADO='1' "
 //						+ "AND R.IDFICHA=? AND R.IDUNIDAD=?";
@@ -2712,7 +2712,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtG7.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) DEBATE_HECHAS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DEBATE D, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_debate D, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G "
 //						+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND R.ESTADO='1' AND R.CALIFICA='1'  "
 //						+ "AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=D.IDTRABAJO AND G.IDGRUPO=D.IDGRUPO AND D.ESTADO='1' AND G.ESTADO='1' "
 //						+ "AND R.IDFICHA=? AND IDMATRICULA=? AND R.IDUNIDAD=?";
@@ -2723,7 +2723,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// DIALOGO ******
 //				query = "SELECT COUNT(*) TOTAL "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO  "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND D.ESTADO='1' AND R.IDFICHA=? AND R.IDUNIDAD=?";
 //
@@ -2731,7 +2731,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				stmtD1.setInt(1, idFicha);
 //
 //				query = "SELECT COUNT(*) HECHAS "
-//						+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//						+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //						+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO  "
 //						+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND D.ESTADO='1' AND R.IDFICHA=? AND D.IDMATRICULA=? AND R.IDUNIDAD=?";
 //
@@ -2935,17 +2935,17 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //				// Avisos y Lecturas
 //
-//				query = "SELECT (SELECT COUNT(*) FROM CV_MATRICULA M, CV_PUBLICACION_FICHA P "
+//				query = "SELECT (SELECT COUNT(*) FROM cv_matricula M, CV_PUBLICACION_FICHA P "
 //						+ "WHERE TRIM(M.USUARIO)=P.USUARIO AND M.IDFICHA=P.IDFICHA AND P.IDHERRAMIENTA=1 AND M.ELIMINADO=0 AND P.ESTADO=0 "
 //						+ "AND P.IDFICHA=? AND IDMATRICULA=?) AVISOS, "
-//						+ "(SELECT COUNT(*) FROM CV_MATRICULA M, CV_PUBLICACION_FICHA P "
+//						+ "(SELECT COUNT(*) FROM cv_matricula M, CV_PUBLICACION_FICHA P "
 //						+ "WHERE TRIM(M.USUARIO)=P.USUARIO AND M.IDFICHA=P.IDFICHA AND P.IDHERRAMIENTA=1 AND M.ELIMINADO=0 AND P.ESTADO=0 "
 //						+ "AND P.IDFICHA=?) AVISOSTOTAL,"
-//						+ "(SELECT COUNT(*) FROM CV_MATRICULA M, CV_PUBLICACION_FICHA P "
+//						+ "(SELECT COUNT(*) FROM cv_matricula M, CV_PUBLICACION_FICHA P "
 //						+ "WHERE TRIM(M.USUARIO)=P.USUARIO AND M.IDFICHA=P.IDFICHA AND P.IDHERRAMIENTA=2 AND M.ELIMINADO=0 AND P.ESTADO=0 "
 //						+ "AND P.IDFICHA=? AND IDMATRICULA=?) LECTURAS,"
 //						+ "(SELECT COUNT(*) "
-//						+ "FROM CV_MATRICULA M, CV_PUBLICACION_FICHA P "
+//						+ "FROM cv_matricula M, CV_PUBLICACION_FICHA P "
 //						+ "WHERE TRIM(M.USUARIO)=P.USUARIO AND M.IDFICHA=P.IDFICHA AND P.IDHERRAMIENTA=2 AND M.ELIMINADO=0 AND P.ESTADO=0 "
 //						+ "AND P.IDFICHA=?) LECTURASTOTAL FROM DUAL";
 //				stmt =  cons.prepareStatement(query);
@@ -3020,7 +3020,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			String query = "SELECT CVMA.IDMATRICULA,GEPE.APEPATERNO,GEPE.APEMATERNO,GEPE.NOMUNO,GEPE.NOMDOS,"
 //					+ "PKG_CV_UTIL.FX_CV_STRING_NUMBER(CVMA.SECCION) SECCION,pkg_cv_com_producto."
 //					+ "fx_cv_com_producto_nombre_id(CVMA.CODIGO_FORMACION) ESPECIALIDAD "
-//					+ "FROM CV_MATRICULA CVMA,SEGURIDAD.SEG_USUARIO SEUS,GENERAL.GEN_PERSONA GEPE "
+//					+ "FROM cv_matricula CVMA,SEGURIDAD.SEG_USUARIO SEUS,GENERAL.GEN_PERSONA GEPE "
 //					+ "WHERE SEUS.USUARIO=CVMA.USUARIO AND SEUS.CODSUJETO=GEPE.CODPERSONA "
 //					+ "AND CVMA.IDFICHA=? AND CVMA.IDROL=? AND CVMA.ELIMINADO='0' "
 //					+ "ORDER BY APEPATERNO,APEMATERNO,NOMUNO,NOMDOS,SECCION";
@@ -3031,7 +3031,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				query = "SELECT CVMA.IDMATRICULA,GEPE.APEPATERNO,GEPE.APEMATERNO,GEPE.NOMUNO,GEPE.NOMDOS,"
 //						+ "PKG_CV_UTIL.FX_CV_STRING_NUMBER(CVMA.SECCION) SECCION,"
 //						+ "pkg_cv_com_producto.fx_cv_com_producto_nombre_id(CVMA.CODIGO_FORMACION) ESPECIALIDAD "
-//						+ "FROM CV_MATRICULA CVMA,SEGURIDAD.SEG_USUARIO SEUS,GENERAL.GEN_PERSONA GEPE "
+//						+ "FROM cv_matricula CVMA,SEGURIDAD.SEG_USUARIO SEUS,GENERAL.GEN_PERSONA GEPE "
 //						+ "WHERE SEUS.USUARIO=CVMA.USUARIO AND SEUS.CODSUJETO=GEPE.CODPERSONA "
 //						+ "AND IDFICHA=? AND TRIM(CVMA.USUARIO)=TRIM(?) AND CVMA.ELIMINADO='0' "
 //						+ "ORDER BY APEPATERNO,APEMATERNO,NOMUNO,NOMDOS,SECCION";
@@ -3086,7 +3086,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //			// LABORATORIO ******
 //			query = "SELECT ROUND(SUM(NVL(N.NOTA,0)*R.PESO)/(SUM(R.PESO)),2) PROMEDIO,COUNT(NOTA) HECHAS,COUNT(*) TOTAL "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_LABORATORIO T, CV_LABORATORIO_NOTA N "
+//					+ "FROM cv_ficha_unidad_RECURSO R, CV_LABORATORIO T, CV_LABORATORIO_NOTA N "
 //					+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND T.IDTRABAJO=N.IDTRABAJO "
 //					+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? "
 //					+ "GROUP BY N.IDMATRICULA HAVING N.IDMATRICULA=?";
@@ -3095,7 +3095,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //			// DIALOGO ******
 //			query = "SELECT COUNT(*) HECHAS "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//					+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //					+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO "
 //					+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? "
 //					+ "GROUP BY D.IDMATRICULA HAVING D.IDMATRICULA=?";
@@ -3104,7 +3104,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //			// INDIVIDUAL ******
 //			query = "SELECT ROUND(SUM(NVL(N.NOTA,0)*R.PESO)/(SUM(R.PESO)),2) PROMEDIO,COUNT(NOTA) HECHAS,COUNT(*) TOTAL "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_INDIVIDUAL T, CV_TRABAJO_INDIVIDUAL_NOTA N "
+//					+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_INDIVIDUAL T, CV_TRABAJO_INDIVIDUAL_NOTA N "
 //					+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND T.IDTRABAJO=N.IDTRABAJO "
 //					+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? "
 //					+ "GROUP BY N.IDMATRICULA HAVING N.IDMATRICULA=?";
@@ -3113,7 +3113,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //
 //			// GRUPAL ******
 //			query = "SELECT ROUND(SUM(NVL(N.NOTA_PROMEDIO,0)*R.PESO)/(SUM(R.PESO)),2) PROMEDIO,COUNT(NOTA_PROMEDIO) HECHAS,COUNT(*) TOTAL "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MATRICULA N "
+//					+ "FROM cv_ficha_unidad_RECURSO R, CV_TRABAJO_GRUPAL T, CV_GRUPO_TRABAJO G, CV_GRUPO_TRABAJO_MATRICULA N "
 //					+ "WHERE R.IDFICHA=T.IDFICHA AND R.IDUNIDAD=T.IDUNIDAD AND R.IDRECURSO=T.IDRECURSO AND T.IDTRABAJO=G.IDTRABAJO AND G.IDTRABAJO=N.IDTRABAJO AND G.IDGRUPO=N.IDGRUPO "
 //					+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND G.ESTADO='1' AND R.IDFICHA=? "
 //					+ "GROUP BY N.IDMATRICULA HAVING N.IDMATRICULA=?";
@@ -3126,7 +3126,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //					"FROM CV_NOTA_TEST D  " +
 //					"WHERE D.IDFICHA=R.IDFICHA AND D.IDRECURSO=R.IDRECURSO AND D.ESTADO='1' AND D.IDMATRICULA=? " +
 //					"GROUP BY D.IDUNIDAD HAVING D.IDUNIDAD=R.IDUNIDAD),0) NOTA " +
-//					"FROM CV_FICHA_UNIDAD_RECURSO R , CV_FICHA_UNIDAD FU " +
+//					"FROM cv_ficha_unidad_RECURSO R , cv_ficha_unidad FU " +
 //					"WHERE R.IDFICHA=FU.IDFICHA AND R.IDUNIDAD=FU.IDUNIDAD AND FU.ESTADO=1 AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=? AND R.IDRECURSO=7)";
 //			stmt4 =  cons.prepareStatement(query);
 //			stmt4.setInt(2, idFicha);
@@ -3134,7 +3134,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			// TOTAL DIALOGO ******
 //			int totalDialogo = 0, totalTest = 0;
 //			query = "SELECT COUNT(*) TOTAL "
-//					+ "FROM CV_FICHA_UNIDAD_RECURSO R, CV_DIALOGO D "
+//					+ "FROM cv_ficha_unidad_RECURSO R, cv_dialogo D "
 //					+ "WHERE R.IDFICHA=D.IDFICHA AND R.IDUNIDAD=D.IDUNIDAD AND R.IDRECURSO=D.IDRECURSO "
 //					+ "AND R.ESTADO='1' AND R.CALIFICA='1' AND R.IDFICHA=?";
 //
@@ -3146,7 +3146,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //				totalDialogo = subResult.getInt("TOTAL");
 //			}
 //			// ********
-//			query = "SELECT COUNT(*) TOTAL FROM CV_FICHA_UNIDAD_RECURSO "
+//			query = "SELECT COUNT(*) TOTAL FROM cv_ficha_unidad_RECURSO "
 //					+ "WHERE ESTADO='1' AND CALIFICA='1' AND IDFICHA=? AND IDRECURSO='7'";
 //
 //			stmt5 =  cons.prepareStatement(query);
@@ -3158,7 +3158,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //			}
 //
 //			// PESOS
-//			query = "SELECT PESO FROM CV_FICHA_RECURSO WHERE IDFICHA=? AND IDRECURSO=?";
+//			query = "SELECT PESO FROM cv_ficha_recurso WHERE IDFICHA=? AND IDRECURSO=?";
 //
 //			stmt6 =  cons.prepareStatement(query);
 //			stmt6.setInt(1, idFicha);
@@ -3315,7 +3315,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		ResultSet result = null;
 //		Connection cons = null;
 //		try {
-//			String query = "UPDATE CV_FICHA SET ESTADO_FECHA='0',CODIGO_PERIODO=?,"
+//			String query = "UPDATE cv_ficha SET ESTADO_FECHA='0',CODIGO_PERIODO=?,"
 //					+ "FECHA_MOD=SYSDATE,USUARIO_MOD=? WHERE IDFICHA=? ";
 //			cons =  dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);
@@ -3351,7 +3351,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		ResultSet result = null;
 //		Connection cons = null;
 //		try {
-//			String query = "UPDATE CV_FICHA SET ESTADO_FECHA='1',CODIGO_PERIODO='',"
+//			String query = "UPDATE cv_ficha SET ESTADO_FECHA='1',CODIGO_PERIODO='',"
 //					+ "FECHA_MOD=SYSDATE,USUARIO_MOD=?,FECHA_INICIO=?,"
 //					+ "FECHA_FIN=?,DIAS_EDICION=?,DIAS_REVISION=?,SEDE=?"
 //					+ "  WHERE IDFICHA=? ";
@@ -3391,7 +3391,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		PreparedStatement stmt = null;
 //		Connection cons = null;
 //		try {
-//			String query = "UPDATE CV_FICHA SET NOAUDITABLE=? WHERE IDFICHA=?";
+//			String query = "UPDATE cv_ficha SET NOAUDITABLE=? WHERE IDFICHA=?";
 //			cons =  dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, noauditable);

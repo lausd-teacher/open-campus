@@ -36,7 +36,7 @@ public class FichaRecursoDAO extends BaseDAO {
 		
 		log.info("modificar(FichaRecurso fr)");
 		try {
-			String query = "UPDATE CV_FICHA_RECURSO SET PESO=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
+			String query = "UPDATE cv_ficha_recurso SET PESO=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
 					+ " WHERE IDFICHA=? AND IDRECURSO=?";		
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -74,7 +74,7 @@ public class FichaRecursoDAO extends BaseDAO {
 		FichaRecurso fr = new FichaRecurso();
 		try {
 			String query = "SELECT IDFICHA, IDRECURSO, PESO, USUARIO_MOD, FECHA_MOD "
-					+ "FROM CV_FICHA_RECURSO WHERE IDFICHA=?";
+					+ "FROM cv_ficha_recurso WHERE IDFICHA=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idFicha);

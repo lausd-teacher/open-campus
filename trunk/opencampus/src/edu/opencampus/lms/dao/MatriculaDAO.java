@@ -300,7 +300,7 @@ public class MatriculaDAO extends BaseDAO {
 		try {
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "SELECT COUNT(*)  FROM CV_MATRICULA WHERE TRIM(USUARIO)=? "
+			String query = "SELECT COUNT(*)  FROM cv_matricula WHERE TRIM(USUARIO)=? "
 					+ "AND IDFICHA=? AND ELIMINADO='0'";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idUsuario.trim());
@@ -308,11 +308,11 @@ public class MatriculaDAO extends BaseDAO {
 			result = (ResultSet) stmt.executeQuery();
 			if (result.next()) {
 				if (0 == result.getInt(1)) {
-					query = "INSERT INTO CV_MATRICULA (IDMATRICULA,USUARIO_CREACION,"
+					query = "INSERT INTO cv_matricula (IDMATRICULA,USUARIO_CREACION,"
 							+ "FECHA_MOD,USUARIO_MOD,FECHA_CREACION,IDFICHA,IDROL,SECCION,"
 							+ "USUARIO,ESTADO,ELIMINADO,codigo_formacion,codigo_curricula,PRINCIPAL)"
 							+ " VALUES (seqcvmatricula.nextval,?,sysdate,?,sysdate,?,?,?,?"
-							+ ",'1','0',?,nvl(PKG_CV_FICHA.fx_cv_curricula(?,?),0),0)";
+							+ ",'1','0',?,nvl(PKG_cv_ficha.fx_cv_curricula(?,?),0),0)";
 					stmt = (PreparedStatement) cons
 							.prepareStatement(query);
 					stmt.setString(1, usuario.getIdUsuario());
@@ -329,8 +329,8 @@ public class MatriculaDAO extends BaseDAO {
 						cons.rollback();
 						throw new DAOException("No se logro insertar");
 					}
-					query = "INSERT INTO CV_DIALOGO_MATRICULA (IDDIALOGO,IDMATRICULA,LEIDO)"
-							+ " SELECT IDDIALOGO,seqcvmatricula.CURRVAL,'0' FROM CV_DIALOGO"
+					query = "INSERT INTO cv_dialogo_matricula (IDDIALOGO,IDMATRICULA,LEIDO)"
+							+ " SELECT IDDIALOGO,seqcvmatricula.CURRVAL,'0' FROM cv_dialogo"
 							+ " WHERE IDFICHA=?";
 					stmt = (PreparedStatement) cons
 							.prepareStatement(query);
@@ -347,9 +347,9 @@ public class MatriculaDAO extends BaseDAO {
 					if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == int_rol
 							|| Constante.ROL_CAMPUS_AULAVIRTUAL_MONITOR_DOCENTE == int_rol
 							|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == int_rol) {
-						query = "INSERT INTO CV_DEBATE_MATRICULA (IDDEBATE,"
+						query = "INSERT INTO cv_debate_matricula (IDDEBATE,"
 								+ "IDMATRICULA,LEIDO) SELECT cvdegr.IDDEBATE,seqcvmatricula."
-								+ "CURRVAL,'0' FROM CV_DEBATE cvdegr,CV_GRUPO_TRABAJO "
+								+ "CURRVAL,'0' FROM cv_debate cvdegr,CV_GRUPO_TRABAJO "
 								+ "cvgrtr,cv_trabajo_grupal cvtrgr WHERE cvdegr.idtrabajo="
 								+ "cvgrtr.idtrabajo and cvdegr.idgrupo=cvgrtr.idgrupo and "
 								+ "cvgrtr.estado='1' and cvtrgr.idtrabajo=cvgrtr.idtrabajo "
@@ -361,7 +361,7 @@ public class MatriculaDAO extends BaseDAO {
 					}
 					if (Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == int_rol
 							|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE_MONITOR == int_rol) {
-						query = "SELECT U.IDUNIDAD FROM CV_FICHA F, CV_FICHA_UNIDAD U "
+						query = "SELECT U.IDUNIDAD FROM cv_ficha F, cv_ficha_unidad U "
 								+ "WHERE F.IDFICHA=U.IDFICHA AND F.IDSILABO=U.IDSILABO"
 								+ " AND F.IDFICHA=?";
 						stmt = (PreparedStatement) cons
@@ -485,7 +485,7 @@ public class MatriculaDAO extends BaseDAO {
 		try {
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "SELECT COUNT(*)  FROM CV_MATRICULA WHERE "
+			String query = "SELECT COUNT(*)  FROM cv_matricula WHERE "
 					+ "idmatricula=? AND IDFICHA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idMatricula);
@@ -536,7 +536,7 @@ public class MatriculaDAO extends BaseDAO {
 		try {
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "SELECT COUNT(*)  FROM CV_MATRICULA WHERE idmatricula=? AND IDFICHA=?";
+			String query = "SELECT COUNT(*)  FROM cv_matricula WHERE idmatricula=? AND IDFICHA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idMatricula);
 			stmt.setInt(2, idFicha);
@@ -634,14 +634,14 @@ public class MatriculaDAO extends BaseDAO {
 		try {
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "UPDATE CV_MATRICULA SET PRINCIPAL=0 WHERE IDROL=? AND " +
+			String query = "UPDATE cv_matricula SET PRINCIPAL=0 WHERE IDROL=? AND " +
 					"IDFICHA=(select idficha from cv_matricula where idmatricula=?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE);
 			stmt.setString(2, idMatricula);
 			stmt.executeUpdate();
 			if ("1".equals(estado)) {
-				query = "UPDATE CV_MATRICULA SET PRINCIPAL=1,usuario_mod=?,fecha_mod="
+				query = "UPDATE cv_matricula SET PRINCIPAL=1,usuario_mod=?,fecha_mod="
 						+ "sysdate WHERE IDMATRICULA=? and IDROL=2";
 				stmt = (PreparedStatement) cons.prepareStatement(query);
 				stmt.setString(1, usuario.getIdUsuario());
@@ -718,7 +718,7 @@ public class MatriculaDAO extends BaseDAO {
 		boolean tipo = false;
 		try {
 			cons = (Connection) dataSource.getConnection();
-			String query = "SELECT IDMATRICULA FROM CV_MATRICULA " +
+			String query = "SELECT IDMATRICULA FROM cv_matricula " +
 					"WHERE ELIMINADO=0 AND ESTADO=1 AND IDMATRICULA=? AND TRIM(USUARIO)=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idMatricula);
@@ -747,7 +747,7 @@ public class MatriculaDAO extends BaseDAO {
 		ResultSet result = null;
 		Connection cons = null;
 		try {
-			String query = "SELECT COUNT(*) EXISTE FROM CV_MATRICULA " +
+			String query = "SELECT COUNT(*) EXISTE FROM cv_matricula " +
 					"WHERE CODIGO_EMPRESA=(SELECT CODINSTITUCION " +
 					"FROM GENERAL.GEN_INSTITUCION " +
 					"WHERE RUC=? AND ESTADO='A') AND IDMATRICULA=?";
@@ -781,9 +781,9 @@ public class MatriculaDAO extends BaseDAO {
 		Connection cons = null;
 		try {
 			cons = (Connection) dataSource.getConnection();
-			String query = "SELECT IDROL FROM CV_MATRICULA " +
+			String query = "SELECT IDROL FROM cv_matricula " +
 					"WHERE ELIMINADO=0 AND ESTADO=1 AND TRIM(USUARIO)=? " +
-					"AND IDFICHA=(SELECT IDFICHA FROM CV_MATRICULA " +
+					"AND IDFICHA=(SELECT IDFICHA FROM cv_matricula " +
 					"WHERE ELIMINADO=0 AND ESTADO=1 AND IDMATRICULA=?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idUsuario);

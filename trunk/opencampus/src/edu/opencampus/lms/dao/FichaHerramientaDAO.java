@@ -39,7 +39,7 @@ public class FichaHerramientaDAO extends BaseDAO {
 		FichaHerramienta fh = new FichaHerramienta();
 		try {
 			String query = "SELECT IDHERRAMIENTA, IDFICHA, ESTADO, DESHABILITADO_DOC, DESHABILITADO_ESTU, USUARIO_MOD, FECHA_MOD "
-					+ "FROM CV_FICHA_HERRAMIENTA WHERE IDFICHA=?";
+					+ "FROM cv_ficha_HERRAMIENTA WHERE IDFICHA=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idFicha);
@@ -77,7 +77,7 @@ public class FichaHerramientaDAO extends BaseDAO {
 		
 		log.info("modificar(FichaHerramienta fr)");
 		try {
-			String query = "UPDATE CV_FICHA_HERRAMIENTA SET ESTADO=?, DESHABILITADO_DOC=?, DESHABILITADO_ESTU=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
+			String query = "UPDATE cv_ficha_HERRAMIENTA SET ESTADO=?, DESHABILITADO_DOC=?, DESHABILITADO_ESTU=?, USUARIO_MOD=?, FECHA_MOD=sysdate "
 					+ " WHERE IDFICHA=? AND IDHERRAMIENTA=?";		
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);

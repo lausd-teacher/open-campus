@@ -28,7 +28,7 @@ public class EncuestaDAO extends BaseDAO{
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "SELECT COUNT(IDMATRICULA) CANTIDAD FROM CV_MATRICULA M, CV_FICHA F " +
+			String query = "SELECT COUNT(IDMATRICULA) CANTIDAD FROM cv_matricula M, cv_ficha F " +
 					"WHERE F.IDFICHA=M.IDFICHA AND M.IDROL=4 AND M.ESTADO=1 AND M.ELIMINADO=0 AND F.CODIGO_FAMILIA='3002'" +
 					"AND M.IDMATRICULA=?";
 			cons = (Connection)dataSource.getConnection();

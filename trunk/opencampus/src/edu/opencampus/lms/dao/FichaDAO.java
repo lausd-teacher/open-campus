@@ -966,7 +966,7 @@ public class FichaDAO extends BaseDAO {
 //
 //		Collection<String> secciones = new ArrayList<String>();
 //		try {
-//			String query = "SELECT CODSECCION FROM CV_FICHA_SEVA WHERE  idficha=?";
+//			String query = "SELECT CODSECCION FROM cv_ficha_SEVA WHERE  idficha=?";
 //			cons = dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);
 //			stmt.setInt(1, idFicha);
@@ -1032,7 +1032,7 @@ public class FichaDAO extends BaseDAO {
 //
 //		log.info("setImportanteFicha(int idFicha, int importante)");
 //		try {
-//			String query = "UPDATE CV_FICHA SET USUARIO_MOD=?, FECHA_MOD"
+//			String query = "UPDATE cv_ficha SET USUARIO_MOD=?, FECHA_MOD"
 //					+ "=sysdate,IMPORTANTE=? WHERE IDFICHA=?";
 //			cons = dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);
@@ -1065,7 +1065,7 @@ public class FichaDAO extends BaseDAO {
 //		Connection cons = null;
 //		log.info("setEstadoFicha(int idFicha, int estado)");
 //		try {
-//			String query = "UPDATE CV_FICHA SET USUARIO_MOD=?, "
+//			String query = "UPDATE cv_ficha SET USUARIO_MOD=?, "
 //					+ "FECHA_MOD=sysdate, ESTADO=? WHERE IDFICHA=?";
 //			cons = dataSource.getConnection();
 //			stmt =  cons.prepareStatement(query);
@@ -1099,7 +1099,7 @@ public class FichaDAO extends BaseDAO {
 //		Connection cons = null;
 //		log.info("setPapelera(Usuario usuario, String[] valores)");
 //		try {
-//			String query = "UPDATE CV_FICHA SET USUARIO_MOD=?, FECHA_MOD=sysdate"
+//			String query = "UPDATE cv_ficha SET USUARIO_MOD=?, FECHA_MOD=sysdate"
 //					+ " ,IDETIQUETA=?,ESTADO=0,IMPORTANTE=0 WHERE IDFICHA=?";
 //			cons = dataSource.getConnection();
 //			cons.setAutoCommit(false);
@@ -1457,7 +1457,7 @@ public class FichaDAO extends BaseDAO {
 //		Connection cons = null;
 //		log.info("setRestaurar(Usuario usuario, String[] valores)");
 //		try {
-//			String query = "UPDATE CV_FICHA SET USUARIO_MOD=?, FECHA_MOD=sysdate"
+//			String query = "UPDATE cv_ficha SET USUARIO_MOD=?, FECHA_MOD=sysdate"
 //					+ " ,IDETIQUETA=1 WHERE IDFICHA=? AND 0=(select count(*) from"
 //					+ " cv_ficha_seva fise,cv_ficha fi  where fise.CODSECPROD in"
 //					+ " (SELECT CODSECPROD FROM cv_ficha_seva WHERE idficha = ?) "
