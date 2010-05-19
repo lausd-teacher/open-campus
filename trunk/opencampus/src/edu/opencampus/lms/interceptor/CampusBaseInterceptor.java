@@ -40,7 +40,7 @@ public abstract class CampusBaseInterceptor implements Interceptor {
 		} else {
 			//Logs de seguimiento minucioso a las peticiones del cliente
 //			if(!"CargarConectadosEnChat".equals(inv.getInvocationContext().getName())) //*Solo para los que enpiecen con Periodical 
-//				log.info("intercept(): " + getInvocationAction(inv) + " - user: "+user);
+				log.info("intercept(): " + getInvocationAction(inv) + " - user: "+user);
 			
 			//Si ocurrio un error en los interceptors anteriores reenviar a error_action.jsp
 			ValidationAware validation = (ValidationAware)inv.getAction();
