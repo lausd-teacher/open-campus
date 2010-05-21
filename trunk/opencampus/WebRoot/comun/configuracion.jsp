@@ -147,7 +147,7 @@
 														
 														<!-- Contenido -->
 														<div id="box_<c:out value='${servicio.id}' />" class="box" <c:if test='${servicio.visible == 0}'>style="display: none;"</c:if>>
-															<div class="demo"><fmt:message key="${servicio.nombre}"/><br/><img src="<c:out value='${contextPath}'/>/img/cargando.gif" /></div>
+															<div class="demo"><fmt:message key="${servicio.nombre}"/></div>
 														</div>
 														<!-- Fin Contenido -->
 														

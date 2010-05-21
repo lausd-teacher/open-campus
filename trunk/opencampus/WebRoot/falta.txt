@@ -45,6 +45,8 @@ border:none ;
 
 
 
+		***fusionar aula_virtual del admin con bienvenida_aula.jsp del admin y dejarlo como  las aulas de docente y estudiante. (luego eliminar bienvenida_aula.jsp)
+
 		portal_admin
 		monitorea
 		*fusionar aula_virtual del docente y estudiante
@@ -108,6 +110,10 @@ y cuando onmouseout que se active, ya que el evento drag esta sobreponiendo los 
 *** cuando con javascript contador un usuario pase los 45 minutos recien activar el onunload para con ajax 
 enviar una consulta y ver si hay session, si hay session pasa, sino muestra una ventana modal de login con ajax. 
 Despues de 45 minutos para evitar congestion por cada request.
+
+*** Para el Menu de las aulas (plan docente, reporte, etc) y Menu principal (misdatos, soporte, mi configuracion,etc) hacerlo con un api js de menu dhtml ponerlo en el include de bienvenida.jsp (  if(aula)menu_aula; else menu_principal;  ), 
+que se genere apartir de un Objeto menu que se guarde en session como un atributo del objeto usuario y 
+que sea cargado de la base de datos las opciones y links que estaran relacionadas a cada rol, (opciones aula asociadas a cv_matricula_rol y opciones principales asociadas a cv_rol).  
 
 *****definir estandares en mensjes de error de formulario, e informacion, podrias usar la logica que usa blueprint 
 (ver Mis Datos), el color del message que aparece cuando se crea un curso (seccion sílabo)(amarillo) esta bacan, usarlo para message de error_action.jsp 

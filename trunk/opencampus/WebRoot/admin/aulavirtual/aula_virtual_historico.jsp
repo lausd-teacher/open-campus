@@ -53,7 +53,7 @@ String n = (String) session.getAttribute("n");
 						<td width="10" class="menu_prin01" align="center">
 							|
 						</td>
-						<td width="100" align="center">
+						<td width="50" align="center">
 							<span class="menu"  onClick="javascript:abrirPlanDocente('<%=request.getContextPath()%>/aulavirtual/SilaboDeCurso.action','PlanDocente','530','350');">
 								Plan Docente </span>
 						</td>

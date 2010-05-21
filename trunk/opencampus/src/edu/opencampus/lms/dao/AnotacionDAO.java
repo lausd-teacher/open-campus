@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import edu.opencampus.lms.excepcion.DAOException;
@@ -94,11 +95,11 @@ public class AnotacionDAO extends HibernateDaoSupport {
 	@SuppressWarnings("unchecked")
 	public List<Anotacion> cargarPortada(int idUsuario) throws DAOException {
 		log.info("cargarPortada(int idUsuario)");
-		// Constante.PORTAL_SERVICIO_ANOTACIONES_CANTIDAD
 		List<Anotacion> anotaciones = new ArrayList<Anotacion>();
 		try {
-			anotaciones = getHibernateTemplate()
-					.find("from Anotacion a where a.usuario = ? order by a.id desc limit 0,"+Constante.PORTAL_CANTIDAD_ANOTACIONES,idUsuario);
+			HibernateTemplate hibernate = getHibernateTemplate();
+			hibernate.setMaxResults(Constante.PORTAL_CANTIDAD_ANOTACIONES);
+			anotaciones = hibernate.find("from Anotacion a where a.usuario = ? order by a.id desc",idUsuario);
 		} catch (DataAccessException e) {
 			log.error(e.toString());
 		}

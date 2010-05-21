@@ -1796,6 +1796,7 @@ public class AulaVirtualDAO extends BaseDAO {
 //		return plan;
 //	}
 //	
+//	http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=JDBCResultset
 //	public Collection<ReporteNotas> listarReporteDeNotas(int idFicha)throws DAOException {
 //		log.info("listarReporteDeNotas(int "+idFicha+")");
 //		PreparedStatement stmt = null;
@@ -1826,7 +1827,8 @@ public class AulaVirtualDAO extends BaseDAO {
 //			query = "SELECT US.IDUNIDAD FROM cv_ficha_unidad FU, CV_UNIDAD_SILABO US  "
 //				+ "WHERE US.IDSILABO=FU.IDSILABO AND US.IDUNIDAD=FU.IDUNIDAD "
 //				+ "AND FU.IDFICHA=? AND FU.ESTADO=1 ORDER BY US.INDICE";
-//
+	
+//			http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=JDBCResultset
 //			stmt =  cons.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 //			stmt.setInt(1, idFicha);
 //			result2 =  stmt.executeQuery();

@@ -36,7 +36,7 @@
 								<td width="10" class="menu_prin01" align="center">&nbsp;
 									
 								</td>
-								<td width="65" align="center">
+								<td width="50" align="center">
 									<span class="menu"
 										onClick="javascript:abrirPlanDocente('<%=request.getContextPath()%>/aulavirtual/SilaboDeCurso.action','PlanDocente','530','350');">
 										<s:text name="aula.alumno.menu.plan_docente"/> </span>
