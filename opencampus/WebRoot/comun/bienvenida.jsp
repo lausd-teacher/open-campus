@@ -14,7 +14,7 @@
 					alt="<s:text name="portal.menu.inicio"/>" border="0"/></a>
 			</td>
 			<td width="80">
-				<span id="top_campus" class="anatips" title="<s:text name="titulo.campus.virtual"/>"><s:text name="titulo.campus.virtual_corto"/></span>
+				<a href="<%=request.getContextPath()%>/Portal.action"><span id="top_campus" class="anatips" title="<s:text name="titulo.campus.virtual"/>"><s:text name="titulo.campus.virtual_corto"/></span></a>
 			</td>
 			<td width="5" align="center">|</td>
 			<td>

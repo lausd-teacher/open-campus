@@ -70,7 +70,6 @@ public class InicioAction extends BaseAction {
 
 	public String execute() throws Exception{
 		log.info("OpenCampus Start");
-		System.out.println(message);
 		noticias = noticiaService.listarNoticiasIntranet();
 		return SUCCESS;
 	}

@@ -360,14 +360,14 @@ tr.roweven {
 	padding: 4px 4px 0px 0px;
 }
 #columns .column .block .box {
-	
+	overflow-x: hidden;
 }
 #columns .column .block .box div.demo{
-	min-height: 60px;
+	min-height: 50px;
 	color: #aaaaaa;
 	text-align: center;
 	font-weight: bold;
-	padding-top: 20px;
+	padding-top: 30px;
 }
 #columns .column .block .foot{
 	background-color: #cccccc; 

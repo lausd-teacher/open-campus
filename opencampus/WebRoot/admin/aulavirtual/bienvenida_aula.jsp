@@ -10,24 +10,23 @@
 <div id="menu_principal_alumno" style="padding-left: 5px;">
 <table width="99%" border="0" cellpadding="0" cellspacing="0" class="tabla_sin_layout">
 					<tr   height="20" >
-					<td width="5px">
-							&nbsp;
-						</td>
-					
-						<td width="53%" height="20" >
-								<strong>
-									<a class="link_curso" href="<%=request.getContextPath()%>/Portal.action">
-										opencampus Virtu@l									</a>								</strong> 
-								<strong>
-&gt;								</strong>
-								<strong>
-									<a class="link_curso"  href="<%=request.getContextPath()%>/admin/ficha/Buscar.action" onclick="javascript:cerrarAulaVirtualVentanas();">
-										Todos los cursos									</a>
-								<strong>
-&gt;								</strong>
-								<strong>
-									<%=usuario.getAulaActual().getCurso().getNombre()%><%//=usuario.getAulaActual().getCurso().getJerarquia().getNombre() %></strong>
-					  </td>
+					<td width="20" align="center">
+						<a href="<%=request.getContextPath()%>/Portal.action"><img src="<%=request.getContextPath()%>/img/icon_config.gif" 
+							alt="<s:text name="portal.menu.inicio"/>" border="0"/></a>
+					</td>
+					<td width="80">
+						<a href="<%=request.getContextPath()%>/Portal.action"><span id="top_campus" class="anatips" title="<s:text name="titulo.campus.virtual"/>">EDUCA.EDU.PE</span></a>
+					</td>
+					<td width="5" align="center">|</td>
+					<td>
+					<a href="<%=request.getContextPath()%>/admin/ficha/Buscar.action" onclick="javascript:cerrarAulaVirtualVentanas();">
+							Cursos
+						</a>
+						&gt;							
+						<span id="top_usuario" style="color: #487FA0; font-weight: bold">
+							<%=usuario.getAulaActual().getCurso().getNombre()%>
+						</span>
+					</td>
 						<td width="27%" align="right">
 							<div id="reloj"></div>
 					  </td>
@@ -36,9 +35,10 @@
 						<td width="20" valign="middle">
 							<a href="<%=request.getContextPath() %>/Curso.action"><img
 									src="<%=request.getContextPath()%>/img/icon_libro_admin.gif"
-									alt="Cursos"  border="0" title="Cursos"  />							</a>						</td>
+									alt="Cursos"  border="0" title="Cursos"  />							</a>						
+						</td>
 						<td width="5" align="center">
-							|						</td>
+							|						
 						<td width="20" valign="middle">
 							<a href="javascript:void(0)" onClick="abrir_servicio_buzon();"><img
 									src="<%=request.getContextPath()%>/img/icon_mail.gif"
@@ -61,8 +61,7 @@
 													 alt="Chat" border="0"/>			
 													</a>	
 						</td>
-						<td>
-							<td width="5" height="10" align="center">
+						<td width="5" height="10" align="center">
 							|						</td>			
 											
 						 <td width="20" height="10"  valign="middle" align="center"><a href="javascript:void(0)" onclick="abrir_servicio_apuntes()">
@@ -106,10 +105,10 @@
 							<td width="10" class="menu_prin01" align="center">
 								|
 							</td>
-							<td width="80" align="center">
+							<td width="50" align="center">
 								<span class="menu"
 									onClick="javascript:abrirPlanDocente('<%=request.getContextPath()%>/aulavirtual/SilaboDeCurso.action','PlanDocente','530','350');">
-									Plan Docente </span>
+									S&iacute;labo </span>
 							</td>
 							<td width="10" class="menu_prin01" align="center">
 								|
