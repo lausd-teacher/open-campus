@@ -81,7 +81,7 @@ public class FichaInformeDAO extends HibernateDaoSupport {
 		Collection<Periodo> periodos = new ArrayList<Periodo>();
 		Periodo periodo = null;
 
-		String query = "SELECT I.CODPERIODO, P.NOMBRE, P.FECINICIO, P.FECFIN FROM CV_INFORME I,CV_PERIODO P " +
+		String query = "SELECT I.CODPERIODO, P.NOMBRE, P.FECINICIO, P.FECFIN FROM cv_informe I,cv_periodo P " +
 				"WHERE I.CODPERIODO=P.CODIGO AND I.CODCURSO=? ORDER BY P.FECINICIO DESC";
 		
 		try {

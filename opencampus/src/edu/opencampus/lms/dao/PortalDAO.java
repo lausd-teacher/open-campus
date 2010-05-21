@@ -29,7 +29,7 @@ public class PortalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_USUARIO SET IDIOMA=? WHERE IDUSUARIO=?";
+			String query = "UPDATE cv_usuario SET IDIOMA=? WHERE IDUSUARIO=?";
 			cons = dataSource.getConnection();
 			stmt = cons.prepareStatement(query);
 			stmt.setString(1, idioma);
@@ -304,7 +304,7 @@ public class PortalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "DELETE FROM CV_SERVICIO_USUARIO WHERE IDUSUARIO=?";
+			String query = "DELETE FROM cv_servicio_usuario WHERE IDUSUARIO=?";
 			cons = dataSource.getConnection();
 			stmt = cons.prepareStatement(query);
 			stmt.setInt(1, usuario);

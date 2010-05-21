@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import edu.opencampus.lms.modelo.BaseModelo;
 
 @Entity
-@Table(name="CV_FORO_MENSAJE")
+@Table(name="cv_foro_mensaje")
 @SequenceGenerator(name="SEQCVFOROMENSAJE",sequenceName="SEQCVFOROMENSAJE",allocationSize=1)
 public class Mensaje extends BaseModelo implements Serializable {
 

@@ -94,7 +94,7 @@ public class BuzonDAO extends BaseDAO {
 		try {
 			String query = "SELECT m.USUARIO_CREACION, m.IDMENSAJE, m.USUARIO_CREACION, m.TITULO, m.CONTENIDO, m.FECHA, m.ADJUNTO, "
 					+ "um.LEIDO, p.APEPATERNO, p.APEMATERNO, p.NOMUNO,p.NOMDOS, um.CARPETA, um.FAVORITO, um.FECHA_LEIDO "
-					+ "from CV_MENSAJE m, CV_USUARIO_MENSAJE um, SEGURIDAD.SEG_USUARIO u, GENERAL.GEN_PERSONA p "
+					+ "from cv_mensaje m, cv_usuario_MENSAJE um, SEGURIDAD.SEG_USUARIO u, GENERAL.GEN_PERSONA p "
 					+ "where trim(um.USUARIO_DESTINO) = ? AND um.ESTADO = ? AND um.IDMENSAJE = m.IDMENSAJE "
 					+ "AND um.USUARIO_DESTINO = u.USUARIO AND u.CODSUJETO = p.CODPERSONA "
 					+ "AND (UPPER(m.TITULO) LIKE UPPER(?) ) "
@@ -298,7 +298,7 @@ public class BuzonDAO extends BaseDAO {
 		Connection cons = null;
 		int x = 0;
 		try {
-			String query = "INSERT INTO CV_MENSAJE_USUARIO(IDMENSAJE,IDUSUARIO,TIPO,CARPETA,LEIDO,ESTADO,IDCARPETA,FAVORITO)"
+			String query = "INSERT INTO cv_mensaje_usuario(IDMENSAJE,IDUSUARIO,TIPO,CARPETA,LEIDO,ESTADO,IDCARPETA,FAVORITO)"
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
@@ -983,7 +983,7 @@ public class BuzonDAO extends BaseDAO {
 		boolean banderita = false;
 		try {
 			String query = "SELECT COUNT(*) "
-					+ "FROM CV_USUARIO_MENSAJE "
+					+ "FROM cv_usuario_MENSAJE "
 					+ "WHERE trim(USUARIO_DESTINO) = ? AND LEIDO = ? and ESTADO = ? and carpeta <> ? and carpeta <> ?";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);

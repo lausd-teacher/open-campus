@@ -477,7 +477,7 @@ public class NoticiaDAO extends BaseDAO {
 			}
 			
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_NOTICIA");
+				log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_noticia");
 				throw new DAOException("No culmino");
 			}
 			
@@ -493,7 +493,7 @@ public class NoticiaDAO extends BaseDAO {
 				stmt.setString(4, (rs.getIdRol() == null)?null:String.valueOf(rs.getIdRol()));
 				
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_REGLA_SERVICIO");
+					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_regla_servicio");
 					throw new DAOException("No culmino");
 				}
 			
@@ -554,7 +554,7 @@ public class NoticiaDAO extends BaseDAO {
 			}
 			
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en modificarNoticia(Noticia noticia) - UPDATE CV_NOTICIA");
+				log.error("Error en modificarNoticia(Noticia noticia) - UPDATE cv_noticia");
 				throw new DAOException("No culmino");
 			}
 			
@@ -577,7 +577,7 @@ public class NoticiaDAO extends BaseDAO {
 				stmt.setString(4, (rs.getIdRol() == null)?null:String.valueOf(rs.getIdRol()));
 				
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_REGLA_SERVICIO");
+					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_regla_servicio");
 					throw new DAOException("No culmino");
 				}
 			

@@ -40,7 +40,7 @@ public class MatriculaDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		Connection cons = null;
 		try {
-			String query = "SELECT idrol,nombre FROM CV_ROL order by idrol";
+			String query = "SELECT idrol,nombre FROM cv_rol order by idrol";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			result = (ResultSet) stmt.executeQuery();
@@ -112,7 +112,7 @@ public class MatriculaDAO extends BaseDAO {
 		PreparedStatement stmt1 = null;
 		ResultSet result1 = null;
 		try {
-			String query = "SELECT idrol,nombre FROM CV_ROL where idrol in ("
+			String query = "SELECT idrol,nombre FROM cv_rol where idrol in ("
 					+ Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE + ","
 					+ Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE
 					+ ") order by idrol ";
@@ -368,23 +368,23 @@ public class MatriculaDAO extends BaseDAO {
 								.prepareStatement(query);
 						stmt.setInt(1, idFicha);
 						result = (ResultSet) stmt.executeQuery();
-						query = "SELECT IDTRABAJO,FECHA_ACTIVACION FROM CV_TRABAJO_INDIVIDUAL "
+						query = "SELECT IDTRABAJO,FECHA_ACTIVACION FROM cv_trabajo_individual "
 								+ "WHERE IDFICHA=? AND IDUNIDAD=?";
 						stmt = (PreparedStatement) cons
 								.prepareStatement(query);
-						query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_NOTA (IDTRABAJO,"
+						query = "INSERT INTO cv_trabajo_individual_nota (IDTRABAJO,"
 								+ "IDMATRICULA,USUARIO_MOD,FECHA_MOD,ESTADO,EXPIRADO) "
 								+ "VALUES (?,seqcvmatricula.CURRVAL,?,SYSDATE,0,0)";
 						stmt1 = (PreparedStatement) cons
 								.prepareStatement(query);
-						query = "INSERT INTO CV_TRABAJO_INDIVIDUAL_INTER (IDTRABAJO,"
+						query = "INSERT INTO cv_trabajo_individual_inter (IDTRABAJO,"
 								+ "IDMATRICULA,INTERACCION,DESCRIPCION,IDMATRICULA_ENVIO,"
 								+ "USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD,"
 								+ "ARCHIVO_NOMBRE,ARCHIVO_TAMANO) "
 								+ "SELECT IDTRABAJO,seqcvmatricula.CURRVAL,1,"
 								+ "DESCRIPCION,IDMATRICULA_ENVIO,USUARIO_CREACION,"
 								+ "FECHA_CREACION,USUARIO_MOD,FECHA_MOD,ARCHIVO_NOMBRE,"
-								+ "ARCHIVO_TAMANO FROM CV_TRABAJO_INDIVIDUAL WHERE IDTRABAJO=?";
+								+ "ARCHIVO_TAMANO FROM cv_trabajo_individual WHERE IDTRABAJO=?";
 						stmt2 = (PreparedStatement) cons
 								.prepareStatement(query);
 						query = "SELECT IDTRABAJO,FECHA_ACTIVACION FROM CV_LABORATORIO "
@@ -415,13 +415,13 @@ public class MatriculaDAO extends BaseDAO {
 								stmt1.setString(2, usuario.getIdUsuario());
 								if (1 != stmt1.executeUpdate()) {
 									log.error("Error en matricularUsuario() "
-											+ "- CV_TRABAJO_INDIVIDUAL_NOTA");
+											+ "- cv_trabajo_individual_nota");
 									throw new DAOException("No culmino");
 								}
 								stmt2.setInt(1, subResult.getInt("IDTRABAJO"));
 								if (1 != stmt2.executeUpdate()) {
 									log.error("Error en matricularUsuario() "
-											+ "- CV_TRABAJO_INDIVIDUAL_INTER");
+											+ "- cv_trabajo_individual_inter");
 									throw new DAOException("No culmino");
 								}
 							}
