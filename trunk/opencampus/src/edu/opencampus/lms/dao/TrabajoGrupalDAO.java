@@ -37,7 +37,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		ResultSet result = null;
 		try {
 			String query = "SELECT T.IDTRABAJO,T.FECHA_ACTIVACION,T.FECHA_ENTREGA,T.DESCRIPCION,T.PUBLICADOR,D.NOMBRE_COMPLETO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS "
-					+ "FROM CV_TRABAJO_GRUPAL T, CV_UNIDAD D, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
+					+ "FROM cv_trabajo_grupal T, cv_unidad D, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
 					+ "WHERE T.PUBLICADOR=M.IDMATRICULA(+) AND M.USUARIO=U.USUARIO(+) AND U.CODSUJETO=P.CODPERSONA(+) AND T.IDUNIDAD=D.IDUNIDAD(+) AND T.IDFICHA=? AND T.IDUNIDAD=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -89,7 +89,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		try {
 
 			String query = "SELECT T.IDUNIDAD,T.IDFICHA,T.FECHA_ACTIVACION,T.FECHA_ENTREGA,T.DESCRIPCION,T.PUBLICADOR,D.NOMBRE_COMPLETO,P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS "
-					+ "FROM CV_TRABAJO_GRUPAL T, CV_UNIDAD D, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
+					+ "FROM cv_trabajo_grupal T, cv_unidad D, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
 					+ "WHERE T.PUBLICADOR=M.IDMATRICULA(+) AND M.USUARIO=U.USUARIO(+) AND U.CODSUJETO=P.CODPERSONA(+) AND T.IDUNIDAD=D.IDUNIDAD(+) AND T.IDTRABAJO=?";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -289,7 +289,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		try {
 			cons = (Connection)dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "UPDATE CV_TRABAJO_GRUPAL SET PUBLICADOR=?, FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
+			String query = "UPDATE cv_trabajo_grupal SET PUBLICADOR=?, FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
 					+ "WHERE IDTRABAJO=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, trabajo.getPublicador().getIdMatricula());
@@ -388,7 +388,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		try {
 			String query = "SELECT "
 					+ "(SELECT NVL(MAX(IDGRUPO),0)+1 FROM CV_GRUPO_TRABAJO WHERE IDTRABAJO=?) ID, "
-					+ "(SELECT FECHA_ACTIVACION FROM CV_TRABAJO_GRUPAL WHERE IDTRABAJO=?) FLAG "
+					+ "(SELECT FECHA_ACTIVACION FROM cv_trabajo_grupal WHERE IDTRABAJO=?) FLAG "
 					+ "FROM DUAL";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -718,7 +718,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		try {
 			String query = "SELECT G.IDGRUPO,G.NOMBRE,G.ARCHIVO_NOMBRE,G.ARCHIVO_TAMANO,G.BANDERA,"
 					+ "NVL((SELECT T.FECHA_ENTREGA - S.FECHA_CREACION "
-					+ "FROM CV_GRUPO_TRABAJO_MSG S, CV_TRABAJO_GRUPAL T "
+					+ "FROM CV_GRUPO_TRABAJO_MSG S, cv_trabajo_grupal T "
 					+ "WHERE S.IDTRABAJO=T.IDTRABAJO AND S.IDTRABAJO=G.IDTRABAJO AND S.IDGRUPO=G.IDGRUPO AND S.IDMENSAJE=(SELECT MIN(S.IDMENSAJE) "
 					+ "FROM CV_GRUPO_TRABAJO_MSG S, cv_matricula M "
 					+ "WHERE S.IDMATRICULA_EMISOR=M.IDMATRICULA AND S.IDTRABAJO=G.IDTRABAJO AND S.IDGRUPO=G.IDGRUPO  "

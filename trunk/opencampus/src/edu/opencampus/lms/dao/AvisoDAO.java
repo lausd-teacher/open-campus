@@ -32,7 +32,7 @@ public class AvisoDAO extends BaseDAO {
 		
 		try {
 			
-			String query = "SELECT TITULAR,TIPO FROM CV_AVISO " +
+			String query = "SELECT TITULAR,TIPO FROM cv_aviso " +
 					"WHERE ESTADO=1 AND ((FECHA IS NOT NULL AND FECHA > curdate()) OR FECHA IS NULL)";
 
 			cons = (Connection)dataSource.getConnection();
@@ -71,7 +71,7 @@ public class AvisoDAO extends BaseDAO {
 //		Seccion seccion= null;
 //		try {
 //			String query = "SELECT N.IDNOTICIA,N.TITULAR,N.FECHA_INICIO,N.ESTADO,S.NOMBRE " +
-//					"FROM CV_NOTICIA N, CV_NOTICIA_SECCION S WHERE N.IDSECCION=S.IDSECCION ORDER BY N.FECHA_INICIO DESC";
+//					"FROM cv_noticia N, cv_noticia_seccion S WHERE N.IDSECCION=S.IDSECCION ORDER BY N.FECHA_INICIO DESC";
 //
 //			cons = (Connection)dataSource.getConnection();
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -110,7 +110,7 @@ public class AvisoDAO extends BaseDAO {
 //		Connection cons = null;
 //		PreparedStatement stmt = null;
 //		try {
-//			String query = "UPDATE CV_NOTICIA SET ESTADO=? WHERE IDNOTICIA=?";
+//			String query = "UPDATE cv_noticia SET ESTADO=? WHERE IDNOTICIA=?";
 //
 //			cons = (Connection)dataSource.getConnection();
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -145,10 +145,10 @@ public class AvisoDAO extends BaseDAO {
 //			String query = null;
 //
 //			if(null != noticia.getImagen()){
-//				query = "INSERT INTO CV_NOTICIA (IDNOTICIA,TITULAR,SUMILLA,CUERPO,FECHA_INICIO,IDSECCION,FORMATO,ESTADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD,IMAGEN_NOMBRE) " +
+//				query = "INSERT INTO cv_noticia (IDNOTICIA,TITULAR,SUMILLA,CUERPO,FECHA_INICIO,IDSECCION,FORMATO,ESTADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD,IMAGEN_NOMBRE) " +
 //				"VALUES (SEQCVNOTICIA.NEXTVAL,?,?,?,?,?,?,?,?,sysdate,?,sysdate,? || LPAD(SEQCVNOTICIA.CURRVAL,10,0) || ?)";
 //			}else{
-//				query = "INSERT INTO CV_NOTICIA (IDNOTICIA,TITULAR,SUMILLA,CUERPO,FECHA_INICIO,IDSECCION,FORMATO,ESTADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD) " +
+//				query = "INSERT INTO cv_noticia (IDNOTICIA,TITULAR,SUMILLA,CUERPO,FECHA_INICIO,IDSECCION,FORMATO,ESTADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD) " +
 //				"VALUES (SEQCVNOTICIA.NEXTVAL,?,?,?,?,?,?,?,?,sysdate,?,sysdate)";
 //			}
 //				
@@ -171,17 +171,17 @@ public class AvisoDAO extends BaseDAO {
 //			}
 //			
 //			if (1 != stmt.executeUpdate()) {
-//				log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_NOTICIA");
+//				log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_noticia");
 //				throw new DAOException("No culmino");
 //			}
 //			
 //			// REGLA ************************************************
 //			
-//			query = "INSERT INTO CV_NOTICIA_REGLA (IDREGLA,IDNOTICIA) " +
+//			query = "INSERT INTO cv_noticia_REGLA (IDREGLA,IDNOTICIA) " +
 //					"VALUES(SEQCVREGLASERVICIO.CURRVAL,SEQCVNOTICIA.CURRVAL)";
 //			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 //			
-//			query = "INSERT INTO CV_REGLA_SERVICIO (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
+//			query = "INSERT INTO cv_regla_servicio (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
 //					"VALUES(SEQCVREGLASERVICIO.NEXTVAL,?,?,?,?,?)";
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			
@@ -193,12 +193,12 @@ public class AvisoDAO extends BaseDAO {
 //				stmt.setInt(5, rs.getSeccion());
 //				
 //				if (1 != stmt.executeUpdate()) {
-//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_REGLA_SERVICIO");
+//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_regla_servicio");
 //					throw new DAOException("No culmino");
 //				}
 //				
 //				if (1 != stmt2.executeUpdate()) {
-//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_NOTICIA_REGLA");
+//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_noticia_REGLA");
 //					throw new DAOException("No culmino");
 //				}
 //				
@@ -245,11 +245,11 @@ public class AvisoDAO extends BaseDAO {
 //			String query = null;
 //
 //			if(null != noticia.getImagen()){
-//				query = "UPDATE CV_NOTICIA SET TITULAR=?, SUMILLA=?, CUERPO=?, FECHA_INICIO=?, IDSECCION=?, FORMATO=?, " +
+//				query = "UPDATE cv_noticia SET TITULAR=?, SUMILLA=?, CUERPO=?, FECHA_INICIO=?, IDSECCION=?, FORMATO=?, " +
 //						"USUARIO_MOD=?, FECHA_MOD=SYSDATE, IMAGEN_NOMBRE=? " +
 //						"WHERE IDNOTICIA=?";
 //			}else{
-//				query = "UPDATE CV_NOTICIA SET TITULAR=?, SUMILLA=?, CUERPO=?, FECHA_INICIO=?, IDSECCION=?, FORMATO=?, " +
+//				query = "UPDATE cv_noticia SET TITULAR=?, SUMILLA=?, CUERPO=?, FECHA_INICIO=?, IDSECCION=?, FORMATO=?, " +
 //						"USUARIO_MOD=?, FECHA_MOD=SYSDATE " +
 //						"WHERE IDNOTICIA=?";
 //			}
@@ -273,13 +273,13 @@ public class AvisoDAO extends BaseDAO {
 //			}
 //			
 //			if (1 != stmt.executeUpdate()) {
-//				log.error("Error en crearNoticia(Noticia noticia) - UPDATE CV_NOTICIA");
+//				log.error("Error en crearNoticia(Noticia noticia) - UPDATE cv_noticia");
 //				throw new DAOException("No culmino");
 //			}
 //			
 //			// REGLA ************************************************
 //			
-//			query = "SELECT IDREGLA FROM CV_NOTICIA_REGLA WHERE IDNOTICIA=?";
+//			query = "SELECT IDREGLA FROM cv_noticia_REGLA WHERE IDNOTICIA=?";
 //			
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			stmt.setInt(1, noticia.getIdnoticia());
@@ -288,17 +288,17 @@ public class AvisoDAO extends BaseDAO {
 //			
 //			// ELIMINAR LA RELACION DE REGLA-NOTICIA *********
 //			
-//			query = "DELETE FROM CV_NOTICIA_REGLA WHERE IDNOTICIA=?";
+//			query = "DELETE FROM cv_noticia_REGLA WHERE IDNOTICIA=?";
 //
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			stmt.setInt(1, noticia.getIdnoticia());
 //			
 //			int row = stmt.executeUpdate();
-//			log.info("CV_NOTICIA_REGLA: Registros eliminados: "+row);
+//			log.info("cv_noticia_REGLA: Registros eliminados: "+row);
 //			
 //			// ELIMINAR LAS REGLAS DE LA NOTICIA ************
 //			
-//			query = "DELETE FROM CV_REGLA_SERVICIO WHERE IDREGLA=?";
+//			query = "DELETE FROM cv_regla_servicio WHERE IDREGLA=?";
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			
 //			while (result.next()) {
@@ -312,12 +312,12 @@ public class AvisoDAO extends BaseDAO {
 //			
 //			//INSERTAR LA NUEVA RELACION DE REGLA-NOTICIA *********
 //			
-//			query = "INSERT INTO CV_NOTICIA_REGLA (IDREGLA,IDNOTICIA) " +
+//			query = "INSERT INTO cv_noticia_REGLA (IDREGLA,IDNOTICIA) " +
 //					"VALUES(SEQCVREGLASERVICIO.CURRVAL,?)";
 //			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 //			stmt2.setInt(1, noticia.getIdnoticia());
 //			
-//			query = "INSERT INTO CV_REGLA_SERVICIO (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
+//			query = "INSERT INTO cv_regla_servicio (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
 //					"VALUES(SEQCVREGLASERVICIO.NEXTVAL,?,?,?,?,?)";
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			
@@ -329,12 +329,12 @@ public class AvisoDAO extends BaseDAO {
 //				stmt.setInt(5, rs.getSeccion());
 //				
 //				if (1 != stmt.executeUpdate()) {
-//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_REGLA_SERVICIO");
+//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_regla_servicio");
 //					throw new DAOException("No culmino");
 //				}
 //				
 //				if (1 != stmt2.executeUpdate()) {
-//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO CV_NOTICIA_REGLA");
+//					log.error("Error en crearNoticia(Noticia noticia) - INSERT INTO cv_noticia_REGLA");
 //					throw new DAOException("No culmino");
 //				}
 //				
@@ -372,7 +372,7 @@ public class AvisoDAO extends BaseDAO {
 //			
 //			// CONSULTA DE REGLAS PORA LA NOTICIA *************
 //			
-//			String query = "SELECT IDREGLA FROM CV_NOTICIA_REGLA WHERE IDNOTICIA=?";
+//			String query = "SELECT IDREGLA FROM cv_noticia_REGLA WHERE IDNOTICIA=?";
 //			cons = (Connection) dataSource.getConnection();
 //			cons.setAutoCommit(false);
 //
@@ -383,17 +383,17 @@ public class AvisoDAO extends BaseDAO {
 //			
 //			// ELIMINAR LA RELACION DE REGLA-NOTICIA *********
 //			
-//			query = "DELETE FROM CV_NOTICIA_REGLA WHERE IDNOTICIA=?";
+//			query = "DELETE FROM cv_noticia_REGLA WHERE IDNOTICIA=?";
 //
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			stmt.setInt(1, idNoticia);
 //			
 //			int row = stmt.executeUpdate();
-//			log.info("CV_NOTICIA_REGLA: Registros eliminados: "+row);
+//			log.info("cv_noticia_REGLA: Registros eliminados: "+row);
 //			
 //			// ELIMINAR LAS REGLAS DE LA NOTICIA ************
 //			
-//			query = "DELETE FROM CV_REGLA_SERVICIO WHERE IDREGLA=?";
+//			query = "DELETE FROM cv_regla_servicio WHERE IDREGLA=?";
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			
 //			while (result.next()) {
@@ -406,7 +406,7 @@ public class AvisoDAO extends BaseDAO {
 //			}
 //			// ELIMINAR LA NOTICIA ***************************
 //			
-//			query = "DELETE FROM CV_NOTICIA WHERE IDNOTICIA=?";
+//			query = "DELETE FROM cv_noticia WHERE IDNOTICIA=?";
 //
 //			stmt = (PreparedStatement) cons.prepareStatement(query);
 //			stmt.setInt(1, idNoticia);

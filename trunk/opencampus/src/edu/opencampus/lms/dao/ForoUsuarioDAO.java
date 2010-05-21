@@ -43,8 +43,8 @@ public class ForoUsuarioDAO extends BaseDAO {
 		ResultSet result = null;		
 		try { 
 			String query = "SELECT F.TITULO, F.IDFORO, F.CERRADO, " +
-					"(SELECT COUNT(*) FROM CV_FORO_MODERADOR WHERE IDFORO = F.IDFORO AND TRIM(USUARIO)=?) MODERADOR " +
-					"FROM CV_FORO F WHERE F.IDFORO = ? AND F.ESTADO = 1";
+					"(SELECT COUNT(*) FROM cv_foro_moderador WHERE IDFORO = F.IDFORO AND TRIM(USUARIO)=?) MODERADOR " +
+					"FROM cv_foro F WHERE F.IDFORO = ? AND F.ESTADO = 1";
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setString(1, idUsuario);
@@ -82,7 +82,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		ResultSet result = null;
 		ResultSet result2 = null;
 		
-		String query = "{CALL  PKG_CV_SERVICIO.SP_CV_SERVICIO_PRE(?)}";
+		String query = "{CALL  PKG_cv_servicio.SP_cv_servicio_PRE(?)}";
 		try {
 			cons = (Connection)dataSource.getConnection();
 			cons.setAutoCommit(false);
@@ -91,10 +91,10 @@ public class ForoUsuarioDAO extends BaseDAO {
 //			callstmt.execute();
 			
 			query = "SELECT DISTINCT F.IDFORO, F.TITULO, F.DESCRIPCION, F.ICONO, F.CERRADO, F.ESTADO, F.USUARIO_CREACION, F.FECHA_CREACION," +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS," +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1" +
-					" AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES," +
-					"(SELECT COUNT(*) FROM CV_FORO_MODERADOR WHERE IDFORO = F.IDFORO AND TRIM(USUARIO)=?) MODERADOR " +
+					"(SELECT COUNT(*) FROM cv_foro_tema WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS," +
+					"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1" +
+					" AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES," +
+					"(SELECT COUNT(*) FROM cv_foro_moderador WHERE IDFORO = F.IDFORO AND TRIM(USUARIO)=?) MODERADOR " +
 					"FROM  " +
 					"(SELECT DISTINCT SEDE,FAMILIA,FORMACION,CICLO,SECCION FROM CV_TEMP_NOTICIA  " +
 					"UNION  " +
@@ -109,7 +109,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 					"SELECT DISTINCT '0',0,0,0,0 FROM DUAL) R, " +
 					"(SELECT F.IDFORO, F.TITULO, F.USUARIO_CREACION, F.FECHA_CREACION, F.ESTADO, F.CERRADO, F.ICONO, F.DESCRIPCION,  " +
 					"S.SEDE, S.FAMILIA, S.FORMACION, S.CICLO, S.SECCION  " +
-					"FROM CV_FORO F, CV_REGLA_SERVICIO S, CV_FORO_REGLA FR  " +
+					"FROM cv_foro F, cv_regla_servicio S, cv_foro_REGLA FR  " +
 					"WHERE F.IDFORO = FR.IDFORO AND S.IDREGLA = FR.IDREGLA AND F.ESTADO = 1) F " +
 					"WHERE R.SEDE=F.SEDE AND R.FAMILIA=F.FAMILIA AND R.FORMACION=F.FORMACION AND R.CICLO=F.CICLO AND R.SECCION=F.SECCION order by f.fecha_creacion desc";			
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -118,14 +118,14 @@ public class ForoUsuarioDAO extends BaseDAO {
 			
 			//Ultimo tema
 			query = "SELECT T.TITULO, T.FECHA_CREACION, P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS " +
-					"FROM CV_FORO_TEMA T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_tema T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE TRIM(U.USUARIO) = T.USUARIO_CREACION AND U.CODSUJETO = P.CODPERSONA AND T.ESTADO = '1' " +
-					"AND T.IDFORO=? AND T.FECHA_CREACION = (SELECT MAX(FECHA_CREACION) FROM CV_FORO_TEMA WHERE IDFORO=T.IDFORO AND ESTADO = '1')";
+					"AND T.IDFORO=? AND T.FECHA_CREACION = (SELECT MAX(FECHA_CREACION) FROM cv_foro_tema WHERE IDFORO=T.IDFORO AND ESTADO = '1')";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
 			//MODERADORES
 			query = "SELECT TRIM(M.USUARIO) USUARIO, P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS " +
-					"FROM CV_FORO_MODERADOR M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_moderador M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE M.USUARIO=U.USUARIO AND U.CODSUJETO = P.CODPERSONA AND M.IDFORO=?";
 			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 			
@@ -203,10 +203,10 @@ public class ForoUsuarioDAO extends BaseDAO {
 			cons = (Connection)dataSource.getConnection();
 						
 			String query = "SELECT DISTINCT F.IDFORO, F.TITULO, F.DESCRIPCION, F.ICONO, F.CERRADO, F.ESTADO, F.FECHA_CREACION, " +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
-					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES " +
-					"FROM CV_FORO F WHERE  F.ESTADO = 1 " +
+					"(SELECT COUNT(*) FROM cv_foro_tema WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
+					"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES " +
+					"FROM cv_foro F WHERE  F.ESTADO = 1 " +
 					"AND F.IDFORO != 10 " + //Admin no ve cafeteria
 					"ORDER BY F.FECHA_CREACION DESC";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -214,14 +214,14 @@ public class ForoUsuarioDAO extends BaseDAO {
 			
 			//Ultimo tema
 			query = "SELECT T.TITULO, T.FECHA_CREACION, P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS " +
-					"FROM CV_FORO_TEMA T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_tema T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE TRIM(U.USUARIO) = T.USUARIO_CREACION AND U.CODSUJETO = P.CODPERSONA AND T.ESTADO = '1' " +
-					"AND T.IDFORO=? AND T.FECHA_CREACION = (SELECT MAX(FECHA_CREACION) FROM CV_FORO_TEMA WHERE IDFORO=T.IDFORO AND ESTADO = '1')";
+					"AND T.IDFORO=? AND T.FECHA_CREACION = (SELECT MAX(FECHA_CREACION) FROM cv_foro_tema WHERE IDFORO=T.IDFORO AND ESTADO = '1')";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
 			//MODERADORES
 			query = "SELECT TRIM(M.USUARIO) USUARIO, P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS " +
-					"FROM CV_FORO_MODERADOR M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_moderador M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE M.USUARIO=U.USUARIO AND U.CODSUJETO = P.CODPERSONA AND M.IDFORO=?";
 			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 			
@@ -288,10 +288,10 @@ public class ForoUsuarioDAO extends BaseDAO {
 		try{			
 			String query = "SELECT T.IDTEMA, T.TITULO, T.ICONO, T.CERRADO, T.FECHA_CREACION," +
 					"T.USUARIO_CREACION, U.USUARIO, P.APEPATERNO, P.NOMUNO," +
-					"(SELECT COUNT(*) FROM CV_FORO_MENSAJE WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA AND ESTADO = 1) MENSAJES," +
-					"(SELECT NVL(AVG(VALOR),0) FROM CV_FORO_TEMA_VALOR WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA) VALORACION," +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA_VALOR WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA) TOTALVOTOS " +
-					"FROM CV_FORO_TEMA T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"(SELECT COUNT(*) FROM cv_foro_mensaje WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA AND ESTADO = 1) MENSAJES," +
+					"(SELECT NVL(AVG(VALOR),0) FROM cv_foro_tema_valor WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA) VALORACION," +
+					"(SELECT COUNT(*) FROM cv_foro_tema_valor WHERE IDFORO=T.IDFORO AND IDTEMA = T.IDTEMA) TOTALVOTOS " +
+					"FROM cv_foro_tema T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE T.ESTADO = 1 AND TRIM(U.USUARIO) = T.USUARIO_CREACION AND U.CODSUJETO = P.CODPERSONA " +
 					"AND  T.IDFORO = ? ORDER BY T.FECHA_CREACION DESC";
 			
@@ -301,10 +301,10 @@ public class ForoUsuarioDAO extends BaseDAO {
 			result = (ResultSet) stmt.executeQuery();
 			
 			query = "SELECT M.CUERPO, M.FECHA_CREACION, P.APEPATERNO, P.NOMUNO " +
-					"FROM CV_FORO_MENSAJE M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_mensaje M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE TRIM(U.USUARIO) = M.USUARIO_CREACION AND U.CODSUJETO = P.CODPERSONA AND M.ESTADO = 1 " +
-					"AND M.IDMENSAJE = (SELECT MAX(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA) " +
-					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA) " +
+					"AND M.IDMENSAJE = (SELECT MAX(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA) " +
+					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA) " +
 					"AND IDFORO = ? AND IDTEMA = ?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idForo);
@@ -351,7 +351,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_FORO_TEMA SET CERRADO=? WHERE IDFORO=? AND IDTEMA=?";
+			String query = "UPDATE cv_foro_tema SET CERRADO=? WHERE IDFORO=? AND IDTEMA=?";
 
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -382,7 +382,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		try {
 			
-			String query = "UPDATE CV_FORO_TEMA SET ESTADO=0 WHERE IDFORO=? AND IDTEMA=?";
+			String query = "UPDATE cv_foro_tema SET ESTADO=0 WHERE IDFORO=? AND IDTEMA=?";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idForo);
@@ -414,7 +414,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		try {
 			
-			String query = "UPDATE CV_FORO_MENSAJE SET ESTADO=0 WHERE IDFORO=? AND IDTEMA=? AND IDMENSAJE=?";
+			String query = "UPDATE cv_foro_mensaje SET ESTADO=0 WHERE IDFORO=? AND IDTEMA=? AND IDMENSAJE=?";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idForo);
@@ -447,7 +447,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		Connection cons = null;
 		
 		try{
-			String query = "INSERT INTO CV_FORO_TEMA(IDFORO,IDTEMA,USUARIO_CREACION,FECHA_CREACION, ESTADO, CERRADO, TITULO, ICONO)" +
+			String query = "INSERT INTO cv_foro_tema(IDFORO,IDTEMA,USUARIO_CREACION,FECHA_CREACION, ESTADO, CERRADO, TITULO, ICONO)" +
 					"VALUES(?,SEQCVFOROTEMA.nextval,?,SYSDATE,1,0,?,0)";
 			cons = (Connection) dataSource.getConnection();
 			cons.setAutoCommit(false);
@@ -456,18 +456,18 @@ public class ForoUsuarioDAO extends BaseDAO {
 			stmt.setString(2, tema.getUsuarioCreacion());
 			stmt.setString(3, tema.getTitulo());
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en nuevoTema(Tema tema) - INSERT INTO CV_FORO_TEMA");
+				log.error("Error en nuevoTema(Tema tema) - INSERT INTO cv_foro_tema");
 				throw new DAOException("No culmino");
 			}
 			
-			query = "INSERT INTO CV_FORO_MENSAJE(IDFORO, IDTEMA, IDMENSAJE, CUERPO, USUARIO_CREACION, FECHA_CREACION, ESTADO) " +
+			query = "INSERT INTO cv_foro_mensaje(IDFORO, IDTEMA, IDMENSAJE, CUERPO, USUARIO_CREACION, FECHA_CREACION, ESTADO) " +
 					"VALUES (?,SEQCVFOROTEMA.CURRVAL,SEQCVFOROMENSAJE.nextval,?,?,SYSDATE,1)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, tema.getIdForo());
 			stmt.setString(2, tema.getCuerpo());
 			stmt.setString(3, tema.getUsuarioCreacion());
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en nuevoTema(Tema tema) - INSERT INTO CV_FORO_MENSAJE");
+				log.error("Error en nuevoTema(Tema tema) - INSERT INTO cv_foro_mensaje");
 				throw new DAOException("No culmino");
 			}
 			// Transaccion exitosa
@@ -494,7 +494,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		List<Mensaje> mensajes = new ArrayList<Mensaje>();
 		
 			String query = "SELECT T.CUERPO, T.IDFORO, T.IDTEMA, T.IDMENSAJE, T.MODERADO,T.USUARIO_CREACION, T.FECHA_CREACION, T.IDMENSAJE_CITA, P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.SEXO " +
-					"FROM CV_FORO_MENSAJE T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
+					"FROM cv_foro_mensaje T, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P " +
 					"WHERE IDFORO = ? AND IDTEMA = ? AND T.ESTADO = 1 AND TRIM(U.USUARIO) = USUARIO_CREACION AND U.CODSUJETO = P.CODPERSONA ORDER BY FECHA_CREACION";
 			try {
 				cons = (Connection)dataSource.getConnection();				
@@ -532,7 +532,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		Connection cons = null;
 		
 		try{
-			String query = "INSERT INTO CV_FORO_MENSAJE (IDFORO,IDTEMA,IDMENSAJE,IDFORO_CITA,IDTEMA_CITA,IDMENSAJE_CITA,CUERPO,ESTADO,MODERADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD) " +
+			String query = "INSERT INTO cv_foro_mensaje (IDFORO,IDTEMA,IDMENSAJE,IDFORO_CITA,IDTEMA_CITA,IDMENSAJE_CITA,CUERPO,ESTADO,MODERADO,USUARIO_CREACION,FECHA_CREACION,USUARIO_MOD,FECHA_MOD) " +
 					"VALUES (?,?,SEQCVFOROMENSAJE.NEXTVAL,?,?,?,?,1,?,?,SYSDATE,?,SYSDATE)";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -547,7 +547,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 			stmt.setString(9, mensaje.getUsuarioCreacion());
 			
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en nuevoMensaje(Mensaje mensaje) - INSERT INTO CV_FORO_MENSAJE");
+				log.error("Error en nuevoMensaje(Mensaje mensaje) - INSERT INTO cv_foro_mensaje");
 				throw new DAOException("No culmino");
 			}
 			
@@ -567,7 +567,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		
 		try{
 			
-			String query = "SELECT TITULO,CERRADO,USUARIO_CREACION FROM CV_FORO_TEMA T WHERE ESTADO=1 AND T.IDFORO=? AND T.IDTEMA = ?";
+			String query = "SELECT TITULO,CERRADO,USUARIO_CREACION FROM cv_foro_tema T WHERE ESTADO=1 AND T.IDFORO=? AND T.IDTEMA = ?";
 			
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -635,7 +635,7 @@ public class ForoUsuarioDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;		
 		try {
-			String query = "SELECT USUARIO_CREACION FROM CV_FORO_MENSAJE WHERE IDMENSAJE=?";
+			String query = "SELECT USUARIO_CREACION FROM cv_foro_mensaje WHERE IDMENSAJE=?";
 			cons = (Connection) dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, idMensaje);

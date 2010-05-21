@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "CV_INFORME")
+@Table(name = "cv_informe")
 @IdClass(FichaInformePK.class)
 public class FichaInforme implements Serializable {
 

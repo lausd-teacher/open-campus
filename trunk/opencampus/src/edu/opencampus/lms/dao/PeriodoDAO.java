@@ -334,7 +334,7 @@ public class PeriodoDAO extends BaseDAO {
 		log.info("obtenerTodo()");
 		Collection<Periodo> col = new ArrayList<Periodo>();
 		try {
-			String query = "SELECT CODIGO,TO_CHAR(FECINICIO,'YYYY')||'-'||NOMBRE AS NOMBRE,SEDE,FECINICIO,FECFIN FROM CV_PERIODO WHERE ESTADO=1 ORDER BY TO_CHAR(FECINICIO,'YYYY') desc, NOMBRE DESC";
+			String query = "SELECT CODIGO,TO_CHAR(FECINICIO,'YYYY')||'-'||NOMBRE AS NOMBRE,SEDE,FECINICIO,FECFIN FROM cv_periodo WHERE ESTADO=1 ORDER BY TO_CHAR(FECINICIO,'YYYY') desc, NOMBRE DESC";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			result =  stmt.executeQuery();
@@ -372,8 +372,8 @@ public class PeriodoDAO extends BaseDAO {
 		Collection<Periodo> col = new ArrayList<Periodo>();
 		try {
 			String query = "SELECT CODIGO,TO_CHAR(FECINICIO,'YYYY')||'-'||NOMBRE AS NOMBRE,SEDE,FECINICIO,FECFIN " +
-					"FROM CV_PERIODO " +
-					"WHERE ESTADO=1 AND SEDE IN (SELECT DISTINCT SEDE FROM CV_USUARIO_DEPARTAMENTO WHERE TRIM(USUARIO) = ?) " +
+					"FROM cv_periodo " +
+					"WHERE ESTADO=1 AND SEDE IN (SELECT DISTINCT SEDE FROM cv_usuario_DEPARTAMENTO WHERE TRIM(USUARIO) = ?) " +
 					"ORDER BY TO_CHAR(FECINICIO,'YYYY') desc, NOMBRE DESC";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);

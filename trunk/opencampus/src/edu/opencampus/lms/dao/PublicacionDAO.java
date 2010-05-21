@@ -45,7 +45,7 @@ public class PublicacionDAO extends BaseDAO {
 		
 			String query = "SELECT pub.IDPUBLICACION, pub.TITULO, pub.CONTENIDO, pub.FECHA, pub.ARCHIVO_NOMBRE, pub.ARCHIVO_TAMANIO, " +
 					"pub.IDPUBLICADOR, u.USUARIO,p.APEPATERNO,p.APEMATERNO,p.NOMUNO,p.NOMDOS,p.SEXO " +
-					"FROM CV_PUBLICACION pub, CV_USUARIO u, CV_PERSONA p " +
+					"FROM cv_publicacion pub, cv_usuario u, cv_persona p " +
 					"WHERE pub.IDFICHA=? AND pub.ESTADO=1 AND pub.IDPUBLICADOR=u.IDUSUARIO AND u.IDUSUARIO=p.IDPERSONA AND pub.IDHERRAMIENTA = ? " +
 					"ORDER BY pub.FECHA DESC";
 		
@@ -93,7 +93,7 @@ public class PublicacionDAO extends BaseDAO {
 
 		Integer id = null;
 		try {
-			String query = "INSERT INTO CV_PUBLICACION(IDHERRAMIENTA,IDFICHA,TITULO,ARCHIVO_NOMBRE,ARCHIVO_TAMANIO,FECHA,ESTADO,CONTENIDO,IDPUBLICADOR) " +
+			String query = "INSERT INTO cv_publicacion(IDHERRAMIENTA,IDFICHA,TITULO,ARCHIVO_NOMBRE,ARCHIVO_TAMANIO,FECHA,ESTADO,CONTENIDO,IDPUBLICADOR) " +
 					"VALUES (?,?,?,?,?,NOW(),?,?,?)";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -136,7 +136,7 @@ public class PublicacionDAO extends BaseDAO {
 		Connection cons = null;
 		
 		try {
-			String query = "DELETE FROM CV_PUBLICACION_MATRICULA WHERE IDPUBLICACION = ? ";
+			String query = "DELETE FROM cv_publicacion_matricula WHERE IDPUBLICACION = ? ";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, idPublicacion);
@@ -159,13 +159,13 @@ public class PublicacionDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		Connection cons = null;
 
-		String query = "update CV_PUBLICACION set ESTADO = '0' where IDPUBLICACION = ?";
+		String query = "update cv_publicacion set ESTADO = '0' where IDPUBLICACION = ?";
 		try {
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, idPublicacion);
 			if (1 != stmt.executeUpdate()) {
-				throw new DAOException("No se pudo eliminar CV_PUBLICACION");
+				throw new DAOException("No se pudo eliminar cv_publicacion");
 			}
 		} catch (DAOException e) {
 			log.error(e);
@@ -188,13 +188,13 @@ public class PublicacionDAO extends BaseDAO {
 		Connection cons = null;
 
 		try {
-			String query = "INSERT INTO CV_PUBLICACION_MATRICULA (IDPUBLICACION, IDMATRICULA) VALUES (?,?)";
+			String query = "INSERT INTO cv_publicacion_matricula (IDPUBLICACION, IDMATRICULA) VALUES (?,?)";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, idPublicacion);
 			stmt.setInt(2, idMatricula);
 			if (1 != stmt.executeUpdate()) {
-				throw new DAOException("No se pudo insertar CV_PUBLICACION_MATRICULA");
+				throw new DAOException("No se pudo insertar cv_publicacion_matricula");
 			}
 		} catch (SQLException e) {
 			log.error(e);

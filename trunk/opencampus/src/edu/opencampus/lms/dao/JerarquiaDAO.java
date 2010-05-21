@@ -282,7 +282,7 @@ public class JerarquiaDAO extends BaseDAO{
 				if("/".equals(result.getString("RUTA"))){
 					general += "Ra&iacute;z";
 				} else {
-					query = "SELECT NOMBRE FROM CV_JERARQUIA WHERE IDJERARQUIA=?";			
+					query = "SELECT NOMBRE FROM cv_jerarquia WHERE IDJERARQUIA=?";			
 					stmt =  cons.prepareStatement(query);
 					String[] array = result.getString("RUTA").split("/"); 
 					for(int o =profundidad;o<array.length-1;o++){

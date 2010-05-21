@@ -1266,14 +1266,14 @@ public class FichaDAO extends BaseDAO {
 //					"AND m.eliminado = '0' AND m.estado = '1'  AND f.estado = '1' AND f.IDETIQUETA != 1000 " +
 //					"AND pkg_cv_ficha.fx_cv_ficha_fechainicio(m.idmatricula) <= sysdate " +
 //					"AND pkg_cv_ficha.fx_cv_ficha_fechafin(m.idmatricula) >= sysdate " +
-//					"AND 0 < (SELECT COUNT(*) FROM CV_INGRESO WHERE ELEMENTO=2 AND TRIM(USUARIO)=TRIM(M.USUARIO) AND VALOR=F.IDFICHA) " +
+//					"AND 0 < (SELECT COUNT(*) FROM cv_ingreso WHERE ELEMENTO=2 AND TRIM(USUARIO)=TRIM(M.USUARIO) AND VALOR=F.IDFICHA) " +
 //					"AND F.IDFICHA != ? AND TRIM(USUARIO)=?";
 //			stmt2 =  cons.prepareStatement(query);
 //			
-//			query = "UPDATE CV_USUARIO_CONFIG SET CLAVE=?, FECHA_GENERADA=SYSDATE WHERE TRIM(USUARIO)=?";
+//			query = "UPDATE cv_usuario_CONFIG SET CLAVE=?, FECHA_GENERADA=SYSDATE WHERE TRIM(USUARIO)=?";
 //			stmt3 =  cons.prepareStatement(query);
 //			
-//			query = "INSERT INTO CV_USUARIO_CONFIG(CLAVE,USUARIO,FECHA_GENERADA) VALUES(?,?,SYSDATE)";
+//			query = "INSERT INTO cv_usuario_CONFIG(CLAVE,USUARIO,FECHA_GENERADA) VALUES(?,?,SYSDATE)";
 //			stmt4 =  cons.prepareStatement(query);
 //			
 //			query = "{CALL SEGURIDAD.PCKSEGURIDAD.GrabaFirma(?,?,?)}";
@@ -1311,7 +1311,7 @@ public class FichaDAO extends BaseDAO {
 //						if(esPersonal > 0)
 //							log.info("                   : "+ result.getString("usuario")+ " - Usuario es un personal de opencampus");
 //							
-//						//AGREGAR O ACTUALIZAR CLAVE EN CV_USUARIO_CONFIG (CON VALORES: #MISMA) ***********
+//						//AGREGAR O ACTUALIZAR CLAVE EN cv_usuario_CONFIG (CON VALORES: #MISMA) ***********
 //						stmt3.setString(1, "#MISMA");
 //						stmt3.setString(2, result.getString("usuario"));
 //						if(1 != stmt3.executeUpdate()){
@@ -1344,7 +1344,7 @@ public class FichaDAO extends BaseDAO {
 //						//Valido si el usuario ya fue generado su clave
 //						//********************** LEER DE BASE DE DATOS JUNTO AL SELECT DE LAS MATRICULAS **************************
 ////						SELECT CLAVE 
-////						FROM CV_USUARIO_CONFIG 
+////						FROM cv_usuario_CONFIG 
 ////						WHERE 
 ////						--FECHA_GENERADA esta entre fecha de inicio-1 y fin de algun curso que tenga el usuario
 ////						AND TRIM(USUARIO)='lechevarria01';
@@ -1362,7 +1362,7 @@ public class FichaDAO extends BaseDAO {
 //							//Recuerdo que el usuario ya se le genero la clave y si tiene otra ficha ya no se le generara.
 //							usrWithNewPass.put(result.getString("usuario"), claveTemp);
 //							
-//							//AGREGAR O ACTUALIZAR CLAVE EN CV_USUARIO_CONFIG (CON VALORES: claveTemp) **********
+//							//AGREGAR O ACTUALIZAR CLAVE EN cv_usuario_CONFIG (CON VALORES: claveTemp) **********
 //							stmt3.setString(1, claveTemp);
 //							stmt3.setString(2, result.getString("usuario"));
 //							if(1 != stmt3.executeUpdate()){

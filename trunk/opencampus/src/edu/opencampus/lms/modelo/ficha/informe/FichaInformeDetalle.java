@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CV_INFORME_DETALLE")
+@Table(name = "cv_informe_detalle")
 @SequenceGenerator(name = "SEQFICHAINFORMEDETALLE", sequenceName = "SEQFICHAINFORMEDETALLE", allocationSize = 1)
 public class FichaInformeDetalle implements Serializable {
 

@@ -307,7 +307,7 @@ public class TestDAO extends BaseDAO {
 
 				if (1 != stmt.executeUpdate()) {
 					throw new DAOException(
-							"No se pudo insertar en la tabla CV_TEST");
+							"No se pudo insertar en la tabla cv_test");
 				}
 
 				if (Constante.TEST_NUM_ASIMPLE == test.getTipo()
@@ -357,7 +357,7 @@ public class TestDAO extends BaseDAO {
 
 						if (1 != stmt.executeUpdate()) {
 							throw new DAOException(
-									"No se pudo insertar en la tabla CV_TEST_DETALLE");
+									"No se pudo insertar en la tabla cv_test_detalle");
 						}
 					}
 
@@ -416,7 +416,7 @@ public class TestDAO extends BaseDAO {
 			}
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException(
-						"No se pudo actualizar en la tabla CV_TEST");
+						"No se pudo actualizar en la tabla cv_test");
 			}
 
 			if (Constante.TEST_NUM_ASIMPLE == test.getTipo()
@@ -466,7 +466,7 @@ public class TestDAO extends BaseDAO {
 
 					if (1 != stmt.executeUpdate()) {
 						throw new DAOException(
-								"No se pudo actualizar en la tabla CV_TEST_DETALLE");
+								"No se pudo actualizar en la tabla cv_test_detalle");
 					}
 				}
 
@@ -500,7 +500,7 @@ public class TestDAO extends BaseDAO {
 			stmt.setInt(2, test.getIdTest());
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException(
-						"No se pudo eliminar en la tabla CV_TEST");
+						"No se pudo eliminar en la tabla cv_test");
 			}
 
 		} catch (SQLException e) {
@@ -548,7 +548,7 @@ public class TestDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "INSERT INTO CV_TEST_NOTA_DETALLE(IDTESTNOTA,IDDETALLE,ESTADO,IDTEST,IDUNIDAD) " +
+			String query = "INSERT INTO cv_test_nota_detalle(IDTESTNOTA,IDDETALLE,ESTADO,IDTEST,IDUNIDAD) " +
 							"VALUES (?,?,?,?,?)";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
@@ -578,7 +578,7 @@ public class TestDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "UPDATE CV_TEST_NOTA SET NOTA=?,ESTADO='1',"
+			String query = "UPDATE cv_test_nota SET NOTA=?,ESTADO='1',"
 					+ "FECHA_FIN=now() WHERE IDTESTNOTA=?";
 			cons =  dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
@@ -587,7 +587,7 @@ public class TestDAO extends BaseDAO {
 			if (1 != stmt.executeUpdate()) {
 				throw new SQLException("No se logro actualizar el registro " + test.getIdNotaTest() + " con " + nota);
 			}
-			query = "SELECT FECHA_FIN FROM CV_TEST_NOTA WHERE IDTESTNOTA = ?";
+			query = "SELECT FECHA_FIN FROM cv_test_nota WHERE IDTESTNOTA = ?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, test.getIdNotaTest());
 			result =  stmt.executeQuery();
@@ -614,7 +614,7 @@ public class TestDAO extends BaseDAO {
 		ResultSet result = null;
 		
 		try {
-			String query = "INSERT INTO CV_TEST_NOTA(FECHA_INICIO,ESTADO,"
+			String query = "INSERT INTO cv_test_nota(FECHA_INICIO,ESTADO,"
 					+ "IDMATRICULA,IDFICHA,IDUNIDAD) VALUES "
 					+ "(now(),'0',?,?,?)";
 			cons =  dataSource.getConnection();
@@ -630,7 +630,7 @@ public class TestDAO extends BaseDAO {
 			result.next();
 			test.setIdNotaTest(result.getInt(1));
 			
-			query = "SELECT FECHA_INICIO FROM CV_TEST_NOTA WHERE IDTESTNOTA = ?";
+			query = "SELECT FECHA_INICIO FROM cv_test_nota WHERE IDTESTNOTA = ?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, test.getIdNotaTest());
 			result =  stmt.executeQuery();
@@ -755,7 +755,7 @@ public class TestDAO extends BaseDAO {
 				try {
 					query = "SELECT PREGUNTA,RESPUESTA,EXPLICACION,"
 							+ "TIPO,GRAFICO,ARCHIVO_NOMBRE,ARCHIVO_TAMANIO "
-							+ "FROM CV_TEST WHERE IDUNIDAD=? AND IDTEST=? AND ESTADO='1' ORDER BY IDTEST";
+							+ "FROM cv_test WHERE IDUNIDAD=? AND IDTEST=? AND ESTADO='1' ORDER BY IDTEST";
 					stmt =  cons
 							.prepareStatement(query);
 					stmt.setInt(1, idUnidad);
@@ -767,7 +767,7 @@ public class TestDAO extends BaseDAO {
 							"where d.idunidad=? and d.idtest=? order by d.item";
 					stmt =  cons
 							.prepareStatement(query);
-					query = "SELECT IDALTERNATIVA,TEXTO FROM CV_TEST_ALTERNATIVA "
+					query = "SELECT IDALTERNATIVA,TEXTO FROM cv_test_alternativa "
 							+ "WHERE IDUNIDAD=? AND IDTEST=? ORDER BY IDALTERNATIVA";
 					subStmt =  cons
 							.prepareStatement(query);

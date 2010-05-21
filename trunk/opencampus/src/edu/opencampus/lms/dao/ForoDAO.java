@@ -46,7 +46,7 @@ public class ForoDAO extends BaseDAO{
 		//OracleCallableStatement callstmt = null;
 		ResultSet result = null;
 		
-		String query = "{CALL  PKG_CV_SERVICIO.SP_CV_SERVICIO_PRE(?)}";
+		String query = "{CALL  PKG_cv_servicio.SP_cv_servicio_PRE(?)}";
 		try {
 			cons = (Connection)dataSource.getConnection();
 			cons.setAutoCommit(false);
@@ -56,10 +56,10 @@ public class ForoDAO extends BaseDAO{
 			
 			query = "SELECT * FROM (" +
 					"SELECT DISTINCT F.IDFORO, F.TITULO, F.ICONO, " +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
-					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES, " +
-					"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+					"(SELECT COUNT(*) FROM cv_foro_tema WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
+					"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+					"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES, " +
+					"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
 					"AND M.USUARIO_CREACION=?) MISMENSAJES " +
 					"FROM  " +
 					"(SELECT DISTINCT SEDE,FAMILIA,FORMACION,CICLO,SECCION FROM CV_TEMP_NOTICIA  " +
@@ -75,7 +75,7 @@ public class ForoDAO extends BaseDAO{
 					"SELECT DISTINCT '0',0,0,0,0 FROM DUAL) R, " +
 					"(SELECT F.IDFORO, F.TITULO, F.ICONO, " +
 					"S.SEDE, S.FAMILIA, S.FORMACION, S.CICLO, S.SECCION  " +
-					"FROM CV_FORO F, CV_REGLA_SERVICIO S, CV_FORO_REGLA FR  " +
+					"FROM cv_foro F, cv_regla_servicio S, cv_foro_REGLA FR  " +
 					"WHERE F.IDFORO = FR.IDFORO AND S.IDREGLA = FR.IDREGLA AND F.ESTADO=1 AND F.CERRADO=0) F " +
 					"WHERE R.SEDE=F.SEDE AND R.FAMILIA=F.FAMILIA AND R.FORMACION=F.FORMACION AND R.CICLO=F.CICLO AND R.SECCION=F.SECCION " +
 					"ORDER BY MISMENSAJES DESC,MENSAJES DESC" +
@@ -125,12 +125,12 @@ public class ForoDAO extends BaseDAO{
 		try {
 			String query =  "SELECT * FROM (" +
 							"SELECT F.IDFORO, F.TITULO, F.ICONO, " +
-							"(SELECT COUNT(*) FROM CV_FORO_TEMA WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
-							"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
-							"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES, " +
-							"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+							"(SELECT COUNT(*) FROM cv_foro_tema WHERE IDFORO = F.IDFORO AND ESTADO = 1) TEMAS, " +
+							"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+							"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES, " +
+							"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
 							"AND M.USUARIO_CREACION=?) MISMENSAJES " +
-							"FROM CV_FORO F WHERE  F.ESTADO = 1 " +
+							"FROM cv_foro F WHERE  F.ESTADO = 1 " +
 							"AND F.IDFORO != 10 " + //Admin no ve cafeteria
 							"ORDER BY MISMENSAJES DESC,MENSAJES DESC" +
 							") WHERE ROWNUM<=4";
@@ -184,10 +184,10 @@ public class ForoDAO extends BaseDAO{
 		Foro foro = null;
 
 		String query = "SELECT F.IDFORO,F.TITULO,F.DESCRIPCION,F.ICONO,F.ESTADO,F.CERRADO, " +
-				"(SELECT COUNT(*) FROM CV_FORO_TEMA WHERE IDFORO=F.IDFORO AND ESTADO = 1) TEMAS, " +
-				"(SELECT COUNT(*) FROM CV_FORO_TEMA T, CV_FORO_MENSAJE M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
-				"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES " +
-				"FROM CV_FORO F WHERE F.ELIMINADO=0" +
+				"(SELECT COUNT(*) FROM cv_foro_tema WHERE IDFORO=F.IDFORO AND ESTADO = 1) TEMAS, " +
+				"(SELECT COUNT(*) FROM cv_foro_tema T, cv_foro_mensaje M WHERE T.IDTEMA=M.IDTEMA AND M.IDFORO = F.IDFORO AND T.ESTADO=1 AND M.ESTADO = 1 " +
+				"AND M.IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA = M.IDTEMA)) MENSAJES " +
+				"FROM cv_foro F WHERE F.ELIMINADO=0" +
 				"AND F.IDFORO != 10 " + //Admin no ve cafeteria
 				"ORDER BY TITULO";
 		
@@ -198,7 +198,7 @@ public class ForoDAO extends BaseDAO{
 			result = (ResultSet) stmt.executeQuery();
 			
 			query = "SELECT TRIM(U.USUARIO) USUARIO,P.NOMUNO,P.NOMDOS,P.APEPATERNO,P.APEMATERNO " +
-					"FROM GENERAL.GEN_PERSONA P, SEGURIDAD.SEG_USUARIO U,CV_FORO_MODERADOR M " +
+					"FROM GENERAL.GEN_PERSONA P, SEGURIDAD.SEG_USUARIO U,cv_foro_moderador M " +
 					"WHERE M.USUARIO=U.USUARIO AND U.CODSUJETO=P.CODPERSONA AND M.IDFORO=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
@@ -259,7 +259,7 @@ public class ForoDAO extends BaseDAO{
 			
 			// Llamada de Procedimiento ***********************
 			
-			String query = "{ CALL  PKG_CV_SERVICIO.SP_CV_SERVICIO_PRE()}";
+			String query = "{ CALL  PKG_cv_servicio.SP_cv_servicio_PRE()}";
 			cons = (Connection)dataSource.getConnection();
 			cons.setAutoCommit(false);
 //			callstmt = (OracleCallableStatement) cons.prepareCall(query);
@@ -358,9 +358,9 @@ public class ForoDAO extends BaseDAO{
 			StringBuffer query  = new StringBuffer(768);
 			query.append("SELECT F.IDFORO,F.TITULO FORO_TITULO,F.CERRADO FORO_CERRADO,T.IDTEMA,T.TITULO,T.CERRADO,T.FECHA_CREACION," +
 					"P.APEPATERNO, P.NOMUNO," +
-					"(SELECT COUNT(IDMENSAJE)-1 FROM CV_FORO_MENSAJE WHERE IDFORO=F.IDFORO AND IDTEMA=T.IDTEMA) TOTAL, " +
-					"(SELECT ROUND(AVG(VALOR),0) FROM CV_FORO_TEMA_VALOR WHERE IDFORO=F.IDFORO AND IDTEMA=T.IDTEMA) VALOR " +
-					"FROM SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P, CV_FORO_TEMA T, CV_FORO F " +
+					"(SELECT COUNT(IDMENSAJE)-1 FROM cv_foro_mensaje WHERE IDFORO=F.IDFORO AND IDTEMA=T.IDTEMA) TOTAL, " +
+					"(SELECT ROUND(AVG(VALOR),0) FROM cv_foro_tema_valor WHERE IDFORO=F.IDFORO AND IDTEMA=T.IDTEMA) VALOR " +
+					"FROM SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P, cv_foro_tema T, cv_foro F " +
 					"WHERE TRIM(U.USUARIO)=T.USUARIO_CREACION AND U.CODSUJETO=P.CODPERSONA AND F.IDFORO=T.IDFORO AND F.ESTADO='1' AND T.ESTADO='1'" +
 					"AND (");
 			
@@ -395,7 +395,7 @@ public class ForoDAO extends BaseDAO{
 				query.append(") AND (" +
 						"T.USUARIO_CREACION = ? ");
 				if(!opciones.isSoloTema()){
-					query.append("OR (SELECT COUNT(IDMENSAJE) FROM CV_FORO_MENSAJE " +
+					query.append("OR (SELECT COUNT(IDMENSAJE) FROM cv_foro_mensaje " +
 							"WHERE IDFORO=T.IDFORO AND IDTEMA=T.IDTEMA AND ROWNUM=1 AND USUARIO_CREACION = ?)>0");
 				}
 			}
@@ -440,12 +440,12 @@ public class ForoDAO extends BaseDAO{
 			if(opciones.getUsuario().length()>0){
 				String query2 = "SELECT IDMENSAJE,CUERPO,FECHA_CREACION," +
 						"(SELECT FILA FROM (SELECT ROWNUM FILA,IDMENSAJE " +
-						"FROM CV_FORO_MENSAJE " +
+						"FROM cv_foro_mensaje " +
 						"WHERE ESTADO=1 " +
 						"AND IDFORO=? AND IDTEMA=? " +
 						"ORDER BY FECHA_CREACION) WHERE IDMENSAJE=M.IDMENSAJE) FILA " +
-						"FROM CV_FORO_MENSAJE M " +
-						"WHERE ESTADO=1 AND IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM CV_FORO_MENSAJE WHERE IDFORO=M.IDFORO AND IDTEMA=M.IDTEMA) " +
+						"FROM cv_foro_mensaje M " +
+						"WHERE ESTADO=1 AND IDMENSAJE != (SELECT MIN(IDMENSAJE) FROM cv_foro_mensaje WHERE IDFORO=M.IDFORO AND IDTEMA=M.IDTEMA) " +
 						"AND USUARIO_CREACION=? AND IDFORO=? AND IDTEMA=? " +
 						"ORDER BY FECHA_CREACION";
 				
@@ -575,7 +575,7 @@ public class ForoDAO extends BaseDAO{
 				in+=","+n;
 		}
 		
-		String query = "SELECT IDFORO,TITULO FROM CV_FORO " +
+		String query = "SELECT IDFORO,TITULO FROM cv_foro " +
 				"WHERE IDFORO IN ("+in+") ORDER BY TITULO";
 		
 		try {
@@ -616,7 +616,7 @@ public class ForoDAO extends BaseDAO{
 		
 		try {
 			String query = "SELECT TITULO,DESCRIPCION,ICONO " +
-					"FROM CV_FORO F WHERE IDFORO=?";
+					"FROM cv_foro F WHERE IDFORO=?";
 
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -633,7 +633,7 @@ public class ForoDAO extends BaseDAO{
 				
 				//Regla de Servicio
 				query = "SELECT S.IDREGLA, S.SEDE, S.FAMILIA, S.FORMACION, S.CICLO, S.SECCION " +
-						"FROM CV_REGLA_SERVICIO S, CV_FORO_REGLA N WHERE N.IDREGLA=S.IDREGLA AND IDFORO=?";
+						"FROM cv_regla_servicio S, cv_foro_REGLA N WHERE N.IDREGLA=S.IDREGLA AND IDFORO=?";
 				
 				stmt = (PreparedStatement) cons.prepareStatement(query);
 				stmt.setInt(1, idForo);
@@ -656,7 +656,7 @@ public class ForoDAO extends BaseDAO{
 				
 				//Moderadores
 				query = "SELECT TRIM(M.USUARIO) USUARIO,P.NOMUNO,P.NOMDOS,P.APEPATERNO,P.APEMATERNO " +
-						"FROM GENERAL.GEN_PERSONA P, SEGURIDAD.SEG_USUARIO U,CV_FORO_MODERADOR M " +
+						"FROM GENERAL.GEN_PERSONA P, SEGURIDAD.SEG_USUARIO U,cv_foro_moderador M " +
 						"WHERE M.USUARIO=U.USUARIO AND U.CODSUJETO=P.CODPERSONA AND IDFORO=?";
 				
 				stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -699,7 +699,7 @@ public class ForoDAO extends BaseDAO{
 		PreparedStatement stmt = null;
 		PreparedStatement stmt2 = null;
 		try {
-			String query = "INSERT INTO CV_FORO (IDFORO,TITULO,DESCRIPCION,ICONO,ESTADO,CERRADO,USUARIO_CREACION,FECHA_CREACION) " +
+			String query = "INSERT INTO cv_foro (IDFORO,TITULO,DESCRIPCION,ICONO,ESTADO,CERRADO,USUARIO_CREACION,FECHA_CREACION) " +
 							"VALUES (SEQCVFORO.NEXTVAL,?,?,?,?,?,?,SYSDATE)";
 				
 			cons = (Connection)dataSource.getConnection();
@@ -713,17 +713,17 @@ public class ForoDAO extends BaseDAO{
 			stmt.setString(6, foro.getUsuarioCreacion());
 			
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en crearForo(Foro foro) - INSERT INTO CV_FORO");
+				log.error("Error en crearForo(Foro foro) - INSERT INTO cv_foro");
 				throw new DAOException("No culmino");
 			}
 			
 			// REGLA ************************************************
 			
-			query = "INSERT INTO CV_REGLA_SERVICIO (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
+			query = "INSERT INTO cv_regla_servicio (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
 					"VALUES(SEQCVREGLASERVICIO.NEXTVAL,?,?,?,?,?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
-			query = "INSERT INTO CV_FORO_REGLA (IDREGLA,IDFORO) " +
+			query = "INSERT INTO cv_foro_REGLA (IDREGLA,IDFORO) " +
 					"VALUES(SEQCVREGLASERVICIO.CURRVAL,SEQCVFORO.CURRVAL)";
 			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 			
@@ -735,12 +735,12 @@ public class ForoDAO extends BaseDAO{
 				stmt.setInt(5, rs.getSeccion());
 				
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en crearForo(Foro foro) - INSERT INTO CV_REGLA_SERVICIO");
+					log.error("Error en crearForo(Foro foro) - INSERT INTO cv_regla_servicio");
 					throw new DAOException("No culmino");
 				}
 				
 				if (1 != stmt2.executeUpdate()) {
-					log.error("Error en crearForo(Foro foro) - INSERT INTO CV_FORO_REGLA");
+					log.error("Error en crearForo(Foro foro) - INSERT INTO cv_foro_REGLA");
 					throw new DAOException("No culmino");
 				}
 				
@@ -748,7 +748,7 @@ public class ForoDAO extends BaseDAO{
 			
 			// MODERADOR ************************************************
 			
-			query = "INSERT INTO CV_FORO_MODERADOR (IDFORO,USUARIO) " +
+			query = "INSERT INTO cv_foro_moderador (IDFORO,USUARIO) " +
 					"VALUES(SEQCVFORO.CURRVAL,?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
@@ -756,7 +756,7 @@ public class ForoDAO extends BaseDAO{
 				stmt.setString(1, usuario.getIdUsuario());
 				
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en crearForo(Foro foro) - INSERT INTO CV_FORO_MODERADOR");
+					log.error("Error en crearForo(Foro foro) - INSERT INTO cv_foro_moderador");
 					throw new DAOException("No culmino");
 				}
 			}
@@ -792,7 +792,7 @@ public class ForoDAO extends BaseDAO{
 		Collection<Usuario> moderadoresAntiguos = new ArrayList<Usuario>();
 		Usuario moderadorAntiguo = null; 
 		try {
-			String query = "UPDATE CV_FORO SET TITULO=?,DESCRIPCION=?,ICONO=? " +
+			String query = "UPDATE cv_foro SET TITULO=?,DESCRIPCION=?,ICONO=? " +
 					"WHERE IDFORO=?";
 				
 			cons = (Connection)dataSource.getConnection();
@@ -804,7 +804,7 @@ public class ForoDAO extends BaseDAO{
 			stmt.setInt(4, foro.getIdForo());
 			
 			if (1 != stmt.executeUpdate()) {
-				log.error("Error en modificarForo(Foro foro) - UPDATE CV_FORO");
+				log.error("Error en modificarForo(Foro foro) - UPDATE cv_foro");
 				throw new DAOException("No culmino");
 			}
 			
@@ -812,7 +812,7 @@ public class ForoDAO extends BaseDAO{
 			
 			// Recuperando lista de reglas antiguas
 			query = "SELECT R.IDREGLA,R.SEDE,R.FAMILIA,R.FORMACION,R.CICLO,R.SECCION " +
-					"FROM CV_REGLA_SERVICIO R,CV_FORO_REGLA F " +
+					"FROM cv_regla_servicio R,cv_foro_REGLA F " +
 					"WHERE R.IDREGLA=F.IDREGLA AND IDFORO=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, foro.getIdForo());
@@ -832,10 +832,10 @@ public class ForoDAO extends BaseDAO{
 			}
 			
 			// Comparando si la regla antigua aun permanece
-			query = "DELETE FROM CV_FORO_REGLA WHERE IDREGLA=?";
+			query = "DELETE FROM cv_foro_REGLA WHERE IDREGLA=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
-			query = "DELETE FROM CV_REGLA_SERVICIO WHERE IDREGLA=?";
+			query = "DELETE FROM cv_regla_servicio WHERE IDREGLA=?";
 			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 			
 			for (ReglaDeServicio regla : reglasAntiguas) {
@@ -843,12 +843,12 @@ public class ForoDAO extends BaseDAO{
 					
 					stmt.setInt(1, regla.getIdRegla());
 					if (1 != stmt.executeUpdate()) {
-						log.error("Error al intentar eliminar regla de CV_FORO_REGLA de id: " + regla.getIdRegla());
+						log.error("Error al intentar eliminar regla de cv_foro_REGLA de id: " + regla.getIdRegla());
 						throw new DAOException("No culmino");
 					}
 					stmt2.setInt(1, regla.getIdRegla());
 					if (1 != stmt2.executeUpdate()) {
-						log.error("Error al intentar eliminar regla de CV_REGLA_SERVICIO de id: " + regla.getIdRegla());
+						log.error("Error al intentar eliminar regla de cv_regla_servicio de id: " + regla.getIdRegla());
 						throw new DAOException("No culmino");
 					}
 					log.info("Regla Eliminada: "+regla.toString());
@@ -859,11 +859,11 @@ public class ForoDAO extends BaseDAO{
 			// Insertando las nuevas reglas
 			foro.getReglaDeServicio().removeAll(reglasAntiguas);
 			
-			query = "INSERT INTO CV_REGLA_SERVICIO (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
+			query = "INSERT INTO cv_regla_servicio (IDREGLA,SEDE,FAMILIA,FORMACION,CICLO,SECCION) " +
 					"VALUES(SEQCVREGLASERVICIO.NEXTVAL,?,?,?,?,?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			
-			query = "INSERT INTO CV_FORO_REGLA (IDREGLA,IDFORO) " +
+			query = "INSERT INTO cv_foro_REGLA (IDREGLA,IDFORO) " +
 					"VALUES(SEQCVREGLASERVICIO.CURRVAL,?)";
 			stmt2 = (PreparedStatement) cons.prepareStatement(query);
 			stmt2.setInt(1, foro.getIdForo());
@@ -876,12 +876,12 @@ public class ForoDAO extends BaseDAO{
 				stmt.setInt(5, regla.getSeccion());
 				
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en modificarForo(Foro foro) - INSERT INTO CV_REGLA_SERVICIO");
+					log.error("Error en modificarForo(Foro foro) - INSERT INTO cv_regla_servicio");
 					throw new DAOException("No culmino");
 				}
 				
 				if (1 != stmt2.executeUpdate()) {
-					log.error("Error en modificarForo(Foro foro) - INSERT INTO CV_FORO_REGLA");
+					log.error("Error en modificarForo(Foro foro) - INSERT INTO cv_foro_REGLA");
 					throw new DAOException("No culmino");
 				}
 				log.info("Regla Creada: "+regla.toString());
@@ -890,7 +890,7 @@ public class ForoDAO extends BaseDAO{
 			
 			// MODERADOR ************************************************
 			
-			query = "SELECT TRIM(USUARIO) USUARIO FROM CV_FORO_MODERADOR WHERE IDFORO=?";
+			query = "SELECT TRIM(USUARIO) USUARIO FROM cv_foro_moderador WHERE IDFORO=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, foro.getIdForo());
 			
@@ -903,7 +903,7 @@ public class ForoDAO extends BaseDAO{
 			}
 			
 			// Comparando si el moderador antiguo aun permanece
-			query = "DELETE FROM CV_FORO_MODERADOR WHERE IDFORO=? AND TRIM(USUARIO)=?";
+			query = "DELETE FROM cv_foro_moderador WHERE IDFORO=? AND TRIM(USUARIO)=?";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, foro.getIdForo());
 			
@@ -912,7 +912,7 @@ public class ForoDAO extends BaseDAO{
 					
 					stmt.setString(2, usuario.getIdUsuario());
 					if (1 != stmt.executeUpdate()) {
-						log.error("Error al intentar eliminar usuario de CV_FORO_MODERADOR de id: " + usuario.getIdUsuario());
+						log.error("Error al intentar eliminar usuario de cv_foro_moderador de id: " + usuario.getIdUsuario());
 						throw new DAOException("No culmino");
 					}
 					log.info("Moderador Eliminado: "+usuario.getIdUsuario());
@@ -923,7 +923,7 @@ public class ForoDAO extends BaseDAO{
 			// Insertando los nuevos moderadores
 			foro.getModeradores().removeAll(moderadoresAntiguos);
 			
-			query = "INSERT INTO CV_FORO_MODERADOR (IDFORO,USUARIO) " +
+			query = "INSERT INTO cv_foro_moderador (IDFORO,USUARIO) " +
 					"VALUES(?,?)";
 			stmt = (PreparedStatement) cons.prepareStatement(query);
 			stmt.setInt(1, foro.getIdForo());
@@ -932,7 +932,7 @@ public class ForoDAO extends BaseDAO{
 				
 				stmt.setString(2, usuario.getIdUsuario());
 				if (1 != stmt.executeUpdate()) {
-					log.error("Error en modificarForo(Foro foro) - INSERT INTO CV_FORO_MODERADOR");
+					log.error("Error en modificarForo(Foro foro) - INSERT INTO cv_foro_moderador");
 					throw new DAOException("No culmino");
 				}
 				log.info("Regla Creada: "+usuario.getIdUsuario());
@@ -965,7 +965,7 @@ public class ForoDAO extends BaseDAO{
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_FORO SET ESTADO=? WHERE IDFORO=?";
+			String query = "UPDATE cv_foro SET ESTADO=? WHERE IDFORO=?";
 
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -994,7 +994,7 @@ public class ForoDAO extends BaseDAO{
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_FORO SET CERRADO=? WHERE IDFORO=?";
+			String query = "UPDATE cv_foro SET CERRADO=? WHERE IDFORO=?";
 
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
@@ -1023,7 +1023,7 @@ public class ForoDAO extends BaseDAO{
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_FORO SET ELIMINADO=1, ESTADO=0 WHERE IDFORO=?";
+			String query = "UPDATE cv_foro SET ELIMINADO=1, ESTADO=0 WHERE IDFORO=?";
 
 			cons = (Connection)dataSource.getConnection();
 			stmt = (PreparedStatement) cons.prepareStatement(query);
