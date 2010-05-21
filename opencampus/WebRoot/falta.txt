@@ -1,4 +1,50 @@
-**diseño: por defaul que el open_table sea sin grid, y se adicione with_grid
+**diseño: por defaul que el open_table sea sin grid, y se adicione with_grid, ver casos de misdatos, index.jsp, opciones, aulavirtuales
+http://www.w3schools.com/css/tryit.asp?filename=trycss_first-child2
+--------------------------------------------------- probar algo asi aver
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+<style type="text/css">
+.Xtablita > td:first-child 
+{
+border:1px solid #ff0000;
+} 
+.tablita tr td
+{
+border:1px solid #ff0000;
+} 
+.tablita tr td td
+{
+border:none ;
+} 
+</style>
+</head>
+
+<body>
+<table class="tablita" border="1">
+ <tr><td>demo</td></tr>
+ <tr><td>
+
+  <table>
+ <tr><td>111</td></tr>
+ <tr><td>222</td></tr>
+ <tr><td>333</td></tr>
+ <tr><td>444</td></tr>
+
+</table>
+
+ </td></tr>
+ <tr><td>demo</td></tr>
+ <tr><td>demo</td></tr>
+
+</table>
+</body>
+</html>
+--------------------------------------------
+
+
+
+
 		portal_admin
 		monitorea
 		*fusionar aula_virtual del docente y estudiante

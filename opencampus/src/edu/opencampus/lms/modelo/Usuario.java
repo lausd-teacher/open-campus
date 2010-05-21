@@ -505,7 +505,7 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 		log.info("valueBound() Ingreso de Usuario: "+this.toString());
 		
 		//Idioma **********
-		e.getSession().setAttribute(Constante.IDIOMA_ATRIBUTO, new Locale(this.idioma));
+		e.getSession().setAttribute(Constante.IDIOMA_ATRIBUTO, new Locale((idioma != null)?idioma:Constante.IDIOMA_ESPANOL));
 		
 		if(!this.isAdmin){
 			//Registro a la lista de conectados **********

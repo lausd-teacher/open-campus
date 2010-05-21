@@ -57,17 +57,17 @@ public class SeguridadAction extends BaseAction {
 		switch (usuario.getEstadoSeguridad()) {
 			case Constante.SEGURIDAD_USUARIO_NO_ENCONTRADO:
 				setMessage("Usuario y/o clave incorrectos.");
-				log.info(getMessage());
+				log.info(message);
 				return INPUT;
 				
 			case Constante.SEGURIDAD_USUARIO_PASSWORD_ERRONEO:
 				setMessage("Usuario y/o clave incorrectos.");
-				log.info(getMessage());
+				log.info(message);
 				return INPUT;
 				
 			case Constante.SEGURIDAD_USUARIO_DESABILITADO:
 				setMessage("Usuario deshabilitado.");
-				log.info(getMessage());
+				log.info(message);
 				return INPUT;
 		}
 		
