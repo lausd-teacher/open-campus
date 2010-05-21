@@ -4,10 +4,10 @@
 <struts>
 	<package name="campus-logeo" extends="campus-default" namespace="/">
 
-		<action name="Logeo" method="ingreso"
+		<action name="Login" method="ingreso"
 			class="edu.opencampus.lms.action.seguridad.SeguridadAction">
 			<result name="success" type="redirect-action">Portal</result>
-			<result name="input">/index.jsp</result>
+			<result name="input" type="redirect-action">Inicio</result>
 		</action>
 
 		<action name="Salir" method="salida"

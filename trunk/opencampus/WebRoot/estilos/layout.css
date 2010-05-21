@@ -158,14 +158,7 @@ form {
 	font-weight: bold;
 	color: #FFFFFF;
 }
-.errMsg {
-	color:#F00 !important;
-	display:block;
-}
 
-.errFld {
-	border: 1px solid #FF0000 !important;
-} 
 /***********************************************/
 	/* Layout Divs Otros                           */
 	/***********************************************/

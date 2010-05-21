@@ -171,6 +171,14 @@ function go(url){
 	window.location.href=url;
 }
 
+//Noticia en la portada
+function abrirImagenDeNoticia(ruta){
+	var newImg = new Image();
+	newImg.src = ruta;
+	var height = newImg.height + 20;
+	var width = newImg.width + 20;
+	window.open(ruta,'Noticia','width='+width+',height='+height+',status=no,toolbar=no,menubar=no,location=no,resizable=no'); 
+}
 /************** Deprecated *****************/
 function nuevoAjax() {
 	var xmlhttp = false;

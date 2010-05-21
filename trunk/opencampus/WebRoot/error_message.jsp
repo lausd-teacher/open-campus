@@ -4,29 +4,29 @@
 
 <s:if test="hasActionErrors()">
 	<div class="actionErrorCSS">
-		<div>Error encontrado:</div>
-		<span><s:actionerror/></span>
+		<span>Error encontrado:</span>
+		<div><s:actionerror/></div>
 	</div>
 	<br/>
 </s:if>
 <s:if test="hasFieldErrors()">
 	<div class="actionErrorCSS">
-		<div>Error encontrado:</div>
-		<span><s:fielderror/></span>
+		<span>Error encontrado:</span>
+		<div><s:fielderror/></div>
 	</div>
 	<br/>
 </s:if>
 <s:if test="hasActionMessages()">
 	<div class="actionMessageCSS">
-		<div>Informaci&oacute;n del sistema:</div>
-		<span><s:actionmessage/></span>
+		<span>Informaci&oacute;n del sistema:</span>
+		<div><s:actionmessage/></div>
 	</div>
 	<br/>
 </s:if>
 <c:if test="${message != null}">
 	<div class="actionMessageCSS">
-		<div>Informaci&oacute;n del sistema:</div>
-		<span><c:out value="${message}"></c:out></span>
+		<span>Informaci&oacute;n del sistema:</span>
+		<div><c:out value="${message}"></c:out></div>
 	</div>
 	<br/>
 </c:if>

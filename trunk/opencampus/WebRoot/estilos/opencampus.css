@@ -375,44 +375,75 @@ tr.roweven {
 }
 
 /***/
-/* ActionMessage */
+/* ActionMessages:  actionMessageCSS, actionWarningCSS, actionErrorCSS */
 /***/
+
+.actionMessageCSS, .actionErrorCSS, .actionWarningCSS {
+	/*width: 100%;*/
+	border: 1px solid; 
+	text-align: left;
+}
+.actionMessageCSS span, .actionErrorCSS span, .actionWarningCSS span {
+	border-bottom: 1px solid #C6D880; 
+	padding: 2px 3px 2px 3px; 
+	color:#FFF; 
+	font-weight: bold;
+	display: block;
+}
+.actionMessageCSS div, .actionErrorCSS div, .actionWarningCSS div {
+	text-align: justify;
+	padding: 1px 3px 1px 3px; 
+}
 
 .actionMessageCSS {
-	width: 100%;
-	border: 1px solid #cccccc; 
-	background-color: #E5EFF8; 
-	color: #cccccc;
+	border-color: #C6D880; 
+	background-color: #E6EFC2; 
+	color: #264409;
 }
-
-.actionMessageCSS div {
-	border-bottom: 1px solid #cccccc; 
-	padding: 2px 0px 2px 0px; 
-	background-color: #cccccc; 
-	color:#FFF; 
-	font-weight: bold;
-	text-indent: 3px;
+.actionMessageCSS a {
+	color:#264409;
 }
-
-/***/
-/* ActionError */
-/***/
-
+.actionMessageCSS span {
+	border-bottom-color: #C6D880; 
+	background-color: #C6D880; 
+}
+.actionWarningCSS {
+	border-color: #FFD324; 
+	background-color: #FFF6BF; 
+	color: #514721;
+}
+.actionWarningCSS a {
+	color:#514721;
+}
+.actionWarningCSS span {
+	border-bottom-color: #FFD324; 
+	background-color: #FFD324; 
+}
 .actionErrorCSS {
-	width: 100%;
-	border: 1px solid #F55; 
-	background-color: #FFFBE8; 
-	color: #F33;
+	border-color: #FBC2C4; 
+	background-color: #FBE3E4; 
+	color: #8a1f11;
+}
+.actionErrorCSS a {
+	color:#8a1f11;
+}
+.actionErrorCSS div {
+	border-bottom-color: #FBC2C4; 
+	background-color: #FBC2C4; 
 }
 
-.actionErrorCSS div {
-	border-bottom: 1px solid #F55; 
-	padding: 2px 0px 2px 0px; 
-	background-color: #F55; 
-	color:#FFF; 
-	font-weight: bold;
-	text-indent: 3px;
+/*
+ * Wforms
+ */
+.errMsg {
+	color:#F00 !important;
+	display:block;
 }
+
+.errFld {
+	border: 1px solid #FF0000 !important;
+}
+
 /*
  * Anatips
  */

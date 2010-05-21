@@ -57,7 +57,7 @@
 					</table>
 		</div>
 		<div id="pie">
-			<s:include value="comun/pie_copyright.jsp" />
+			<s:include value="/comun/pie.jsp"/>
 		</div>
 	</div>
 </body>

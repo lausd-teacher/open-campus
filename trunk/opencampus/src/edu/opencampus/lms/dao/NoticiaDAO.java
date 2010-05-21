@@ -931,6 +931,10 @@ public class NoticiaDAO extends BaseDAO {
 				noticia.setImagen(result.getString("imagen_nombre"));
 				noticia.setFecha(Formato.dateToCalendar(result.getString("fecha_inicio")));
 				noticias.add(noticia);
+				noticias.add(noticia);
+				noticias.add(noticia);
+				noticias.add(noticia);
+				noticias.add(noticia);
 			}
 			
 		} catch (SQLException e) {
