@@ -507,6 +507,7 @@ div#anatips_tip {
 	background-image: url(../img/logo.jpg);
 	height: 68px;
 	background-repeat: no-repeat;
+	padding: 0px;
 }
 #main_menu {
 	height: 22px;

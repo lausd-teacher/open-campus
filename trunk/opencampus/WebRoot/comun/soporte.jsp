@@ -49,16 +49,8 @@
 }
 </style>
 
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
-
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<script>	   
 			var imagesDir = "<%=request.getContextPath()%>/js/openwysiwyg/icons/";
 			var cssDir = "<%=request.getContextPath()%>/js/openwysiwyg/styles/";

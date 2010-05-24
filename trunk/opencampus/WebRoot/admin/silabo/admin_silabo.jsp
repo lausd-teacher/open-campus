@@ -24,22 +24,9 @@
 	display: none;
 }
 </style>
-<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-			<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>
-<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
+<s:include value="/comun/jslibs.jsp"/>
 <script language="javascript" type="text/javascript"
 			src='<%=request.getContextPath()%>/admin/silabo/admin_silabo.js'></script>
-<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/fastinit.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/tablesort.js"></script>
 
 </head>
 <%	

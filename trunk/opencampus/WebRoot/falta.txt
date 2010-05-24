@@ -115,6 +115,10 @@ Despues de 45 minutos para evitar congestion por cada request.
 que se genere apartir de un Objeto menu que se guarde en session como un atributo del objeto usuario y 
 que sea cargado de la base de datos las opciones y links que estaran relacionadas a cada rol, (opciones aula asociadas a cv_matricula_rol y opciones principales asociadas a cv_rol).  
 
+***añadir evento onclick a todo button. input submit, o en evento ounonload o unload, que cuandose invoke con dom busques todos los enlaces input o button 
+y lo desactives añadiendo un mnsaje de procesos ejecuntados, tipo bcp.
+
+
 *****definir estandares en mensjes de error de formulario, e informacion, podrias usar la logica que usa blueprint 
 (ver Mis Datos), el color del message que aparece cuando se crea un curso (seccion sílabo)(amarillo) esta bacan, usarlo para message de error_action.jsp 
 
