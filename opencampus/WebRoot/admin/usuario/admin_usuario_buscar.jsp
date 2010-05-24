@@ -45,22 +45,9 @@
 	padding-right:5px;
 }
 </style>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
+		<s:include value="/comun/jslibs.jsp"/>
 		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/admin/usuario/admin_usuario_buscar.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>	
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/fastinit.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/tablesort.js"></script>	
+			src="<%=request.getContextPath()%>/admin/usuario/admin_usuario_buscar.js"></script>	
 	</head>
 	<body>
 		<div id="contenedor">

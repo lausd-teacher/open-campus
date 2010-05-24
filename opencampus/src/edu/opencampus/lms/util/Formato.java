@@ -166,7 +166,7 @@ public final class Formato {
 		}
 		String temp = name;
 		try {
-			name = name.toLowerCase();
+			name = Formato.matizarFrace(name).toLowerCase().replaceAll("null", "");
 			String[] name_parte = name.split(" ");
 			name = "";
 			for (int u = 0; u < name_parte.length; u++) {
