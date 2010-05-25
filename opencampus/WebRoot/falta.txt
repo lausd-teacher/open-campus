@@ -73,6 +73,8 @@ border:none ;
 ****** Cambia la estructura de trabajo individual, no se sincroniza cuando se matricula a un alumno despues de publicar trabajo
 ****Corregir interceptors!!!!!!!!!
 **** Corregir el test que no traiga al html las respuestas
+
+***problem javascript en admin_unidad.jsp, porque hay un form que tiene un input hiden con nombre 'id' y eso raya al wforms (linea 241 fr admin_unidad.jsp)
 ---------------------------------------------------------------------------------------------------------
 //Creado por y modificado por deben de guardar el username y no el id (para que se pueda mostrar)
 //En la base de datos modificado_en debe ser CURRENT_TIMESTAMP y credo_en '0000:...' (manualmente con now())

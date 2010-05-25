@@ -59,30 +59,10 @@
 						<tr>
 							<td colspan="2" align="center">
 								<div id="inicio" style="padding-top: 10px;">
-									<table width="95%" border="0" cellpadding="0" cellspacing="0">
+									<table width="95%" border="0" cellpadding="0" cellspacing="0" class="open_table">
+										<caption>Fechas de ejecuci&oacute;n</caption>
 										<tr>
-											<td width="100%" class="lin_azul">
-												<table border="0" align="left" cellpadding="0" cellspacing="0">
-													<tr>
-														<td width="3">
-															<img src="<%=request.getContextPath()%>/img/fon_tit_curso_01.jpg" width="3"
-																height="21" />
-														</td>
-														<td class="fon_tit_curso">
-															Fechas de ejecuci&oacute;n
-														</td>
-														<td width="22">
-															<img src="<%=request.getContextPath()%>/img/fon_tit_curso_03.jpg" width="22"
-																height="21" />
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td
-												style="border-bottom: 1px solid #4268C9;border-left:1px solid #4268C9; border-right:1px solid #4268C9;"
-												width="100%">
+											<td width="100%">
 												<div id="otros">
 													<%
 														Periodo periodo = aula.getPeriodo();

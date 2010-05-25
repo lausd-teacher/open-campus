@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@  page import="edu.opencampus.lms.util.Constante"%>
 <%@  page import="edu.opencampus.lms.util.Formato"%>
 <%@  page
@@ -14,10 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Unidades del Sílabo</title>
-<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/jComponente.js"></script>
+<s:include value="/comun/jslibs.jsp"/>
 <script type="text/javascript" src='<%=request.getContextPath()%>/admin/silabo/admin_silabo.js'></script>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/saludo.js"></script>
 <style type="text/css">
 #lista {
 	position:absolute;

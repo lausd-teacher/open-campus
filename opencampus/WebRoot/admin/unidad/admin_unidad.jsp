@@ -10,11 +10,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>
-<s:text name="titulo.campus.virtual" />
-</title>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
+<s:include value="/comun/jslibs.jsp"/>
 <style>
 .ocultar {
 	margin-top: 10px;
@@ -23,8 +19,6 @@
 }
 </style>
 <script type="text/javascript" src='<%=request.getContextPath()%>/admin/unidad/admin_unidad.js'></script>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/saludo.js"></script>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/util.js"></script>
 <script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/admin/aulavirtual/aula_virtual.js"></script>
 
 </head>

@@ -15,18 +15,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title><s:text name="titulo.campus.virtual" />
 		</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>	
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<link rel="stylesheet" type="text/css"
 			href="<%=request.getContextPath()%>/js/autocomplete/autocomplete.css" />
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/js/autocomplete/prototype.js"></script>	
+		<!-- script type="text/javascript"
+			src="<%=request.getContextPath()%>/js/autocomplete/prototype.js"></script-->	
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/autocomplete/autocomplete.js"></script>	
 		<link rel="stylesheet" type="text/css"

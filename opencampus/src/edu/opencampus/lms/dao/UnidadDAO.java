@@ -235,6 +235,7 @@ public class UnidadDAO extends BaseDAO {
 				stmt =  cons.prepareStatement(query);
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
+				throw new DAOException("La unidad no ha sido eliminada, posiblemente este en uso, solo pudo ser desactivada.");
 			} catch (Exception er) {
 				log.error(er.toString());
 				throw new DAOException(er.toString());

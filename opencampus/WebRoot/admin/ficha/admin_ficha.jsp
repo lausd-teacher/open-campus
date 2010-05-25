@@ -14,20 +14,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title><s:text name="titulo.campus.virtual" />
 		</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>	
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/fastinit.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/tablesort.js"></script>	
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<link rel="stylesheet" type="text/css"
 			href="<%=request.getContextPath()%>/js/jscalendar/calendar-style.css" />
 		<script type="text/javascript"
@@ -36,7 +24,8 @@
 			src="<%=request.getContextPath()%>/js/jscalendar/calendar-es.js"></script>
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/jscalendar/calendar-setup.js"></script>
-		<script language="javascript" type="text/javascript"
+			
+		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/admin/ficha/admin_ficha.js"></script>
 	</head>
 	<body>

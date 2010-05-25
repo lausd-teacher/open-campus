@@ -10,11 +10,7 @@
 <title>
 <s:text name="titulo.campus.virtual" />
 </title>
-<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/saludo.js"></script>
-<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/js/util.js"></script>
-	<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
+<s:include value="/comun/jslibs.jsp"/>
    
 </head>
 <body>
