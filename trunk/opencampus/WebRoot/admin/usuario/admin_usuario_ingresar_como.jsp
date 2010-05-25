@@ -13,14 +13,7 @@
 
 <title><s:text name="titulo.campus.virtual" /></title>
 
-<link href="<c:out value='${contextPath}'/>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript"
-			src="<c:out value='${contextPath}'/>/js/saludo.js"></script>
-<script language="javascript" type="text/javascript"
-			src="<c:out value='${contextPath}'/>/js/jComponente.js"></script>
-<script language="javascript" type="text/javascript" 
-			src="<c:out value='${contextPath}'/>/js/util.js"></script>
+<s:include value="/comun/jslibs.jsp"/>
 
 </head>
 <body>
@@ -34,18 +27,12 @@
     <div id="pop_cuerpo">
 		<s:include value="/error_message.jsp"/>
 		<form method="post" action="<c:out value='${contextPath}'/>/admin/LoginAs.action" onsubmit="return !(this.idUsuario.value.trim() === '')">
-			<table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
-	          <tr>
-	            <td class="foro_fon_tit_iz" width="3">&nbsp;</td>
-	            <td class="foro_fon_tit" width="100" height="21">Ingresar como</td>
-	            <td class="foro_fon_tit_de" width="20">&nbsp;</td>
-	            <td>&nbsp;</td>
-	          </tr>
-            </table>
-			<table width="950" border="0" align="center" cellpadding="3" cellspacing="0" class="bor_tabla">
+			<table width="100%" border="0" cellpadding="3" cellspacing="0" class="open_table">
+	          <caption>Ingresar como</caption>
 		        <tr height="23">
-		            <td style="padding-left: 5px;">
+		            <td>
 		            	<strong>Usuario: </strong> <input name="idUsuario" type="text" class="form_text" value="" maxlength="20" size="20" /> <input type="submit" value="Ingresar" class="form_button"/>
+		        	</td>
 		        </tr>
 			</table>
 		</form>
