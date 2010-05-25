@@ -44,7 +44,7 @@
 								<td width="10" class="menu_prin01" align="center">
 									|
 								</td>
-								<td width="47" align="center">
+								<td width="47" align="center" style="display: none">
 									<span class="menu"
 										onclick="javascript:abrirReporte('<%=request.getContextPath()%>/aulavirtual/Reporte.action','Reporte','640','350');">
 										<s:text name="aula.alumno.menu.reporte"/> </span>
@@ -52,7 +52,7 @@
 								<td width="10" class="menu_prin01" align="center">
 									|
 								</td>
-								<td width="87" align="center">
+								<td width="87" align="center" style="display: none">
 									<span class="menu"
 										onclick="javascript:abrirReporte('<%=request.getContextPath()%>/aulavirtual/ReporteNotas.action','Reporte de Notas','640','350');">
 										<s:text name="aula.alumno.menu.reporte_notas"/> </span>
