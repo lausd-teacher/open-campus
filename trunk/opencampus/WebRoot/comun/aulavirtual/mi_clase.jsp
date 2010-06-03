@@ -41,17 +41,18 @@
 	font-family:arial,verdana;
 	font-size:8pt;
 	line-height:20px;
-	text-align:right;
+	text-align:left;
 	float:right;
 	height: 20px;
 	width: 124px;
 	padding-right:5px;
+	padding-left:5px;
 }
 </style>
 <script type="text/javascript">
 	// ********** Mostrar Imagen de Usuario (existe una copia en admin_usuario_buscar.js) ************//
 var imagen;
-var x = 
+var x;
 function verImagen(img, archivo) {
 	if (xStr(archivo)) {
 		x = xPageX(img);

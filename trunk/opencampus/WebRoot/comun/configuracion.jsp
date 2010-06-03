@@ -70,7 +70,7 @@
 					
 				<table border="0" cellpadding="3" cellspacing="0" class="open_grid" width="100%">
 						<thead>
-							<tr><td class="line">Arrastre cada elemento y despl&aacute;celo hasta la hubicaci&oacute;n deseada.</td></tr>
+							<tr><td class="line"><s:text name="portal.configuracion.help2"/></td></tr>
 						</thead>
 						<tbody>
 							<tr>

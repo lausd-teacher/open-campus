@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page errorPage="../../error_action.jsp" %>
-<%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
-<%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
+<%@ page errorPage="../../error_action.jsp"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:set var="contextPath" value='${pageContext.request.contextPath}' />
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title><s:text name="titulo.campus.virtual" />
-		</title>
+		<s:include value="/comun/jslibs.jsp"/>
+		
 		<style>
 #ampliacion {
 	border-right: #666666 1px solid;
@@ -37,35 +38,24 @@
 	font-family:arial,verdana;
 	font-size:8pt;
 	line-height:20px;
-	text-align:right;
+	text-align:left;
 	float:right;
 	height: 20px;
 	width: 124px;
 	padding-right:5px;
+	padding-left:5px;
 }
 </style>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css"
-			rel="stylesheet" type="text/css" />
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/saludo.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jComponente.js"></script>
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/directorio.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/util.js"></script>	
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/jPrototype.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/fastinit.js"></script>
-		<script language="javascript" type="text/javascript" 
-			src="<%=request.getContextPath()%>/js/tablesort.js"></script>	
 	</head>
 	<body>
-		<div id="contenedor">
-			<s:include value="/comun/bienvenida.jsp"></s:include>
-			<div id="cuerpo">			
-				<div id="principal">
+		<div id="container">
+		
+			<s:include value="/comun/bienvenida.jsp"/>
+			
+			<div id="body">
+				
 				<s:include value="/error_message.jsp"/> 
 				<c:if test="${usuarios != null}">
 					<table width="975" cellpadding="3" cellspacing="0" class="open_border" border="0">
@@ -95,7 +85,7 @@
 								</c:choose>
 							</td>
 							<td width="160" align="center"> 
-								<f:Constante campo="BUSQUEDA_CANTIDAD_DIRECTORIO" var="cantidad"/>
+								<c:set var="cantidad" value="${BUSQUEDA_CANTIDAD_DIRECTORIO}"></c:set>
 								<c:out value="${(pagina * cantidad) + 1}"/>
 								-
 								<c:out value="${(pagina * cantidad) + fn:length(usuarios)}"/>
@@ -107,7 +97,7 @@
 									<c:when test="${paginas - pagina >= 1}">
 										<a class="opcion_selecionar" style="text-decoration: underline;font-weight: bold;"
 											href="<%=request.getContextPath()%>/Directorio.action?pagina=<c:out value="${pagina+1}"/>">
-											&gt; </span>
+											&gt; </a>
 									</c:when>
 									<c:otherwise>
 										<span class="opcion_selecionar" style="color: silver;"> &gt; </span>
@@ -207,8 +197,7 @@
 							<c:choose>
 								<c:when test="${fn:length(usuarios)>0}">
 									<c:forEach items="${usuarios}" var="u" varStatus="fila">
-										<tr onmouseover="verImagen(this,'<%=request.getContextPath()%>/VerFoto.action?id=<c:out value="${u.id}"/>');"
-										onmouseout=" ocultarImagen();" id="<c:out value="${u.idToString}"/>" style="height: 16px;">
+										<tr id="<c:out value="${u.idToString}"/>" style="height: 16px;">
 										
 											<td align="center" class="bor_der_unid">
 												<c:out value="${u.rolPredeterminado.nombre}" default="&nbsp;" escapeXml="false"></c:out>
@@ -229,6 +218,10 @@
 												<c:out value="${u.persona.nomdos}" default="&nbsp;" escapeXml="false"/>
 											</td>
 											<td align="center" >
+												<img src="<%=request.getContextPath()%>/img/icon_user.png" border="0" class="link_negro" style="cursor: pointer;"
+															onmouseover="verImagen(this,'<%=request.getContextPath()%>/VerFoto.action?id=<c:out value="${u.id}"/>');"
+															onmouseout=" ocultarImagen();" id="<c:out value="${u.usuario}"/>" />
+												&nbsp;
 												<img src="<%=request.getContextPath()%>/img/icon_mail_send.gif" border="0"
 														style="cursor:pointer" onclick="nuevoMensaje('<%=request.getContextPath()%>/comun/buzon/NuevoMensaje.action?destino=<c:out value="${u.usuario}"/>')">
 											</td>
@@ -245,12 +238,12 @@
 						</c:if>
 					</table>
 					</form>
-					<br/>
-				</div>				
+						
+			
 			</div>
-			<div id="pie">
-				<%@include file="/comun/pie.jsp"%>
-			</div>
+			
+			<s:include value="/comun/pie.jsp"/>
+			
 			<div id="ampliacion">
 				<div id="c1">
 					<img src="<%=request.getContextPath()%>/img/cargando.gif"
@@ -259,6 +252,7 @@
 				<div id="cerrarampliacion" style="color:#ffffff;font-weight: bold;">
 				</div>
 			</div>
+			
 		</div>
 	</body>
 </html>

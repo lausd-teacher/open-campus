@@ -95,7 +95,7 @@
 					<strong><c:out value="${noticia.imagen}"/></strong>
 				</td>
 				<td align="right" style="padding:3px;">
-					<strong style="color: rgb(68, 101, 155);"><f:DateToString fecha="${noticia.fecha}"/></strong>
+					<strong style="color: rgb(68, 101, 155);"><fmt:formatDate  value="${noticia.fecha.time}" type="both" pattern="dd-MM-yyyy" /></strong>
 				</td>
 			</tr>
 			<tr>
@@ -119,7 +119,15 @@
 				<td colspan=2 />
 			</tr>
 		</c:forEach>
-
+		<c:if test="${fn:length(noticias)==0}">
+			<tr>
+				<td style="color:gray;font-size:8pt;" height="22" >
+					<span style="padding : 7px;">
+						<s:text name="portal.noticia.contenido.vacio"/>
+					</span>
+				</td>
+			</tr>
+		</c:if>
 	</table>
 </c:when>
 
