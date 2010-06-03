@@ -119,13 +119,14 @@
 		    		<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpe,image/pjpeg,image/x-png,application/vnd.ms-powerpoint,application/octet-stream,
 	application/pdf,application/msword,application/vnd.ms-excel,application/x-zip-compressed,application/zip,text/plain,text/html,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,
 	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/richtext</param>
-	    			<param name="maximumSize">15728640</param>
+	    			<param name="maximumSize">5242880</param>
 	    		</interceptor-ref>
 			</interceptor-stack>
 			
 			<interceptor-stack name="campusfileUpload-images">
 				<interceptor-ref name="fileUpload">
 		    		<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpe,image/pjpeg,image/x-png</param>
+		    		<param name="maximumSize">512000</param>
 	    		</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>

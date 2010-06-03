@@ -28,6 +28,7 @@
 		<action name="SolicitarCambioDatos" method="solicitarCambioDatos"
 			class="edu.opencampus.lms.action.buzon.BuzonAction">
 			<result name="success" type="redirect-action">MisDatos</result>
+			<interceptor-ref name="campusfileUpload-images"/>
 			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
