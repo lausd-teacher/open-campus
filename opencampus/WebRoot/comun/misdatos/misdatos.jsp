@@ -50,7 +50,7 @@
 									<b><s:text name="portal.misdatos.contenido.usuario"/></b>
 								</td>
 								<td class="border-right">
-									<%=usuario.getUsuario()%>&nbsp;&nbsp;&nbsp;<font color="#cccccc">(<%=usuario.getIdToString()%>)</font>
+									<%=usuario.getUsuario()%>&nbsp;&nbsp;&nbsp;<font color="#ffffff">(<%=usuario.getIdToString()%>)</font>
 								</td>
 								<td class="border-right" width="100">
 									<b><s:text name="portal.misdatos.contenido.fechanac"/></b>
@@ -160,7 +160,7 @@
 										<input value="<s:text name="portal.misdatos.botones.cambiar"/>" type="button"
 											onClick="verPanelCambioPassword();"/>
 									
-										<input onClick="verPanelCambioCorreo();"
+										<input onClick="verPanelCambioCorreo();" style="display: none;"
 											type="button" value="<s:text name="portal.misdatos.botones.modificar"/>" />
 									</td>
 								</tr>
@@ -230,7 +230,7 @@
 		
 		<!-- ************************************  MODIFICAR DATOS *************************************************** -->
 		
-		<div id="form_div_datos"  style="width: 500px;" class="open_modal">
+		<div id="form_div_datos"  style="width: 720px;" class="open_modal">
 			<form id="form_datos" action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post">
 				<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
 					<caption><s:text name="portal.misdatos.botones.solicitar.titulo"/></caption>
@@ -239,11 +239,13 @@
 						<col/>
 						<col width="80"/>
 						<col />
+						<col width="80"/>
+						<col />
 					</colgroup>
 					<thead>
 						<tr>
-							<!-- td width="80"></td><td></td><td width="80"></td><td></td></tr><tr-->
-							<td colspan="4" align="center"><b><s:text name="portal.misdatos.botones.solicitar.comentario"/></b></td>
+							<!-- td width="80"></td><td></td><td width="80"></td><td></td><td width="80"></td><td></td></tr><tr-->
+							<td colspan="6" align="center"><b><s:text name="portal.misdatos.botones.solicitar.comentario"/></b></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -252,66 +254,112 @@
 								<b><s:text name="portal.misdatos.botones.solicitar.contenido.nombres"/></b>
 							</td>
 							<td>
-								<input style="font-size: 9pt" name="nombres" size="20"
+								<input type="text" name="nombres" size="24" maxlength="200"
 									value="<%=Formato.formatoTexto(p.getNomuno())%> <%=Formato.formatoTexto(p.getNomdos())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.paterno"/></b>
+							</td>
+							<td>
+								<input type="text" name="paterno" size="24" maxlength="100"
+									value="<%=Formato.formatoTexto(p.getApepaterno())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.materno"/></b>
+							</td>
+							<td align="left">
+								<input type="text" name="materno" size="24" maxlength="100"
+									value="<%=Formato.formatoTexto(p.getApematerno())%>" />
+							</td>
+						</tr>
+						<tr class="line">	
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.nacimiento"/></b>
+							</td>
+							<td>
+								<input type="text" name="nacimiento" size="24" maxlength="20"
+									value="<%=p.getFecnacimientoAsString()%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.dni"/></b>
+							</td>
+							<td>
+								<input type="text" name="dni" size="24" maxlength="20"
+									value="<%=Formato.formatoTextoNull(p.getDni())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.sexo"/></b>
+							</td>
+							<td>
+								<input type="radio" name="sexo" value="M" <%if(p.getSexo().equals("M"))out.print("checked");%>>Masculino
+								<input type="radio" name="sexo" value="F" <%if(p.getSexo().equals("F"))out.print("checked");%>>Femenino	
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.email"/></b>
+							</td>
+							<td>
+								<input name="email" type="text" size="24" maxlength="100"
+									value="<%=Formato.formatoTextoNull(p.getEmail())%>" />
 							</td>
 							<td>
 								<b><s:text name="portal.misdatos.botones.solicitar.contenido.telefono"/></b>
 							</td>
 							<td>
-								<input style="font-size: 9pt" name="telefono" type="text"
-									size="20"
+								<input name="telefono" type="text" size="24" maxlength="40"
 									value="<%=Formato.formatoTextoNull(p.getTeldomicilio())%>" />
-							</td>
-							<%-- <td><span class="textstatic">Fecha Nacimiento</span></td>
-							<td><input style="font-size:9pt" name="fec_nac" size="10" value="<%=Formato.getStringDeDate(usuarioDato.getFechaNacimiento())%>"/></td>--%>
-						</tr>
-						<tr class="line">
-							<td>
-								<b><s:text name="portal.misdatos.botones.solicitar.contenido.paterno"/></b>
-							</td>
-							<td>
-								<input style="font-size: 9pt" name="paterno" size="20"
-									value="<%=Formato.formatoTexto(p.getApepaterno())%>" />
 							</td>
 							<td>
 								<b><s:text name="portal.misdatos.botones.solicitar.contenido.celular"/></b>
 							</td>
 							<td>
-								<input style="font-size: 9pt" name="celular" type="text"
-									size="12"
+								<input  name="celular" type="text" size="24" maxlength="40"
 									value="<%=Formato.formatoTextoNull(p.getTelcelular())%>" />
+							</td>
+						</tr>
+						<tr class="line">
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.departamento"/></b>
+							</td>
+							<td>
+								<input name="departamento" type="text" size="24" maxlength="100"
+									value="<%=p.getUbigeo().getDepartamento()%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.provincia"/></b>
+							</td>
+							<td>
+								<input name="provincia" type="text" size="24" maxlength="100"
+									value="<%=p.getUbigeo().getProvincia()%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.distrito"/></b>
+							</td>
+							<td>
+								<input  name="distrito" type="text" size="24" maxlength="100"
+									value="<%=p.getUbigeo().getDistrito()%>" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<b><s:text name="portal.misdatos.botones.solicitar.contenido.materno"/></b>
-							</td>
-							<td align="left">
-								<input style="font-size: 9pt" name="materno" size="20"
-									value="<%=Formato.formatoTexto(p.getApematerno())%>" />
-							</td>
-							<td colspan="2">&nbsp;</td>
-						</tr>
-						<%--<tr>
-						<td><span class="textstatic">Ubicaci&oacute;n</span></td>
-							<td><input name="ubicacion" style="font-size:9pt" type="text" size="40" value="<%=Formato.formatoTexto(usuario.getUsuarioDato().getUbigeo().getNombreCompleto())%>"/></td>
-							<td><span class="textstatic">Sexo</span></td>
-							<td><input <%if(usuarioDato.getSexo().equals("M"))out.print("checked");%> type="radio" name="sexo" value="M">Masculino<input <%if(usuarioDato.getSexo().equals("F"))out.print("checked");%> type="radio" name="sexo" value="F">Femenino						
-						</tr>--%>
-						<tr class="line">
-							<td>
 								<b><s:text name="portal.misdatos.botones.solicitar.contenido.direccion"/></b>
 							</td>
 							<td  colspan="3">
-								<input name="direccion" style="font-size: 9pt;width: 318px;"
+								<input name="direccion" type="text" size="72" maxlength="100" 
 									value="<%=Formato.formatoTextoNull(p.getDirdomicilio())%>" />
+							</td>
+							<td>
+								<b><s:text name="portal.misdatos.botones.solicitar.contenido.foto"/></b>
+							</td>
+							<td>
+								<input  name="foto" type="file"  value="" size="8" />
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4" align="right">
+							<td colspan="6" align="right">
 								<input type="reset" value="<s:text name="portal.misdatos.botones.solicitar.botones.cancelar"/>" onClick="ocultarPanelCambioDatos()">
 								<input type="submit" value="<s:text name="portal.misdatos.botones.solicitar.botones.enviar"/>">
 							</td>

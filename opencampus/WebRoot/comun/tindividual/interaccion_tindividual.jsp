@@ -79,7 +79,7 @@
 			<c:choose>
 			<c:when test="${rol == 'docente'}">
 			<table width="500" align="center" bgcolor="#FFFFFF" class="tabla01">
-		        <CAPTION>
+		        <CAPTION style="color: #000000; font-size: 11px;">
 		          Trabajo: <c:out value="${ti.nombreUnidad}"></c:out>
 		          	<input type="hidden" id="idMatricula" value="<c:out value='${matricula.usuarioReceptor.idMatricula}'/>" />
 		         </CAPTION>
@@ -111,7 +111,7 @@
 			</c:when>
 			<c:otherwise>
 				<table width="500" align="center" bgcolor="#FFFFFF" class="tabla01">
-		        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold;padding-left: 5px;" colspan="2">
+		        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold;padding-left: 5px;  color: #000000; font-size: 11px;" colspan="2">
 		          Trabajo: <c:out value="${ti.nombreUnidad}"></c:out>
 		         </td></tr>
 		        <tr>
@@ -129,7 +129,7 @@
 			</c:choose>
 			
 			<table width="500" align="center" bgcolor="#FFFFFF" class="tabla01">
-		        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold; padding-left: 5px;" colspan="2">
+		        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold; padding-left: 5px; color: #000000; font-size: 11px;" colspan="2">
 		          	Env&iacute;o y Recepci&oacute;n de Documentos
 		        </td></tr>
 		        

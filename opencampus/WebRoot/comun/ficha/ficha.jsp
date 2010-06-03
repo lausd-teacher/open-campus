@@ -50,21 +50,21 @@
 																	<tr>
 																		<td colspan="2">
 																			<table width="200" border="0" align="center" cellpadding="0" cellspacing="0" 
-																				style="padding-left: 3px;padding-right: -3px; ">
+																				style="padding-left: 3px;padding-right: 3px; ">
 																				<tbody>
 																				<tr>
 																					<td width="85" height="112" align="center" valign="middle" style="border-right: none !important;">
 																						<img src="<%=request.getContextPath()%>/VerFoto.action?id=<c:out value="${ficha.docentePrincipal.usuario.id}"/>" width="85" border="0"/> 
 																					</td>
-																					<td width="115" align="left" style="border-right: none !important;">
-																						<p>
+																					<td width="115" align="left" style="border-right: none !important; text-align: left !important; ">
+																						<p style="text-align: left !important;">
 																							<c:out value="${ficha.docentePrincipal.usuario.persona.nombreCompleto}"/>
 																						</p>
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2"  style="border-right: none !important;">
-																						<hr align="center" width="170" />
+																						<hr width="90%" />
 																					</td>
 																				</tr>
 																				
@@ -200,7 +200,7 @@
 																	</tbody>
 																	<tfoot>
 																		<tr>
-																		<td align="right" colspan="2">
+																		<td align="left" colspan="2">
 																			<a
 																				href="<%=request.getContextPath()%>/aulavirtual/AulaVirtual.action?id=<c:out value="${ficha.idFicha}"/>"
 																				class="ingr_curso" style="padding-right: 5px;"><s:text name="portal.servicios.link" /></a>

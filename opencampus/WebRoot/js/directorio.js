@@ -18,7 +18,7 @@ function validar(form){
 			&& form.nombre2.value.trim().length < 3
 			&& form.paterno.value.trim().length < 3
 			&& form.materno.value.trim().length < 3)){
-	alert("Debe indicar el rol y como mínimo uno de los cinco campos del formulario \ncon una longitud no menor a 3 caracteres.");
+	alert("Debe indicar el grupo y como mínimo uno de los cinco campos del formulario \ncon una longitud no menor a 3 caracteres.");
 	return false;
 	}
 	return true;
@@ -26,11 +26,13 @@ function validar(form){
 
 // ********** Mostrar Imagen de Usuario ************//
 var imagen;
+var x;
 function verImagen(img, archivo) {
 	if (xStr(archivo)) {
+		x = xPageX(img);
 		imagen = new Image();
 		imagen.src = archivo;
-		xMoveTo("ampliacion", xPageX(img), xPageY(img) + xHeight(img));
+		xMoveTo("ampliacion", xPageX(img) - xWidth("ampliacion"), xPageY(img) + xHeight(img));
 		pruebaCarga(imagen);
 		xShow("ampliacion");
 		
@@ -44,7 +46,7 @@ function pruebaCarga() {
 		xResizeTo("ampliacion", ancho + 6, alto + 6 + 20);
 		xResizeTo("c1", ancho, alto);
 		xWidth("cerrarampliacion", ancho); 
-		//xLeft("ampliacion",xPageX("ampliacion")-xWidth("ampliacion")+136);
+		xLeft("ampliacion",x-xWidth("ampliacion"));
 		xInnerHtml("c1", "<img src=\"" + imagen.src + "\" width=\"" + ancho + "\" height=\"" + alto + "\" border=\"0\">");
 	} else {
 		setTimeout("pruebaCarga()", 500);

@@ -73,11 +73,14 @@
 			<img onclick="abrir_<%=Constante.SERVICIO_AGENDA%>();" src="<%=request.getContextPath()%>/img/agenda_icon.gif"
 				width="16" height="16" border="0" style="cursor:pointer;" title="<s:text name="portal.bienvenida.agenda.alt"/>"/>								
 		</td>
+		<%if(false){ %>
 		<td width="5" align="center">|</td>	
 		<td width="20" align="center">	
 			<img onclick="abrir_<%=Constante.SERVICIO_CHAT%>();" src="<%=request.getContextPath()%>/img/icono_chat.gif"
 				width="16" height="16" border="0" title="<s:text name="portal.bienvenida.chat.alt"/>" style="cursor:pointer;"/>
 		</td>
+		<%} %>
+		
 		<td width="5" align="center">|</td>	
 		<td width="20" align="center">
 			<img onclick="abrir_<%=Constante.SERVICIO_APUNTES%>();"  src="<%=request.getContextPath()%>/img/apuntes_icon.gif" 

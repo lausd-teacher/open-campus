@@ -114,7 +114,7 @@
 										
 										<c:if test="${aula.cantidadTextos > 0}">
 											<td align="center"  width="24" class="border-right">
-												<img src="<%=request.getContextPath()%>/img/icon_libro.gif" style="cursor: pointer;" alt="Ver Texto"
+												<img src="<%=request.getContextPath()%>/img/icon_libro.gif" style="cursor: pointer;" class="anatips" title="Ver Texto"
 													onclick="abrirTexto('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=1&id=<c:out value="${unidad.idUnidad}"/>');"/>
 											</td>
 										</c:if>
@@ -124,14 +124,14 @@
 										
 										<c:if test="${aula.cantidadRepasos > 0}">
 											<td align="left">
-												<span style="cursor: pointer; text-decoration: underline; white-space: nowrap;" 
+												<span style="cursor: pointer; text-decoration: underline; white-space: nowrap;" class="anatips" title="Ver Repaso"
 													onclick="abrirRepaso('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=3&id=<c:out value="${unidad.idUnidad}"/>');">
 													<c:out value="${unidad.nombreCompleto}"/>
 												</span>
 											</td>
 											
 											<td align="center"  width="24" class="border-right">
-												<img src="<%=request.getContextPath()%>/img/icon_download.gif" style="cursor: pointer;" alt="Descargar Repaso"
+												<img src="<%=request.getContextPath()%>/img/icon_download.gif" style="cursor: pointer;" class="anatips" title="Descargar Repaso"
 													onclick=""/>
 											</td>
 										</c:if>
@@ -145,7 +145,7 @@
 											</td>
 											
 											<td align="center" width="22">
-												<img src="<%=request.getContextPath()%>/img/icon_lab.gif" style="cursor: pointer;" alt="Ver Laboratorio"
+												<img src="<%=request.getContextPath()%>/img/icon_lab.gif" style="cursor: pointer;" class="anatips" title="Ver Laboratorio"
 													onClick="abrirLaboratorioPdf('<%=request.getContextPath()%>/aulavirtual/VerRecurso.action?ruta=2&id=<c:out value="${unidad.idUnidad}"/>');"/>
 											</td>
 											
@@ -168,7 +168,7 @@
 											</td>
 											
 											<td align="center" width="22">
-												<img src="<%=request.getContextPath()%>/img/icon_dialog.gif" style="cursor: pointer;" alt="Sala de Diálogo"
+												<img src="<%=request.getContextPath()%>/img/icon_dialog.gif" style="cursor: pointer;" class="anatips" title="Sala de Diálogo"
 													onClick="abrirDialogo('<%=request.getContextPath()%>/aulavirtual/dialogo/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>','Dialogo','620','400');"/>
 											</td>
 											
@@ -191,7 +191,7 @@
 											</td>
 											
 											<td align="center" width="22">
-												<img src="<%=request.getContextPath()%>/img/icon_trab.gif" style="cursor: pointer;" alt="Trabajo Individual"
+												<img src="<%=request.getContextPath()%>/img/icon_trab.gif" style="cursor: pointer;" class="anatips" title="Trabajo Individual"
 													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tindividual/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
 											</td>
 											
@@ -214,7 +214,7 @@
 											</td>
 											
 											<td align="center" width="22">
-												<img src="<%=request.getContextPath()%>/img/icon_trab_grup.gif" style="cursor: pointer;" alt="Trabajo Grupal"
+												<img src="<%=request.getContextPath()%>/img/icon_trab_grup.gif" style="cursor: pointer;" class="anatips" title="Trabajo Grupal"
 													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tgrupal/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
 											</td>
 											
@@ -236,7 +236,7 @@
 												&nbsp;
 											</td>
 											<td align="center" width="22">
-												<img src="<%=request.getContextPath()%>/img/icon_test.gif" style="cursor: pointer;" alt="Evaluación"
+												<img src="<%=request.getContextPath()%>/img/icon_test.gif" style="cursor: pointer;" class="anatips" title="Evaluación"
 													onClick="abrirTest('<%=request.getContextPath()%>/aulavirtual/test/Listar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
 											</td>
 											<td align="right" width="20">

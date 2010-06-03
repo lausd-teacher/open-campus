@@ -1,3 +1,23 @@
+/*** Modificar Datos ***/
+function verPanelCambioDatos() {
+	DarkPanel.show('form_div_datos',{duration	: 0.0});
+}
+
+function ocultarPanelCambioDatos() {
+	DarkPanel.hide('form_div_datos');
+}
+
+/*** Modificar Clave ***/
+function verPanelCambioPassword() {
+	DarkPanel.show('form_div_clave',{duration	: 0.0});
+}
+
+function ocultarPanelCambioPassword() {
+	DarkPanel.hide('form_div_clave');
+	$("password_level").style.backgroundPosition= '200px';
+	$("password_level").style.backgroundColor= '#ffffff';
+}
+
 function validarClave(texto) {
 	if(!texto.empty()){
 		var password = new PasswordTest(texto);
@@ -14,32 +34,6 @@ function validarClave(texto) {
 		$("password_level").style.backgroundPosition= '200px';
 		$("password_level").style.backgroundColor= '#ffffff';
 	}
-}
-
-function verPanelCambioPassword() {
-	DarkPanel.show('form_div_clave',{duration	: 0.0});
-}
-
-function ocultarPanelCambioPassword() {
-	DarkPanel.hide('form_div_clave');
-	$("password_level").style.backgroundPosition= '200px';
-	$("password_level").style.backgroundColor= '#ffffff';
-}
-
-function verPanelCambioDatos() {
-	DarkPanel.show('form_div_datos',{duration	: 0.0});
-}
-
-function ocultarPanelCambioDatos() {
-	DarkPanel.hide('form_div_datos');
-}
-
-function verPanelCambioCorreo() {
-	DarkPanel.show('form_div_correo',{duration	: 0.0});
-	$("newMail").value = $("theMail").innerHTML.replace(/<BR>/gi, ",")
-}
-function ocultarPanelCambioCorreo() {
-	DarkPanel.hide('form_div_correo');
 }
 
 wf.functionName_formValidation = "myCustomValidation";
@@ -86,6 +80,15 @@ function myCustomValidation (evt) {
 		alert('Ocurrió un error. Actualice la página.\nError:'+((e.description)?e.description:e));
 		return wf.utilities.XBrowserPreventEventDefault(evt);
 	}
+}
+
+/*** Modificar Correo ***/
+function verPanelCambioCorreo() {
+	DarkPanel.show('form_div_correo',{duration	: 0.0});
+	$("newMail").value = $("theMail").innerHTML.replace(/<BR>/gi, ",")
+}
+function ocultarPanelCambioCorreo() {
+	DarkPanel.hide('form_div_correo');
 }
 
 function grabarCorreo() {
