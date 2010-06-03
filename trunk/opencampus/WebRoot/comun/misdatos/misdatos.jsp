@@ -231,7 +231,7 @@
 		<!-- ************************************  MODIFICAR DATOS *************************************************** -->
 		
 		<div id="form_div_datos"  style="width: 720px;" class="open_modal">
-			<form id="form_datos" action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post">
+			<form id="form_datos" action="<%=request.getContextPath()%>/SolicitarCambioDatos.action" method="post" enctype="multipart/form-data">
 				<table width="100%" cellpadding="3" cellspacing="0" class="open_table">
 					<caption><s:text name="portal.misdatos.botones.solicitar.titulo"/></caption>
 					<colgroup>
@@ -353,7 +353,7 @@
 								<b><s:text name="portal.misdatos.botones.solicitar.contenido.foto"/></b>
 							</td>
 							<td>
-								<input  name="foto" type="file"  value="" size="8" />
+								<input  name="doc" type="file"  value="" size="8" />
 							</td>
 						</tr>
 					</tbody>

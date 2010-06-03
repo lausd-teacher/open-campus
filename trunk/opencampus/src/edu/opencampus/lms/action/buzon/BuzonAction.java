@@ -20,6 +20,7 @@ import edu.opencampus.lms.modelo.usuario.Persona;
 import edu.opencampus.lms.service.BuzonService;
 import edu.opencampus.lms.util.Archivo;
 import edu.opencampus.lms.util.Constante;
+import edu.opencampus.lms.util.Formato;
 import edu.opencampus.lms.util.SendMail;
 import edu.opencampus.lms.util.UsuariosConectados;
 
@@ -85,8 +86,6 @@ public class BuzonAction extends BaseAction {
 
 	private String nombres;
 
-	private String fec_nac;
-
 	private String paterno;
 
 	private String telefono;
@@ -95,11 +94,21 @@ public class BuzonAction extends BaseAction {
 
 	private String celular;
 
-	private String ubicacion;
-
 	private String sexo;
 
 	private String direccion;
+	
+	private String nacimiento;
+	
+	private String dni;
+	
+	private String email;
+	
+	private String departamento;
+	
+	private String provincia;
+	
+	private String distrito;
 
 	private int cantidadPorPagina = Constante.MAX_FILA_POR_PAG;
 
@@ -790,63 +799,58 @@ public class BuzonAction extends BaseAction {
 	
 	public String solicitarCambioDatos() throws Exception{
 		log.info("solicitarCambioDatos()");
-		String idUsuario = ""+getUsuarioSession().getId();
-		Mensaje m = new Mensaje();
+		
 		Persona ud = getUsuarioSession().getPersona();
-		int cont = 0;
-
-		contenido = "El usuario <strong>" + getUsuarioSession().getUsuario()
-				+ "</strong> solicita el cambio de sus datos personales:<br> ";
+		contenido = "";
+		
 		if (!nombres.equalsIgnoreCase((ud.getNomuno().concat(" "
-				+ ud.getNomdos())))) {
+				+ Formato.formatoTextoNull(ud.getNomdos()))))) {
 			contenido += "<br>Nombres: " + nombres;
-			cont++;
 		}
-		if (!paterno.equalsIgnoreCase(ud.getApepaterno())) {
+		if (!paterno.equalsIgnoreCase(Formato.formatoTextoNull(ud.getApepaterno()))) {
 			contenido += "<br>Apellido paterno: " + paterno;
-			cont++;
 		}
-		if (!materno.equalsIgnoreCase(ud.getApematerno())) {
+		if (!materno.equalsIgnoreCase(Formato.formatoTextoNull(ud.getApematerno()))) {
 			contenido += "<br>Apellido materno: " + materno;
-			cont++;
 		}
-		if (!celular.equals(ud.getTelcelular())) {
+		if (!nacimiento.equalsIgnoreCase(Formato.formatoTextoNull(ud.getFecnacimientoAsString()))) {
+			contenido += "<br>Fecha de Nacimiento: " + nacimiento;
+		}
+		if (!dni.equalsIgnoreCase(Formato.formatoTextoNull(ud.getDni()))) {
+			contenido += "<br>DNI: " + dni;
+		}
+		if (!sexo.equalsIgnoreCase(ud.getSexo())) {
+			contenido += "<br>Sexo: " + sexo;
+		}
+		if (!email.equalsIgnoreCase(Formato.formatoTextoNull(ud.getEmail()))) {
+			contenido += "<br>Email: " + email;
+		}
+		if (!celular.equals(Formato.formatoTextoNull(ud.getTelcelular()))) {
 			contenido += "<br>Celular: " + celular;
-			cont++;
 		}
-		if (!telefono.equals(ud.getTeldomicilio())) {
+		if (!telefono.equals(Formato.formatoTextoNull(ud.getTeldomicilio()))) {
 			contenido += "<br>Telefono: " + telefono;
-			cont++;
 		}
-		if (!direccion.equalsIgnoreCase(ud.getDirdomicilio())) {
+		if (!departamento.equalsIgnoreCase(ud.getUbigeo().getDepartamento())) {
+			contenido += "<br>Departamento: " + departamento;
+		}
+		if (!provincia.equals(ud.getUbigeo().getProvincia())) {
+			contenido += "<br>Provincia: " + provincia;
+		}
+		if (!distrito.equals(ud.getUbigeo().getDistrito())) {
+			contenido += "<br>Distrito: " + distrito;
+		}
+		if (!direccion.equalsIgnoreCase(Formato.formatoTextoNull(ud.getDirdomicilio()))) {
 			contenido += "<br>Direccion: " + direccion;
-			cont++;
 		}
-		log.info("# de datos modificados: "+cont);
-		if (cont > 0) {
-			m.setContenido(contenido);
-			m.setTitulo("Modificación de datos personales");
-			m.setUsuario(idUsuario);
-			m.setEstado(1);
-			m.setFavorito(0);
-			m.setAdjunto(0);
+		log.info("Contenido: "+contenido);
+		if (false && contenido.trim().length()>0) {
+			contenido = "El usuario <strong>" + getUsuarioSession().getUsuario()
+			+ "</strong> solicita el cambio de sus datos personales:<br> " + contenido;
+			titulo = "Modificación de datos personales";
 			
-			m.setIdMensaje(buzonService.guardarMensaje(m));
+			enviarMensajeSoporte();
 			
-			//Guardar mensaje a soporte
-			Collection<Usuario> soportes = buzonService.listarSoportes();
-			for (Usuario usuario : soportes) {
-				log.info("Mensaje para soporte: "+usuario.getUsuario());
-				m.setUsuario(String.valueOf(usuario.getId()));
-				m.setCarpeta("R");
-				m.setTipo("D");
-				buzonService.guardarMensajeUsuario(m);
-			}
-			//Guardar mensaje al mismo usuario
-			m.setUsuario(idUsuario);
-			m.setCarpeta("E");
-			m.setTipo("R");
-			buzonService.guardarMensajeUsuario(m);
 			setMessage("La solicitud ha sido enviado a soporte.");
 			
 		}
@@ -1252,14 +1256,6 @@ public class BuzonAction extends BaseAction {
 		this.nombres = nombres;
 	}
 
-	public String getFec_nac() {
-		return fec_nac;
-	}
-
-	public void setFec_nac(String fec_nac) {
-		this.fec_nac = fec_nac;
-	}
-
 	public String getPaterno() {
 		return paterno;
 	}
@@ -1290,14 +1286,6 @@ public class BuzonAction extends BaseAction {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
-	}
-
-	public String getUbicacion() {
-		return ubicacion;
-	}
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
 	}
 
 	public String getSexo() {
@@ -1393,6 +1381,54 @@ public class BuzonAction extends BaseAction {
 
 	public void setNoleidos(int noleidos) {
 		this.noleidos = noleidos;
+	}
+
+	public String getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(String nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getDistrito() {
+		return distrito;
+	}
+
+	public void setDistrito(String distrito) {
+		this.distrito = distrito;
 	}
 
 	public String getId() {
