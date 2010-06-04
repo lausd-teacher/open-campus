@@ -21,8 +21,6 @@
 		
 		<script language="javascript" type="text/javascript"
 			src="<%=request.getContextPath()%>/js/passwordmeter.js"></script>
-		<script language="javascript" type="text/javascript"
-			src="<%=request.getContextPath()%>/js/cambioclave.js"></script>
 		<script language="javascript" type="text/javascript" 
 			src='<%=request.getContextPath()%>/comun/misdatos/misdatos.js'></script>
 			

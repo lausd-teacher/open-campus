@@ -345,7 +345,7 @@ function validarAB(texto){
 	}
 	return true;
 }
-
+//deprecated, usar el que esta en util "validarExtAdjunto"
 extArray = new Array(".gif", ".jpg",".png");
 function validarAdjunto(file){
 	if(file == "") return true;

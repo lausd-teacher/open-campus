@@ -636,6 +636,7 @@ function showLoading(){
 	xShowD('loading');	
 }
 
+//deprecated, usar el que esta en util "validarExtAdjunto"
 var extArray = new Array(".gif", ".jpg",".png");
 function validarAdjunto(file){
 	if(file == "") return true;

@@ -7,7 +7,7 @@ var campusBiblioteca = null;
 var campusBuzon = null;
 var campusChat = null;
 var campusGuia = null;
-function cerrarVentanas() {
+function cerrarVentanas() { //HAcerlo con arraysmediante una funcion reutilizable que abra popups
 	if (campusApuntes) {
 		campusApuntes.close();
 	}
@@ -53,8 +53,7 @@ function verIdiomas(e){
 }
 
 function cambiarIdioma(idioma){
-	var myConn = new XHConn();
-	myConn.connect(xGetContextPath()+"/GuardarIdioma.action?request_locale="+idioma, "POST", null, function (oXML) {location.reload();});
+	new XHConn().connect(xGetContextPath()+"/GuardarIdioma.action?request_locale="+idioma, "POST", null, function (oXML) {location.reload();});
 }
 
 function changeImage(img){
@@ -71,6 +70,29 @@ function changeImage(img){
 	}
 }
 
+function mensajeSoporte(titulo, contenido){
+	try{
+		var params = "titulo="+titulo+"&contenido="+escape(contenido);
+		new XHConn().connect(xGetContextPath()+"/comun/buzon/EnviarMensajeSoporte.action", "POST", params,function (oXML) {});
+		//new Ajax.Request(xGetContextPath() +"/comun/buzon/EnviarMensajeSoporte.action", {method: 'POST', parameters: params, onSuccess: function(transport) {}});
+	}catch(e){}
+}
+
+var imgExts = new Array(".gif", ".jpg",".png");
+function validarExtAdjunto(file, CustomImgExts, alerta){
+	if(file == "") return true;
+	CustomImgExts = (CustomImgExts)?CustomImgExts:imgExts;
+	while (file.indexOf("\\") != -1)
+	file = file.slice(file.indexOf("\\") + 1);
+	ext = file.slice(file.indexOf(".")).toLowerCase();
+	for (var i = 0; i < CustomImgExts.length; i++) {
+		if (CustomImgExts[i] == ext) {
+			return true;
+		}
+	}
+	if(alerta)alert("Se permiten únicamente archivos con la extención: " + (CustomImgExts.join(" ")));
+	return false;
+}
 
 
 /* Abrir Servicios */

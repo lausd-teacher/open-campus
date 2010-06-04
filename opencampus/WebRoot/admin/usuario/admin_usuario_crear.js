@@ -48,7 +48,9 @@ function verificaUsuario(){
 
 wf.functionName_formValidation = "myCustomValidation";
 function myCustomValidation (evt) {
-	if (wf.formValidation(evt) && evt.srcElement.id == 'form_usuario_crear'){
+	var form =wf.helpers.getSourceElement(evt);
+	
+	if (wf.formValidation(evt) && form.id == 'form_usuario_crear'){
 		
 		var isValidate = true;
 		
@@ -216,6 +218,7 @@ function selectAll(theSel){
 	}
 }
 
+//deprecated, usar el que esta en util "validarExtAdjunto"
 extArray = new Array(".jpg");
 function validarAdjunto(file){
 	if(file == "") return true;
