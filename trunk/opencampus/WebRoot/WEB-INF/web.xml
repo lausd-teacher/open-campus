@@ -102,15 +102,15 @@
 	</welcome-file-list>
 	<error-page>
 		<error-code>404</error-code><!-- Not Found  -->
-		<location>/error.jsp</location>
+		<location>/error.jsp?id=404</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code><!-- Internal Server Error  -->
-		<location>/error.jsp</location>
+		<location>/error.jsp?id=500</location>
 	</error-page>
 	<error-page>
 		<error-code>403</error-code><!-- Forbidden  -->
-		<location>/error.jsp</location>
+		<location>/error.jsp?id=403</location>
 	</error-page>
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
