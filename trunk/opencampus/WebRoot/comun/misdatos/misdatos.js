@@ -39,22 +39,23 @@ function validarClave(texto) {
 wf.functionName_formValidation = "myCustomValidation";
 function myCustomValidation (evt) {
 	try{
-		if (wf.formValidation(evt) && evt.srcElement.id == 'form_clave'){
+		var form =wf.helpers.getSourceElement(evt);
+		if (wf.formValidation(evt) && form.id == 'form_clave'){
 			
 			var isValidate = true;
 				
 			//Validar clave
-			if(evt.srcElement.claveTemp.value != evt.srcElement.claveTemp2.value ){
-				showErrorForm(evt.srcElement.claveTemp2,"Clave no coincide.");
+			if(form.claveTemp.value != form.claveTemp2.value ){
+				showErrorForm(form.claveTemp2,"Clave no coincide.");
 				isValidate =  false;
 			}else{
-				hideErrorForm(evt.srcElement.claveTemp2);
+				hideErrorForm(form.claveTemp2);
 			}
-			if(evt.srcElement.claveTemp.value.length < evt.srcElement.claveTemp.alt){
-				showErrorForm(evt.srcElement.claveTemp,"La clave debe tener una longitud no menor a 6.");
+			if(form.claveTemp.value.length < form.claveTemp.alt){
+				showErrorForm(form.claveTemp,"La clave debe tener una longitud no menor a 6.");
 				isValidate =  false;
 			}else{
-				hideErrorForm(evt.srcElement.claveTemp);
+				hideErrorForm(form.claveTemp);
 			}
 			
 			if(!isValidate)
@@ -64,12 +65,14 @@ function myCustomValidation (evt) {
 			//loading();
 			//return wf.utilities.XBrowserPreventEventDefault(evt);
 			
-		}else if (wf.formValidation(evt) && evt.srcElement.id == 'form_datos'){
+		}else if (wf.formValidation(evt) && form.id == 'form_datos'){
 			
 			var isValidate = true;
 				
 			//Validar ...
-			
+			if(!validarExtAdjunto(form.doc.value,false,true)){
+				isValidate = false;
+			}
 			
 			if(!isValidate)
 				return wf.utilities.XBrowserPreventEventDefault(evt);

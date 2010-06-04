@@ -762,7 +762,7 @@ public class BuzonAction extends BaseAction {
 				GregorianCalendar gc = new GregorianCalendar();
 				int mes = gc.get(Calendar.MONTH) + 1;
 				int anio = gc.get(Calendar.YEAR) - 2000;
-				String anho = "anio";
+				String anho = "" + anio;
 				if (anio < 10) {
 					anho = "0" + anio;
 				}
@@ -843,8 +843,11 @@ public class BuzonAction extends BaseAction {
 		if (!direccion.equalsIgnoreCase(Formato.formatoTextoNull(ud.getDirdomicilio()))) {
 			contenido += "<br>Direccion: " + direccion;
 		}
+		if(null != doc && doc.exists()){
+			contenido += "<br>Adjunta nueva foto: "+docFileName;
+		}
 		log.info("Contenido: "+contenido);
-		if (false && contenido.trim().length()>0) {
+		if (contenido.trim().length()>0) {
 			contenido = "El usuario <strong>" + getUsuarioSession().getUsuario()
 			+ "</strong> solicita el cambio de sus datos personales:<br> " + contenido;
 			titulo = "Modificación de datos personales";

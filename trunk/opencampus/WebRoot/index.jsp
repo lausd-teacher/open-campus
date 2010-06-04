@@ -15,7 +15,7 @@
 		<s:include value="/comun/jslibs.jsp"/>	
 		<script type="text/javascript">
 			Event.observe(window, 'load', function() {
-				$('idUsuario').focus();
+				$('idusuario').focus();
 			});
 		</script>	
 	</head>
@@ -40,7 +40,7 @@
 										<tr>
 											<td align="right" width="60"><strong>Usuario :</strong></td>
 											<td>
-												<input name="idUsuario" type="text" autocomplete="off" maxlength="32" size="16" class="required"
+												<input id="idusuario" name="idUsuario" type="text" autocomplete="off" maxlength="32" size="16" class="required"
 													value="<c:out value="${idUsuario}" default="ebenites"/>" />
 											</td>
 										<tr>

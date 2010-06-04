@@ -407,7 +407,7 @@ function crearnoticia(form){
 	return true;
 	
 }
-
+//deprecated, usar el que esta en util "validarExtAdjunto"
 var extArray = new Array(".gif", ".jpg",".png");
 function validarAdjunto(file){
 	if(file == "") return true;
