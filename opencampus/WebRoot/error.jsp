@@ -1,81 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="edu.opencampus.lms.util.Constante"%>
+<%@page import="java.util.Properties"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	Properties prop = new Properties();
+	try {
+	  prop.load(application.getResource("/WEB-INF/classes/mensajes_es.properties").openStream());
+	} catch(Exception e) {}
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Campus Virtual de opencampus</title>
-		<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />
+		<title><%=prop.getProperty("titulo.campus.virtual") %></title>
+		<link href="<%=request.getContextPath()%>/estilos/estilos.css" rel="stylesheet" type="text/css" />		
 	</head>
 	<body>
-		<div id="contenedor">
-			<div id="menu_principal">
-				<table width="100%" border="0">
+		<div id="container">
+		
+			<div id="top_menu">
+				<table width="100%" border="0" cellpadding="2" cellspacing="0">
 					<tr>
-						<td width="4%">&nbsp;							
+						<td width="20" align="center">
+							<a href="<%=request.getContextPath()%>/Portal.action"><img src="<%=request.getContextPath()%>/img/icon_config.gif" 
+								alt="<%=prop.getProperty("portal.menu.inicio") %>" border="0"/></a>
 						</td>
-						<td width="96%">
-							<strong style="color:#333333">Campus Virtu@l opencampus</strong>
+						<td width="80">
+							<a href="<%=request.getContextPath()%>/Portal.action"><span><%=prop.getProperty("titulo.campus.virtual_corto") %></span></a>
 						</td>
+						<td></td>
 					</tr>
 				</table>
 			</div>
-			<div id="cuerpo" style="height:470px">
-				<table width="100%" height="470" border="0" cellpadding="0" cellspacing="7">
-					<tr>
-					  <td valign="top" class="xbor_tabla" height="450">
-					  <table width="100%" border="0" cellpadding="0" cellspacing="0"  height="450">
-                        <tr>
-                          <td width="48%" valign="top"><img src="<%=request.getContextPath()%>/img/logo_index.jpg" width="255" height="51"></td>
-                          <td width="12%">&nbsp;</td>
-                          <td width="40%">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td valign="top" align="right"><table width="100%" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td height="105">&nbsp;</td>
-                              <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td width="16%">&nbsp;</td>
-                              <td width="58%"><div align="right" class="bienvenida">Ocurri&oacute; un error inesperado, </div></td>
-                              <td width="23%">&nbsp;</td>
-                              <td width="3%">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td height="50" colspan="3">&nbsp;</td>
-                              <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <td colspan="2" class="bienvenida" style="padding-right:30px"><div align="right">por favor contacte a soporte. </div></td>
-                              <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td height="50">&nbsp;</td>
-                              <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td colspan="2"><div align="center" class="bienvenida">
-                                <div align="right">Gracias.</div>
-                              </div></td>
-                            </tr>
-                          </table></td>
-                          <td valign="top"><div align="right"><img src="<%=request.getContextPath()%>/img/interrogacion.jpg" width="117" height="105"></div></td>
-                          <td align="right" valign="bottom"><img src="<%=request.getContextPath()%>/img/opencampus.jpg" width="286" height="342"></td></tr>
-                      </table>
-				      </td>
-				  </tr>
+			<div id="banner"></div>
+			
+			<div id="body">
+			
+				<table width="100%" border="0" cellpadding="3" cellspacing="0" class="open_table" height="400">
+					<caption>Informaci&oacute;n del sistema</caption>
+					<tbody>
+						<tr>
+							<td class="error_jsp">
+								<%
+									String param = request.getParameter("id");
+									if("404".equals(param)){
+								%>
+										<h1>ERROR 404</h1><hr/><h2>P&aacute;gina no econtrada.</h2>
+										<center><img src="<%=request.getContextPath()%>/img/vista.png" alt="ERROR 404"></center>
+								<%
+									}else if("403".equals(param)){
+								%>
+										<h1>ERROR 403</h1><hr/><h2>P&aacute;gina protegida.</h2>
+										<center><img src="<%=request.getContextPath()%>/img/padlock.png" alt="ERROR 403"></center>
+								<%
+									}else if("500".equals(param)){
+								%>
+										<h1>ERROR 500</h1><hr/><h2>Error interno del sistema.</h2>
+										<center><img src="<%=request.getContextPath()%>/img/error.png" alt="ERROR 500"></center>
+								<%
+									}else{
+								%>
+										<h1>ERROR DESCONOCIDO</h1><hr/><h2>Error Realmente desconocido.</h2>
+								<%
+									}
+								%>
+								<font size="3">&lsaquo;&lsaquo;</font> <a href="javascript:history.back(1)">Regresar</a>
+							</td>
+						</tr>
+					</tbody>
 				</table>
+						
 			</div>
 			<div id="pie">
-					
+				<div>
+					Copyright &copy; 2010 <a href="#"><%=prop.getProperty("titulo.campus.virtual") %></a><br/>
+					<%=prop.getProperty("portal.pie.derechos") %>
+				</div>
+				<div class="right">
+					<a href="#"><%=Constante.DIRECCION_CORREO_SALIENTE %></a><br/>
+					<%=prop.getProperty("portal.pie.requerimientos") %>
+				</div>
 			</div>
+
 		</div>
 	</body>
 </html>

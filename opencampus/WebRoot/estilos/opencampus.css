@@ -469,6 +469,22 @@ tr.roweven {
 }
 
 /*
+ * Error jsp
+ */
+.error_jsp{
+	vertical-align: top; 
+	padding: 20px;
+}
+.error_jsp h1{
+	margin-bottom: 0px;
+	color: #333333;
+}
+.error_jsp h2{
+	margin-top: 0px;
+	color: gray;
+}
+
+/*
  * Wforms
  */
 .errMsg {
