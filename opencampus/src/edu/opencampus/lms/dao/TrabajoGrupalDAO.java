@@ -131,8 +131,40 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		return tg;
 
 	}
+	
+	public int obtenerIdGrupo(TrabajoGrupal idTrabajo, int idMatricula) throws DAOException {
+		log.info("obtenerIdGrupo("+idTrabajo+", "+idMatricula+")");
+		Connection cons = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
 
-	public Collection<Matricula> verIntegrantes(int idTrabajo, int idMatricula) throws DAOException {
+			String query = "SELECT NVL((SELECT M.IDGRUPO FROM CV_GRUPO_TRABAJO_MATRICULA M, CV_GRUPO_TRABAJO G WHERE M.IDTRABAJO=G.IDTRABAJO AND M.IDGRUPO=G.IDGRUPO AND M.IDTRABAJO=? AND M.IDMATRICULA=? AND G.ESTADO=?),-1) IDGRUPO FROM DUAL";
+			cons = (Connection)dataSource.getConnection();
+			stmt = (PreparedStatement) cons.prepareStatement(query);
+			stmt.setInt(1, idTrabajo);
+			stmt.setInt(2, idMatricula);
+			stmt.setInt(3, Constante.ESTADO_ACTIVO);
+			result = (ResultSet) stmt.executeQuery();
+			if (result.next()) {
+				return result.getInt("IDGRUPO");
+			}
+
+		} catch (SQLException e) {
+			log.error(e.toString());
+			throw new DAOException(e.toString());
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new DAOException(e.toString());
+		} finally {
+			closeResultSet(result);
+			closeStatement(stmt);
+			closeConnection(cons);
+		}
+		return 0;
+	}
+
+	public Collection<Matricula> verIntegrantes(TrabajoGrupal idTrabajo, int idMatricula) throws DAOException {
 		log.info("verIntegrantes(int idTrabajo, int idMatricul)");
 		Connection cons = null;
 		PreparedStatement stmt = null;
@@ -260,9 +292,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 			stmt.setString(5, integrante.getNotaParticipacion());
 			stmt.setString(6, integrante.getNotaPromedio());
 			stmt.setInt(7, idTrabajoGrupal);
-			stmt
-					.setString(8, integrante.getUsuarioMatricula()
-							.getIdMatricula());
+			stmt.setString(8, integrante.getUsuarioMatricula().getIdMatricula());
 
 			if (1 != stmt.executeUpdate()) {
 				log
@@ -1096,37 +1126,6 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 	}
 
-	public int obtenerIdGrupo(int idTrabajo, int idMatricula) throws DAOException {
-		log.info("obtenerIdGrupo("+idTrabajo+", "+idMatricula+")");
-		Connection cons = null;
-		PreparedStatement stmt = null;
-		ResultSet result = null;
-		try {
-
-			String query = "SELECT NVL((SELECT M.IDGRUPO FROM CV_GRUPO_TRABAJO_MATRICULA M, CV_GRUPO_TRABAJO G WHERE M.IDTRABAJO=G.IDTRABAJO AND M.IDGRUPO=G.IDGRUPO AND M.IDTRABAJO=? AND M.IDMATRICULA=? AND G.ESTADO=?),-1) IDGRUPO FROM DUAL";
-			cons = (Connection)dataSource.getConnection();
-			stmt = (PreparedStatement) cons.prepareStatement(query);
-			stmt.setInt(1, idTrabajo);
-			stmt.setInt(2, idMatricula);
-			stmt.setInt(3, Constante.ESTADO_ACTIVO);
-			result = (ResultSet) stmt.executeQuery();
-			if (result.next()) {
-				return result.getInt("IDGRUPO");
-			}
-
-		} catch (SQLException e) {
-			log.error(e.toString());
-			throw new DAOException(e.toString());
-		} catch (Exception e) {
-			log.error(e.toString());
-			throw new DAOException(e.toString());
-		} finally {
-			closeResultSet(result);
-			closeStatement(stmt);
-			closeConnection(cons);
-		}
-		return 0;
-	}
 
 	public int obtenerEstadoDebate(int idTrabajo, int idGrupo, int idMatricula) throws DAOException {
 		log.info("obtenerEstadoDebate(int idTrabajo, int idGrupo, int idMatricula)");

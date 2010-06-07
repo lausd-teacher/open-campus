@@ -49,6 +49,8 @@ public class Constante {
 	public static final String RUTA_PUBLICACIONES = REPOSITORIO + "pub" + SLASH;
 	
 	public static final String RUTA_TRABAJOS = REPOSITORIO + "trabajo" + SLASH;
+	
+	public static final String RUTA_GRUPALES = REPOSITORIO + "grupales" + SLASH;
 		
 	
 	

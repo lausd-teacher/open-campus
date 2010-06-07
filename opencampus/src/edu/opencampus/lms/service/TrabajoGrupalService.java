@@ -43,7 +43,7 @@ public class TrabajoGrupalService {
 		return tg;
 	}
 	
-	public Collection<Matricula> verIntegrantes(int idTrabajo, int idMatricula) throws ServiceException{
+	public Collection<Matricula> verIntegrantes(TrabajoGrupal idTrabajo, int idMatricula) throws ServiceException{
 		Collection<Matricula> integrantes = null;
 		try {
 			integrantes = trabajoGrupalDAO.verIntegrantes(idTrabajo, idMatricula);
@@ -229,7 +229,7 @@ public class TrabajoGrupalService {
 		}
 	}
 
-	public int obtenerIdGrupo(int idTrabajo, int idMatricula) throws ServiceException{
+	public int obtenerIdGrupo(TrabajoGrupal idTrabajo, int idMatricula) throws ServiceException{
 		int idGrupo;
 		try {
 			idGrupo = trabajoGrupalDAO.obtenerIdGrupo(idTrabajo, idMatricula);
