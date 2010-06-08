@@ -10,6 +10,7 @@ public class TrabajoGrupalGrupo extends BaseModelo {
 	
 	private int idTrabajo;
 	private int idGrupo;
+	private int idFicha;
 	private String nombre;
 	private String archivoNombre;
 	private String archivoTamanio;
@@ -22,6 +23,14 @@ public class TrabajoGrupalGrupo extends BaseModelo {
 	private Collection<TrabajoGrupalIntegrante> integrantes;
 	private Collection<TrabajoGrupalMensaje> mensajes;
 	
+	public int getIdFicha() {
+		return idFicha;
+	}
+
+	public void setIdFicha(int idFicha) {
+		this.idFicha = idFicha;
+	}
+
 	public TrabajoGrupalGrupo() {
 	}
 	

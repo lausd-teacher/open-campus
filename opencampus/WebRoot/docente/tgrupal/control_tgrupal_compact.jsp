@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
@@ -10,7 +11,7 @@
 <%@  page import="edu.opencampus.lms.util.Constante"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 <%
-AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA_ACTUAL);
+AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO_ACTUAL)).getAulaActual();
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -50,7 +51,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 				<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="90%">
-							<strong>Curso : <%=aula.getNombreCurso()%> </strong>
+							<strong>Curso : <%=aula.getCurso().getNombre()%> </strong>
 						</td>
 						<td width="5%"><a href="#" class="salir" onClick="window.print()">Imprimir</a> </td>
 						<td width="3%"><a href="#" class="salir" onClick="window.print()"><img

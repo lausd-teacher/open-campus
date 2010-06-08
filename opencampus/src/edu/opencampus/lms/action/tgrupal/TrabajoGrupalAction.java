@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 
-import javax.smartcardio.ATR;
-
 import edu.opencampus.lms.action.BaseAction;
 import edu.opencampus.lms.excepcion.ServiceException;
 import edu.opencampus.lms.modelo.AulaVirtual;
+import edu.opencampus.lms.modelo.Matricula;
 import edu.opencampus.lms.modelo.TrabajoGrupal;
 import edu.opencampus.lms.modelo.Usuario;
-import edu.opencampus.lms.modelo.Matricula;
 import edu.opencampus.lms.modelo.tgrupal.TrabajoGrupalGrupo;
 import edu.opencampus.lms.modelo.tgrupal.TrabajoGrupalIntegrante;
 import edu.opencampus.lms.modelo.tgrupal.TrabajoGrupalMensaje;
@@ -367,17 +365,18 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String verMensajes(){
 		log.info("verMensajes()");
 		
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
+		AulaVirtual aula = getUsuarioSession().getAulaActual();
+		TrabajoGrupal tg = (TrabajoGrupal)getSession().get("GRUPAL");
 		
 		try {
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg != null){
 				
-				TrabajoGrupal tg = new TrabajoGrupal();
-				tg.setIdTrabajo(aula.getTrabajoGrupalActual());
-				tg = tGrupalService.obtenerTrabajoGrupalPorID(tg);
+//				TrabajoGrupal tg = new TrabajoGrupal();
+//				tg.setIdTrabajo(aula.getTrabajoGrupalActual());
+//				tg = tGrupalService.obtenerTrabajoGrupalPorID(tg);
 				
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
 				grupo = tGrupalService.verMensajes(grupo);
 				
@@ -397,19 +396,26 @@ public class TrabajoGrupalAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	TrabajoGrupal tg = null;
+	AulaVirtual aula = null;
+	@Override
+	public void prepare() throws Exception {
+		super.prepare();
+		tg = (TrabajoGrupal)getSession().get("GRUPAL");
+		aula = getUsuarioSession().getAulaActual();
+	}
 
 	public String enviarMensaje(){
 		log.info("enviarMensaje()");
 		
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 		
 		try {
-			if(aula != null && usuario != null && aula.getTrabajoGrupalActual() != 0 && aula.getIdMatricula() != 0 && aula.getPeriodoMaestro() != 0){
+			if(aula != null && usuario != null && tg != null && aula.getMatriculaActual().getIdMatricula() != null ){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setEstado(aula.getIdMatricula());
+				grupo.setEstado(aula.getMatriculaActual().getIdMatricula());
 				grupo.setBandera(Constante.FLAG_PENDIENTE_ESTUDIANTE);
 				
 				int[] idMensajeEstado = tGrupalService.obtenerUltimoIdMensaje(grupo);
@@ -417,10 +423,10 @@ public class TrabajoGrupalAction extends BaseAction {
 				TrabajoGrupalMensaje mensaje = new TrabajoGrupalMensaje();
 				mensaje.setDescripcion(descripcion);
 				Matricula matricula = new Matricula();
-				matricula.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+				matricula.setIdMatricula(aula.getMatriculaActual().getIdMatricula());
 				mensaje.setUsuarioEmisor(matricula);
-				mensaje.setUsuarioCreacion(usuario.getIdUsuario());
-				mensaje.setUsuarioModificacion(usuario.getIdUsuario());
+				mensaje.setUsuarioCreacion(""+usuario.getId());
+				mensaje.setUsuarioModificacion(""+usuario.getId());
 				
 				//File **********************************************************
 				
@@ -431,8 +437,8 @@ public class TrabajoGrupalAction extends BaseAction {
 					String origen = file.getAbsolutePath();
 					if(!"/".equals(Constante.SLASH))
 						origen = origen.replaceAll("/", Constante.SLASH);
-					String directorioDestino = Constante.RUTA_GRUPALES + Constante.SLASH + aula.getPeriodoMaestro() +
-						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + aula.getTrabajoGrupalActual() + Constante.SLASH + idGrupo;
+					String directorioDestino = Constante.RUTA_GRUPALES + 
+						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + tg.getIdTrabajo() + Constante.SLASH + idGrupo;
 					String nombreDestino = "TG" +"_" + idGrupo + "_" + idMensajeEstado[0] + extension;
 					if(idMensajeEstado[1] == 0)
 						nombreDestino = "TG" +"_" + idGrupo + "_" + (idMensajeEstado[0]+1) + extension;
@@ -493,26 +499,25 @@ public class TrabajoGrupalAction extends BaseAction {
 	}
 	
 	public String cargar() {
-		log.info("cargar()");
-		
-		AulaVirtual aula = getAulaVirtualSession();
-		
+		log.info("cargar()"+idUnidad);
+		getSession().put("MODO_GRUPAL", 1);
 		try {
 			if(idUnidad != null || cmd != null){
-				TrabajoGrupal tg = new TrabajoGrupal();
 				if(idUnidad != null && idUnidad.trim().length()>0){
+					tg = new TrabajoGrupal();
 					tg.setIdFicha(aula.getIdFicha());
 					tg.setIdUnidad(Integer.parseInt(idUnidad));
+					tg.setIdTrabajo(Integer.parseInt(idUnidad));
 					tg = tGrupalService.obtenerTrabajoGrupal(tg);
-				}else if(aula.getTrabajoGrupalActual() != 0){
-					tg.setIdTrabajo(aula.getTrabajoGrupalActual());
-					tg = tGrupalService.obtenerTrabajoGrupalPorID(tg);
+					getSession().put("GRUPAL", tg);
+				}else if(tg.getIdTrabajo() != 0){
+					//tg = tGrupalService.obtenerTrabajoGrupalPorID(tg);
 				} else{
 					log.error("Faltan parametros requeridos");
 					throw new Exception("Faltan parametros requeridos");
 				}
 				
-				aula.setTrabajoGrupalActual(tg.getIdTrabajo());
+				//aula.setTrabajoGrupalActual(tg.getIdTrabajo());
 				
 				if(null == getSession().get("MODO_GRUPAL") && aula.getEstadoEjecucion() != 2 && tg.getFechaActivacion() == null)
 					return SUCCESS;
@@ -520,7 +525,7 @@ public class TrabajoGrupalAction extends BaseAction {
 				getRequest().setAttribute("TRABAJO_GRUPAL", tg);
 				
 				if(tg.getFechaActivacion() != null){
-					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg.getIdTrabajo(), aula.getIdMatricula());
+					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg.getIdTrabajo(), aula.getMatriculaActual().getIdMatricula());
 					getRequest().setAttribute("GRUPOS", grupos);
 					//*** 
 					for (TrabajoGrupalGrupo grupo : grupos) {
@@ -529,17 +534,18 @@ public class TrabajoGrupalAction extends BaseAction {
 					}
 				}else{
 					//***
+					System.out.println("integrentes");
 					ngrupos = tGrupalService.obtenerEstudiantes(aula.getIdFicha()).size();
 				}
 			}
-			getSession().put("UNIDAD_NOMBRE_TEMP",Util.getNombreUnidad(aula.getUnidades(), idUnidad)); // (solo para nombres de unidades en jsp) esto eliminar y trabajar con objetos de cada recurso en aula
+			getSession().put("UNIDAD_NOMBRE_TEMP",Util.getNombreUnidad(aula.getSilabo().getUnidades(), idUnidad)); // (solo para nombres de unidades en jsp) esto eliminar y trabajar con objetos de cada recurso en aula
 			
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		if(null != getSession().get("MODO_GRUPAL") && 1 == (Integer)getSession().get("MODO_GRUPAL"))
 			return "success_extended";
@@ -550,11 +556,10 @@ public class TrabajoGrupalAction extends BaseAction {
 		log.info("publicarTrabajo()");
 		try {
 			Usuario usuario = getUsuarioSession();
-			AulaVirtual aula = getAulaVirtualSession();
-			if(aula.getTrabajoGrupalActual() != 0 && aula.getIdMatricula() != 0){
+			if(tg.getIdTrabajo() != 0 && aula.getMatriculaActual().getIdMatricula() != 0){
 				
 				if(file != null && file.exists()){
-					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.listarGrupos(aula.getTrabajoGrupalActual());
+					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.listarGrupos(tg.getIdTrabajo());
 					for (TrabajoGrupalGrupo grupo : grupos) {
 						this.idGrupo = String.valueOf(grupo.getIdGrupo()); 
 						subirTrabajo();
@@ -562,14 +567,14 @@ public class TrabajoGrupalAction extends BaseAction {
 				}
 				
 				TrabajoGrupal tg = new TrabajoGrupal();
-				tg.setIdTrabajo(aula.getTrabajoGrupalActual());
-				tg.setFechaActivacion(Formato.setDateDeJSPCompleto(fechaActivacion));
-				tg.setFechaEntrega(Formato.setDateDeJSPCompleto(fechaEntrega));
+				tg.setIdTrabajo(tg.getIdTrabajo());
+				tg.setFechaActivacion(Formato.stringToCalendar(fechaActivacion, Constante.FECHA_DIA_MES_ANO_HORA_MI));
+				tg.setFechaEntrega(Formato.stringToCalendar(fechaEntrega, Constante.FECHA_DIA_MES_ANO_HORA_MI));
 				tg.setDescripcion(descripcion);
-				tg.setUsuarioModificacion(usuario.getIdUsuario());
+				tg.setUsuarioModificacion(""+usuario.getId());
 				
 				Matricula publicador = new Matricula();
-				publicador.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+				publicador.setIdMatricula(aula.getMatriculaActual().getIdMatricula());
 				tg.setPublicador(publicador);
 				
 				tGrupalService.publicarTrabajo(tg);
@@ -587,20 +592,19 @@ public class TrabajoGrupalAction extends BaseAction {
 		//if(true)return SUCCESS;
 		try {
 			Usuario usuario = getUsuarioSession();
-			AulaVirtual aula = getAulaVirtualSession();
-			if(aula.getTrabajoGrupalActual() != 0 && aula.getIdMatricula() != 0 && aula.getPeriodoMaestro() != 0){
+			if(tg.getIdTrabajo() != 0 && aula.getMatriculaActual().getIdMatricula() != 0 ){
 				
 				//*** Grupos
 				
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(1);
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
-				grupo.setUsuarioCreacion(usuario.getIdUsuario());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
+				grupo.setUsuarioCreacion(""+usuario.getId());
 				grupo.setEstado(Constante.ESTADO_ACTIVO);
 				
 				Collection<Matricula> es = tGrupalService.obtenerEstudiantes(aula.getIdFicha());
 				
-				tGrupalService.eliminarGrupos(aula.getTrabajoGrupalActual());
+				tGrupalService.eliminarGrupos(tg);
 				
 				int gt=0,g=0;
 				for (int i = 1; i <= ngrupos; i++) {
@@ -616,9 +620,9 @@ public class TrabajoGrupalAction extends BaseAction {
 					String origen = file.getAbsolutePath();
 					if(!"/".equals(Constante.SLASH))
 						origen = origen.replaceAll("/", Constante.SLASH);
-					String directorioDestino = Constante.RUTA_GRUPALES + Constante.SLASH + aula.getPeriodoMaestro() +
-						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + aula.getTrabajoGrupalActual() + Constante.SLASH + grupo.getIdGrupo();
-					String nombreDestino = "TG" + aula.getTrabajoGrupalActual() + "_" + grupo.getIdGrupo() + extension;
+					String directorioDestino = Constante.RUTA_GRUPALES + 
+						Constante.SLASH + aula.getIdFicha() + Constante.SLASH + tg.getIdTrabajo() + Constante.SLASH + grupo.getIdGrupo();
+					String nombreDestino = "TG" + tg.getIdTrabajo() + "_" + grupo.getIdGrupo() + extension;
 					Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
 					grupo.setArchivoNombre(nombreDestino);
 					grupo.setArchivoTamanio(String.valueOf(file.length()));
@@ -629,21 +633,21 @@ public class TrabajoGrupalAction extends BaseAction {
 				for (Matricula m : es) {
 					log.info("Asignar Estudiante a grupo Grupo: Estudiante "+m.getIdMatricula()+" a Grupo "+g);
 					grupo.setIdGrupo(g--);
-					tGrupalService.asignarGrupo(grupo, Integer.parseInt(m.getIdMatricula()));
+					tGrupalService.asignarGrupo(grupo, m.getIdMatricula());
 					if(gt-ngrupos==g)g=gt;
 				}
 				
 				//*** ******
 				log.info("Publicar Trabajo");
 				TrabajoGrupal tg = new TrabajoGrupal();
-				tg.setIdTrabajo(aula.getTrabajoGrupalActual());
-				tg.setFechaActivacion(Formato.setDateDeJSPCompleto(fechaActivacion));
-				tg.setFechaEntrega(Formato.setDateDeJSPCompleto(fechaEntrega));
+				tg.setIdTrabajo(tg.getIdTrabajo());
+				tg.setFechaActivacion(Formato.stringToCalendar(fechaActivacion, Constante.FECHA_DIA_MES_ANO_HORA_MI));
+				tg.setFechaEntrega(Formato.stringToCalendar(fechaActivacion, Constante.FECHA_DIA_MES_ANO_HORA_MI));
 				tg.setDescripcion(descripcion);
-				tg.setUsuarioModificacion(usuario.getIdUsuario());
+				tg.setUsuarioModificacion(""+usuario.getId());
 				
 				Matricula publicador = new Matricula();
-				publicador.setIdMatricula(String.valueOf(aula.getIdMatricula()));
+				publicador.setIdMatricula(aula.getMatriculaActual().getIdMatricula());
 				tg.setPublicador(publicador);
 				
 				tGrupalService.publicarTrabajo(tg);
@@ -653,7 +657,7 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (Exception e) {
 			log.error(e);
 			try {
-				tGrupalService.eliminarGrupos(getAulaVirtualSession().getTrabajoGrupalActual());
+				tGrupalService.eliminarGrupos(tg);
 			} catch (ServiceException e1) {
 				log.error(e1);
 			}
@@ -664,10 +668,9 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String verTrabajo(){
 		log.info("verTrabajo()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
 				grupo = tGrupalService.verTrabajo(grupo);
 				getRequest().setAttribute("GRUPO", grupo);
@@ -685,22 +688,20 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String subirTrabajo(){
 		log.info("subirTrabajo() - Archivo: "+filename+" - "+file.length()+" bytes");
 		
-		AulaVirtual aula = getAulaVirtualSession();
-		
 		try {
-			if(file != null && file.exists() && aula.getTrabajoGrupalActual() != 0 && aula.getPeriodoMaestro() != 0){
+			if(file != null && file.exists() && tg.getIdTrabajo() != 0 ){
 				String extension = filename.substring(filename.lastIndexOf("."));
 				String origen = file.getAbsolutePath();
 				if(!"/".equals(Constante.SLASH))
 					origen = origen.replaceAll("/", Constante.SLASH);
-				String directorioDestino = Constante.RUTA_GRUPALES + Constante.SLASH + aula.getPeriodoMaestro() +
-					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + aula.getTrabajoGrupalActual() + Constante.SLASH + idGrupo;
-				String nombreDestino = "TG" + aula.getTrabajoGrupalActual() + "_" + idGrupo + extension;
+				String directorioDestino = Constante.RUTA_GRUPALES + 
+					Constante.SLASH + aula.getIdFicha() + Constante.SLASH + tg.getIdTrabajo() + Constante.SLASH + idGrupo;
+				String nombreDestino = "TG" + tg.getIdTrabajo() + "_" + idGrupo + extension;
 				Archivo.copiarArchivo(origen, directorioDestino + Constante.SLASH + nombreDestino);
 				
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
 				grupo.setArchivoNombre(nombreDestino);
 				grupo.setArchivoTamanio(String.valueOf(file.length()));
 				tGrupalService.subirTrabajo(grupo);
@@ -719,13 +720,12 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String descargarTrabajo(){
 		log.info("descargarTrabajo()");
 		
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 		
 		try {
-			if(aula != null  && aula.getTrabajoGrupalActual() != 0 && aula.getPeriodoMaestro() != 0 && idGrupo != null
+			if(aula != null  && tg.getIdTrabajo() != 0 && idGrupo != null
 					&& aula.getIdFicha() != 0 && filename != null){
-				String source = Constante.RUTA_GRUPALES + Constante.SLASH + aula.getPeriodoMaestro() +
-				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + aula.getTrabajoGrupalActual() + 
+				String source = Constante.RUTA_GRUPALES + 
+				Constante.SLASH + aula.getIdFicha() + Constante.SLASH + tg.getIdTrabajo() + 
 				Constante.SLASH + idGrupo + Constante.SLASH + filename;
 				
 				Archivo.downloadFile(filename, source, getResponse());
@@ -744,22 +744,21 @@ public class TrabajoGrupalAction extends BaseAction {
 		log.info("calificar()");
 		
 		Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-		AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 		
 		try {
-			if(usuario != null && aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(usuario != null && aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalIntegrante integrante = new TrabajoGrupalIntegrante();
 				Matricula matricula = new Matricula();
-				matricula.setIdMatricula(idMatricula);
+				matricula.setIdMatricula(Integer.parseInt(idMatricula));
 				integrante.setUsuarioMatricula(matricula);
-				integrante.setUsuarioModificacion(usuario.getIdUsuario());
+				integrante.setUsuarioModificacion(""+usuario.getId());
 				integrante.setNotaOportunidad(notaOportunidad);
 				integrante.setNotaCoherencia(notaCoherencia);
 				integrante.setNotaInnovacion(notaInnovacion);
 				integrante.setNotaParticipacion(notaParticipacion);
 				integrante.setNotaPromedio(notaFinal);
 				
-				tGrupalService.calificarTrabajo(aula.getTrabajoGrupalActual(),integrante);
+				tGrupalService.calificarTrabajo(tg,integrante);
 				//System.out.println(integrante.getNotaOportunidad());
 				PrintWriter out = getResponse().getWriter();
 				out.print("OK");
@@ -781,9 +780,8 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String gestionDeGrupos() {
 		log.info("gestionDeGrupos()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
-				Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGrupos(aula.getIdFicha(),aula.getTrabajoGrupalActual());
+			if(aula != null && tg.getIdTrabajo() != 0){
+				Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGrupos(aula.getIdFicha(),tg.getIdTrabajo());
 				getRequest().setAttribute("GRUPOS", grupos);
 			}
 			
@@ -800,7 +798,6 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String crearGrupo(){
 		log.info("crearGrupo()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 			
 			getResponse().setContentType("text/html; charset=ISO-8859-1");
 			PrintWriter pw = getResponse().getWriter();
@@ -808,7 +805,8 @@ public class TrabajoGrupalAction extends BaseAction {
 			if(aula != null){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(1);
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdFicha(tg.getIdFicha());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
 				grupo.setNombre(descripcion);
 				grupo.setEstado(Constante.ESTADO_ACTIVO);
 				
@@ -831,16 +829,16 @@ public class TrabajoGrupalAction extends BaseAction {
 		log.info("asignarGrupo()");
 		try {
 			Usuario usuario = (Usuario)getSession().get(Constante.USUARIO_ACTUAL);
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 			
 			getResponse().setContentType("text/html; charset=ISO-8859-1");
 			PrintWriter pw = getResponse().getWriter();
 			
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
-				grupo.setUsuarioCreacion(usuario.getIdUsuario());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
+				grupo.setIdFicha(tg.getIdFicha());
+				grupo.setUsuarioCreacion(""+usuario.getId());
 				
 				tGrupalService.asignarGrupo(grupo, Integer.parseInt(idMatricula));
 				pw.print("OK");
@@ -860,15 +858,15 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String desasignarGrupo(){
 		log.info("desasignarGrupo()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 			
 			getResponse().setContentType("text/html; charset=ISO-8859-1");
 			PrintWriter pw = getResponse().getWriter();
 			
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
+				grupo.setIdFicha(tg.getIdFicha());
 				
 				tGrupalService.desasignarGrupo(grupo, Integer.parseInt(idMatricula));
 				pw.print("OK");
@@ -888,15 +886,15 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String renombrarGrupo(){
 		log.info("renombrarGrupo()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 			
 			getResponse().setContentType("text/html; charset=ISO-8859-1");
 			PrintWriter pw = getResponse().getWriter();
 			
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
+				grupo.setIdFicha(tg.getIdFicha());
 				grupo.setNombre(descripcion);
 				
 				tGrupalService.renombrarGrupo(grupo);
@@ -917,15 +915,15 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String eliminarGrupo(){
 		log.info("eliminarGrupo()");
 		try {
-			AulaVirtual aula = (AulaVirtual) getSession().get(Constante.AULA_ACTUAL);
 			
 			getResponse().setContentType("text/html; charset=ISO-8859-1");
 			PrintWriter pw = getResponse().getWriter();
 			
-			if(aula != null && aula.getTrabajoGrupalActual() != 0){
+			if(aula != null && tg.getIdTrabajo() != 0){
 				TrabajoGrupalGrupo grupo = new TrabajoGrupalGrupo();
 				grupo.setIdGrupo(Integer.parseInt(idGrupo));
-				grupo.setIdTrabajo(aula.getTrabajoGrupalActual());
+				grupo.setIdTrabajo(tg.getIdTrabajo());
+				grupo.setIdFicha(tg.getIdFicha());
 				grupo.setEstado(Constante.ESTADO_INACTIVO);
 				
 				tGrupalService.eliminarGrupo(grupo);

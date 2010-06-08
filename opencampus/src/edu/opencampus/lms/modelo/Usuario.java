@@ -42,7 +42,7 @@ public class Usuario extends BaseModelo implements Comparable<Usuario>, HttpSess
 
 	private String usuario;
 	
-	private String tipo;
+	private String tipo = Constante.TIPO_USUARIO_PERSONA;
 	
 	private String idioma;
 	
