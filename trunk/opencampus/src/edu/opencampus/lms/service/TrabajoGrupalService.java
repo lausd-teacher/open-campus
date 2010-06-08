@@ -27,8 +27,8 @@ public class TrabajoGrupalService {
 		try {
 			tg = trabajoGrupalDAO.obtenerTrabajoGrupal(tg);
 		} catch (DAOException e) {
-			log.error(e.getMessage());
-			throw new ServiceException(e.getMessage());
+			log.error(e);
+			throw new ServiceException(e);
 		}
 		return tg;
 	}
@@ -139,7 +139,7 @@ public class TrabajoGrupalService {
 		}
 	}
 	
-	public void eliminarGrupos(int idTrabajo) throws ServiceException {
+	public void eliminarGrupos(TrabajoGrupal idTrabajo) throws ServiceException {
 		try {
 			trabajoGrupalDAO.eliminarGrupos(idTrabajo);
 		} catch (DAOException e) {
@@ -181,7 +181,7 @@ public class TrabajoGrupalService {
 		return grupos;
 	}
 	
-	public void calificarTrabajo(int idTrabajoGrupal, TrabajoGrupalIntegrante integrante) throws ServiceException{
+	public void calificarTrabajo(TrabajoGrupal idTrabajoGrupal, TrabajoGrupalIntegrante integrante) throws ServiceException{
 		try {
 			trabajoGrupalDAO.calificarTrabajo(idTrabajoGrupal, integrante);
 		} catch (DAOException e) {

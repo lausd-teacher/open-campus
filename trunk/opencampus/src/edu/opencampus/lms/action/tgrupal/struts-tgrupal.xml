@@ -7,29 +7,29 @@
 	 	<action name="VerTrabajoGrupal" method="verTrabajoGrupal" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success">/estudiante/tgrupal/interaccion_tgrupal.jsp</result>
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
  	
  		<action name="ResponderMensaje" method="responderMensaje" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success" type="redirect-action">VerTrabajoGrupal?cmd=return</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="estudiante-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="DescargarTrabajoGrupal" method="descargarTrabajoGrupal"
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">			
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="VerIntegrantes" method="verIntegrantes"
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">			
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="RenombrarMiGrupo" method="renombrarMiGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="estudiante-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
  	
 <!--		***************************** MENSAJES *********************************-->
@@ -37,14 +37,14 @@
  		<action name="VerMensajes" method="verMensajes" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success">/docente/tgrupal/interaccion_tgrupal.jsp</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="EnviarMensaje" method="enviarMensaje" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success" type="redirect-action">VerMensajes?idGrupo=${idGrupo}</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
  	
 <!--		***************************** CONTROL *********************************-->
@@ -52,20 +52,20 @@
 		<action name="CambiarModo" method="cambiarModo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success" type="redirect-action">Cargar?idUnidad=${idUnidad}</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="Cargar" method="cargar" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success_extended">/docente/tgrupal/control_tgrupal.jsp</result>
 			<result name="success">/docente/tgrupal/control_tgrupal_compact.jsp</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 	
 		<action name="VerTrabajo" method="verTrabajo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success">/docente/tgrupal/control_subirTrabajo.jsp</result>
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="SubirTrabajo" method="subirTrabajo" 
@@ -73,12 +73,12 @@
 			<result name="success" type="redirect-action">VerTrabajo?idGrupo=${idGrupo}</result>
 			<result name="error">/docente/tgrupal/control_subirTrabajo.jsp</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="DescargarTrabajo" method="descargarTrabajo"
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">			
-			<interceptor-ref name="docente-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="PublicarTrabajo" method="publicarTrabajo" 
@@ -86,7 +86,7 @@
 			<result name="success" type="redirect-action">Cargar?cmd=return</result>
 			<result name="input">/docente/tgrupal/control_tgrupal_compact.jsp</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="PublicarTrabajoCompacto" method="publicarTrabajoCompacto" 
@@ -94,12 +94,12 @@
 			<result name="success" type="redirect-action">Cargar?cmd=return</result>
 			<result name="input">/docente/tgrupal/control_tgrupal_compact.jsp</result>
 			<interceptor-ref name="campusfileUpload-documents"/>
-    		<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+    		<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="Calificar" method="calificar" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 <!--		***************************** GRUPOS *********************************-->
@@ -107,32 +107,32 @@
 		<action name="GestionDeGrupos" method="gestionDeGrupos" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
 			<result name="success">/docente/tgrupal/control_grupos.jsp</result>
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="CrearGrupo" method="crearGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="EliminarGrupo" method="eliminarGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="AsignarGrupo" method="asignarGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="DesasignarGrupo" method="desasignarGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="RenombrarGrupo" method="renombrarGrupo" 
 			class="edu.opencampus.lms.action.tgrupal.TrabajoGrupalAction">
-			<interceptor-ref name="docente-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 	</package>
