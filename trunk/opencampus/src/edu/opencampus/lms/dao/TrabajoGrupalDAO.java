@@ -66,6 +66,14 @@ public class TrabajoGrupalDAO extends BaseDAO {
 				publicador.setUsuario(usuario);
 				
 				tg.setPublicador(publicador);
+			}else{
+				try{
+				query = "INSERT INTO cv_trabajo_grupal(idunidad, idficha) VALUE(?,?)";
+				stmt =  cons.prepareStatement(query);
+				stmt.setInt(1, tg.getIdUnidad());
+				stmt.setInt(2, tg.getIdFicha());
+				stmt.executeUpdate();
+				}catch (Exception e) {}
 			}
 
 		} catch (SQLException e) {
@@ -248,14 +256,15 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_GRUPO_TRABAJO SET ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=? "
-					+ "WHERE IDTRABAJO=? AND IDGRUPO=?";
+			String query = "UPDATE cv_trabajo_grupal_grupo SET archivo_nombre=?, archivo_tamanio=? " +
+					"WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setString(1, grupo.getArchivoNombre());
 			stmt.setString(2, grupo.getArchivoTamanio());
 			stmt.setInt(3, grupo.getIdTrabajo());
-			stmt.setInt(4, grupo.getIdGrupo());
+			stmt.setInt(4, grupo.getIdFicha());
+			stmt.setInt(5, grupo.getIdGrupo());
 
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error subirTrabajo(TrabajoGrupalGrupo grupo)");
@@ -311,34 +320,33 @@ public class TrabajoGrupalDAO extends BaseDAO {
 	}
 
 	public void publicarTrabajo(TrabajoGrupal trabajo) throws DAOException {
-		log.info("publicarTrabajo(TrabajoGrupal trabajo)");
+		log.info("publicarTrabajo("+trabajo.getIdTrabajo()+","+trabajo.getIdFicha()+")");
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
 			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
-			String query = "UPDATE cv_trabajo_grupal SET PUBLICADOR=?, FECHA_ACTIVACION=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), FECHA_ENTREGA=TO_DATE (?, 'DD-MM-YYYY HH24:MI'), DESCRIPCION=?, USUARIO_MOD=?, FECHA_MOD=SYSDATE "
-					+ "WHERE IDTRABAJO=?";
+			String query = "UPDATE cv_trabajo_grupal SET IDMATRICULA_ENVIO=?, fecha_activacion=?, fecha_entrega=?, descripcion=? " +
+					"WHERE idunidad=? AND idficha=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, trabajo.getPublicador().getIdMatricula());
-			stmt.setString(2, Formato.setBaseDatosDeDateCompleto(trabajo
-					.getFechaActivacion()));
-			stmt.setString(3, Formato.setBaseDatosDeDateCompleto(trabajo
-					.getFechaEntrega()));
+			stmt.setString(2, Formato.calendarToTimestamp(trabajo.getFechaActivacion()));
+			stmt.setString(3, Formato.calendarToTimestamp(trabajo.getFechaEntrega()));
 			stmt.setString(4, trabajo.getDescripcion());
-			stmt.setString(5, trabajo.getUsuarioModificacion());
-			stmt.setInt(6, trabajo.getIdTrabajo());
+			stmt.setInt(5, trabajo.getIdTrabajo());
+			stmt.setInt(6, trabajo.getIdFicha());
 			int n = stmt.executeUpdate();
 			if (1 != n) {
 				log.error("Error en publicarTrabajo(TrabajoGrupal trabajo) - Row Updates: "+n);
 				throw new DAOException("No culmino");
 			}
 
-			query = "UPDATE CV_GRUPO_TRABAJO SET BANDERA=? WHERE IDTRABAJO=? AND BANDERA=?";
+			query = "UPDATE cv_trabajo_grupal_grupo SET bandera=? WHERE idunidad=? AND idficha=? AND bandera=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, Constante.FLAG_PENDIENTE_ESTUDIANTE);
 			stmt.setInt(2, trabajo.getIdTrabajo());
-			stmt.setInt(3, Constante.FLAG_NO_INICIADO);
+			stmt.setInt(3, trabajo.getIdFicha());
+			stmt.setInt(4, Constante.FLAG_NO_INICIADO);
 			stmt.executeUpdate();
 
 			cons.commit();
@@ -418,14 +426,15 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "SELECT "
-					+ "(SELECT NVL(MAX(IDGRUPO),0)+1 FROM CV_GRUPO_TRABAJO WHERE IDTRABAJO=?) ID, "
-					+ "(SELECT FECHA_ACTIVACION FROM cv_trabajo_grupal WHERE IDTRABAJO=?) FLAG "
-					+ "FROM DUAL";
+			String query = "SELECT  " +
+					"(SELECT IFNULL(MAX(idgrupo),0)+1 FROM cv_trabajo_grupal_grupo WHERE idunidad=? AND idficha=?) id,  " +
+					"(SELECT fecha_activacion FROM cv_trabajo_grupal WHERE idunidad=? AND idficha=?) flag;";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdTrabajo());
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdTrabajo());
+			stmt.setInt(4, grupo.getIdFicha());
 			result =  stmt.executeQuery();
 			if (result.next()) {
 				grupo.setIdGrupo(result.getInt("ID"));
@@ -435,13 +444,14 @@ public class TrabajoGrupalDAO extends BaseDAO {
 					grupo.setBandera(Constante.FLAG_PENDIENTE_ESTUDIANTE);
 			}
 			
-			query = "INSERT INTO CV_GRUPO_TRABAJO (IDTRABAJO,IDGRUPO,NOMBRE,ESTADO,BANDERA) VALUES (?,?,?,?,?)";
+			query = "INSERT INTO cv_trabajo_grupal_grupo (idunidad,idficha,idgrupo,nombre,estado,bandera) VALUES (?,?,?,?,?,?)";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
-			stmt.setString(3, grupo.getNombre());
-			stmt.setInt(4, grupo.getEstado());
-			stmt.setInt(5, grupo.getBandera());
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setString(4, grupo.getNombre());
+			stmt.setInt(5, grupo.getEstado());
+			stmt.setInt(6, grupo.getBandera());
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error en crearGrupo(TrabajoGrupalGrupo grupo)");
 				throw new DAOException("No culmino");
@@ -468,17 +478,17 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "INSERT INTO CV_GRUPO_TRABAJO_MATRICULA (IDGRUPO,IDTRABAJO,IDMATRICULA,USUARIO_MOD,FECHA_MOD) "
-					+ "VALUES (?,?,?,?,SYSDATE)";
+			String query = "INSERT INTO cv_trabajo_grupal_matricula (idgrupo,idunidad,idficha,idmatricula,modificado_por,modificado_en) " +
+					"VALUES (?,?,?,?,?,NOW())";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdGrupo());
 			stmt.setInt(2, grupo.getIdTrabajo());
-			stmt.setInt(3, idMatricula);
-			stmt.setString(4, grupo.getUsuarioCreacion());
+			stmt.setInt(3, grupo.getIdFicha());
+			stmt.setInt(4, idMatricula);
+			stmt.setString(5, grupo.getUsuarioCreacion());
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error en asignarGrupo(TrabajoGrupalGrupo grupo, int idMatricula)");
+				log.error("Error en asignarGrupo(TrabajoGrupalGrupo grupo, int idMatricula)");
 				throw new DAOException("No culmino");
 			}
 
@@ -500,15 +510,15 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "DELETE FROM CV_GRUPO_TRABAJO_MATRICULA WHERE IDTRABAJO=? AND IDGRUPO=? AND IDMATRICULA=?";
+			String query = "DELETE FROM cv_trabajo_grupal_matricula WHERE idunidad=? AND idficha=? AND idgrupo=? AND idmatricula=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
-			stmt.setInt(3, idMatricula);
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setInt(4, idMatricula);
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error en desasignarGrupo(TrabajoGrupalGrupo grupo, int idMatricula)");
+				log.error("Error en desasignarGrupo(TrabajoGrupalGrupo grupo, int idMatricula)");
 				throw new DAOException("No culmino");
 			}
 
@@ -529,12 +539,13 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_GRUPO_TRABAJO SET NOMBRE=? WHERE IDTRABAJO=? AND IDGRUPO=?";
+			String query = "UPDATE cv_trabajo_grupal_grupo SET nombre=? WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setString(1, grupo.getNombre());
 			stmt.setInt(2, grupo.getIdTrabajo());
-			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setInt(3, grupo.getIdFicha());
+			stmt.setInt(4, grupo.getIdGrupo());
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error en renombrarGrupo(TrabajoGrupalGrupo grupo)");
 				throw new DAOException("No culmino");
@@ -557,19 +568,21 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "DELETE FROM CV_GRUPO_TRABAJO_MATRICULA WHERE IDTRABAJO=? AND IDGRUPO=?";
+			String query = "DELETE FROM cv_trabajo_grupal_matricula WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
 			stmt.executeUpdate();
 
-			query = "UPDATE CV_GRUPO_TRABAJO SET ESTADO=? WHERE IDTRABAJO=? AND IDGRUPO=?";
+			query = "UPDATE cv_trabajo_grupal_grupo SET estado=? WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getEstado());
 			stmt.setInt(2, grupo.getIdTrabajo());
-			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setInt(3, grupo.getIdFicha());
+			stmt.setInt(4, grupo.getIdGrupo());
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error en eliminarGrupo(TrabajoGrupalGrupo grupo)");
 				throw new DAOException("No culmino");
@@ -597,21 +610,24 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "DELETE FROM CV_GRUPO_TRABAJO_MATRICULA WHERE IDTRABAJO=?";
+			String query = "delete from cv_trabajo_grupal_matricula where idunidad=? AND idficha=?";
 			cons = dataSource.getConnection();
 			cons.setAutoCommit(false);
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
+			stmt.setInt(2, tg.getIdFicha());
 			stmt.executeUpdate();
 			
-			query = "DELETE FROM CV_GRUPO_TRABAJO_MSG WHERE IDTRABAJO=?";
+			query = "delete from cv_trabajo_grupal_mensaje where idunidad=? AND idficha=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
+			stmt.setInt(2, tg.getIdFicha());
 			stmt.executeUpdate();
 
-			query = "DELETE FROM CV_GRUPO_TRABAJO WHERE IDTRABAJO=?";
+			query = "delete from cv_trabajo_grupal_grupo where idunidad=? AND idficha=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
+			stmt.setInt(2, tg.getIdFicha());
 			stmt.executeUpdate();
 			cons.commit();
 		} catch (SQLException e) {
@@ -633,7 +649,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 	public Collection<TrabajoGrupalGrupo> obtenerGrupos(int idFicha,
 			int idunidad) throws DAOException {
-		log.info("obtenerGrupos(int idFicha,int idTrabajo)");
+		log.info("obtenerGrupos(int "+idFicha+",int "+idunidad+")");
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -745,8 +761,8 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 	}
 
-	public Collection<TrabajoGrupalGrupo> obtenerGruposParaEvaluacion(int idTrabajo, int idMatricula) throws DAOException {
-		log.info("obtenerGruposParaEvaluacion(int idTrabajo, int idMatricula)");
+	public Collection<TrabajoGrupalGrupo> obtenerGruposParaEvaluacion(TrabajoGrupal tg, int idMatricula) throws DAOException {
+		log.info("obtenerGruposParaEvaluacion("+tg.getIdTrabajo()+","+tg.getIdFicha()+", int "+idMatricula+")");
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -777,7 +793,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
 			stmt.setInt(2, idMatricula);
-			stmt.setInt(3, idTrabajo);
+			stmt.setInt(3, tg.getIdTrabajo());
 			stmt.setInt(4, Constante.ESTADO_ACTIVO);
 			result =  stmt.executeQuery();
 
@@ -788,7 +804,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 					+ "WHERE G.IDMATRICULA=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) AND G.IDTRABAJO=? AND G.IDGRUPO=? "
 					+ "AND M.ELIMINADO='0' AND M.ESTADO='1' ORDER BY P.APEPATERNO,P.APEMATERNO,P.NOMUNO";
 			stmt =  cons.prepareStatement(query);
-			stmt.setInt(1, idTrabajo);
+			stmt.setInt(1, tg.getIdTrabajo());
 			ResultSet subResult = null;
 
 			while (result.next()) {
@@ -853,7 +869,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 	}
 
-	public Collection<TrabajoGrupalGrupo> listarGrupos(int idTrabajo) throws DAOException {
+	public Collection<TrabajoGrupalGrupo> listarGrupos(TrabajoGrupal tg) throws DAOException {
 		log.info("listarGrupos(int idTrabajo)");
 		Connection cons = null;
 		PreparedStatement stmt = null;
@@ -862,11 +878,11 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		TrabajoGrupalGrupo grupo = null;
 
 		try {
-			String query = "SELECT IDGRUPO,NOMBRE FROM CV_GRUPO_TRABAJO WHERE IDTRABAJO=? AND ESTADO=? ORDER BY NOMBRE";
+			String query = "SELECT idgrupo,nombre FROM cv_trabajo_grupal_grupo WHERE idunidad=? AND idficha=? AND estado=1 ORDER BY nombre";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
-			stmt.setInt(1, idTrabajo);
-			stmt.setInt(2, Constante.ESTADO_ACTIVO);
+			stmt.setInt(1, tg.getIdTrabajo());
+			stmt.setInt(2, tg.getIdFicha());
 			result =  stmt.executeQuery();
 
 			while (result.next()) {
