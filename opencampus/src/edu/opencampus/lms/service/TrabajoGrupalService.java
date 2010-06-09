@@ -159,7 +159,7 @@ public class TrabajoGrupalService {
 		return grupos;
 	}
 	
-	public Collection<TrabajoGrupalGrupo> obtenerGruposParaEvaluacion(int idTrabajo, int idMatricula) throws ServiceException{
+	public Collection<TrabajoGrupalGrupo> obtenerGruposParaEvaluacion(TrabajoGrupal idTrabajo, int idMatricula) throws ServiceException{
 		Collection<TrabajoGrupalGrupo> grupos = null;
 		try {
 			grupos = trabajoGrupalDAO.obtenerGruposParaEvaluacion(idTrabajo, idMatricula);
@@ -170,7 +170,7 @@ public class TrabajoGrupalService {
 		return grupos;
 	}
 	
-	public Collection<TrabajoGrupalGrupo> listarGrupos(int idTrabajo) throws ServiceException {
+	public Collection<TrabajoGrupalGrupo> listarGrupos(TrabajoGrupal idTrabajo) throws ServiceException {
 		Collection<TrabajoGrupalGrupo> grupos = null;
 		try {
 			grupos = trabajoGrupalDAO.listarGrupos(idTrabajo);

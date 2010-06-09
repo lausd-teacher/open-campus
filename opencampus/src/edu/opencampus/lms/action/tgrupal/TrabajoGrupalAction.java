@@ -262,9 +262,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		} catch (ServiceException e) {
 			log.error(e);
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 			
 		return SUCCESS;
@@ -352,9 +352,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 		
@@ -388,9 +388,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		} catch (ServiceException e) {
 			log.error(e);
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		
 		return SUCCESS;
@@ -474,9 +474,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		} catch (ServiceException e) {
 			log.error(e);
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 			
 		return SUCCESS;
@@ -501,6 +501,7 @@ public class TrabajoGrupalAction extends BaseAction {
 	public String cargar() {
 		log.info("cargar()"+idUnidad);
 		getSession().put("MODO_GRUPAL", 1);
+		System.out.println(aula.getFechaInicioToString());
 		try {
 			if(idUnidad != null || cmd != null){
 				if(idUnidad != null && idUnidad.trim().length()>0){
@@ -525,7 +526,7 @@ public class TrabajoGrupalAction extends BaseAction {
 				getRequest().setAttribute("TRABAJO_GRUPAL", tg);
 				
 				if(tg.getFechaActivacion() != null){
-					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg.getIdTrabajo(), aula.getMatriculaActual().getIdMatricula());
+					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg, aula.getMatriculaActual().getIdMatricula());
 					getRequest().setAttribute("GRUPOS", grupos);
 					//*** 
 					for (TrabajoGrupalGrupo grupo : grupos) {
@@ -551,7 +552,7 @@ public class TrabajoGrupalAction extends BaseAction {
 			return "success_extended";
 		return SUCCESS;
 	}
-	
+	// PRIMERO SE PUBLICA LUEGO SE PUEDE FORMAR GRUPOS (O FORMAR AUTOMATICAMENTE)
 	public String publicarTrabajo(){
 		log.info("publicarTrabajo()");
 		try {
@@ -559,15 +560,15 @@ public class TrabajoGrupalAction extends BaseAction {
 			if(tg.getIdTrabajo() != 0 && aula.getMatriculaActual().getIdMatricula() != 0){
 				
 				if(file != null && file.exists()){
-					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.listarGrupos(tg.getIdTrabajo());
+					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.listarGrupos(tg);
 					for (TrabajoGrupalGrupo grupo : grupos) {
 						this.idGrupo = String.valueOf(grupo.getIdGrupo()); 
 						subirTrabajo();
 					}
 				}
 				
-				TrabajoGrupal tg = new TrabajoGrupal();
-				tg.setIdTrabajo(tg.getIdTrabajo());
+				//TrabajoGrupal tg = new TrabajoGrupal();
+				//tg.setIdTrabajo(tg.getIdTrabajo());
 				tg.setFechaActivacion(Formato.stringToCalendar(fechaActivacion, Constante.FECHA_DIA_MES_ANO_HORA_MI));
 				tg.setFechaEntrega(Formato.stringToCalendar(fechaEntrega, Constante.FECHA_DIA_MES_ANO_HORA_MI));
 				tg.setDescripcion(descripcion);
@@ -678,9 +679,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return SUCCESS;
 	}
@@ -709,9 +710,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		} catch (ServiceException e) {
 			log.error(e);
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		
 		return SUCCESS;
@@ -768,9 +769,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		} catch (ServiceException e) {
 			log.error(e);
 		} catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 	}
@@ -788,9 +789,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return SUCCESS;
 	}
@@ -817,9 +818,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 		
@@ -847,9 +848,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 		
@@ -875,9 +876,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 		
@@ -904,9 +905,9 @@ public class TrabajoGrupalAction extends BaseAction {
 		}catch (ServiceException e) {
 			log.error(e);
 		}catch (NumberFormatException e){
-			log.error(e.getMessage());
+			log.error(e);
 		}catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e);
 		}
 		return NONE;
 		

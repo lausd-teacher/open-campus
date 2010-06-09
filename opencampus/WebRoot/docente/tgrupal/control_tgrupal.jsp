@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="f" uri="/WEB-INF/FormatoTags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="java.util.*"%>
 <%@taglib prefix="ct" uri="/WEB-INF/CampusTags"%>
 <%@  page import="edu.opencampus.lms.modelo.AulaVirtual"%>
@@ -51,7 +52,7 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 
 	<body onload="ocultarFlags();">
 	<c:set var="tg" value='${requestScope.TRABAJO_GRUPAL}'/>
-	<c:set var="aula" value='${sessionScope.aula_actual}' />
+	<c:set var="aula" value='${sessionScope.usuario_actual.aulaActual}' />
 
 	
 <div id="pop_up" style="width: 520px;">
@@ -129,7 +130,7 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 	  </c:choose>
 		
 		<div id="form_TGrupal" style="display: <c:out value='${display}' />">
-		<form  onsubmit="javascript:return validar(this.fechaActivacion.value,this.fechaEntrega.value,this.descripcion.value,'<f:DateToString fecha="${aula.fechaInicio}"/>','<f:DateToString fecha="${aula.fechaFin}"/>')"
+		<form  onsubmit="javascript:return validar(this.fechaActivacion.value,this.fechaEntrega.value,this.descripcion.value,'<c:out value="${aula.fechaInicioToString}" />','<f:DateToString fecha="${aula.fechaFin}"/>')"
 		method="post" action="<c:out value='${contextPath}'/>/aulavirtual/tgrupal/PublicarTrabajo.action">
 			<table width="500" style="table-layout: fixed;" align="center" cellpadding="3" cellspacing="0" class="bor_tabla" border="0">
 	
