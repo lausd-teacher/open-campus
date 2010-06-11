@@ -303,15 +303,8 @@ public class DebateAction extends BaseAction {
 		return SUCCESS;
 	}
 	
-	crear <-----
-	eliminarPlactica
-	eliminar
-
-	--yata
-	cargarTertuliaXML
 	public String crear() {
-		log.info("crear() "+predecesor);
-		
+		log.info("crear() p:"+predecesor+" a:"+asunto);
 		try {
 			if(tg != null && asunto != null && asunto.trim().length()>0 && texto != null && texto.trim().length()>0){
 			
@@ -327,7 +320,7 @@ public class DebateAction extends BaseAction {
 					modelo.setPredecesor(predecesor);
 					try { 
 						
-						modelo = debateService.crearPlactica(aula, idGrupo, modelo);
+						modelo = debateService.crearPlactica(aula, tg.getIdTrabajo(), modelo);
 						PrintWriter out = getResponse().getWriter();
 						out.print("OK");
 						out.close();

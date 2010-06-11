@@ -69,6 +69,7 @@ public class DebateDAO extends BaseDAO {
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException("DebateDAO: crearPlactica(): Error en cv_debate");
 			}
+			log.info("cv_debate ok");
 			
 			result = stmt.getGeneratedKeys();
 			result.next();
@@ -83,6 +84,7 @@ public class DebateDAO extends BaseDAO {
 			stmt.setInt(3, idTrabajo);
 			stmt.setInt(4, aula.getIdFicha());
 			stmt.executeUpdate();
+			log.info("cv_debate_matricula (alumnos) ok");
 			
 			query = "INSERT INTO cv_debate_matricula(iddebate,idmatricula,leido) " +
 					"SELECT ?,idmatricula,'0' FROM cv_matricula " +
@@ -93,6 +95,8 @@ public class DebateDAO extends BaseDAO {
 			stmt.setInt(2, idTrabajo);
 			stmt.setInt(3, aula.getIdFicha());
 			stmt.executeUpdate();
+			log.info("cv_debate_matricula (docentes) ok");
+			
 //			query = "SELECT SEQCVDEBATE.CURRVAL,TO_CHAR(SYSDATE,'DD-MM-YYYY HH24:MI') FECHA FROM DUAL";
 //			stmt =  cons.prepareStatement(query);
 //			result =  stmt.executeQuery();
@@ -108,6 +112,7 @@ public class DebateDAO extends BaseDAO {
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException("DebateDAO: crearPlactica(): Error en cv_debate_GRUPAL_MATRICULA");
 			}
+			log.info("cv_debate_matricula update myself ok");
 			cons.commit();
 		} catch (SQLException e) {
 			log.error(e);
