@@ -47,7 +47,7 @@ public class DebateService {
 	public Debate obtenerDebate(AulaVirtual aula, int idDebate, boolean soloTexto) throws ServiceException {
 		Debate debate = null;
 		try {
-			marcarLeido(idDebate, aula.getIdMatricula(), 1);
+			marcarLeido(idDebate, aula.getMatriculaActual().getIdMatricula(), 1);
 			debate = debateDAO.obtenerDebate(aula, idDebate, soloTexto);
 		} catch (DAOException e) {
 			log.debug(e);

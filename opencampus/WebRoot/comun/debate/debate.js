@@ -157,7 +157,7 @@ function marcarLeido(input,idDialogo){
 				xGetElementById('flag_'+idDialogo).src = xGetContextPath()+"/img/flag.gif";
 			}else{
 				input.value = 'Marcar no leído';
-				xGetElementById('flag_'+idDialogo).src = xGetContextPath()+"/img/nada.gif";
+				xGetElementById('flag_'+idDialogo).src = xGetContextPath()+"/img/cal.gif";
 			}
 		}else{
 			alert('Hubo un error al intentar guardar, se sugiere actualizar la página.');
@@ -238,7 +238,7 @@ function showEvents(id,xml){
 	xShowD('fila_cuerpo_'+id);
 	
 	imgMas = xGetElementById('flag_'+id);
-	if(imgMas) imgMas.src = xGetContextPath()+"/img/nada.gif";
+	if(imgMas) imgMas.src = xGetContextPath()+"/img/cal.gif";
 	
 	xShowD('fila_form_'+id);
 	
@@ -302,7 +302,7 @@ function showEvents(id,xml){
 		if(leido == 0)
 			td.innerHTML = '<img id="flag_'+idDialogo+'" src="'+xGetContextPath()+'/img/flag.gif" width="8"/>';
 		else
-			td.innerHTML = '<img id="flag_'+idDialogo+'" src="'+xGetContextPath()+'/img/nada.gif" width="8"/>';
+			td.innerHTML = '<img id="flag_'+idDialogo+'" src="'+xGetContextPath()+'/img/cal.gif" width="8"/>';
 		tr.appendChild(td);
 		
 		var text = document.createTextNode(asunto);
@@ -401,7 +401,7 @@ function showEvents(id,xml){
 		tdPri.appendChild(table);
 		
 		/*var img = new Image();
-		img.src = xGetContextPath()+'/img/nada.gif';
+		img.src = xGetContextPath()+'/img/cal.gif';
 		img.height = 2;
 		tdPri.appendChild(img);*/
 		

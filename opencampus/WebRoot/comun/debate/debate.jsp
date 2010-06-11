@@ -223,7 +223,7 @@ onclick="window.document.location =xGetContextPath() +'/aulavirtual/debate/Carga
 						
 					  		</c:when>
 							<c:otherwise>
-							  <tr><td><center><h5>Este di&aacute;logo no contiene ning&uacute;n tema a&uacute;n.<br>¿Quiere ser el primero?</h5></center></td></tr>
+							  <tr><td><center><h5>Este debate no contiene ning&uacute;n tema a&uacute;n.<br>¿Quiere ser el primero?</h5></center></td></tr>
 							</c:otherwise>
 					  </c:choose>
 					  
