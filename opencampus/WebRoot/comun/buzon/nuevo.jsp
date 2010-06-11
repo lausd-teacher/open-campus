@@ -14,6 +14,8 @@
 	var cssDir = "<%=contexto%>/js/openwysiwyg/styles/";
 	var popupsDir = "<%=contexto%>/js/openwysiwyg/popups/";
 </script>
+<link href="<%=request.getContextPath()%>/estilos/estilos.css"
+			rel="stylesheet" type="text/css" />
 	<link href="<%=request.getContextPath()%>/comun/buzon/buzonCSS.css"
 		rel="stylesheet" type="text/css" />
 <script type="text/javascript"	src="<%=contexto%>/js/openwysiwyg/wysiwyg.js"></script>
@@ -65,13 +67,11 @@ td {
 <table width="56%" border="0" cellpadding="7" cellspacing="0">
   <tr>
     <td><table width="51%" border="0" cellpadding="0" cellspacing="0" class="bor_tabla">
-      <tr class="xxx">
-        <td height="20" class="tit_cab">Mensaje</td>
-      </tr>
+      <caption>Mensaje</caption>
       <tr>
         <td>
         
-        <table width="480" border="0" bgcolor="#E5EFF8" class="thc">
+        <table width="480" border="0" bgcolor="#E5FEC1" class="thc">
             <tr>
               <td width="89">
                 Para:
