@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,12 +140,10 @@ public class DebateDAO extends BaseDAO {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "UPDATE cv_debate SET estado=0,"
-					+ "FECHA_eliminacion=SYSDATE,usuario_eliminacion=?"
-					+ "  WHERE IDDEBATE=?";
+			String query = "UPDATE cv_debate SET estado=0 "
+					+ " WHERE IDDEBATE=?";
 			stmt =  conec.prepareStatement(query);
-			stmt.setString(1, usuario);
-			stmt.setInt(2, idDebate);
+			stmt.setInt(1, idDebate);
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException(
 						"DebateDAO: eliminarPlacticaSub(): Error");
@@ -174,14 +171,12 @@ public class DebateDAO extends BaseDAO {
 		ResultSet result = null;
 		Connection cons = null;
 		try {
-			String query = "UPDATE cv_debate SET estado=0,"
-					+ "FECHA_eliminacion=SYSDATE,usuario_eliminacion=?"
-					+ "  WHERE IDDEBATE=?";
+			String query = "UPDATE cv_debate SET estado=0 "
+					+ " WHERE IDDEBATE=?";
 			cons =  dataSource.getConnection();
 			cons.setAutoCommit(false);
 			stmt =  cons.prepareStatement(query);
-			stmt.setString(1, idUsuario);
-			stmt.setInt(2, idDebate);
+			stmt.setInt(1, idDebate);
 			if (1 != stmt.executeUpdate()) {
 				throw new DAOException("DebateDAO: eliminarPlactica(): Error");
 			}

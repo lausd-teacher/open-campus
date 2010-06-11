@@ -55,7 +55,7 @@
 			<tr class="portal_selecionando" 
 				style="cursor:pointer; <c:if test="${conectado.value.rolPredeterminado.idrol != 145}">background-color: #F0F8E5;</c:if> <c:if test="${conectado.value.id == '100524'}">background-color: #AEDFFF;</c:if>"
 				onclick="enviarCorreo('<c:out value="${conectado.value.usuario}"/>','[Recado]')"
-				onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${conectado.value.rolPredeterminado.nombre}"/>', this);">
+				onmouseout="return hideTip();" onmouseover="return tooltip('Rol: <c:out value="${conectado.value.rolPredeterminado.nombre}"/>');">
 				<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="midle">
 					<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 				</td>
@@ -139,7 +139,7 @@
 			<c:forEach var="cumple" items="${usuarios}">
 			<tr class="portal_selecionando" style="cursor:pointer; <c:if test="${cumple.rolPredeterminado.idrol != 0 && cumple.rolPredeterminado.idrol != 7}">background-color: #E0F8E5;</c:if>"
 				onclick="enviarCorreo('<c:out value="${cumple.usuario}"/>','Feliz Cumpleaños!')"
-				onmouseout="ocultarToolTip()" onmouseover="verToolTip('Rol: <c:out value="${cumple.rolPredeterminado.nombre}"/>', this);">
+				onmouseout="return hideTip();" onmouseover="return tooltip('Rol: <c:out value="${cumple.rolPredeterminado.nombre}"/>');">
 				<td  height="18" width="20" style="color: #cccccc;padding-bottom:1px;" align="center" valign="middle">
 					<img src="<c:out value='${contextPath}'/>/img/mas_portal.gif"/>
 				</td>

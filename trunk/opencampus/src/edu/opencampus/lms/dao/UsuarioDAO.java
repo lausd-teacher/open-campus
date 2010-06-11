@@ -414,9 +414,9 @@ public class UsuarioDAO extends BaseDAO {
 		List<Rol> roles = null;
 		Persona datos = null;
 		try {
-			String query = "select apepaterno,apematerno,nomuno,nomdos,fecnacimiento,idpersona " +
-					"from cv_persona " +
-					"where estado=1 and curdate() = fecnacimiento order by apepaterno,apematerno,nomuno,nomdos " +
+			String query = "select apepaterno,apematerno,nomuno,nomdos,fecnacimiento,idpersona,u.usuario " +
+					"from cv_persona p, cv_usuario u " +
+					"where p.idpersona=u.idusuario and p.estado=1 AND DATE_FORMAT(CURDATE(),'%d/%m') = DATE_FORMAT(fecnacimiento,'%d/%m') order by apepaterno,apematerno,nomuno,nomdos " +
 					"limit 0,"+Constante.PORTAL_CANTIDAD_CUMPLEANOS;
 			cons = dataSource.getConnection();
 			stmt = cons.prepareStatement(query);
@@ -430,6 +430,8 @@ public class UsuarioDAO extends BaseDAO {
 			
 			while (result.next()) {
 				usuario = new Usuario();
+				usuario.setId(result.getInt("idpersona"));
+				usuario.setUsuario(result.getString("usuario"));
 				usuario.setTipo(Constante.TIPO_USUARIO_PERSONA);
 				usuario.setId(result.getInt("idpersona"));
 				
