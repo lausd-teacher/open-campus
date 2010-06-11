@@ -75,7 +75,7 @@
 												<img id="flag_<c:out value="${debate.idDebate}" />"  src="<%=request.getContextPath() %>/img/flag.gif" width="8"/>
 											</c:when>
 											<c:otherwise>
-												<img id="flag_<c:out value="${debate.idDebate}" />"  src="<%=request.getContextPath() %>/img/nada.gif" width="8"/>
+												<img id="flag_<c:out value="${debate.idDebate}" />"  src="<%=request.getContextPath() %>/img/cal.gif" width="8"/>
 											</c:otherwise>
 										</c:choose>
 									</caption>
@@ -153,7 +153,7 @@
 																			<img id="flag_<c:out value="${dia.idDebate}" />"  src="<%=request.getContextPath() %>/img/flag.gif" width="8"/>
 																		</c:when>
 																		<c:otherwise>
-																			<img id="flag_<c:out value="${dia.idDebate}" />"  src="<%=request.getContextPath() %>/img/nada.gif" width="8"/>
+																			<img id="flag_<c:out value="${dia.idDebate}" />"  src="<%=request.getContextPath() %>/img/cal.gif" width="8"/>
 																		</c:otherwise>
 																	</c:choose>
 																</td>											
@@ -194,7 +194,7 @@
 																</td>
 															</tr>
 														</tbody>
-													</table><img src="<%=request.getContextPath() %>/img/nada.gif" height="2"/></c:forEach></td>							
+													</table><img src="<%=request.getContextPath() %>/img/cal.gif" height="2"/></c:forEach></td>							
 										</tr>
 									</tbody>									
 								</table>

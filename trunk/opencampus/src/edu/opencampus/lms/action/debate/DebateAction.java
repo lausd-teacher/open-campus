@@ -149,7 +149,7 @@ public class DebateAction extends BaseAction {
 				
 				aula.setDebateActual(idGrupo);
 				
-				debates = debateService.obtenerPlactica(aula, idGrupo);
+				debates = debateService.obtenerPlactica(aula, tg.getIdTrabajo());
 				
 				if (getUsuarioSession().getRolPredeterminado().getIdrol() == Constante.ROL_CAMPUS_ADMINISTRADOR) {
 					this.esAdmin = true;
@@ -283,7 +283,7 @@ public class DebateAction extends BaseAction {
 					modelo.setTexto(texto);
 					modelo.setPredecesor(predecesor);
 					
-					modelo = debateService.crearPlactica(aula, idGrupo, modelo);
+					modelo = debateService.crearPlactica(aula, tg.getIdTrabajo(), modelo);
 				
 				}else{
 					log.error("No tiene permiso para acceder al recurso o no esta listo.");
@@ -303,6 +303,12 @@ public class DebateAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	crear <-----
+	eliminarPlactica
+	eliminar
+
+	--yata
+	cargarTertuliaXML
 	public String crear() {
 		log.info("crear() "+predecesor);
 		
