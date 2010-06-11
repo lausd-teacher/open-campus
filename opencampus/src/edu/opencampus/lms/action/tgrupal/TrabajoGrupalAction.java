@@ -523,7 +523,7 @@ public class TrabajoGrupalAction extends BaseAction {
 				getRequest().setAttribute("TRABAJO_GRUPAL", tg);
 				
 				if(tg.getFechaActivacion() != null){
-					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg, aula.getMatriculaActual().getIdMatricula());
+					Collection<TrabajoGrupalGrupo> grupos = tGrupalService.obtenerGruposParaEvaluacion(tg, (aula.getMatriculaActual().getIdMatricula()!=null)?aula.getMatriculaActual().getIdMatricula():0);
 					getRequest().setAttribute("GRUPOS", grupos);
 					//*** 
 					for (TrabajoGrupalGrupo grupo : grupos) {
