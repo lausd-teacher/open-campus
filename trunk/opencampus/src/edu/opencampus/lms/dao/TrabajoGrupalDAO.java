@@ -146,12 +146,14 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		ResultSet result = null;
 		try {
 
-			String query = "SELECT NVL((SELECT M.IDGRUPO FROM CV_GRUPO_TRABAJO_MATRICULA M, CV_GRUPO_TRABAJO G WHERE M.IDTRABAJO=G.IDTRABAJO AND M.IDGRUPO=G.IDGRUPO AND M.IDTRABAJO=? AND M.IDMATRICULA=? AND G.ESTADO=?),-1) IDGRUPO FROM DUAL";
+			String query = "SELECT IFNULL((SELECT m.idgrupo FROM cv_trabajo_grupal_matricula m, cv_trabajo_grupal_grupo g  " +
+					"WHERE m.idunidad=g.idunidad AND m.idficha=g.idficha AND m.idgrupo=g.idgrupo AND m.idunidad=? AND m.idficha=? AND m.idmatricula=? " +
+					"AND g.estado='1'),-1) idgrupo";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
-			stmt.setInt(2, idMatricula);
-			stmt.setInt(3, Constante.ESTADO_ACTIVO);
+			stmt.setInt(2, tg.getIdFicha());
+			stmt.setInt(3, idMatricula);
 			result =  stmt.executeQuery();
 			if (result.next()) {
 				return result.getInt("IDGRUPO");
@@ -181,24 +183,30 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		
 		try {
 
-			String query = "SELECT P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS " +
-					"FROM GENERAL.GEN_PERSONA P, SEGURIDAD.SEG_USUARIO U, CV_GRUPO_TRABAJO_MATRICULA TM, CV_GRUPO_TRABAJO G, cv_matricula M " +
-					"WHERE G.IDTRABAJO=TM.IDTRABAJO AND G.IDGRUPO=TM.IDGRUPO AND TM.IDMATRICULA=M.IDMATRICULA " +
-					"AND U.USUARIO=M.USUARIO AND U.CODSUJETO=P.CODPERSONA AND G.ESTADO='1' " +
-					"AND G.IDTRABAJO=? AND G.IDGRUPO=(SELECT IDGRUPO FROM CV_GRUPO_TRABAJO_MATRICULA " +
-					"WHERE IDTRABAJO=G.IDTRABAJO AND IDMATRICULA=?) ORDER BY P.APEPATERNO, P.APEMATERNO, P.NOMUNO, P.NOMDOS";
+			String query = "SELECT p.apepaterno, p.apematerno, p.nomuno, p.nomdos " +
+					"FROM cv_persona p, cv_usuario u, cv_trabajo_grupal_matricula tm, cv_trabajo_grupal_grupo g, cv_matricula m " +
+					"WHERE g.idunidad=tm.idunidad AND g.idficha=tm.idficha AND g.idgrupo=tm.idgrupo AND tm.idmatricula=m.idmatricula " +
+					"AND u.idusuario=m.idusuario AND u.idusuario=p.idpersona AND g.estado='1' " +
+					"AND g.idunidad=? AND g.idficha=? AND g.idgrupo=(SELECT idgrupo FROM cv_trabajo_grupal_matricula " +
+					"WHERE idunidad=g.idunidad AND idficha=g.idficha AND idmatricula=?) ORDER BY p.apepaterno, p.apematerno, p.nomuno, p.nomdos";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
-			stmt.setInt(2, idMatricula);
+			stmt.setInt(2, tg.getIdFicha());
+			stmt.setInt(3, idMatricula);
 			result =  stmt.executeQuery();
 			while (result.next()) {
 				colega = new Matricula();
-//				colega.setPaterno(Formato.formatoTexto(result.getString("APEPATERNO")));
-//				colega.setMaterno(Formato.formatoTexto(result.getString("APEMATERNO")));
-//				colega.setNombre1(Formato.formatoTexto(result.getString("NOMUNO")));
-//				colega.setNombre2(Formato.formatoTexto(result.getString("NOMDOS")));
 				
+				Usuario usuario = new Usuario();
+				Persona persona = new Persona();
+				persona.setApepaterno(Formato.formatoTexto(result.getString("APEPATERNO")));
+				persona.setApematerno(Formato.formatoTexto(result.getString("APEMATERNO")));
+				persona.setNomuno(Formato.formatoTexto(result.getString("NOMUNO")));
+				persona.setNomdos(Formato.formatoTexto(result.getString("NOMDOS")));
+				usuario.setPersona(persona);
+				colega.setUsuario(usuario);
+
 				integrantes.add(colega);
 			}
 
@@ -224,16 +232,17 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		ResultSet result = null;
 		
 		try {
-			String query = "SELECT ARCHIVO_NOMBRE,ARCHIVO_TAMANO FROM CV_GRUPO_TRABAJO WHERE IDTRABAJO=? AND IDGRUPO=?";
+			String query = "SELECT archivo_nombre,archivo_tamanio FROM cv_trabajo_grupal_grupo WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
 			result =  stmt.executeQuery();
 
 			if (result.next()) {
 				grupo.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
-				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANO"));
+				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
 			}
 
 		} catch (SQLException e) {
@@ -288,9 +297,9 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		try {
-			String query = "UPDATE CV_GRUPO_TRABAJO_MATRICULA SET USUARIO_MOD=?, FECHA_MOD=SYSDATE, NOTA_OPORTUNIDAD=?, "
-					+ "NOTA_COHERENCIA=?, NOTA_INNOVACION=?, NOTA_PARTICIPACION=?, NOTA_PROMEDIO=? "
-					+ "WHERE IDTRABAJO=? AND IDMATRICULA=?";
+			String query = "UPDATE cv_trabajo_grupal_matricula SET modificado_por=?, modificado_en=NOW(), nota_oportunidad=?,  " +
+					"nota_coherencia=?, nota_innovacion=?, nota_participacion=?, nota_promedio=?  " +
+					"WHERE idunidad=? AND idficha=? AND idmatricula=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setString(1, integrante.getUsuarioModificacion());
@@ -300,7 +309,8 @@ public class TrabajoGrupalDAO extends BaseDAO {
 			stmt.setString(5, integrante.getNotaParticipacion());
 			stmt.setString(6, integrante.getNotaPromedio());
 			stmt.setInt(7, tg.getIdTrabajo());
-			stmt.setInt(8, integrante.getUsuarioMatricula().getIdMatricula());
+			stmt.setInt(8, tg.getIdFicha());
+			stmt.setInt(9, integrante.getUsuarioMatricula().getIdMatricula());
 
 			if (1 != stmt.executeUpdate()) {
 				log.error("Error calificarTrabajo(TrabajoIndividualMatricula tMatricula)");
@@ -774,37 +784,42 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		Matricula matricula = null;
 
 		try {
-			String query = "SELECT G.IDGRUPO,G.NOMBRE,G.ARCHIVO_NOMBRE,G.ARCHIVO_TAMANO,G.BANDERA,"
-					+ "NVL((SELECT T.FECHA_ENTREGA - S.FECHA_CREACION "
-					+ "FROM CV_GRUPO_TRABAJO_MSG S, cv_trabajo_grupal T "
-					+ "WHERE S.IDTRABAJO=T.IDTRABAJO AND S.IDTRABAJO=G.IDTRABAJO AND S.IDGRUPO=G.IDGRUPO AND S.IDMENSAJE=(SELECT MIN(S.IDMENSAJE) "
-					+ "FROM CV_GRUPO_TRABAJO_MSG S, cv_matricula M "
-					+ "WHERE S.IDMATRICULA_EMISOR=M.IDMATRICULA AND S.IDTRABAJO=G.IDTRABAJO AND S.IDGRUPO=G.IDGRUPO  "
-					+ "AND M.IDROL=? AND S.ARCHIVO_NOMBRE IS NOT NULL)),0) EXPIRADO, "
-					+ "(SELECT COUNT(*) DEBATE_TOTAL FROM cv_debate WHERE ESTADO='1' AND IDTRABAJO=G.IDTRABAJO AND IDGRUPO=G.IDGRUPO) DEBATES,"
-					+ "(SELECT COUNT(cvdi.iddebate) FROM cv_debate cvdi,cv_debate_matricula cvdima,"
-					+ "cv_trabajo_grupal cvtrgr,cv_grupo_trabajo cvgrtr "
-					+ "WHERE cvdima.iddebate = cvdi.iddebate AND cvdima.leido = 0 AND cvdi.estado = 1 "
-					+ "AND cvgrtr.idtrabajo = cvtrgr.idtrabajo AND cvgrtr.estado =1 AND cvdima.idmatricula = ? "
-					+ "AND cvgrtr.idgrupo = cvdi.idgrupo AND cvgrtr.idtrabajo = cvdi.idtrabajo AND cvgrtr.idgrupo = G.IDGRUPO "
-					+ "AND cvgrtr.idtrabajo =G.IDTRABAJO) BANDERADEBATE "
-					+ "FROM CV_GRUPO_TRABAJO G WHERE G.IDTRABAJO=? AND G.ESTADO=? ORDER BY G.IDGRUPO";
+			String query = "SELECT g.idgrupo,g.nombre,g.archivo_nombre,g.archivo_tamanio,g.bandera," +
+					"" +
+					"IFNULL((SELECT t.fecha_entrega - s.creado_en " +
+					"	FROM cv_trabajo_grupal_mensaje s, cv_trabajo_grupal t " +
+					"	WHERE s.idunidad=t.idunidad AND s.idficha=t.idficha AND s.idgrupo=g.idgrupo " +
+					"	AND s.idmensaje=(SELECT MIN(s.idmensaje) " +
+					"		FROM cv_trabajo_grupal_mensaje	 s, cv_matricula m " +
+					"		WHERE s.idmatricula_envio=m.idmatricula AND s.idunidad=g.idunidad AND s.idficha=g.idficha AND s.idgrupo=g.idgrupo  " +
+					"		AND m.idrol=2 AND s.archivo_nombre IS NOT NULL)),0) expirado, " +
+					"		" +
+					"(SELECT COUNT(*) debate_total FROM cv_debate WHERE estado='1' AND idunidad=g.idunidad AND idficha=g.idficha AND idgrupo=g.idgrupo) debates," +
+					"(SELECT COUNT(cvdi.iddebate) FROM cv_debate cvdi,cv_debate_matricula cvdima," +
+					"	cv_trabajo_grupal cvtrgr,cv_trabajo_grupal_grupo cvgrtr " +
+					"	WHERE cvdima.iddebate = cvdi.iddebate AND cvdima.leido = 0 AND cvdi.estado = 1 " +
+					"	AND cvgrtr.idunidad = cvtrgr.idunidad AND cvgrtr.idficha = cvtrgr.idficha AND cvgrtr.estado =1 " +
+					"	AND cvdima.idmatricula = ? " +
+					"	AND cvgrtr.idgrupo = cvdi.idgrupo AND cvgrtr.idunidad = cvdi.idunidad AND cvgrtr.idficha = cvdi.idficha AND cvgrtr.idgrupo = g.idgrupo " +
+					"	AND cvgrtr.idunidad =g.idunidad AND cvgrtr.idficha =g.idficha) banderadebate " +
+					"FROM cv_trabajo_grupal_grupo g WHERE g.idunidad=? AND g.idficha=? AND g.estado='1' ORDER BY g.idgrupo";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
-			stmt.setInt(1, Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE);
-			stmt.setInt(2, idMatricula);
-			stmt.setInt(3, tg.getIdTrabajo());
-			stmt.setInt(4, Constante.ESTADO_ACTIVO);
+			stmt.setInt(1, idMatricula);
+			stmt.setInt(2, tg.getIdTrabajo());
+			stmt.setInt(3, tg.getIdFicha());
 			result =  stmt.executeQuery();
 
-			query = "SELECT G.IDMATRICULA,G.NOTA_OPORTUNIDAD,NOTA_COHERENCIA,NOTA_INNOVACION,NOTA_PARTICIPACION,NOTA_PROMEDIO,"
-					+ "PKG_CV_UTIL.fx_cv_string_number(M.SECCION) SECCION, P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS," 
-					+ "(SELECT COUNT(*) DEBATE_TOTAL FROM cv_debate WHERE ESTADO='1' AND IDTRABAJO=G.IDTRABAJO AND IDGRUPO=G.IDGRUPO AND IDMATRICULA=G.IDMATRICULA) DEBATES "
-					+ "FROM CV_GRUPO_TRABAJO_MATRICULA G, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
-					+ "WHERE G.IDMATRICULA=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) AND G.IDTRABAJO=? AND G.IDGRUPO=? "
-					+ "AND M.ELIMINADO='0' AND M.ESTADO='1' ORDER BY P.APEPATERNO,P.APEMATERNO,P.NOMUNO";
+			query = "SELECT g.idmatricula,g.nota_oportunidad,nota_coherencia,nota_innovacion,nota_participacion,nota_promedio, " +
+					"p.apepaterno,p.apematerno,p.nomuno,p.nomdos,  " +
+					"(SELECT COUNT(*) debate_total FROM cv_debate WHERE estado='1' AND idunidad=g.idunidad AND idficha=g.idunidad AND idgrupo=g.idgrupo AND idmatricula_envio=g.idmatricula) debates  " +
+					"FROM cv_trabajo_grupal_matricula g, cv_matricula m, cv_usuario u, cv_persona p  " +
+					"WHERE g.idmatricula=m.idmatricula AND u.idusuario=m.idusuario AND u.idusuario=p.idpersona AND m.eliminado='0' AND m.estado='1' " +
+					"AND g.idunidad=? AND g.idficha=? AND g.idgrupo=? " +
+					"ORDER BY p.apepaterno,p.apematerno,p.nomuno";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, tg.getIdTrabajo());
+			stmt.setInt(2, tg.getIdFicha());
 			ResultSet subResult = null;
 
 			while (result.next()) {
@@ -812,7 +827,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 				grupo.setIdGrupo(result.getInt("IDGRUPO"));
 				grupo.setNombre(result.getString("NOMBRE"));
 				grupo.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
-				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANO"));
+				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
 				grupo.setBandera(result.getInt("BANDERA"));
 				grupo.setBanderaDebate(result.getInt("BANDERADEBATE"));
 				grupo.setDebates(result.getInt("DEBATES"));
@@ -825,7 +840,7 @@ public class TrabajoGrupalDAO extends BaseDAO {
 				else
 					grupo.setExpirado(Constante.FLAG_TRABAJO_PENDIENTE);
 
-				stmt.setInt(2, result.getInt("IDGRUPO"));
+				stmt.setInt(3, result.getInt("IDGRUPO"));
 				subResult =  stmt.executeQuery();
 
 				integrantes = new ArrayList<TrabajoGrupalIntegrante>();
@@ -840,12 +855,17 @@ public class TrabajoGrupalDAO extends BaseDAO {
 					integrante.setDebates(subResult.getInt("DEBATES"));
 
 					matricula = new Matricula();
-//					matricula.setIdMatricula(subResult.getString("IDMATRICULA"));
-//					matricula.setSeccion(subResult.getString("SECCION"));
-//					matricula.setPaterno(Formato.formatoTexto(subResult.getString("APEPATERNO")));
-//					matricula.setMaterno(Formato.formatoTexto(subResult.getString("APEMATERNO")));
-//					matricula.setNombre1(Formato.formatoTexto(subResult.getString("NOMUNO")));
-//					matricula.setNombre2(Formato.formatoTexto(subResult.getString("NOMDOS")));
+					matricula.setIdMatricula(subResult.getInt("idmatricula"));
+					
+					Usuario usuario = new Usuario();
+					Persona persona = new Persona();
+					persona.setApepaterno(Formato.formatoTexto(subResult.getString("APEPATERNO")));
+					persona.setApematerno(Formato.formatoTexto(subResult.getString("APEMATERNO")));
+					persona.setNomuno(Formato.formatoTexto(subResult.getString("NOMUNO")));
+					persona.setNomdos(Formato.formatoTexto(subResult.getString("NOMDOS")));
+					usuario.setPersona(persona);
+					
+					matricula.setUsuario(usuario);
 					integrante.setUsuarioMatricula(matricula);
 
 					integrantes.add(integrante);
@@ -918,57 +938,55 @@ public class TrabajoGrupalDAO extends BaseDAO {
 		TrabajoGrupalMensaje mensaje = null;
 		Matricula matricula = null;
 		try {
-			String query = "SELECT NOMBRE,ARCHIVO_NOMBRE,ARCHIVO_TAMANO,BANDERA, "
-					+ "(SELECT COUNT(NVL(NOTA_PROMEDIO,0))-COUNT(NOTA_PROMEDIO) FROM CV_GRUPO_TRABAJO_MATRICULA WHERE IDGRUPO=T.IDGRUPO AND IDTRABAJO=T.IDTRABAJO) NOCALIFICADOS "
-					+ "FROM CV_GRUPO_TRABAJO T WHERE IDTRABAJO=? AND IDGRUPO=? AND ESTADO=?";
+			String query = "SELECT nombre,archivo_nombre,archivo_tamanio,bandera, " +
+					"(SELECT COUNT(IFNULL(nota_promedio,0))-COUNT(nota_promedio) FROM cv_trabajo_grupal_matricula WHERE idgrupo=t.idgrupo AND idunidad=t.idunidad AND idficha=t.idficha) nocalificados  " +
+					"FROM cv_trabajo_grupal_grupo t WHERE idunidad=? AND idficha=? AND idgrupo=? AND estado='1'";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
-			stmt.setInt(3, Constante.ESTADO_ACTIVO);
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
 			result =  stmt.executeQuery();
 			if (result.next()) {
 				grupo.setNombre(result.getString("NOMBRE"));
 				grupo.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
-				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANO"));
+				grupo.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
 				grupo.setBandera(result.getInt("BANDERA"));
 				grupo.setEstado(result.getInt("NOCALIFICADOS"));
 
 				// Lista de Mensajes
-				query = "SELECT T.IDMENSAJE,T.DESCRIPCION,T.IDMATRICULA_EMISOR,M.IDROL,T.ARCHIVO_NOMBRE,T.ARCHIVO_TAMANO,"
-						+ "P.APEPATERNO,P.APEMATERNO,P.NOMUNO,P.NOMDOS,T.USUARIO_CREACION,T.FECHA_CREACION,T.USUARIO_MOD,T.FECHA_MOD "
-						+ "FROM CV_GRUPO_TRABAJO_MSG T, cv_matricula M, SEGURIDAD.SEG_USUARIO U, GENERAL.GEN_PERSONA P "
-						+ "WHERE T.IDMATRICULA_EMISOR=M.IDMATRICULA(+) AND U.USUARIO(+)=M.USUARIO AND U.CODSUJETO=P.CODPERSONA(+) "
-						+ "AND T.IDTRABAJO=? AND T.IDGRUPO=? ORDER BY T.IDMENSAJE";
+				query = "SELECT t.idmensaje,t.descripcion,t.idmatricula_envio,m.idrol,t.archivo_nombre,t.archivo_tamanio, " +
+						"p.apepaterno,p.apematerno,p.nomuno,p.nomdos,t.creado_por,t.creado_en,t.modificado_por,t.modificado_en " +
+						"FROM cv_trabajo_grupal_mensaje t, cv_matricula m, cv_usuario u, cv_persona p " +
+						"WHERE t.idmatricula_envio=m.idmatricula AND u.idusuario=m.idusuario AND u.idusuario=p.idpersona " +
+						"AND t.idunidad=? AND t.idficha=? AND t.idgrupo=? ORDER BY t.idmensaje";
 				stmt =  cons.prepareStatement(query);
 				stmt.setInt(1, grupo.getIdTrabajo());
-				stmt.setInt(2, grupo.getIdGrupo());
+				stmt.setInt(2, grupo.getIdFicha());
+				stmt.setInt(3, grupo.getIdGrupo());
 				result =  stmt.executeQuery();
 				while (result.next()) {
 					mensaje = new TrabajoGrupalMensaje();
 					mensaje.setIdMensaje(result.getInt("IDMENSAJE"));
 					mensaje.setDescripcion(result.getString("DESCRIPCION"));
-					mensaje
-							.setArchivoNombre(result
-									.getString("ARCHIVO_NOMBRE"));
-					mensaje.setArchivoTamanio(result
-							.getString("ARCHIVO_TAMANO"));
-					mensaje.setUsuarioCreacion(result
-							.getString("USUARIO_CREACION"));
-					mensaje.setUsuarioModificacion(result
-							.getString("USUARIO_MOD"));
-					mensaje.setFechaCreacion(Formato.getDateDeBaseDatos(result
-							.getString("FECHA_CREACION")));
-					mensaje.setFechaModificacion(Formato
-							.getDateDeBaseDatos(result.getString("FECHA_MOD")));
+					mensaje.setArchivoNombre(result.getString("ARCHIVO_NOMBRE"));
+					mensaje.setArchivoTamanio(result.getString("ARCHIVO_TAMANIO"));
+					mensaje.setUsuarioCreacion(result.getString("creado_por"));
+					mensaje.setUsuarioModificacion(result.getString("modificado_por"));
+					mensaje.setFechaCreacion(Formato.timestampToCalendar(result.getString("creado_en")));
+					mensaje.setFechaModificacion(Formato.timestampToCalendar(result.getString("modificado_en")));
 
 					matricula = new Matricula();
-//					matricula.setIdMatricula(result.getString("IDMATRICULA_EMISOR"));
-//					matricula.setRol(result.getInt("IDROL"));
-//					matricula.setPaterno(Formato.formatoTexto(result.getString("APEPATERNO")));
-//					matricula.setMaterno(Formato.formatoTexto(result.getString("APEMATERNO")));
-//					matricula.setNombre1(Formato.formatoTexto(result.getString("NOMUNO")));
-//					matricula.setNombre2(Formato.formatoTexto(result.getString("NOMDOS")));
+					matricula.setIdMatricula(result.getInt("idmatricula_envio"));
+					
+					Usuario usuario = new Usuario();
+					Persona persona = new Persona();
+					persona.setApepaterno(Formato.formatoTexto(result.getString("APEPATERNO")));
+					persona.setApematerno(Formato.formatoTexto(result.getString("APEMATERNO")));
+					persona.setNomuno(Formato.formatoTexto(result.getString("NOMUNO")));
+					persona.setNomdos(Formato.formatoTexto(result.getString("NOMDOS")));
+					usuario.setPersona(persona);
+					matricula.setUsuario(usuario);
 
 					mensaje.setUsuarioEmisor(matricula);
 
@@ -1002,17 +1020,18 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 		try {
 
-			String query = "SELECT (SELECT MAX(IDMENSAJE) FROM CV_GRUPO_TRABAJO_MSG WHERE IDTRABAJO=? AND IDGRUPO=?) LASTMESSAGE, "
-					+ "NVL((SELECT IDMENSAJE FROM CV_GRUPO_TRABAJO_MSG M WHERE IDTRABAJO=? AND IDGRUPO=? AND IDMATRICULA_EMISOR=? "
-					+ "AND IDMENSAJE=(SELECT MAX(IDMENSAJE) FROM CV_GRUPO_TRABAJO_MSG WHERE IDTRABAJO=M.IDTRABAJO AND IDGRUPO=M.IDGRUPO)),0) ACTION "
-					+ "FROM DUAL";
+			String query = "SELECT (SELECT MAX(idmensaje) FROM cv_trabajo_grupal_mensaje WHERE idunidad=? AND idficha=? AND idgrupo=?) lastmessage,  " +
+					"IFNULL((SELECT idmensaje FROM cv_trabajo_grupal_mensaje m WHERE idunidad=? AND idficha=? AND idgrupo=? AND idmatricula_envio=?  " +
+					"AND idmensaje=(SELECT MAX(idmensaje) FROM cv_trabajo_grupal_mensaje WHERE idunidad=m.idunidad AND idficha=m.idficha AND idgrupo=m.idgrupo)),0) ACTION";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, datos.getIdTrabajo());
-			stmt.setInt(2, datos.getIdGrupo());
-			stmt.setInt(3, datos.getIdTrabajo());
-			stmt.setInt(4, datos.getIdGrupo());
-			stmt.setInt(5, datos.getEstado());
+			stmt.setInt(2, datos.getIdFicha());
+			stmt.setInt(3, datos.getIdGrupo());
+			stmt.setInt(4, datos.getIdTrabajo());
+			stmt.setInt(5, datos.getIdFicha());
+			stmt.setInt(6, datos.getIdGrupo());
+			stmt.setInt(7, datos.getEstado());
 			result =  stmt.executeQuery();
 			if (result.next()) {
 				idMensajeEstado[0] = result.getInt("LASTMESSAGE");
@@ -1043,39 +1062,41 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 		try {
 			cons = dataSource.getConnection();
+			cons.setAutoCommit(false);
 
 			// *** CV_GRUPO_TRABAJO_MSG
 
-			String query = "INSERT INTO CV_GRUPO_TRABAJO_MSG (IDTRABAJO,IDGRUPO,IDMENSAJE,DESCRIPCION,IDMATRICULA_EMISOR,ARCHIVO_NOMBRE,ARCHIVO_TAMANO,USUARIO_CREACION,USUARIO_MOD,FECHA_CREACION,FECHA_MOD) "
-					+ "VALUES(?,?,?,?,?,?,?,?,?,SYSDATE,SYSDATE)";
+			String query = "INSERT INTO cv_trabajo_grupal_mensaje (idunidad,idficha,idgrupo,idmensaje,descripcion,idmatricula_envio,archivo_nombre,archivo_tamanio,creado_por,modificado_por,creado_en,modificado_en)  " +
+					"VALUES(?,?,?,?,?,?,?,?,?,?,NOW(),NOW())";
 
 			stmt =  cons.prepareStatement(query);
+			
 			stmt.setInt(1, grupo.getIdTrabajo());
-			stmt.setInt(2, grupo.getIdGrupo());
-			stmt.setInt(3, mensaje.getIdMensaje());
-			stmt.setString(4, mensaje.getDescripcion());
-			stmt.setInt(5, mensaje.getUsuarioEmisor().getIdMatricula());
-			stmt.setString(6, mensaje.getArchivoNombre());
-			stmt.setString(7, mensaje.getArchivoTamanio());
-			stmt.setString(8, mensaje.getUsuarioCreacion());
-			stmt.setString(9, mensaje.getUsuarioModificacion());
+			stmt.setInt(2, grupo.getIdFicha());
+			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setInt(4, mensaje.getIdMensaje());
+			stmt.setString(5, mensaje.getDescripcion());
+			stmt.setInt(6, mensaje.getUsuarioEmisor().getIdMatricula());
+			stmt.setString(7, mensaje.getArchivoNombre());
+			stmt.setString(8, mensaje.getArchivoTamanio());
+			stmt.setString(9, mensaje.getUsuarioCreacion());
+			stmt.setString(10, mensaje.getUsuarioModificacion());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error nuevoMensaje(TrabajoGrupalGrupo grupo) - CV_GRUPO_TRABAJO_MSG");
+				log.error("Error nuevoMensaje(TrabajoGrupalGrupo grupo) - cv_trabajo_grupal_mensaje");
 				throw new DAOException("No culmino");
 			}
 
 			// *** CV_GRUPO_TRABAJO
-			query = "UPDATE CV_GRUPO_TRABAJO SET BANDERA=? WHERE IDTRABAJO=? AND IDGRUPO=?";
+			query = "UPDATE cv_trabajo_grupal_grupo SET bandera=? WHERE idunidad=? AND idficha=? AND idgrupo=?";
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, grupo.getBandera());
 			stmt.setInt(2, grupo.getIdTrabajo());
-			stmt.setInt(3, grupo.getIdGrupo());
+			stmt.setInt(3, grupo.getIdFicha());
+			stmt.setInt(4, grupo.getIdGrupo());
 
 			if (1 != stmt.executeUpdate()) {
-				log
-						.error("Error en nuevoMensaje(TrabajoGrupalGrupo grupo) - CV_GRUPO_TRABAJO");
+				log.error("Error en nuevoMensaje(TrabajoGrupalGrupo grupo) - cv_trabajo_grupal_grupo");
 				throw new DAOException("No culmino");
 			}
 
@@ -1107,10 +1128,10 @@ public class TrabajoGrupalDAO extends BaseDAO {
 
 		try {
 			cons = dataSource.getConnection();
-
+			
 			if (mensaje.getArchivoNombre() != null) {
-				String query = "UPDATE CV_GRUPO_TRABAJO_MSG SET DESCRIPCION=?, ARCHIVO_NOMBRE=?, ARCHIVO_TAMANO=?, "
-						+ "USUARIO_MOD=?, FECHA_MOD=SYSDATE WHERE IDTRABAJO=? AND IDGRUPO=? AND IDMENSAJE=?";
+				String query = "UPDATE cv_trabajo_grupal_mensaje SET descripcion=?, archivo_nombre=?, archivo_tamanio=?, " +
+						"modificado_por=?, modificado_en=NOW() WHERE idunidad=? AND idficha=? AND idgrupo=? AND idmensaje=?";
 
 				stmt =  cons.prepareStatement(query);
 				stmt.setString(1, mensaje.getDescripcion());
@@ -1118,18 +1139,20 @@ public class TrabajoGrupalDAO extends BaseDAO {
 				stmt.setString(3, mensaje.getArchivoTamanio());
 				stmt.setString(4, mensaje.getUsuarioModificacion());
 				stmt.setInt(5, grupo.getIdTrabajo());
-				stmt.setInt(6, grupo.getIdGrupo());
-				stmt.setInt(7, mensaje.getIdMensaje());
+				stmt.setInt(6, grupo.getIdFicha());
+				stmt.setInt(7, grupo.getIdGrupo());
+				stmt.setInt(8, mensaje.getIdMensaje());
 			} else {
-				String query = "UPDATE CV_GRUPO_TRABAJO_MSG SET DESCRIPCION=?, "
-						+ "USUARIO_MOD=?, FECHA_MOD=SYSDATE WHERE IDTRABAJO=? AND IDGRUPO=? AND IDMENSAJE=?";
+				String query = "UPDATE cv_trabajo_grupal_mensaje SET descripcion=?,  " +
+						"modificado_por=?, modificado_en=NOW() WHERE idunidad=? AND idficha=? AND idgrupo=? AND idmensaje=?";
 
 				stmt =  cons.prepareStatement(query);
 				stmt.setString(1, mensaje.getDescripcion());
 				stmt.setString(2, mensaje.getUsuarioModificacion());
 				stmt.setInt(3, grupo.getIdTrabajo());
-				stmt.setInt(4, grupo.getIdGrupo());
-				stmt.setInt(5, mensaje.getIdMensaje());
+				stmt.setInt(4, grupo.getIdFicha());
+				stmt.setInt(5, grupo.getIdGrupo());
+				stmt.setInt(6, mensaje.getIdMensaje());
 			}
 
 			if (1 != stmt.executeUpdate()) {
@@ -1150,23 +1173,24 @@ public class TrabajoGrupalDAO extends BaseDAO {
 	}
 
 
-	public int obtenerEstadoDebate(int idTrabajo, int idGrupo, int idMatricula) throws DAOException {
+	public int obtenerEstadoDebate(TrabajoGrupal tg, int idGrupo, int idMatricula) throws DAOException {
 		log.info("obtenerEstadoDebate(int idTrabajo, int idGrupo, int idMatricula)");
 		Connection cons = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String query = "SELECT COUNT(cvdi.iddebate) DEBATE FROM cv_debate cvdi,cv_debate_matricula cvdima,"
-					+ "cv_trabajo_grupal cvtrgr,cv_grupo_trabajo cvgrtr "
-					+ "WHERE cvdima.iddebate = cvdi.iddebate AND cvdima.leido = 0 AND cvdi.estado = 1 "
-					+ "AND cvgrtr.idtrabajo = cvtrgr.idtrabajo AND cvgrtr.estado =1 AND cvdima.idmatricula = ? "
-					+ "AND cvgrtr.idgrupo = cvdi.idgrupo AND cvgrtr.idtrabajo = cvdi.idtrabajo AND cvgrtr.idgrupo = ? "
-					+ "AND cvgrtr.idtrabajo =?";
+			String query = "SELECT COUNT(cvdi.iddebate) debate FROM cv_debate cvdi,cv_debate_matricula cvdima, " +
+					"cv_trabajo_grupal cvtrgr, cv_trabajo_grupal_grupo cvgrtr  " +
+					"WHERE cvdima.iddebate = cvdi.iddebate AND cvdima.leido = 0 AND cvdi.estado = '1'  " +
+					"AND cvgrtr.idunidad = cvtrgr.idunidad AND cvgrtr.idficha = cvtrgr.idficha AND cvgrtr.estado = '1' AND cvdima.idmatricula = ?  " +
+					"AND cvgrtr.idgrupo = cvdi.idgrupo AND cvgrtr.idunidad = cvdi.idunidad AND cvgrtr.idficha = cvdi.idficha AND cvgrtr.idgrupo = ?  " +
+					"AND cvgrtr.idunidad =? AND cvtrgr.idficha=?";
 			cons = dataSource.getConnection();
 			stmt =  cons.prepareStatement(query);
 			stmt.setInt(1, idMatricula);
 			stmt.setInt(2, idGrupo);
-			stmt.setInt(3, idTrabajo);
+			stmt.setInt(3, tg.getIdTrabajo());
+			stmt.setInt(4, tg.getIdFicha());
 			result =  stmt.executeQuery();
 
 			if (result.next()) {

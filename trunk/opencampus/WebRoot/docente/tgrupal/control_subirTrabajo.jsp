@@ -24,7 +24,7 @@ body {
 	margin-bottom: 0px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
-	background-color: #C5DAF6;
+	background-color: #CCCCCC;
 	margin-right: 0px;
 	margin-left: 0px;
 }
@@ -46,7 +46,7 @@ function enviarArchivo() {
 </script>
 
 </head>
-<body leftmargin="0" bgcolor="#C5DAF6">
+<body leftmargin="0" bgcolor="#CCCCCC">
 
 <c:choose>
 	<c:when test="${GRUPO != null}">

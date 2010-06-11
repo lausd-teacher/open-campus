@@ -249,14 +249,12 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 	
   </div>  
 	<div id="pie">
-		<p class="pie">
-			<%@include file="../../comun/pie.jsp" %>
-		</p>
+		<%@include file="../../comun/pie.jsp" %>
 	</div>
 </div>
 
 <script type="text/javascript">
-	window.resizeTo(800,420);
+	window.resizeTo(820,420);
 </script>
 
 </body>

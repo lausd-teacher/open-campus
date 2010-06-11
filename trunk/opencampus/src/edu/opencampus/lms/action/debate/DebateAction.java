@@ -7,6 +7,7 @@ import edu.opencampus.lms.action.BaseAction;
 import edu.opencampus.lms.excepcion.ServiceException;
 import edu.opencampus.lms.modelo.AulaVirtual;
 import edu.opencampus.lms.modelo.Debate;
+import edu.opencampus.lms.modelo.TrabajoGrupal;
 import edu.opencampus.lms.service.DebateService;
 import edu.opencampus.lms.service.TrabajoGrupalService;
 import edu.opencampus.lms.util.Constante;
@@ -126,16 +127,23 @@ public class DebateAction extends BaseAction {
 	public void setPredecesor(int predecesor) {
 		this.predecesor = predecesor;
 	}
+	
+	TrabajoGrupal tg = null;
+	AulaVirtual aula = null;
+	@Override
+	public void prepare() throws Exception {
+		super.prepare();
+		tg = (TrabajoGrupal)getSession().get("GRUPAL");
+		aula = getUsuarioSession().getAulaActual();
+	}
 
 	public String cargar() {
 		log.info("cargar()");
 		try {
-			AulaVirtual aula = getAulaVirtualSession();
-			
-			if (Constante.ROL_CAMPUS_AULAVIRTUAL_MONITOR_DOCENTE != aula.getRol().getIdrol()
-					&& Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE != aula.getRol().getIdrol()
-					&& Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE != aula.getRol().getIdrol()) {
-				this.idGrupo = tGrupalService.obtenerIdGrupo(aula.getTrabajoGrupalActual(),aula.getIdMatricula());
+			if (Constante.ROL_CAMPUS_AULAVIRTUAL_MONITOR_DOCENTE != aula.getMatriculaActual().getRol().getIdRol()
+					&& Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE != aula.getMatriculaActual().getRol().getIdRol()
+					&& Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE != aula.getMatriculaActual().getRol().getIdRol()) {
+				this.idGrupo = tGrupalService.obtenerIdGrupo(tg,aula.getMatriculaActual().getIdMatricula());
 			}
 			if(this.idGrupo != null && this.idGrupo > 0){
 				
@@ -143,16 +151,16 @@ public class DebateAction extends BaseAction {
 				
 				debates = debateService.obtenerPlactica(aula, idGrupo);
 				
-				if (getUsuarioSession().getRolPredeterminado() == Constante.ROL_CAMPUS_ADMINISTRADOR) {
+				if (getUsuarioSession().getRolPredeterminado().getIdrol() == Constante.ROL_CAMPUS_ADMINISTRADOR) {
 					this.esAdmin = true;
 				}
-				if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == aula.getRol().getIdrol()
-						|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == aula.getRol().getIdrol()
-						|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == aula.getRol().getIdrol()) {
-					this.esInvitado = false;
-				}else{
-					this.esInvitado = true;
-				}
+//				if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == aula.getRol().getIdrol()
+//						|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == aula.getRol().getIdrol()
+//						|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == aula.getRol().getIdrol()) {
+//					this.esInvitado = false;
+//				}else{
+//					this.esInvitado = true;
+//				}
 				
 			}else{
 				log.error("No tiene permiso para acceder al presente debate.");
@@ -174,24 +182,22 @@ public class DebateAction extends BaseAction {
 		log.info("cargarSala() "+idDebate);
 		try {
 			
-			AulaVirtual aula = getAulaVirtualSession();
-			
 			if(idDebate != null){
 				
 				debate = debateService.obtenerDebate(aula, idDebate, false);
 				
 				debates = debateService.obtenerSubPlactica(aula, idDebate);
 				
-				if (getUsuarioSession().getRolPredeterminado() == Constante.ROL_CAMPUS_ADMINISTRADOR) {
+				if (getUsuarioSession().getRolPredeterminado().getIdrol() == Constante.ROL_CAMPUS_ADMINISTRADOR) {
 					this.esAdmin = true;
 				}
-				if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == aula.getRol().getIdrol()
-						|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == aula.getRol().getIdrol()
-						|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == aula.getRol().getIdrol()) {
-					this.esInvitado = false;
-				}else{
-					this.esInvitado = true;
-				}
+//				if (Constante.ROL_CAMPUS_AULAVIRTUAL_DOCENTE == aula.getRol().getIdrol()
+//						|| Constante.ROL_CAMPUS_AULAVIRTUAL_ESTUDIANTE == aula.getRol().getIdrol()
+//						|| Constante.ROL_CAMPUS_AULAVIRTUAL_RESPONSABLE == aula.getRol().getIdrol()) {
+//					this.esInvitado = false;
+//				}else{
+//					this.esInvitado = true;
+//				}
 								
 			}else{
 				log.error("No tiene permiso para acceder al recurso o no esta listo.");
@@ -213,10 +219,9 @@ public class DebateAction extends BaseAction {
 		log.info("cargarTertuliaXML() "+idDebate);
 		try {
 			
-			AulaVirtual aula = getAulaVirtualSession();
-			String idUnidad = String.valueOf(getAulaVirtualSession().getDialogoActual());
+			String iddebate = String.valueOf(aula.getDebateActual());
 			
-			if(aula != null && idUnidad != null){
+			if(aula != null && iddebate != null){
 				
 				debate = debateService.obtenerDebate(aula, idDebate, true);
 				
@@ -264,10 +269,8 @@ public class DebateAction extends BaseAction {
 	public String crearPlactica() {
 		log.info("crearPlactica() "+predecesor);
 		
-		AulaVirtual aula =getAulaVirtualSession();
-		
 		try {
-			if(getAulaVirtualSession().getTrabajoGrupalActual() != 0 && asunto != null && asunto.trim().length()>0 && texto != null && texto.trim().length()>0){
+			if(tg != null && asunto != null && asunto.trim().length()>0 && texto != null && texto.trim().length()>0){
 				
 				this.idGrupo = aula.getDebateActual();
 				
@@ -280,7 +283,7 @@ public class DebateAction extends BaseAction {
 					modelo.setTexto(texto);
 					modelo.setPredecesor(predecesor);
 					
-					modelo = debateService.crearPlactica(getAulaVirtualSession(), idGrupo, modelo);
+					modelo = debateService.crearPlactica(aula, idGrupo, modelo);
 				
 				}else{
 					log.error("No tiene permiso para acceder al recurso o no esta listo.");
@@ -303,10 +306,8 @@ public class DebateAction extends BaseAction {
 	public String crear() {
 		log.info("crear() "+predecesor);
 		
-		AulaVirtual aula = getAulaVirtualSession();
-		
 		try {
-			if(getAulaVirtualSession().getTrabajoGrupalActual() != 0 && asunto != null && asunto.trim().length()>0 && texto != null && texto.trim().length()>0){
+			if(tg != null && asunto != null && asunto.trim().length()>0 && texto != null && texto.trim().length()>0){
 			
 				this.idGrupo = aula.getDebateActual();
 				
@@ -320,7 +321,7 @@ public class DebateAction extends BaseAction {
 					modelo.setPredecesor(predecesor);
 					try { 
 						
-						modelo = debateService.crearPlactica(getAulaVirtualSession(), idGrupo, modelo);
+						modelo = debateService.crearPlactica(aula, idGrupo, modelo);
 						PrintWriter out = getResponse().getWriter();
 						out.print("OK");
 						out.close();
@@ -347,18 +348,18 @@ public class DebateAction extends BaseAction {
 	public String eliminarPlactica() {
 		log.info("eliminarPlactica() "+idDebate);
 		try {
-			debateService.eliminarPlactica(this.getUsuarioSession().getIdUsuario(), idDebate);
+			debateService.eliminarPlactica(this.getUsuarioSession().getId()+"", idDebate);
 		} catch (ServiceException e) {
 			log.info(e);
 		}
-		this.idGrupo = getAulaVirtualSession().getDebateActual();
+		this.idGrupo = aula.getDebateActual();
 		return SUCCESS;
 	}
 	
 	public String eliminar() {
 		log.info("eliminar() "+idDebate);
 		try {
-			debateService.eliminarPlactica(this.getUsuarioSession().getIdUsuario(), idDebate);
+			debateService.eliminarPlactica(this.getUsuarioSession().getId()+"", idDebate);
 			PrintWriter out = getResponse().getWriter();
 			out.print("OK");
 			out.close();
@@ -373,10 +374,8 @@ public class DebateAction extends BaseAction {
 	public String marcarLeido() {
 		log.info("marcarLeido() "+idDebate);
 		try {
-			AulaVirtual aula = getAulaVirtualSession();
-			
 			if(idDebate != 0 && aula != null){
-				debateService.marcarLeido(idDebate, aula.getIdMatricula(), owner);
+				debateService.marcarLeido(idDebate, aula.getMatriculaActual().getIdMatricula(), owner);
 				PrintWriter out = getResponse().getWriter();
 				out.print("OK");
 				out.close();

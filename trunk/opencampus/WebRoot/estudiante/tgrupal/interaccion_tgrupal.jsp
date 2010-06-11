@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="edu.opencampus.lms.modelo.Usuario"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -10,7 +11,7 @@
 <%@  page import="edu.opencampus.lms.util.Constante"%>
 <c:set var="contextPath" value='${pageContext.request.contextPath}'/>
 <%
-AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA_ACTUAL);
+AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO_ACTUAL)).getAulaActual();
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,7 +32,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 	<body onLoad="if(e = xGetElementById('sizeFilaDocente')){xShowD('filaDocente_'+xGetElementById('sizeFilaDocente').value);}">
 
 	<c:set var="tg" value='${requestScope.TRABAJO_GRUPAL}'/>
-	<c:set var="aula" value='${sessionScope.aula_actual}' />
+	<c:set var="aula" value='${sessionScope.usuario_actual.aulaActual}' />
 	<c:set var="grupo" value='${requestScope.TRABAJO_GRUPAL_MENSAJES}'/>
 
 
@@ -40,7 +41,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 					<table width="100%" border="0" cellspacing="0" cellpadding="3">
 					<tr>
 						<td width="90%">
-							<strong>Curso : <%=aula.getNombreCurso()%> </strong>
+							<strong>Curso : <%=aula.getCurso().getNombre()%> </strong>
 						</td>
 						<td width="5%"><a href="#" class="salir" onClick="window.print()">Imprimir</a> </td>
 						<td width="3%"><a href="#" class="salir" onClick="window.print()"><img
@@ -60,9 +61,9 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 		<c:choose>
 			<c:when test="${tg.fechaActivacion != null && requestScope.NoActivate ==  null}">
 				<table width="500" align="center" bgcolor="#FFFFFF" class="tabla01" style="table-layout: fixed;">
-			        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold;" colspan="2">
+			        <CAPTION>
 			          Trabajo: <c:out value="${tg.nombreUnidad}"></c:out>
-			         </td>
+			         </CAPTION>
 			        </tr> 
 			        <tr>
 						<td width="244" style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #cccccc;">
@@ -150,9 +151,9 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 				<p></p>
 				
 				<table width="500" align="center" bgcolor="#FFFFFF" class="tabla01">
-		        <tr class="fon_tit_curso"><td height="20" style="font-size: 12px;font-weight: bold;" colspan="2">
+		        <CAPTION>
 		          	Env&iacute;o y recepci&oacute;n de documentos
-		        </td>
+		        </CAPTION>
 			    </tr> 
 		        
 <%--		        ************* LISTA DE MENSAJES ***************--%>
@@ -183,7 +184,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 				        		<td style="padding: 5px; white-space: nowrap; border-bottom: solid 1px #B0BACB;">
 					        		<span style="float:left;">
 						        		<strong>
-							        		Enviado por: <c:out value="${tg.publicador.nombreCompletoJsp}" />
+							        		Enviado por: <c:out value="${tg.publicador.usuario.nombreCompleto}" />
 						        		</strong>
 						        	</span>
 					        		<span style="width: 120px; float:right; text-align:right;">
@@ -260,7 +261,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 					        		<span style="float:left;">
 						        		<strong>
 							        		Enviado por: 
-							        		<c:out value="${mensaje.usuarioEmisor.nombreCompletoJsp}" />
+							        		<c:out value="${mensaje.usuarioEmisor.usuario.nombreCompleto}" />
 						        		</strong>
 						        	</span>
 					        		<span style="width: 120px; float:right; text-align:right;">
@@ -327,10 +328,9 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 	              			</c:if>
               			</span>
               			<span style="float:right; text-align:right;">
-	              			
-	              				<input type="button" class="form_button"
+              				              				<input type="button" class="form_button"
 	              				<c:choose>
-	              					<c:when test="${grupo.bandera==1 && aula.idMatricula==ultimoUsuario}">
+	              					<c:when test="${grupo.bandera==1 && aula.matriculaActual.idMatricula==ultimoUsuario}">
 	              						onclick="mostrarFormModMensaje()" value="Editar"
 	              					</c:when>
 	              					<c:otherwise>
@@ -372,7 +372,7 @@ AulaVirtual aula = (AulaVirtual)request.getSession().getAttribute(Constante.AULA
 					
 								<tr>
 									<td colspan="3" style="padding-left: 5px;">
-										<textarea rows="4" cols="58" id="form_descripcion" onKeyDown="cuentaCaracteres(this)" onKeyUp="cuentaCaracteres(this)" name="descripcion"></textarea>
+										<textarea rows="4" cols="92" id="form_descripcion" onKeyDown="cuentaCaracteres(this)" onKeyUp="cuentaCaracteres(this)" name="descripcion"></textarea>
 									</td>
 								</tr>
 								<tr>
