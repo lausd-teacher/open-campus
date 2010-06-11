@@ -22,6 +22,7 @@ body {
 	table-layout: fixed;
 	background-color: #ffffff;
 	table-layout: fixed;
+	border-collapse: collapse;
 }
 .open_table.nogrid{
 	border-right: solid #CCCCCC 1px !important;
@@ -58,23 +59,20 @@ body {
 .open_table thead tr{
 	background-color: #DDDDDD;
 }
-.open_table thead tr th {
+.open_table thead tr th, .open_table thead tr td{
 	border-right: 1px solid #CCCCCC;
 	vertical-align: middle;
 	font-size: 11px;
 	font-weight: bold;
+	padding: 3px;
+}
+.open_table thead tr th {
 	text-transform: capitalize;
 	text-align: center;
-	vertical-align: middle;
 }
 .open_table thead tr td {
-	border-right: 1px solid #CCCCCC;
-	vertical-align: middle;
-	font-size: 11px;
-	font-weight: bold;
 	text-transform: none;
 	text-align: left;
-	vertical-align: middle;
 	color: #5c5c5c;
 }
 .open_table.nogrid th, .open_table.nogrid td {
@@ -89,6 +87,7 @@ body {
 .open_table tbody tr th, .open_table tbody tr td {
 	border-right: 1px solid #CCCCCC;
 	font-size: 11px;
+	padding: 3px;
 }
 
 .open_table tfoot tr {
@@ -98,8 +97,9 @@ body {
 .open_table tfoot tr th, .open_table tfoot tr td {
 	border-right: 1px solid #CCCCCC;
 	font-size: 11px;
-	color: #ffffff;
 	font-weight: bold;
+	color: #ffffff;
+	padding: 3px;
 }
 /* Bordes a celdas manuales */ 
 .open_table .border-top, .open_table .border-t{

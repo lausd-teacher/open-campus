@@ -16,6 +16,9 @@ public class AulaVirtual extends BaseModelo {
 	private Integer dialogoActual;
 	
 	@Deprecated
+	private Integer debateActual;
+	
+	@Deprecated
 	private Test testActual;
 	
 	private Integer idFicha;
@@ -48,6 +51,14 @@ public class AulaVirtual extends BaseModelo {
 	@Deprecated
 	public void setTestActual(Test testActual) {
 		this.testActual = testActual;
+	}
+	@Deprecated
+	public Integer getDebateActual() {
+		return debateActual;
+	}
+	@Deprecated
+	public void setDebateActual(Integer debateActual) {
+		this.debateActual = debateActual;
 	}
 
 	public Matricula getDocentePrincipal() {

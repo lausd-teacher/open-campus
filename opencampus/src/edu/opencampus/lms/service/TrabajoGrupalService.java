@@ -240,7 +240,7 @@ public class TrabajoGrupalService {
 		return idGrupo;
 	}
 	
-	public int obtenerEstadoDebate(int idTrabajo, int idGrupo, int idMatricula) throws ServiceException{
+	public int obtenerEstadoDebate(TrabajoGrupal idTrabajo, int idGrupo, int idMatricula) throws ServiceException{
 		int debate = 0;
 		try {
 			debate = trabajoGrupalDAO.obtenerEstadoDebate(idTrabajo, idGrupo, idMatricula);

@@ -213,7 +213,7 @@
 											
 											<td align="center" width="22">
 												<img src="<%=request.getContextPath()%>/img/icon_trab_grup.gif" style="cursor: pointer;" class="anatips" title="Trabajo Grupal"
-													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tgrupal/Cargar.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
+													onClick="abrirTrabajo('<%=request.getContextPath()%>/aulavirtual/tgrupal/VerTrabajoGrupal.action?idUnidad=<c:out value="${unidad.idUnidad}"/>')"/>
 											</td>
 											
 											<td align="left" class="border-right" width="10">

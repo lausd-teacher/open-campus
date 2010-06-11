@@ -278,8 +278,9 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 					        <tr id="fila_<c:out value="${fila.count}" />" style="display:none">
 					        	<td colspan="9">
 					        	<c:if test="${fn:length(grupo.integrantes)>0}">
-					        		<table width="100%" class="tabla01" style="table-layout: fixed; background-color: #E5EFF8">
-							        	<tr class="tabla01_subEncabezado" style="background-color: #C5DAF6">
+					        		<table border="0" width="100%" class="open_table">
+					        			<thead>
+							        	<tr>
 <%--						        			<td width="242">Integrantes</td>--%>
 <%--						        			<td width="40">Debates</td>--%>
 <%--						        			<td width="40">NO</td>--%>
@@ -287,31 +288,29 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 <%--						        			<td width="40">NI</td>--%>
 <%--						        			<td width="40">NP</td>--%>
 <%--						        			<td width="40">NF</td>--%>
-											<td align="center" width="24">&nbsp;</td>
-									        <td width="79">Paterno</td>
-									        <td width="79">Materno</td>
-									        <td width="140">Nombres</td>
-									        <td width="50">Secci&oacute;n</td>
-						        			<td width="50">Debates</td>
-						        			<td width="50">Nota</td>
+											<th align="center" width="24">&nbsp;</th>
+									        <th width="79">Paterno</th>
+									        <th width="79">Materno</th>
+									        <th>Nombres</th>
+						        			<th width="50">Debates</th>
+						        			<th width="50">Nota</th>
 						        		</tr>
+						        		</thead>
+						        		<tbody>
 							        <c:forEach items="${grupo.integrantes}" var="integrante" varStatus="intg">
-						        		<tr>
+						        		<tr class="line">
 						        			<td align="center">
 						        				<c:out value="${intg.count}" />
 						        			</td>
 						        			<td style="white-space: nowrap; padding-left: 5px;">
-						        				<c:out value="${integrante.usuarioMatricula.paterno}"></c:out>
+						        				<c:out value="${integrante.usuarioMatricula.usuario.persona.apepaterno}"></c:out>
 						        			</td>
 						        			<td style="white-space: nowrap; padding-left: 5px;">
-						        				<c:out value="${integrante.usuarioMatricula.materno}"></c:out>
+						        				<c:out value="${integrante.usuarioMatricula.usuario.persona.apematerno}"></c:out>
 						        			</td>
 						        			<td style="white-space: nowrap; padding-left: 5px;">
-						        				<c:out value="${integrante.usuarioMatricula.nombre1}"></c:out>
-						        				<c:out value="${integrante.usuarioMatricula.nombre2}"></c:out>
-						        			</td>
-						        			<td align="center">
-						        				<c:out value="${integrante.usuarioMatricula.seccion}"></c:out>
+						        				<c:out value="${integrante.usuarioMatricula.usuario.persona.nomuno}"></c:out>
+						        				<c:out value="${integrante.usuarioMatricula.usuario.persona.nomdos}"></c:out>
 						        			</td>
 						        			<td align="center">
 						        				<c:out value="${integrante.debates}"></c:out> /
@@ -356,11 +355,14 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 						        			</td>
 						        		</tr>
 							        </c:forEach>
+							        </tbody>
+							        <tfoot>
 							        	<tr>
-						        			<td colspan="7" style="background-color: #C5DAF6;">
+						        			<td colspan="6">
 						        					<iframe src="<c:out value='${contextPath}'/>/docente/tgrupal/control_subirTrabajo.jsp?idGrupo=<c:out value='${grupo.idGrupo}' />" id="uploadForm" frameborder="0" marginwidth="0" width="100%" marginheight="0" height="20" scrolling='no'></iframe>
 						        			</td>
 						        		</tr>
+						        	</tfoot>
 						        	</table>
 						        </c:if>
 					        	</td>
@@ -439,9 +441,7 @@ AulaVirtual aula = ((Usuario)request.getSession().getAttribute(Constante.USUARIO
 		
   </div>  
 	<div id="pie">
-		<p class="pie">
-			<%@include file="../../comun/pie.jsp" %>
-		</p>
+		<%@include file="../../comun/pie.jsp" %>
 	</div>
 </div>
 

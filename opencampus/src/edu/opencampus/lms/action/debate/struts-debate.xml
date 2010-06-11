@@ -6,23 +6,23 @@
 		<action name="Cargar" method="cargar"
 			class="edu.opencampus.lms.action.debate.DebateAction">
 			<result name="success">/comun/debate/debate.jsp</result>
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="CargarSala" method="cargarSala"
 			class="edu.opencampus.lms.action.debate.DebateAction">
 			<result name="success">/comun/debate/debate_sala.jsp</result>
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="CargarTertulia" method="cargarTertuliaXML"
 			class="edu.opencampus.lms.action.debate.DebateAction">
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 
 		<action name="MarcarLeido" method="marcarLeido"
 			class="edu.opencampus.lms.action.debate.DebateAction">
-			<interceptor-ref name="estudiante-monitor-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 
 		<action name="Crear" method="crearPlactica"
@@ -33,12 +33,12 @@
 			<result name="goSala" type="redirect-action">
 				CargarSala?idDebate=${idDebate}
 			</result>
-			<interceptor-ref name="estudiante-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 		
 		<action name="CrearAsync" method="crear"
 			class="edu.opencampus.lms.action.debate.DebateAction">
-			<interceptor-ref name="estudiante-aula-virtual"></interceptor-ref>
+			<interceptor-ref name="usuario-campus"></interceptor-ref>
 		</action>
 
 		<action name="Eliminar" method="eliminarPlactica"

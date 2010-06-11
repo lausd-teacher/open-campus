@@ -172,6 +172,8 @@ function calificarTrabajo(fila, idMatricula){
 
 	if(validarNota(nota_NF.value)){
 	
+		 var cadena = "idMatricula="+idMatricula+"&notaOportunidad=0&notaCoherencia=0&notaInnovacion=0&notaParticipacion=0";
+	
 	    //Entrada
 	    if(nota_NF.value != ""){
 	    	if(parseInt(nota_NF.value)<11){
@@ -179,10 +181,11 @@ function calificarTrabajo(fila, idMatricula){
 	    	}else{
 	    		nota_NF.style.color = "#0997F7";
 	    	}
+	    	cadena += "&notaFinal="+nota_NF.value;
 	    }else{
 	    	nota_NF.value = "";
 	    }
-	    var cadena = "idMatricula="+idMatricula+"&notaOportunidad=0&notaCoherencia=0&notaInnovacion=0&notaParticipacion=0&notaFinal="+nota_NF.value;
+	   
 				
 		//Salida
 		
