@@ -72,7 +72,7 @@ public class JerarquiaDAO extends BaseDAO{
 	}
 	
 	public Jerarquia obtenerPadre(int idPredecesor) throws DAOException {
-		log.info("obtenerPadre("+idPredecesor+")");
+		//log.info("obtenerPadre("+idPredecesor+")");
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		Connection cons = null;
@@ -109,7 +109,9 @@ public class JerarquiaDAO extends BaseDAO{
 			}
 			
 			//Traer al padre de su padre
-			jerarquia.setPadre(obtenerPadre(jerarquia.getPadre().getIdJerarquia()));
+			if(jerarquia != null){
+				jerarquia.setPadre(obtenerPadre(jerarquia.getPadre().getIdJerarquia()));
+			}
 			
 		}
 		

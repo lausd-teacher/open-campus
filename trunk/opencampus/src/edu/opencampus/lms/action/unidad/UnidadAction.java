@@ -111,13 +111,13 @@ public class UnidadAction extends BaseAction {
 				ruta = (Integer)getSession().get("UNIDAD_RUTA");
 				exacto = (String)getSession().get("UNIDAD_EXACTO");
 			}
-			if (unidad != null && ruta != null && unidad.trim().length() >= 2) {
+			if (unidad != null && ruta != null /*&& unidad.trim().length() >= 2*/) {
 				unidades = unidadService.buscarUnidadPorNombre(unidad, ruta, exacto);
 				getSession().put("UNIDAD_NOMBRE", unidad);
 				getSession().put("UNIDAD_RUTA", ruta);
 				getSession().put("UNIDAD_EXACTO", exacto);
 			}else{
-				addActionError("Ha ingresado un nombre de unidad no válida.");
+				//addActionError("Ha ingresado un nombre de unidad no válida.");
 				log.error("Faltan parametros del formulario.");
 			}
 		} catch (Exception e) {

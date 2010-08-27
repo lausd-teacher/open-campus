@@ -206,7 +206,7 @@
 							</table>
 						
 						</c:if>
-						
+						<%if(false) { %>
 						<json:object name="aula" escapeXml="true">
 						  <json:property name="itemCount" value="${aula.idFicha}"/>
 						  <json:property name="subtotal" value="${aula.curso.nombre}"/>
@@ -220,6 +220,7 @@
 							<!-- if(usuario.esAdmin())mostrar boton de regresar a fichas -->
 							<!-- http://json-taglib.sourceforge.net/tutorial.html -->
 							<!-- http://www.roseindia.net/jstl/jstlxmltags.shtml -->
+						<%} %>
 					</div>
 				</div>
 				<div id="pie">
@@ -228,7 +229,7 @@
 			</div>
 		</form>
 				
-		<div id="menu_config"  style="position:absolute; left:0px; top:160px; background-color:#FFF; padding:1px; Xdisplay: none;">
+		<div id="menu_config"  style="position:absolute; left:0px; top:160px; background-color:#FFF; padding:1px; display: none;">
 			<table border="0" cellpadding="3" cellspacing="0" class="tabla01">
 				<tr>
 					<td width="20" align="center" style="cursor:pointer;"  onClick=""

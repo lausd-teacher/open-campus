@@ -107,7 +107,7 @@
 	                  <td width="50" align="center" class="moduloAbajo" colspan="2"><b>Evaluaci&oacute;n</b> </td>
 	                  <td width="30" align="center" class="moduloAbajo"><b>Texto</b> </td>
 	                  <td width="30" align="center" class="moduloAbajo"><b>Repaso</b> </td>
-	                  <td width="30" align="center" class="moduloAbajo"><b>Lab.</b> </td>
+	                  <td width="30" align="center" class="moduloAbajo"><b>Gu&iacute;a</b> </td>
 	                  <td width="80" colspan="3" align="center" class="moduloAbajo1"><b>Acciones</b> </td>
 	                </tr>
 	                
@@ -251,7 +251,7 @@
       </div>
       <!-- ULTIMAS UNIDADES -->
       
-      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="bor_tabla" style="margin-top:10px; table-layout: fixed;">
+      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="bor_tabla" style="display:none;margin-top:10px; table-layout: fixed;">
         <caption class="fon_cab tit_cab">&Uacute;ltimas Unidades</caption>
         <c:choose>
 			<c:when test="${fn:length(ultimas)>0}">

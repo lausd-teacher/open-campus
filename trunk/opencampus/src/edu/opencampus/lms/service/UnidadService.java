@@ -32,11 +32,13 @@ public class UnidadService {
 	}
 
 	public Collection<Unidad> buscarUnidadPorNombre(String nombre,Integer jerarquia, String exacto) throws ServiceException {
+		log.info("nombre:"+nombre+" jerarquia:"+jerarquia);
 		try {
 			Collection<Unidad> unidades = new ArrayList<Unidad>();
 			Collection<Unidad> unidadesTMP = unidadDAO.buscarPorNombre(nombre, exacto);
 			log.info("Total de unidades de nombre indicado: "+unidadesTMP.size());
 			for (Unidad unidad : unidadesTMP) {
+				//log.info("UnidadID ID:"+unidad.getIdUnidad());
 				unidad.setJerarquia(jerarquiaDAO.obtenerPadre(unidad.getJerarquia().getIdJerarquia()));
 				if(unidad.getJerarquia().isMyParent(jerarquia)){
 					unidades.add(unidad);

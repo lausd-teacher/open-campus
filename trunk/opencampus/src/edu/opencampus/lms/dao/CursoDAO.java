@@ -27,7 +27,7 @@ public class CursoDAO extends BaseDAO {
 		Curso curso = null;
 		String query = "select c.idcurso,c.idjerarquia,j.nombre jerarquia,c.nombre,c.creado_en " +
 				"from cv_curso c, cv_jerarquia j " +
-				"where c.idjerarquia=j.idjerarquia and c.estado=1 " +
+				"where c.idjerarquia=j.idjerarquia and c.estado=1 and j.estado=1 " +
 				"and replace(replace(replace(replace(replace(replace(upper(c.nombre),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') like ? order by c.nombre";
 		try {
 			cons =  dataSource.getConnection();
