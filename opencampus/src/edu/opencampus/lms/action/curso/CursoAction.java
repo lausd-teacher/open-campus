@@ -90,7 +90,7 @@ public class CursoAction extends BaseAction {
 	public String buscar() {
 		log.info("buscar()");
 		try {
-			if (idJerarquia != null && nombre != null && nombre.trim().length() > 2) {
+			if (idJerarquia != null && nombre != null) {
 				cursos = cursoService.buscar(nombre, idJerarquia);
 			}else{
 				addActionError("Ha ingresado un nombre de unidad no válida.");

@@ -354,7 +354,7 @@ function validarBuscar(form){
 		return false;
 	}
 	return true;*/
-	var flag = validarCaracteres(form.unidad.value);
+	var flag = true; //validarCaracteres(form.unidad.value);
 	if(!flag){
 		alert("El criterio de búsqueda incluye caracteres no válidos o ha ingresado menos de 2 carácteres.")
 	}

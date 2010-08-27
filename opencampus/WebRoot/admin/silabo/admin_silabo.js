@@ -40,8 +40,9 @@ function validacion(form) {
 	}
 }
 function validarCaracteres(texto){
-	var reg=/(^[a-zA-Z0-9._@<:#ø+$&()°,-=*\/>Ò·ÈÌÛ˙—¡…Õ”⁄ ]{3,100}$)/;
-	return reg.test(texto);
+	return true;
+	//var reg=/(^[a-zA-Z0-9._@<:#ø+$&()°,-=*\/>Ò·ÈÌÛ˙—¡…Õ”⁄ ]{3,100}$)/;
+	//return reg.test(texto);
 }
 //From Ficha
 //********************************************************************************************//
@@ -78,19 +79,19 @@ function buscarCursos(){
 	// Entrada
 	var jerarquiComp = xGetElementById("idJerarquia");
 	var nombreComp = xGetElementById("nombre");
-	
+
 	//Salida
 	var salidaComp = xGetElementById("resultado_curso");
 	
-	if(trim(nombreComp.value) != ""){
-		if(validarCaracteres(nombreComp.value)){
+	if(true || trim(nombreComp.value) != ""){
+		if(true || validarCaracteres(nombreComp.value)){
 			// Reset Interface
 			primeraVez=true;
 			xGetElementById("form_Silabo_idCurso").value = "";
 			xHideD("form_Silabo");
 			xHideD("resultado_silabo");
 		
-			var cadena = "nombre="+toHex(nombreComp.value)+"&idJerarquia="+jerarquiComp.value;
+			var cadena = "nombre="+escape(nombreComp.value)+"&idJerarquia="+jerarquiComp.value;
 			
 			salidaComp.innerHTML = "<DIV align='center' style='padding: 2px; background: rgb(204, 68, 68) none repeat scroll 0%; z-index: 3; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: white; font-size: 95%; top: 1px; right: 16px; '> Cargando...</DIV>";
 		
@@ -121,7 +122,7 @@ var cuenta=0;
 function crearCurso(form){
 	if (cuenta == 0) {
 		form.nombre.value = form.nombre.value.trim();
-		if(!validarCaracteres(form.nombre.value)){
+		if(false && !validarCaracteres(form.nombre.value)){
 			alert("Ingrese un nombre v·lido.");
 			return false;
 		}
@@ -136,8 +137,15 @@ function crearCurso(form){
 				if(ajax.responseText.trim() == 'OK'){
 					showMessage("El curso "+form.nombre.value+" ha sido creado de manera satisfactoria.");
 					cuenta = 0;
+					
+					var jerarquiComp = xGetElementById("idJerarquia");
+					jerarquiComp.value = form.idJerarquia.value;
+					var nombreComp = xGetElementById("nombre");
+					nombreComp.value = form.nombre.value;
+					
 					form.reset();
 					mostrarNuevo(xGetElementById("btNuevo"));
+					
 					buscarCursos();
 				}else{
 					alert("Hubo un error al intentar crear el curso.")

@@ -51,7 +51,7 @@ public class UnidadDAO extends BaseDAO {
 		int totalTest = 0;
 		try {
 			String query = "select u.idunidad,u.idjerarquia,j.nombre jerarquia,u.nombre,u.creado_en,u.estado,u.modificado_en  " +
-					"from cv_unidad u, cv_jerarquia j where u.idjerarquia=j.idjerarquia " +
+					"from cv_unidad u, cv_jerarquia j where u.idjerarquia=j.idjerarquia and j.estado=1 " +
 					"and replace(replace(replace(replace(replace(replace(upper(u.nombre),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ñ','N') ";
 
 			if (exacto != null) {

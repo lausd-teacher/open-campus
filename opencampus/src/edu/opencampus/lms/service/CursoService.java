@@ -29,11 +29,13 @@ public class CursoService {
 	}
 
 	public Collection<Curso> buscar(String nombre, Integer idJerarquia) throws ServiceException {
+		log.info("Nombre:"+nombre+" IdJerarquia:"+idJerarquia);
 		try {
 			Collection<Curso> cursos = new ArrayList<Curso>();
 			Collection<Curso> cursosTMP = cursoDAO.buscar(nombre);
 			log.info("Total de cursos de nombre indicado: "+cursosTMP.size());
 			for (Curso curso : cursosTMP) {
+				log.info("Curso ID:"+curso.getIdCurso());
 				curso.setJerarquia(jerarquiaDAO.obtenerPadre(curso.getJerarquia().getIdJerarquia()));
 				if(curso.getJerarquia().isMyParent(idJerarquia)){
 					cursos.add(curso);

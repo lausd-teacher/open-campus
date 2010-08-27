@@ -60,7 +60,7 @@
           	<strong>Jerarqu&iacute;a:</strong>          	
           </td>
           <td width="100">
-			<select class="form_text" name="idJerarquia">
+			<select class="form_text" name="idJerarquia" id="idJerarquia">
 	         	<c:forEach items="${jerarquias}" var="j">
 	         		<option value="<c:out value="${j.idJerarquia}"/>"><c:out value="${j.rutaCompleta}"/></option>
 	         	</c:forEach>
@@ -70,8 +70,8 @@
             <strong>Nombre:</strong> 
           </td>
           <td>
-          <input name="text" type="text" class="form_text" id="nombre" value="" maxlength="100" size="32">
-          <input name="submit" type="submit" class="form_button" value="Buscar"></td>
+          <input type="text" class="form_text" id="nombre" value="" maxlength="100" size="32">
+          <input type="submit" class="form_button" value="Buscar"></td>
         </tr>
         <tr style="background-color: #cccccc">
             <td align="right" colspan="4">&nbsp; 
