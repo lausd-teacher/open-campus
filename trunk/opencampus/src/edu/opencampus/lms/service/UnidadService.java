@@ -38,7 +38,7 @@ public class UnidadService {
 			Collection<Unidad> unidadesTMP = unidadDAO.buscarPorNombre(nombre, exacto);
 			log.info("Total de unidades de nombre indicado: "+unidadesTMP.size());
 			for (Unidad unidad : unidadesTMP) {
-				//log.info("UnidadID ID:"+unidad.getIdUnidad());
+				log.info("UnidadID ID:"+unidad.getIdUnidad());
 				unidad.setJerarquia(jerarquiaDAO.obtenerPadre(unidad.getJerarquia().getIdJerarquia()));
 				if(unidad.getJerarquia().isMyParent(jerarquia)){
 					unidades.add(unidad);
