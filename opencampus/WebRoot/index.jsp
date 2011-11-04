@@ -43,6 +43,7 @@
 												<input id="idusuario" name="idUsuario" type="text" autocomplete="off" maxlength="32" size="16" class="required"
 													value="<c:out value="${idUsuario}" default="ebenites"/>" />
 											</td>
+										</tr>
 										<tr>
 											<td align="right">
 												<strong>Clave :</strong>
@@ -81,7 +82,8 @@
 										codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
 										width="760" height="68" align="">
 										<param name=movie value="<c:out value="${contextPath}"/>/img/Xlogo.swf"><param name=quality value=high>
-										<embed src="<c:out value="${contextPath}"/>/img/Xlogo.swf" quality=high  width="760" height="68" name="logo" align=""
+										<pram name="wmode" value="transparent"></pram>
+										<embed src="<c:out value="${contextPath}"/>/img/Xlogo.swf" quality=high wmode="transparent"  width="760" height="68" name="logo" align=""
 										type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
 										</embed></object>
 									</td></tr>
