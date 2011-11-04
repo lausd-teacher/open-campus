@@ -178,7 +178,7 @@ public class PeriodoAction extends BaseAction {
 					&& (finicio = Formato.stringToCalendar(fechaInicio+" 00:00:00", Constante.FECHA_DIA_MES_ANO_HORA_MI_SEG)) != null
 					&& (ffin = Formato.stringToCalendar(fechaFin+" 23:59:59", Constante.FECHA_DIA_MES_ANO_HORA_MI_SEG)) != null){
 				
-				if(!periodoService.esDuplicado(nombre)){
+				if(true || !periodoService.esDuplicado(nombre)){
 					
 					if(finicio.before(ffin)){
 		
