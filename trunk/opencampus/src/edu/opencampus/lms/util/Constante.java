@@ -5,7 +5,7 @@ public class Constante {
 	/**
 	 * Redireccion de correo
 	 */
-	public static final String DIRECCION_CORREO_SALIENTE = "informes@educa.edu.pe";
+	public static final String DIRECCION_CORREO_SALIENTE = "informes@utec.edu.pe";
 	
 	/**
 	 * CONSTANTES PARA EL REPOSITORIO
