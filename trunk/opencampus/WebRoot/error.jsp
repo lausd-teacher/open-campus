@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="edu.opencampus.lms.util.Constante"%>
 <%@page import="java.util.Properties"%>
+<%@page import="java.util.GregorianCalendar"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	Properties prop = new Properties();
@@ -72,7 +73,7 @@
 			</div>
 			<div id="pie">
 				<div>
-					Copyright &copy; 2010 <a href="#"><%=prop.getProperty("titulo.campus.virtual") %></a><br/>
+					Copyright &copy; <%=new GregorianCalendar().get(GregorianCalendar.YEAR) %> <a href="#"><%=prop.getProperty("titulo.campus.virtual") %></a><br/>
 					<%=prop.getProperty("portal.pie.derechos") %>
 				</div>
 				<div class="right">
