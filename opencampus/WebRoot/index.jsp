@@ -78,14 +78,14 @@
 								<caption>Bienvenido a <s:text name="titulo.campus.virtual"/></caption>
 								<tbody>
 									<tr><td id="banner">
-										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+										<!--object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
 										codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
 										width="760" height="68" align="">
-										<param name=movie value="<c:out value="${contextPath}"/>/img/Xlogo.swf"><param name=quality value=high>
+										<param name=movie value="<c:out value="${contextPath}"/>/img/logo.swf"><param name=quality value=high>
 										<pram name="wmode" value="transparent"></pram>
-										<embed src="<c:out value="${contextPath}"/>/img/Xlogo.swf" quality=high wmode="transparent"  width="760" height="68" name="logo" align=""
+										<embed src="<c:out value="${contextPath}"/>/img/logo.swf" quality=high wmode="transparent"  width="760" height="68" name="logo" align=""
 										type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
-										</embed></object>
+										</embed></object-->
 									</td></tr>
 								</tbody>
 							</table>
