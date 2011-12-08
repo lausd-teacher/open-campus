@@ -12,18 +12,13 @@ public class Constante {
 	 */
 
 	public static final String PROYECTO = "OpenCampus";
-	public static final String SLASH = "/";
+	public static final String SLASH = "\\";
 	private static final String RUTA_PROYECTO = "opencampus";
-	private static final String RUTA_REPOSITORIO = "/home/";
-	private static final String RUTA_REPOSITORIO_TEMPORAL = "/erick/www/";
-	private static final String RUTA_DOMINIO = "http://127.0.0.1/";
+//	private static final String RUTA_REPOSITORIO = "/home/";
+//	private static final String RUTA_REPOSITORIO = "/home/webcampus/";
+	private static final String RUTA_REPOSITORIO = "M:\\";
 	
 	public static final String REPOSITORIO = RUTA_REPOSITORIO + RUTA_PROYECTO + SLASH;
-	public static final String REPOSITORIO_TEMPORAL = RUTA_REPOSITORIO_TEMPORAL + RUTA_PROYECTO + SLASH;
-	public static final String RUTA_WEB = RUTA_DOMINIO + RUTA_PROYECTO + SLASH;
-	
-	public static final String RUTA_SOFTWARE = REPOSITORIO_TEMPORAL + "software" + SLASH;
-	public static final String RUTA_WEB_SOFTWARE = RUTA_WEB + "software/";
 	
 	public static final String RUTA_NOTICIA = REPOSITORIO + "noticia" + SLASH;
 	
