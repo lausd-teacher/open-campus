@@ -58,7 +58,7 @@
 										<tr>
 											<td width="60"><strong class="textstatic">Nombre:</strong></td>
 											<td width="100"><input type="text" name="nombre" value="<c:out value="${nombre}"></c:out>" maxlength="255" class="form_text" size="48" onkeyup="$('idCurso').value =  0;">
-											<input type="hidden" name="idCurso" value="<c:out value="${idCurso}" default="0"/>"><input type="hidden" name="idSilabo" value="<c:out value="${idSilabo}" default="0"/>"></td>
+											<input type="hidden" id="idCurso" name="idCurso" value="<c:out value="${idCurso}" default="0"/>"><input type="hidden" id="idSilabo" name="idSilabo" value="<c:out value="${idSilabo}" default="0"/>"></td>
 											<td width="60"><strong class="textstatic">Periodo:</strong></td>
 											<td width="100"> 
 												<select class="form_text" name="idPeriodo" onchange="clearDateInputs()">
