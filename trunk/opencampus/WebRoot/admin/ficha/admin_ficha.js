@@ -26,13 +26,13 @@ function loadSylabus(id){
 			oTable.cellSpacing="0";
 			oTable.cellPadding="3";
 			
-			var oTbody = xCreate("tbody");
-			
 			//Encabezado
 			var oCap = xCreate('caption');
 			oCap.className = "fon_cab tit_cab";
 			oCap.innerHTML = 'S&iacute;labo: '+xml.getElementsByTagName("descripcion")[0].childNodes[0].nodeValue;
-			oTbody.appendChild(oCap);
+			oTable.appendChild(oCap);
+			
+			var oTbody = xCreate("tbody");
 			
 			//SubEncabezado
 			var oTR = xCreate('tr');
@@ -177,7 +177,7 @@ function loadSylabus(id){
 			$('sylabus').appendChild(oTable);
 			
 			var oButton = xCreate('button');
-			oButton.value = 'Modificar Silabo';
+			oButton.innerHTML = 'Modificar Silabo';
 			oButton.className = 'form_button';
 			oButton.onclick = function(){
 		        if(window.confirm("¿Desea cambiar la ventana actual?\nSe perderán los datos no guardados.")) {
